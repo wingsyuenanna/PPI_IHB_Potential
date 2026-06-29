@@ -1,0 +1,87 @@
+source_id,source_name,lat,lon,country_iso3
+44375328,Laakirchen Papier AG Pulp Mill,47.9770957,13.8161934,AUT
+44375330,Mondi Neusiedler Pulp Mill,48.0732305,14.8091594,AUT
+44375331,Papierfabrik Wattens GmbH & Co KG - Delfort,47.2969362,11.5903444,AUT
+44375329,UPM-Kymmene Steyrermuhl Austria Pulp Mill,47.9915494,13.8000831,AUT
+44375327,Ybbstaler Zellstoff Pulp Mill,48.0250129,14.7628564,AUT
+44375332,Burgo Ardennes Pulp Mill,49.5518274,5.5054045,BEL
+44375334,Stambolijski Kraft Pulp & Paper Mill,42.1340315,24.5212027,BGR
+44375333,Svilocell EAD - Subsidiary of Svilosa AD,43.618351,25.3506224,BGR
+44375335,Svistov Pulp Plant,43.63592,25.30431,BGR
+44375503,Biocel Paskov Pulp Mill,49.717969,18.2946046,CZE
+44375502,OP Pap√≠rna s.r.o. - Delfort,49.9596659,16.8653919,CZE
+44375507,Dynos GmbH - Niederlassung Bad Durkheim,49.4515534,8.0629732,DEU
+44375511,Essity Operations Mannheim GmbH Pulp Mill,49.5342827,8.4594229,DEU
+44375510,GRuNPERGA Papier Pulp Mill,50.7786198,13.1594074,DEU
+44375506,Heinrich Schaller Pappenfabrik e.K. Pulp Mill,50.0210149,12.0200894,DEU
+44375515,Katz GmbH & Co. KG,48.7236271,8.3557998,DEU
+44375508,Lenk Paper GmbH - Papierfabrik Schleipen,49.4648466,8.109916,DEU
+44375512,Mercer Rosenthal GmbH - MR - Mercer International Group,50.4034989,11.7007465,DEU
+44375504,Sappi Alfeld Kraft Pulp and Paper Mill,51.987118,9.819078,DEU
+44375514,Sappi Stockstadt GmbH - Division of Sappi Fine Paper Europe,49.9773198,9.0663252,DEU
+44375513,Sappi Stockstadt Mill,49.97624,9.0697,DEU
+44375509,Sprick GmbH Bielefelder Papier- und Wellpappenwerke & Co.- Hauptverwaltung,52.0249437,8.5625952,DEU
+44375505,ZS Zellstoff Stendal GmbH - Mercer Stendal,52.726328,12.011216,DEU
+44375519,Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Navia,43.5275013,-6.7240832,ESP
+44375518,Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Pontevedra,42.4108321,-8.6759041,ESP
+44375517,Smurfit Kappa Nervi√≥n Pulp Mill,43.1828069,-2.6605848,ESP
+44375520,Estonian Cell AS - Heinzel Group,59.501988,26.5481615,EST
+44375534,Aanekoski Bioproduct Pulp Mill,62.596,25.741,FIN
+44375535,Enocell Pulp Mill,62.919186,30.230598,FIN
+44375536,Kaskinen Pulp Mill,62.22108,21.144193,FIN
+44375525,Mets√§ Board Cartonboard Division Joutseno Mill,61.1282381,28.4669153,FIN
+44375524,Mets√§ Board Linerboard and Paper Division Kaskinen Mill,62.3822834,21.2277852,FIN
+44375526,Mets√§ Fibre Oy - Joutseno Mill,61.1279785,28.4477818,FIN
+44375529,Mets√§ Fibre Oy - Rauma Mill,61.1108083,21.4601152,FIN
+44375521,Mets√§ Fibre Oy - √Ñ√§nekoski Mill,62.5907343,25.7521142,FIN
+44375522,Mets√§ Fibre Oy Pulp Mill,60.170885,24.806265,FIN
+44375537,Pankakoski Pulp and Cartonboard Mill,63.192955,30.82435,FIN
+44375538,Pietarsaari Pulp Mill,63.701563,22.706674,FIN
+44375539,Rauma Pulp Mill,61.111671,21.466299,FIN
+44375531,Stora Enso Biomaterials - Enocell Pulp Mill,62.9212369,30.2292483,FIN
+44375530,Stora Enso Oyj - Sunila Pulp Mill,60.4934978,26.9521607,FIN
+44375532,Stora Enso Oyj - Varkaus Mill,62.3246584,27.8961002,FIN
+44375533,Stora Enso Packaging Papers Varkaus,62.3195831,27.8991735,FIN
+44375523,UPM Group - Paper Industry,60.1671177,24.9517049,FIN
+44375527,UPM Group - Paper Industry - Kaukas Mill,61.0663059,28.2307043,FIN
+44375528,UPM Group - Paper Industry - Pietarsaari Mill,63.6744036,22.6966088,FIN
+44375540,Alizay Papier SASU - VPK Group,49.318664,1.169947,FRA
+44375543,Facture Biganos Pulp and Paper Mill,44.629661,-0.975188,FRA
+44375544,Golbey Pulp and Paper Mill,48.210464,6.425649,FRA
+44375545,Mimizan Pulp and Paper Mill - Paper Bags,44.207946,-1.249265,FRA
+44375542,Rayonier Advanced Materials,43.8313896,-0.826609,FRA
+44375546,Saillat-sur-Vienne Pulp and Paper Mill,45.876393,0.817428,FRA
+44375547,Saint Gaudens Pulp Mill,43.096501,0.726795,FRA
+44375548,Tarascon Pulp Mill,43.780612,4.652488,FRA
+44375541,WEPA Greenfield SAS - WEPA Group,49.0330112,3.3935335,FRA
+44375549,Drava Paper Mill,45.85666053657,17.3978741551187,HRV
+44375550,Drvenjaƒça d.d. Pulp Mill,45.2997443,14.7213856,HRV
+44375551,Dunacell Kft. Pulp Mill,46.927179,18.9365433,HUN
+44375578,Burgo Group spa - Sede legale,45.5200417,11.4873544,ITA
+44375581,Cartiera Italiana S.p.A. Pulp Mill,45.6866357,8.3102668,ITA
+44375579,Portonogaro Pulp Mill,45.9400546,12.8391955,ITA
+44375580,Sicem Saga S.p.A. Pulp Mill,44.5977267,10.4096447,ITA
+44375633,Global Cellulose Fibers - Gdansk Modified Fiber Plant - International Paper,54.356974,18.485606,POL
+44375635,Mondi ≈öwiecie Pulp Mill,53.393136,18.378309,POL
+44375634,Schumacher Packaging Myszk√≥w Pulp Mill,50.573395,19.319579,POL
+44375637,Celbi Caima Dissolving Pulp Mill,39.471564,-8.333286,PRT
+44375640,Fapajal - F√°brica de Papel do Tojal S.A. Pulp Mill,38.8603802,-9.126352,PRT
+44375639,Figueira da Foz BEKP Pulp and Paper Mill,40.059689,-8.853132,PRT
+44375636,Leirosa Bleached Eucalyptus Pulp Mill,40.050547,-8.875138,PRT
+44375638,The Navigator Company - Cacia Pulp Mill,40.6845188,-8.5901778,PRT
+44375641,The Navigator Company - Set√∫bal Mill,38.49203572,-8.807280032,PRT
+44375648,Bukocel a.s. Pulpmill - Buk√≥za Holding Pulp Mill,48.8633371,21.7287537,SVK
+44375649,Mondi SCP Pulp Mill,49.0782433,19.3182058,SVK
+44375650,VIPAP VIDEM KR≈†KO d.d. Pulp Mill,45.9561765,15.4921437,SVN
+44375652,Domsj√∂ Fabriker AB,63.2900474,18.7166166,SWE
+44375651,Nordic Paper,59.2957139419109,14.1316787525493,SWE
+44375660,SCA Massa √ñstrands massafabrik SCA Graphic Sundsvall AB Pulp Mill,62.4854563,17.3248651,SWE
+44375659,SCA Ortviken Pulp Mill,62.390811,17.306927,SWE
+44375653,Stora Enso Consumer Board Fors Mill,60.128161,18.643501,SWE
+44375658,Stora Enso Packaging Boards Skoghall Mill - Udden,59.3234598,13.4595214,SWE
+44375657,Sylvamo Nym√∂lla Mill - Sylvamo Pulp Mill,56.043586,14.4629943,SWE
+44375654,S√∂dra Cell AB - S√∂dra Cell M√∂nster√•s,57.0932528661614,16.5531215056192,SWE
+44375655,S√∂dra Cell AB - S√∂dra Cell M√∂rrum,56.1938314,14.748156,SWE
+44375661,S√∂dra Cell AB - S√∂dra Cell V√§r√∂,57.2502804,12.1823234,SWE
+44375663,S√∂dra Cell Virkesv√§gen 1,57.2850024822815,12.4442615189103,SWE
+44375662,S√∂dra Cell V√§r√∂,57.2600040100003,12.1769718719116,SWE

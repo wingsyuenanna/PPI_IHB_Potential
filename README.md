@@ -22,7 +22,7 @@ Sites where the renewable path is cost-competitive (or otherwise favorable) are 
 - **Heat replacement boundary:** Only the fossil share of facility heat demand is considered replaceable by IHB (see fossil share table below).
 - **Supply options compared:** Colocated solar + IHB vs. CCGT-generated heat.
 - **Cost data:** Country-level LCOE/LCOH inputs from Bloomberg (solar, battery, CCGT).
-- **Solar siting:** Available land is limited to bare land, cropland, and building footprints within the facility area (Google Earth Engine).
+- **Solar siting:** Available land is limited to bare land and cropland within ~5 km of each facility (Google Earth Engine). Built-up areas are excluded.
 - **Solar resource:** Hourly/daily solar radiation from PVGIS (2023), based on facility latitude and longitude.
 
 > **TODO:** Document key assumptions not yet captured — discount rate, project lifetime, IHB round-trip efficiency, capacity factor sources, and how facility output type (pulp vs. tissue, etc.) is assigned.
@@ -115,13 +115,12 @@ For each facility, latitude and longitude are used to retrieve 2023 solar radiat
 
 ### 5. Land Availability
 
-Using Google Earth Engine, land within each facility footprint is classified and summed across categories treated as suitable for solar development:
+Using Google Earth Engine, land within ~5 km of each facility is classified and summed across categories treated as suitable for solar development:
 
 - Bare land
 - Cropland
-- Building footprints
 
-The total available area constrains the maximum colocated solar array size per site.
+Built-up areas are excluded. Run a larger buffer (e.g. 15 km) only as a sensitivity case.
 
 > **TODO:** Define spatial boundary (buffer around facility point vs. parcel polygon), resolution, and any exclusion rules.
 

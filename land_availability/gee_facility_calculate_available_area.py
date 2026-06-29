@@ -1,9 +1,22 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
 import ee
+
+DEFAULT_GEE_PROJECT = "eu-re-potential"
+
+
+def get_elevation() -> ee.Image:
+    """
+    Blended DEM for slope screening.
+
+    SRTM (30 m) is used where available (56°S–60°N). Copernicus GLO-30 fills gaps
+    above 60°N (Finland, northern Sweden) where SRTM has no coverage.
+    """
+    srtm = ee.Image("USGS/SRTMGL1_003")
+    copernicus_dem = ee.ImageCollection("COPERNICUS/DEM/GLO30").select("DEM").mosaic()
+    return srtm.unmask(copernicus_dem)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -11,11 +24,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         description="Script version of GEE_facility_calculate_available_area.ipynb (exports land-cover area within a buffer for each facility point)."
     )
     p.add_argument(
+        "--project",
+        default=DEFAULT_GEE_PROJECT,
+        help=f"Google Cloud project id for Earth Engine (default: {DEFAULT_GEE_PROJECT}).",
+    )
+    p.add_argument(
         "--asset",
         required=True,
         help="Earth Engine FeatureCollection asset id containing facility points (must include source_id/source_name).",
     )
-    p.add_argument("--buffer-m", type=int, default=15000, help="Buffer radius in meters (e.g., 5000 or 15000).")
+    p.add_argument(
+        "--buffer-m",
+        type=int,
+        default=5000,
+        help="Buffer radius in meters. Default 5000 (5 km) for colocated solar; use 15000 only for sensitivity.",
+    )
     p.add_argument("--slope-max-deg", type=float, default=5.0, help="Maximum slope for suitability mask.")
     p.add_argument("--wdpa-padding-m", type=int, default=100, help="Padding applied to protected areas mask.")
     p.add_argument("--scale", type=int, default=30, help="Scale in meters for reduceRegion.")
@@ -30,13 +53,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
 
-    ee.Initialize()
+    ee.Initialize(project=args.project)
 
     wdpa_statuses = ["Designated", "Inscribed", "Established"]
 
     points = ee.FeatureCollection(args.asset)
     wc = ee.Image("ESA/WorldCover/v200/2021").select("Map")
-    elev = ee.Image("USGS/SRTMGL1_003")
+    elev = get_elevation()
     wdpa = ee.FeatureCollection("WCMC/WDPA/current/polygons").filter(
         ee.Filter.inList("STATUS", wdpa_statuses)
     )
