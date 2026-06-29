@@ -1,4 +1,4 @@
-"""Calculate country-level fossil share from Eurostat simplified energy balances."""
+"""Export fossil-share lookup table from the heat demand workbook."""
 
 from __future__ import annotations
 
@@ -6,128 +6,87 @@ import argparse
 from pathlib import Path
 
 import pandas as pd
-
-FOSSIL_FUEL_COLUMNS = [
-    "Solid fossil fuels",
-    "Oil shale and oil sands",
-    "Natural gas",
-    "Oil and petroleum products (excluding biofuel portion)",
-]
+from openpyxl import load_workbook
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = (
-    PROJECT_ROOT / "Input" / "nrg_bal_s__custom_21950796_spreadsheet.xlsx"
+DEFAULT_WORKBOOK = (
+    PROJECT_ROOT / "heat_demand" / "pulp_paper_heat_demand_corrected.xlsx"
 )
-DEFAULT_OUTPUT = PROJECT_ROOT / "heat_demand" / "fossil_share" / "fossil_share_by_country.csv"
+DEFAULT_OUTPUT = PROJECT_ROOT / "heat_demand" / "fossil_share" / "fossil_share_lookup.csv"
 
 
-def find_tj_sheet(path: Path) -> str:
-    """Return the sheet name whose unit of measure is Terajoule (TJ)."""
-    workbook = pd.ExcelFile(path)
-    for sheet_name in workbook.sheet_names:
-        preview = pd.read_excel(path, sheet_name=sheet_name, header=None, nrows=12)
-        if preview.astype(str).apply(lambda s: s.str.contains("Terajoule", case=False, na=False)).any().any():
-            return sheet_name
-    raise ValueError(f"No Terajoule (TJ) sheet found in {path}")
+def export_fossil_share_lookup(workbook_path: Path) -> pd.DataFrame:
+    """
+    Export country|NACE fossil shares from the workbook Fossil_Shares sheet.
 
-
-def _to_numeric(value) -> float | None:
-    if pd.isna(value) or value == ":":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def load_tj_data(path: Path, sheet_name: str | None = None) -> pd.DataFrame:
-    """Load the Eurostat TJ export and return country-level energy balances."""
-    sheet_name = sheet_name or find_tj_sheet(path)
-    raw = pd.read_excel(path, sheet_name=sheet_name, header=None)
-
-    header_row_idx = raw.index[raw.iloc[:, 0] == "SIEC (Labels)"][0]
-    headers = {
-        str(label).strip(): col_idx
-        for col_idx, label in enumerate(raw.iloc[header_row_idx])
-        if pd.notna(label) and str(label).strip()
-    }
-
-    if "Total" not in headers:
-        raise ValueError("Expected a 'Total' column in the Eurostat TJ sheet.")
-
-    missing = [col for col in FOSSIL_FUEL_COLUMNS if col not in headers]
-    if missing:
-        raise ValueError(f"Missing expected fossil fuel columns: {missing}")
+    The workbook is the source of truth for fossil shares used in heat demand
+    formulas. Eurostat 2023 data populates columns D–E in that sheet.
+    """
+    workbook = load_workbook(workbook_path, data_only=True)
+    worksheet = workbook["Fossil_Shares"]
 
     records: list[dict] = []
-    for _, row in raw.iloc[header_row_idx + 2 :].iterrows():
-        country = row.iloc[0]
-        if pd.isna(country):
+    for row in range(3, worksheet.max_row + 1):
+        country = worksheet.cell(row, 1).value
+        if not country:
             continue
 
-        country = str(country).strip()
-        if not country or country.startswith("Special value"):
-            break
+        total_tj = worksheet.cell(row, 4).value
+        fossil_sum_tj = worksheet.cell(row, 5).value
+        fossil_share = worksheet.cell(row, 6).value
+        if fossil_share is None and total_tj not in (None, 0) and fossil_sum_tj is not None:
+            fossil_share = fossil_sum_tj / total_tj
 
-        total = _to_numeric(row.iloc[headers["Total"]])
-        if total is None or total <= 0:
-            continue
+        country_str = str(country).strip()
+        nace = worksheet.cell(row, 3).value
+        lookup_key = f"{country_str}|{nace}"
 
-        record: dict = {"country": country, "total_tj": total}
-        fossil_total = 0.0
-        for fuel in FOSSIL_FUEL_COLUMNS:
-            value = _to_numeric(row.iloc[headers[fuel]]) or 0.0
-            column_name = fuel.lower().replace(" ", "_").replace("(", "").replace(")", "")
-            column_name = column_name.replace("__", "_").replace(",", "")
-            record[f"{column_name}_tj"] = value
-            fossil_total += value
-
-        record["fossil_total_tj"] = fossil_total
-        record["fossil_share"] = fossil_total / total
-        records.append(record)
+        records.append(
+            {
+                "country": country_str,
+                "sector": worksheet.cell(row, 2).value,
+                "nace": nace,
+                "total_tj": total_tj,
+                "fossil_sum_tj": fossil_sum_tj,
+                "fossil_share": fossil_share,
+                "data_available": worksheet.cell(row, 7).value,
+                "lookup_key": lookup_key,
+            }
+        )
 
     return pd.DataFrame(records)
-
-
-def calculate_fossil_share(path: Path, sheet_name: str | None = None) -> pd.DataFrame:
-    """Calculate fossil share (fossil fuels / total) for each country."""
-    result = load_tj_data(path, sheet_name=sheet_name)
-    return result.sort_values("country").reset_index(drop=True)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Calculate country-level fossil share for pulp and paper industry "
-            "energy use from Eurostat simplified energy balances (TJ sheet)."
+            "Export fossil-share lookup values from pulp_paper_heat_demand_corrected.xlsx. "
+            "Update Fossil_Shares in the workbook when Eurostat data changes."
         )
     )
     parser.add_argument(
-        "--input",
+        "--workbook",
         type=Path,
-        default=DEFAULT_INPUT,
-        help="Path to the Eurostat Excel export.",
+        default=DEFAULT_WORKBOOK,
+        help="Path to the heat demand workbook.",
     )
     parser.add_argument(
         "--output",
         type=Path,
         default=DEFAULT_OUTPUT,
-        help="Path to write the fossil share CSV.",
-    )
-    parser.add_argument(
-        "--sheet",
-        type=str,
-        default=None,
-        help="Optional sheet name override (default: auto-detect Terajoule sheet).",
+        help="Path to write the fossil share lookup CSV.",
     )
     args = parser.parse_args()
 
-    result = calculate_fossil_share(args.input, sheet_name=args.sheet)
+    result = export_fossil_share_lookup(args.workbook)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     result.to_csv(args.output, index=False)
 
-    print(f"Wrote {len(result)} countries to {args.output}")
-    print(result[["country", "total_tj", "fossil_total_tj", "fossil_share"]].head(10).to_string(index=False))
+    print(f"Wrote {len(result)} lookup rows to {args.output}")
+    preview = result[result["data_available"] == "Yes"].head(10)
+    print(
+        preview[["country", "nace", "fossil_share"]].to_string(index=False)
+    )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,97 @@
+country,sector,nace,total_tj,fossil_sum_tj,fossil_share,data_available,lookup_key
+Albania,C17 — All paper & pulp,C17,,0.0,,No,Albania|C17
+Albania,C17_X_C1711 — Paper excl. pulp,C17xP,,0.0,,No,Albania|C17xP
+Albania,C1711 — Pulp only,C1711,,0.0,,No,Albania|C1711
+Austria,C17 — All paper & pulp,C17,61834.396,17366.4,0.2808533942823668,Yes,Austria|C17
+Austria,C17_X_C1711 — Paper excl. pulp,C17xP,9197.39,0.0,0.0,Yes,Austria|C17xP
+Austria,C1711 — Pulp only,C1711,52637.006,17366.4,0.3299275798475316,Yes,Austria|C1711
+Belgium,C17 — All paper & pulp,C17,22562.816,883.4,0.039152914246165016,Yes,Belgium|C17
+Belgium,C17_X_C1711 — Paper excl. pulp,C17xP,,640.2,,No,Belgium|C17xP
+Belgium,C1711 — Pulp only,C1711,,243.2,,No,Belgium|C1711
+Bulgaria,C17 — All paper & pulp,C17,,914.0,,No,Bulgaria|C17
+Bulgaria,C17_X_C1711 — Paper excl. pulp,C17xP,,11.3,,No,Bulgaria|C17xP
+Bulgaria,C1711 — Pulp only,C1711,,0.0,,No,Bulgaria|C1711
+Croatia,C17 — All paper & pulp,C17,1987.634,1091.0,0.5488938104298879,Yes,Croatia|C17
+Croatia,C17_X_C1711 — Paper excl. pulp,C17xP,1987.634,1091.0,0.5488938104298879,Yes,Croatia|C17xP
+Croatia,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Croatia|C1711
+Cyprus,C17 — All paper & pulp,C17,19.948,8.6,0.43112091437738115,Yes,Cyprus|C17
+Cyprus,C17_X_C1711 — Paper excl. pulp,C17xP,19.854,8.6,0.4331620832074141,Yes,Cyprus|C17xP
+Cyprus,C1711 — Pulp only,C1711,0.094,0.0,0.0,Yes,Cyprus|C1711
+Czechia,C17 — All paper & pulp,C17,,5206.2,,No,Czechia|C17
+Czechia,C17_X_C1711 — Paper excl. pulp,C17xP,,1674.6,,No,Czechia|C17xP
+Czechia,C1711 — Pulp only,C1711,,0.0,,No,Czechia|C1711
+Denmark,C17 — All paper & pulp,C17,2282.649,1110.8,0.48662759802317396,Yes,Denmark|C17
+Denmark,C17_X_C1711 — Paper excl. pulp,C17xP,2282.649,1110.8,0.48662759802317396,Yes,Denmark|C17xP
+Denmark,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Denmark|C1711
+Estonia,C17 — All paper & pulp,C17,1746.264,420.4,0.24074252232193988,Yes,Estonia|C17
+Estonia,C17_X_C1711 — Paper excl. pulp,C17xP,828.94,121.1,0.14609018746833305,Yes,Estonia|C17xP
+Estonia,C1711 — Pulp only,C1711,917.323,299.3,0.3262754776670813,Yes,Estonia|C1711
+Finland,C17 — All paper & pulp,C17,212799.209,18002.6,0.08459899867390953,Yes,Finland|C17
+Finland,C17_X_C1711 — Paper excl. pulp,C17xP,103077.948,11307.1,0.1096946555435892,Yes,Finland|C17xP
+Finland,C1711 — Pulp only,C1711,109721.261,6695.5,0.06102281307175279,Yes,Finland|C1711
+France,C17 — All paper & pulp,C17,73551.671,24104.5,0.3277219901638944,Yes,France|C17
+France,C17_X_C1711 — Paper excl. pulp,C17xP,51435.385,22445.7,0.4363863515360097,Yes,France|C17xP
+France,C1711 — Pulp only,C1711,22116.286,0.0,0.0,Yes,France|C1711
+Germany,C17 — All paper & pulp,C17,181262.159,69138.0,0.3814254468854693,Yes,Germany|C17
+Germany,C17_X_C1711 — Paper excl. pulp,C17xP,162640.718,66843.9,0.41099117626866355,Yes,Germany|C17xP
+Germany,C1711 — Pulp only,C1711,18621.441,2294.1,0.12319669567999599,Yes,Germany|C1711
+Greece,C17 — All paper & pulp,C17,,942.1,,No,Greece|C17
+Greece,C17_X_C1711 — Paper excl. pulp,C17xP,,942.1,,No,Greece|C17xP
+Greece,C1711 — Pulp only,C1711,,0.0,,No,Greece|C1711
+Hungary,C17 — All paper & pulp,C17,9160.272,2795.4,0.3051656108028233,Yes,Hungary|C17
+Hungary,C17_X_C1711 — Paper excl. pulp,C17xP,8610.28,2685.9,0.31194107508698904,Yes,Hungary|C17xP
+Hungary,C1711 — Pulp only,C1711,549.992,109.5,0.19909380500080004,Yes,Hungary|C1711
+Ireland,C17 — All paper & pulp,C17,205.417,96.4,0.469289299327709,Yes,Ireland|C17
+Ireland,C17_X_C1711 — Paper excl. pulp,C17xP,205.417,96.4,0.469289299327709,Yes,Ireland|C17xP
+Ireland,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Ireland|C1711
+Italy,C17 — All paper & pulp,C17,82726.435,57652.2,0.6969017823625544,Yes,Italy|C17
+Italy,C17_X_C1711 — Paper excl. pulp,C17xP,40388.192,15793.8,0.39104993855629877,Yes,Italy|C17xP
+Italy,C1711 — Pulp only,C1711,42338.243,41858.4,0.9886664404094426,Yes,Italy|C1711
+Latvia,C17 — All paper & pulp,C17,121.075,71.0,0.5864133801362792,Yes,Latvia|C17
+Latvia,C17_X_C1711 — Paper excl. pulp,C17xP,120.92,70.9,0.5863380747601721,Yes,Latvia|C17xP
+Latvia,C1711 — Pulp only,C1711,0.155,0.2,1.2903225806451615,Yes,Latvia|C1711
+Lithuania,C17 — All paper & pulp,C17,1891.557,399.3,0.21109593842532898,Yes,Lithuania|C17
+Lithuania,C17_X_C1711 — Paper excl. pulp,C17xP,1891.557,399.3,0.21109593842532898,Yes,Lithuania|C17xP
+Lithuania,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Lithuania|C1711
+Luxembourg,C17 — All paper & pulp,C17,,0.0,,No,Luxembourg|C17
+Luxembourg,C17_X_C1711 — Paper excl. pulp,C17xP,,0.0,,No,Luxembourg|C17xP
+Luxembourg,C1711 — Pulp only,C1711,,0.0,,No,Luxembourg|C1711
+Malta,C17 — All paper & pulp,C17,30.362,16.0,0.5269745076081945,Yes,Malta|C17
+Malta,C17_X_C1711 — Paper excl. pulp,C17xP,30.362,16.0,0.5269745076081945,Yes,Malta|C17xP
+Malta,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Malta|C1711
+Moldova,C17 — All paper & pulp,C17,64.772,19.7,0.30414376582473907,Yes,Moldova|C17
+Moldova,C17_X_C1711 — Paper excl. pulp,C17xP,64.772,19.7,0.30414376582473907,Yes,Moldova|C17xP
+Moldova,C1711 — Pulp only,C1711,,0.0,,No,Moldova|C1711
+Montenegro,C17 — All paper & pulp,C17,44.145,27.9,0.6320081549439347,Yes,Montenegro|C17
+Montenegro,C17_X_C1711 — Paper excl. pulp,C17xP,30.173,14.0,0.46399098531799954,Yes,Montenegro|C17xP
+Montenegro,C1711 — Pulp only,C1711,13.973,14.0,1.001932298003292,Yes,Montenegro|C1711
+Netherlands,C17 — All paper & pulp,C17,,9870.0,,No,Netherlands|C17
+Netherlands,C17_X_C1711 — Paper excl. pulp,C17xP,,9870.0,,No,Netherlands|C17xP
+Netherlands,C1711 — Pulp only,C1711,,0.0,,No,Netherlands|C1711
+Norway,C17 — All paper & pulp,C17,15050.158,1114.2,0.07403244537366319,Yes,Norway|C17
+Norway,C17_X_C1711 — Paper excl. pulp,C17xP,11440.082,468.4,0.040943762466038265,Yes,Norway|C17xP
+Norway,C1711 — Pulp only,C1711,3610.076,645.8,0.1788882006916198,Yes,Norway|C1711
+Poland,C17 — All paper & pulp,C17,59148.791,14365.3,0.24286717880674855,Yes,Poland|C17
+Poland,C17_X_C1711 — Paper excl. pulp,C17xP,57598.697,13692.7,0.23772586383334332,Yes,Poland|C17xP
+Poland,C1711 — Pulp only,C1711,1550.094,672.6,0.4339091693794054,Yes,Poland|C1711
+Portugal,C17 — All paper & pulp,C17,53802.848,7561.1,0.14053345280160634,Yes,Portugal|C17
+Portugal,C17_X_C1711 — Paper excl. pulp,C17xP,8440.673,3854.0,0.45659866221567874,Yes,Portugal|C17xP
+Portugal,C1711 — Pulp only,C1711,45362.175,3707.0,0.08172006743503811,Yes,Portugal|C1711
+Romania,C17 — All paper & pulp,C17,5484.239,2482.6,0.4526790316760448,Yes,Romania|C17
+Romania,C17_X_C1711 — Paper excl. pulp,C17xP,5484.239,2482.6,0.4526790316760448,Yes,Romania|C17xP
+Romania,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Romania|C1711
+Serbia,C17 — All paper & pulp,C17,4664.987,1626.4,0.34863977112905137,Yes,Serbia|C17
+Serbia,C17_X_C1711 — Paper excl. pulp,C17xP,4664.987,1626.4,0.34863977112905137,Yes,Serbia|C17xP
+Serbia,C1711 — Pulp only,C1711,0.0,0.0,,Yes,Serbia|C1711
+Slovakia,C17 — All paper & pulp,C17,15114.9,1350.9,0.08937538455431396,Yes,Slovakia|C17
+Slovakia,C17_X_C1711 — Paper excl. pulp,C17xP,,0.0,,No,Slovakia|C17xP
+Slovakia,C1711 — Pulp only,C1711,,0.0,,No,Slovakia|C1711
+Slovenia,C17 — All paper & pulp,C17,4686.014,2843.2,0.606741678535318,Yes,Slovenia|C17
+Slovenia,C17_X_C1711 — Paper excl. pulp,C17xP,,2817.0,,No,Slovenia|C17xP
+Slovenia,C1711 — Pulp only,C1711,,26.2,,No,Slovenia|C1711
+Spain,C17 — All paper & pulp,C17,72398.777,24178.0,0.33395591751501547,Yes,Spain|C17
+Spain,C17_X_C1711 — Paper excl. pulp,C17xP,58973.151,14998.1,0.25432081796002387,Yes,Spain|C17xP
+Spain,C1711 — Pulp only,C1711,13425.626,9180.0,0.6837669990211257,Yes,Spain|C1711
+Sweden,C17 — All paper & pulp,C17,258003.456,7062.4,0.02737327673626201,Yes,Sweden|C17
+Sweden,C17_X_C1711 — Paper excl. pulp,C17xP,148816.629,4847.8,0.032575660613841755,Yes,Sweden|C17xP
+Sweden,C1711 — Pulp only,C1711,109186.827,2214.6,0.02028266651617232,Yes,Sweden|C1711
