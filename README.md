@@ -2,24 +2,25 @@
 
 ## Overview
 
-This research assesses the global potential for Industrial Heat Batteries (IHBs) to displace fossil-fueled heat at pulp and paper facilities. Using facility-level production estimates from Climate TRACE, we estimate replaceable thermal demand, then compare the levelized cost of heat (LCOH) from two supply options:
+This research assesses the EU potential for Industrial Heat Batteries (IHBs) to displace fossil-fueled heat at pulp and paper facilities. Using facility-level production estimates from Climate TRACE, we estimate replaceable thermal demand, then compare the levelized cost of heat (LCOH) from two supply options:
 
 1. **Colocated renewable path** — solar generation plus IHB storage
-2. **Fossil baseline** — natural gas combined-cycle gas turbine (CCGT) heat
+2. **Fossil baseline** — natural gas boiler heat
 
 Sites where the renewable path is cost-competitive (or otherwise favorable) are flagged as potential IHB candidates. The analysis also quantifies the emissions and cost benefits of deployment at those sites.
 
 ## Research Questions
 
-- How much fossil-replaceable heat demand exists across global pulp and paper facilities?
+- How much fossil-replaceable heat demand exists across EU pulp and paper facilities?
 - Which facilities have favorable economics for colocated solar + IHB vs. CCGT heat?
 - What site-level conditions (solar resource, land availability, heat profile, country-level costs) drive competitiveness?
 - What are the aggregate decarbonization and cost implications of targeting high-potential sites?
 
 ## Scope and Assumptions
 
-- **Sector:** Pulp and paper industrial facilities globally.
+- **Sector:** Pulp and paper industrial facilities.
 - **Heat replacement boundary:** Only the fossil share of facility heat demand is considered replaceable by IHB (see fossil share table below).
+- **Steam scope:** Replaceable heat is modeled as process steam (kraft digesters \~170 °C, paper drying \~180 °C), which a steam-delivering IHB can serve. Lime-kiln fuel at kraft mills (\~900 °C direct firing, roughly 8–12% of mill fuel input) is outside this scope: an IHB does not fire a rotary kiln, and the kiln is not modeled separately. Where country-average fossil shares include kiln fuel, addressable demand at fossil-fired kraft (Pulp/Integrated) sites is somewhat overstated; at many Nordic mills the kiln already burns biomass and is excluded via the fossil share.
 - **Supply options compared:** Colocated solar + IHB vs. CCGT-generated heat.
 - **Cost data:** Country-level LCOE/LCOH inputs from Bloomberg (solar, battery, CCGT).
 - **Solar siting:** Available land is limited to bare land and cropland within ~5 km of each facility (Google Earth Engine). Built-up areas are excluded.
@@ -36,10 +37,12 @@ Sites where the renewable path is cost-competitive (or otherwise favorable) are 
 | Land cover / available area | Google Earth Engine | Estimates of land suitable for colocated solar |
 | Technology costs (solar, battery, CCGT) | Bloomberg (by country) | LCOH inputs per facility |
 | Heat intensity & fossil share | Sector-specific assumptions (table below) | Replaceable heat calculations |
-| Heat load shape | Sample heat profiles | Daily/seasonal heat demand profiles |
+| Heat load shape | Flat hourly profile (derived) | Constant load from annual replaceable heat |
 | Validation benchmarks | Facility disclosures (e.g., ENCE annual reports) | Sanity-check production estimates |
 
 ## Methodology
+
+We apply a bottom-up production-activity approach, estimating heat demand as output × specific heat intensity × fossil share. Heat intensities are drawn from [BREFs / the same engineering sources underlying JRC-IDEES]. The fossil share is taken from Eurostat sector-level data. This inverts the more common European top-down approach (e.g. JRC-IDEES, Fraunhofer ISI 2016), which anchors to Eurostat energy balances and uses production as a disaggregation weight; we instead use facility-level production directly.
 
 ### 1. Replaceable Heat Demand
 
@@ -49,7 +52,7 @@ Each facility is categorized by primary output: **Pulp**, **Integrated pulp+pape
 
 | Product category         | Thermal SEC (MWhth/t) | Equivalent (GJ/t) | Source                                                                              |
 | ------------------------ | --------------------: | ----------------: |----------------------------------------------------------------------------------- |
-| Virgin pulp (kraft pulp) |               ~4 |             ~12 | [Energy Cost Reduction in the Pulp and Paper Industry](https://ressources-naturelles.canada.ca/sites/www.nrcan.gc.ca/files/oee/pdf/publications/infosource/pub/cipec/pulp-paper-industry/pdf/pulp-paper-industry.pdf) |
+| Virgin pulp (kraft pulp) |               ~3.3 |             ~12 | [Energy Cost Reduction in the Pulp and Paper Industry](https://ressources-naturelles.canada.ca/sites/www.nrcan.gc.ca/files/oee/pdf/publications/infosource/pub/cipec/pulp-paper-industry/pdf/pulp-paper-industry.pdf) |
 | Integrated pulp + paper  |               4.0–6.0 |             14-20 | [BAT Reference Document for Pulp, Paper and Board Industry](https://bureau-industrial-transformation.jrc.ec.europa.eu/sites/default/files/2020-03/superseded_ppm_bref-1201.pdf)                           |
 | Paper & board            |               1.1-1.6 |              4-6 | [BAT Reference Document for Pulp, Paper and Board Industry](https://bureau-industrial-transformation.jrc.ec.europa.eu/sites/default/files/2020-03/superseded_ppm_bref-1201.pdf)                             |
 | Tissue                   |               2.0–3.3 |              7–12 | [BAT Reference Document for Pulp, Paper and Board Industry](https://bureau-industrial-transformation.jrc.ec.europa.eu/sites/default/files/2020-03/superseded_ppm_bref-1201.pdf)         |
@@ -58,7 +61,7 @@ Heat Intensity Values Chosen:
 
 | Category | Heat intensity |
 |----------|----------------|
-| Pulp | 4.0 MWh<sub>th</sub>/t |
+| Pulp | 3.3 MWh<sub>th</sub>/t |
 | Integrated pulp+paper | 5.0 MWh<sub>th</sub>/t |
 | Paper/board | 1.3 MWh<sub>th</sub>/t |
 | Tissue | 2.6 MWh<sub>th</sub>/t |
@@ -66,29 +69,23 @@ Heat Intensity Values Chosen:
 
 Fossil Share is calculated using [Eurostat](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_indq_n/default/table?lang=en) natural gas, coal, oil & Petroleum against totals.
 
-$$
-\text{Fossil Share}_{c} = \frac{E_{\text{natural gas},c} + E_{\text{coal},c} + E_{\text{oil},c} + E_{\text{mfg gases},c}}{E_{\text{total},c}}
-$$
+```
+Fossil Share_c = (E_natural gas,c + E_coal,c + E_oil,c + E_mfg gases,c) / E_total,c
 
+Heat_i = Production_i × Intensity_product
 
-$$
-\text{Heat}_i = \text{Production}_i \times \text{Intensity}_{product}
-$$
-
-$$
-\text{Replaceable Heat}_i = \text{Heat}_i \times \text{Fossil Share}_{country}
-$$
+Replaceable Heat_i = Heat_i × Fossil Share_country
+```
 
 Where:
-- **Production**<sub>i</sub> = annual output (t/yr), from Climate TRACE capacity × capacity factor
-- **Intensity**<sub>i</sub> = sector-specific thermal energy per ton of output
-- **Fossil Share**<sub>i</sub> = fraction of heat currently met by fossil fuels
+- **Production**_i = annual output (t/yr), from Climate TRACE capacity × capacity factor
+- **Intensity**_i = sector-specific thermal energy per ton of output
+- **Fossil Share**_i = fraction of heat currently met by fossil fuels
 
 > **TODO:** Document capacity factor source and facility categorization rules (how output type is assigned when a site produces multiple products).
 
 ### 2. Validation
-
-Production estimates are checked against reported facility output where public data is available.
+To validate the bottom-up approach, facility-level heat demand was aggregated to country level and compared against Eurostat C17 combustion-energy totals. In countries with high facility coverage (France 59%, Portugal 51%), the bottom-up estimate recovers a plausible majority of sector combustion energy without exceeding it. Lower coverage ratios elsewhere (Germany 10%, Sweden 26%) reflect incomplete facility matching in Climate TRACE rather than methodological bias, consistent with the proxy-capacity limitations documented in the dataset. Production estimates are checked against reported facility output where public data is available.
 
 **Example — ENCE pulp mills (Spain):**
 
@@ -103,26 +100,129 @@ Reported values from [ENCE pulp business disclosures](https://ence.es/en/pulp-bu
 
 ### 3. Heat Profile
 
-Sample heat profiles are used to approximate the shape of daily (and potentially seasonal) heat demand at representative facilities. These profiles scale total replaceable heat to an hourly or sub-daily load curve for sizing solar and IHB capacity.
+Heat demand is estimated at **annual** resolution only (production × SEC × fossil share). No hourly or seasonal mill data are available at facility level from Climate TRACE or the workbook, so temporal shape cannot be inferred site-by-site from production statistics alone.
 
-> **TODO:** Specify profile source(s), whether profiles differ by facility category, and how peak/average heat load is derived.
+**Assumption:** replaceable heat is modeled as a **flat (constant) hourly load** over the year:
+
+```
+Hourly heat load (kW_th) = Replaceable Heat_i (MWh_th/yr) × 1,000 / 8,760
+```
+
+This flat profile is used when aligning heat demand with hourly PVGIS solar output for sizing colocated solar and IHB capacity. It implies:
+
+- No diurnal ramping (e.g. higher steam demand during day shifts)
+- No seasonal variation (e.g. higher demand in winter)
+- Average load equals peak load for sizing purposes
+
+Real pulp and paper mills typically show within-day and seasonal variation. The flat load is therefore a **deliberate simplification** driven by the annual aggregation step; it tends to understate peak requirements and may over- or under-state storage needs depending on how heat load and solar generation correlate in practice. More detailed load shapes can be substituted in sensitivity analysis where representative profiles are available.
 
 ### 4. Solar Resource
 
-For each facility, latitude and longitude are used to retrieve 2023 solar radiation from PVGIS. This supports estimation of colocated solar generation potential.
+For each facility, latitude and longitude are used to retrieve hourly PV output from the [PVGIS API](https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/getting-started-pvgis/api-non-interactive-service_en) (`seriescalc` endpoint). This supports estimation of colocated solar generation potential and hourly alignment with heat load profiles.
 
-> **TODO:** Note PVGIS dataset/parameters used (e.g., hourly GHI/DNI, tilt/azimuth assumptions, system losses).
+**Script:** `solar_radiation/pull_pvgis.py`  
+**Inputs:** `heat_demand/facilities/facilities_2024_eu.csv` (one row per facility, `source_id` + lat/lon)  
+**Outputs:**
+- `solar_radiation/outputs/solar_radiation_by_facility.csv` — annual summary per site
+- `solar_radiation/outputs/hourly_profiles/{source_id}_2023.parquet` — 8,760 hourly rows per site (`P_kWperkWp`)
+
+```bash
+python3 solar_radiation/pull_pvgis.py
+```
+
+Re-run with `--overwrite` to refresh all profiles; already-downloaded sites are skipped by default.
+
+#### PVGIS parameters
+
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| Radiation database | **PVGIS-ERA5** | Reanalysis-based irradiance |
+| Year | **2023** | Single calendar year |
+| System size | **1 kWp** | Output normalized per kWp installed |
+| System losses | **0%** | Idealized resource; apply losses in LCOH/sizing step |
+| Tilt | **\|latitude\|** | Steep latitude-tilt rule from prior workflow; not necessarily optimal fixed tilt |
+| Azimuth | **0°** (south) in Northern Hemisphere; **180°** in Southern Hemisphere | |
+| Output variable | **P** (W) → `P_kWperkWp` | Hourly AC power per kWp, kW/kWp |
+
+Timestamps from PVGIS (UTC) are converted to the local timezone at each coordinate (via `timezonefinder`), rounded to the nearest hour, deduplicated, and reindexed to a complete local hourly series for the target year (missing hours filled with 0).
+
+#### Summary metrics
+
+- **`annual_yield_kwh_per_kwp`** — sum of hourly `P_kWperkWp` (= kWh per kWp per year)
+- **`solar_capacity_factor`** — `annual_yield_kwh_per_kwp / 8760`
+
+For the current EU facility set (2023), annual yield ranges from ~950 kWh/kWp (northern Finland) to ~1,950 kWh/kWp (southern Portugal), consistent with latitude and the tilt/loss assumptions above.
+
+> **Note:** Results are comparable across sites under identical PVGIS settings. For absolute generation or LCOH, consider adding a standard system-loss factor (e.g. 10–14%) and/or a fixed tilt sensitivity case.
 
 ### 5. Land Availability
 
-Using Google Earth Engine, land within ~5 km of each facility is classified and summed across categories treated as suitable for solar development:
+Land suitable for colocated solar is estimated in Google Earth Engine (GEE) as the area of selected land-cover classes within a buffer around each facility point. The default **5 km** buffer reflects on-site or immediately adjacent siting for colocated arrays; a **15 km** buffer is reserved for sensitivity analysis only.
 
-- Bare land
-- Cropland
+**Scripts:** `land_availability/prepare_gee_upload.py` → `land_availability/gee_facility_calculate_available_area.py` → `land_availability/merge_land_availability.py`  
+**Exploratory notebook:** `land_availability/GEE_facility_calculate_available_area.ipynb` (maps and buffer tests only; use the Python script for production exports)
 
-Built-up areas are excluded. Run a larger buffer (e.g. 15 km) only as a sensitivity case.
+#### Spatial boundary and resolution
 
-> **TODO:** Define spatial boundary (buffer around facility point vs. parcel polygon), resolution, and any exclusion rules.
+| Setting | Default | Description |
+|---------|---------|-------------|
+| Facility geometry | **Point** (Climate TRACE lat/lon) | No parcel polygons |
+| Buffer | **5,000 m** radius | Circular buffer around each point |
+| Land cover | **ESA WorldCover v200 (2021)** | 10 m product aggregated at 30 m for zonal stats |
+| Analysis scale | **30 m** | `reduceRegion` scale in GEE |
+| GEE project | **`eu-re-potential`** | Earth Engine Cloud project |
+
+#### Suitability mask (environmental exclusions)
+
+Before summing land-cover classes, pixels are masked out if they fail either test:
+
+1. **Slope** — terrain slope **> 5°** (excluded). Elevation from **SRTM** (30 m) where available; **Copernicus DEM GLO-30** fills gaps **above 60°N** (Finland, northern Sweden), where SRTM has no coverage.
+2. **Protected areas** — pixels within **WDPA** polygons (status: Designated, Inscribed, or Established), with a **100 m** buffer around protected boundaries.
+
+Remaining pixels are grouped by WorldCover class and summed to km² within the facility buffer.
+
+#### Land-cover classes and available area
+
+All WorldCover classes are exported for transparency. **Available land for colocated solar** counts only:
+
+- **Bare / sparse vegetation** (`bare_sparse_km2`, WorldCover class 60)
+- **Cropland** (`cropland_km2`, class 40)
+
+**Excluded from available land:** built-up (50), tree cover (10), water (80), wetland (90), and other classes — roofs, roads, forest, and water bodies are not treated as array siting area.
+
+```
+available_land_km² = bare_sparse_km² + cropland_km²
+```
+
+#### Pipeline
+
+```bash
+# 1. Export facility points (after facilities CSV is current)
+python3 land_availability/prepare_gee_upload.py
+
+# 2. Upload Input/facilities_2024_eu_gee_upload.csv in GEE Console as a table asset
+
+# 3. Start batch export to Google Drive (requires `earthengine authenticate`)
+python3 land_availability/gee_facility_calculate_available_area.py \
+  --project eu-re-potential \
+  --asset projects/eu-re-potential/assets/facilities_2024_eu_gee_upload \
+  --buffer-m 5000
+
+# 4. Download Drive CSV → Input/LandCover_Area_Categorized_5km.csv
+
+# 5. Merge with facility metadata
+python3 land_availability/merge_land_availability.py \
+  --land-export Input/LandCover_Area_Categorized_5km.csv
+```
+
+**Output:** `land_availability/outputs/land_availability_by_facility.csv` — facility metadata plus all land-cover km² columns and `available_land_km2`.
+
+#### Limitations
+
+- Point + buffer is a screening metric, not a land-ownership or permitting assessment.
+- Cropland may be technically suitable by land cover but restricted by agricultural use or policy.
+- WorldCover and WDPA vintages (2021 / current WDPA) may not reflect recent land-use change.
+- Zonal sums are approximate at 30 m scale; very small available areas near the resolution limit should be interpreted cautiously.
 
 ### 6. Technology Costs
 
@@ -142,15 +242,15 @@ LCOH is computed for each facility under both supply paths, using replaceable he
 
 **Renewable path (solar + IHB):**
 
-> **TODO:** Add equation(s) for solar array sizing, battery sizing, and LCOH<sub>solar+IHB</sub>.
+> **TODO:** Add equation(s) for solar array sizing, battery sizing, and LCOH for the solar + IHB path.
 
 **Fossil baseline (CCGT):**
 
-> **TODO:** Add equation(s) for LCOH<sub>CCGT</sub>.
+> **TODO:** Add equation(s) for LCOH for the CCGT path.
 
 **Comparison:**
 
-> **TODO:** Define decision criteria — e.g., LCOH<sub>solar+IHB</sub> < LCOH<sub>CCGT</sub>, minimum land area, minimum solar yield, etc.
+> **TODO:** Define decision criteria — e.g. solar+IHB LCOH below CCGT LCOH, minimum land area, minimum solar yield, etc.
 
 ### 8. Site Screening and Results
 
@@ -180,7 +280,7 @@ Test how robust site rankings and aggregate results are to uncertainty in key in
 
 ## Limitations
 
-> **TODO:** Capture known limitations — e.g., reliance on sector-average intensity/fossil share, simplified land screening, country-level rather than site-level costs, heat profile representativeness, Climate TRACE data uncertainty.
+> **TODO:** Capture known limitations — e.g., reliance on sector-average intensity/fossil share, flat heat-load assumption from annual aggregation, simplified land screening, country-level rather than site-level costs, Climate TRACE data uncertainty.
 
 ## References
 

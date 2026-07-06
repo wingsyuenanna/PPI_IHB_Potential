@@ -1,0 +1,2 @@
+source_id,source_name,iso3_country,lat,lon,classification,replaceable_heat_mwh_th,available_land_km2,solar_capacity_factor,storage_type,project_start,steam_temp_c,status,load_target_mw
+44375331,Papierfabrik Wattens GmbH & Co KG - Delfort,AUT,47.2969362,11.5903444,Paper/Board,0.0,4.990803723929136,0.165162558219178,heat,2025,180.0,skipped_no_load,0

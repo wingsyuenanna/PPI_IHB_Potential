@@ -4,3 +4,7 @@ plotly
 openpyxl
 nbformat>=4.2.0
 earthengine-api
+requests
+timezonefinder
+pyarrow
+highspy

@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5b4a57cfe77f440e0918d0110643bd54 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5b4a57cfe77f440e0918d0110643bd54" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5b4a57cfe77f440e0918d0110643bd54 = L.map(
+                "map_5b4a57cfe77f440e0918d0110643bd54",
+                {
+                    center: [51.683663501077376, 12.24617662468812],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b2d5a3e05a57b0cdb65b083103d14506 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b2d5a3e05a57b0cdb65b083103d14506.addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            var circle_marker_6e023a665fec6ff14bc93217bb6f637d = L.circleMarker(
+                [48.0250129, 14.7628564],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#39a258ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.030984754346079, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_3bea081ccf7b395e3bda6d6da651c74b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7db2eedf7a2a26e0c50f932bcba30de1 = $(`<div id="html_7db2eedf7a2a26e0c50f932bcba30de1" style="width: 100.0%; height: 100.0%;"><b>Ybbstaler Zellstoff Pulp Mill</b><br>Pulp — AUT<br><hr style='margin:3px'><b>LCOH: $56/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $45 + TES $10<br>Load: 32.3 MW_th (283 GWh/yr)<br>Solar: 299 MW | TES: 1,380 MWh / 115 MW<br>Solar CF: 0.153<br>Land: fits (max 1,212 MW)</div>`)[0];
+                popup_3bea081ccf7b395e3bda6d6da651c74b.setContent(html_7db2eedf7a2a26e0c50f932bcba30de1);
+            
+        
+
+        circle_marker_6e023a665fec6ff14bc93217bb6f637d.bindPopup(popup_3bea081ccf7b395e3bda6d6da651c74b)
+        ;
+
+        
+    
+    
+            circle_marker_6e023a665fec6ff14bc93217bb6f637d.bindTooltip(
+                `<div>
+                     Ybbstaler Zellstoff Pulp Mill: $56/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0af1a93be49317ffd6b8d36ed06fa83c = L.circleMarker(
+                [48.0732305, 14.8091594],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#38a258ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.984996245635905, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_66e8e4545e40d51e20dee368c6877a85 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9d43731852b493aaa6daf0e0d646d210 = $(`<div id="html_9d43731852b493aaa6daf0e0d646d210" style="width: 100.0%; height: 100.0%;"><b>Mondi Neusiedler Pulp Mill</b><br>Integrated — AUT<br><hr style='margin:3px'><b>LCOH: $55/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $44 + TES $10<br>Load: 41.7 MW_th (365 GWh/yr)<br>Solar: 377 MW | TES: 1,747 MWh / 146 MW<br>Solar CF: 0.155<br>Land: fits (max 2,005 MW)</div>`)[0];
+                popup_66e8e4545e40d51e20dee368c6877a85.setContent(html_9d43731852b493aaa6daf0e0d646d210);
+            
+        
+
+        circle_marker_0af1a93be49317ffd6b8d36ed06fa83c.bindPopup(popup_66e8e4545e40d51e20dee368c6877a85)
+        ;
+
+        
+    
+    
+            circle_marker_0af1a93be49317ffd6b8d36ed06fa83c.bindTooltip(
+                `<div>
+                     Mondi Neusiedler Pulp Mill: $55/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0e82007b19817cd90441e90d937025fb = L.circleMarker(
+                [49.5518274, 5.5054045],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#51aa5eff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.331952783021428, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_3b0df8124abf2e7f7720b4aa2f1b2a87 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4875a110eadf349e3baa68abd1e312f9 = $(`<div id="html_4875a110eadf349e3baa68abd1e312f9" style="width: 100.0%; height: 100.0%;"><b>Burgo Ardennes Pulp Mill</b><br>Integrated — BEL<br><hr style='margin:3px'><b>LCOH: $75/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $63 + TES $12<br>Load: 7.3 MW_th (64 GWh/yr)<br>Solar: 105 MW | TES: 353 MWh / 29 MW<br>Solar CF: 0.142<br>Land: fits (max 413 MW)</div>`)[0];
+                popup_3b0df8124abf2e7f7720b4aa2f1b2a87.setContent(html_4875a110eadf349e3baa68abd1e312f9);
+            
+        
+
+        circle_marker_0e82007b19817cd90441e90d937025fb.bindPopup(popup_3b0df8124abf2e7f7720b4aa2f1b2a87)
+        ;
+
+        
+    
+    
+            circle_marker_0e82007b19817cd90441e90d937025fb.bindTooltip(
+                `<div>
+                     Burgo Ardennes Pulp Mill: $75/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af34d8d3a7c33b12dd3f88500866ad1f = L.circleMarker(
+                [43.618351, 25.3506224],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b9e54ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.297454717273222, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_1420d20e3f1d28eaa60f3e985a674191 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d524f35b16c83e071d3cd38825006dcd = $(`<div id="html_d524f35b16c83e071d3cd38825006dcd" style="width: 100.0%; height: 100.0%;"><b>Svilocell EAD - Subsidiary of Svilosa AD</b><br>Pulp — BGR<br><hr style='margin:3px'><b>LCOH: $44/MWh_th</b> (0.4× fossil @$110)<br>&nbsp;&nbsp;solar $36 + TES $8<br>Load: 7.1 MW_th (62 GWh/yr)<br>Solar: 48 MW | TES: 235 MWh / 20 MW<br>Solar CF: 0.177<br>Land: fits (max 1,261 MW)</div>`)[0];
+                popup_1420d20e3f1d28eaa60f3e985a674191.setContent(html_d524f35b16c83e071d3cd38825006dcd);
+            
+        
+
+        circle_marker_af34d8d3a7c33b12dd3f88500866ad1f.bindPopup(popup_1420d20e3f1d28eaa60f3e985a674191)
+        ;
+
+        
+    
+    
+            circle_marker_af34d8d3a7c33b12dd3f88500866ad1f.bindTooltip(
+                `<div>
+                     Svilocell EAD - Subsidiary of Svilosa AD: $44/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a92cbac64bc813e78b783ca2920c9f6c = L.circleMarker(
+                [49.9596659, 16.8653919],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4da85dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.661763670983934, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_ba58391b9ba21c41ea361a107af96d02 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_917be47b53316dd87c85786287005df8 = $(`<div id="html_917be47b53316dd87c85786287005df8" style="width: 100.0%; height: 100.0%;"><b>OP Pap√≠rna s.r.o. - Delfort</b><br>Paper/Board — CZE<br><hr style='margin:3px'><b>LCOH: $71/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $59 + TES $12<br>Load: 8.8 MW_th (77 GWh/yr)<br>Solar: 104 MW | TES: 444 MWh / 37 MW<br>Solar CF: 0.137<br>Land: fits (max 953 MW)</div>`)[0];
+                popup_ba58391b9ba21c41ea361a107af96d02.setContent(html_917be47b53316dd87c85786287005df8);
+            
+        
+
+        circle_marker_a92cbac64bc813e78b783ca2920c9f6c.bindPopup(popup_ba58391b9ba21c41ea361a107af96d02)
+        ;
+
+        
+    
+    
+            circle_marker_a92cbac64bc813e78b783ca2920c9f6c.bindTooltip(
+                `<div>
+                     OP Pap√≠rna s.r.o. - Delfort: $71/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e75b9b35366ba1db01ac04b1c849960 = L.circleMarker(
+                [49.717969, 18.2946046],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4da85dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.075645601426153, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_94a5a7b0ee7dd38a62123f81a4d4ab26 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_52a2916ea5d8408fade1ce8a55f3c115 = $(`<div id="html_52a2916ea5d8408fade1ce8a55f3c115" style="width: 100.0%; height: 100.0%;"><b>Biocel Paskov Pulp Mill</b><br>Pulp — CZE<br><hr style='margin:3px'><b>LCOH: $71/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $58 + TES $13<br>Load: 16.8 MW_th (148 GWh/yr)<br>Solar: 197 MW | TES: 930 MWh / 77 MW<br>Solar CF: 0.137<br>Land: fits (max 1,986 MW)</div>`)[0];
+                popup_94a5a7b0ee7dd38a62123f81a4d4ab26.setContent(html_52a2916ea5d8408fade1ce8a55f3c115);
+            
+        
+
+        circle_marker_6e75b9b35366ba1db01ac04b1c849960.bindPopup(popup_94a5a7b0ee7dd38a62123f81a4d4ab26)
+        ;
+
+        
+    
+    
+            circle_marker_6e75b9b35366ba1db01ac04b1c849960.bindTooltip(
+                `<div>
+                     Biocel Paskov Pulp Mill: $71/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02f5074b495fca001e256f84f08f934e = L.circleMarker(
+                [51.987118, 9.819078],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#56ab5fff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.408964772088574, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_1f6a792efa096017bb44dd42b900bbac = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5fb5b1b3c8cc75aaf5c89103f9f9109b = $(`<div id="html_5fb5b1b3c8cc75aaf5c89103f9f9109b" style="width: 100.0%; height: 100.0%;"><b>Sappi Alfeld Kraft Pulp and Paper Mill</b><br>Integrated — DEU<br><hr style='margin:3px'><b>LCOH: $79/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $66 + TES $13<br>Load: 35.9 MW_th (314 GWh/yr)<br>Solar: 574 MW | TES: 1,989 MWh / 166 MW<br>Solar CF: 0.132<br>Land: fits (max 1,054 MW)</div>`)[0];
+                popup_1f6a792efa096017bb44dd42b900bbac.setContent(html_5fb5b1b3c8cc75aaf5c89103f9f9109b);
+            
+        
+
+        circle_marker_02f5074b495fca001e256f84f08f934e.bindPopup(popup_1f6a792efa096017bb44dd42b900bbac)
+        ;
+
+        
+    
+    
+            circle_marker_02f5074b495fca001e256f84f08f934e.bindTooltip(
+                `<div>
+                     Sappi Alfeld Kraft Pulp and Paper Mill: $79/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_edd5a9ab036a16d4ff52f88676bac1c9 = L.circleMarker(
+                [52.726328, 12.011216],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ba85dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.423677091183386, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_8e67ef11bf57e86ede1f047f0e2324e5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d7343ef2b5804004fe284eb430169f17 = $(`<div id="html_d7343ef2b5804004fe284eb430169f17" style="width: 100.0%; height: 100.0%;"><b>ZS Zellstoff Stendal GmbH - Mercer Stendal</b><br>Pulp — DEU<br><hr style='margin:3px'><b>LCOH: $70/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $57 + TES $13<br>Load: 12.8 MW_th (112 GWh/yr)<br>Solar: 178 MW | TES: 691 MWh / 58 MW<br>Solar CF: 0.133<br>Land: fits (max 3,296 MW)</div>`)[0];
+                popup_8e67ef11bf57e86ede1f047f0e2324e5.setContent(html_d7343ef2b5804004fe284eb430169f17);
+            
+        
+
+        circle_marker_edd5a9ab036a16d4ff52f88676bac1c9.bindPopup(popup_8e67ef11bf57e86ede1f047f0e2324e5)
+        ;
+
+        
+    
+    
+            circle_marker_edd5a9ab036a16d4ff52f88676bac1c9.bindTooltip(
+                `<div>
+                     ZS Zellstoff Stendal GmbH - Mercer Stendal: $70/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f43b154f2bc00fbd6a11d5f0514296f = L.circleMarker(
+                [50.0210149, 12.0200894],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4da85dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.921530714800017, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_0081daaf406fb54935750cab65152f73 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3a02f43a7d1a2d3f60512fb6ee61ac6d = $(`<div id="html_3a02f43a7d1a2d3f60512fb6ee61ac6d" style="width: 100.0%; height: 100.0%;"><b>Heinrich Schaller Pappenfabrik e.K. Pulp Mill</b><br>Paper/Board — DEU<br><hr style='margin:3px'><b>LCOH: $72/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $58 + TES $14<br>Load: 10.1 MW_th (88 GWh/yr)<br>Solar: 143 MW | TES: 566 MWh / 47 MW<br>Solar CF: 0.140<br>Land: fits (max 484 MW)</div>`)[0];
+                popup_0081daaf406fb54935750cab65152f73.setContent(html_3a02f43a7d1a2d3f60512fb6ee61ac6d);
+            
+        
+
+        circle_marker_1f43b154f2bc00fbd6a11d5f0514296f.bindPopup(popup_0081daaf406fb54935750cab65152f73)
+        ;
+
+        
+    
+    
+            circle_marker_1f43b154f2bc00fbd6a11d5f0514296f.bindTooltip(
+                `<div>
+                     Heinrich Schaller Pappenfabrik e.K. Pulp Mill: $72/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b26d7117d5858d08996b5ecb9420556e = L.circleMarker(
+                [49.4515534, 8.0629732],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4da85dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.921530714800017, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_cfd8f4eeb646750919df09ceb1634411 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f48eb294a678257c3d4001efb0ea220b = $(`<div id="html_f48eb294a678257c3d4001efb0ea220b" style="width: 100.0%; height: 100.0%;"><b>Dynos GmbH - Niederlassung Bad Durkheim</b><br>Paper/Board — DEU<br><hr style='margin:3px'><b>LCOH: $71/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $62 + TES $10<br>Load: 10.1 MW_th (88 GWh/yr)<br>Solar: 151 MW | TES: 414 MWh / 34 MW<br>Solar CF: 0.144<br>Land: fits (max 0 MW)</div>`)[0];
+                popup_cfd8f4eeb646750919df09ceb1634411.setContent(html_f48eb294a678257c3d4001efb0ea220b);
+            
+        
+
+        circle_marker_b26d7117d5858d08996b5ecb9420556e.bindPopup(popup_cfd8f4eeb646750919df09ceb1634411)
+        ;
+
+        
+    
+    
+            circle_marker_b26d7117d5858d08996b5ecb9420556e.bindTooltip(
+                `<div>
+                     Dynos GmbH - Niederlassung Bad Durkheim: $71/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2bc3f4d4d22f9ec5283ddd6ef3d6caad = L.circleMarker(
+                [49.4648466, 8.109916],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87ba6cff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.921530714800017, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_e26957fc7cd37482b586be901fc168ae = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6832296442d13a5daccd8130ba93c76a = $(`<div id="html_6832296442d13a5daccd8130ba93c76a" style="width: 100.0%; height: 100.0%;"><b>Lenk Paper GmbH - Papierfabrik Schleipen</b><br>Paper/Board — DEU<br><hr style='margin:3px'><b>LCOH: $118/MWh_th</b> (1.1× fossil @$110)<br>&nbsp;&nbsp;solar $107 + TES $11<br>Load: 10.1 MW_th (88 GWh/yr)<br>Solar: 262 MW | TES: 464 MWh / 39 MW<br>Solar CF: 0.137<br>Land: <b style=color:red>exceeds limit</b> (max 3 MW)</div>`)[0];
+                popup_e26957fc7cd37482b586be901fc168ae.setContent(html_6832296442d13a5daccd8130ba93c76a);
+            
+        
+
+        circle_marker_2bc3f4d4d22f9ec5283ddd6ef3d6caad.bindPopup(popup_e26957fc7cd37482b586be901fc168ae)
+        ;
+
+        
+    
+    
+            circle_marker_2bc3f4d4d22f9ec5283ddd6ef3d6caad.bindTooltip(
+                `<div>
+                     Lenk Paper GmbH - Papierfabrik Schleipen: $118/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c3dd7669006a1e6871ed2c58236e312 = L.circleMarker(
+                [52.0249437, 8.5625952],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#54ab5fff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.921530714800017, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_ab2fedc44ce04bc0f0a6161258d9ca06 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ab889aed102090833439befce22ed1b6 = $(`<div id="html_ab889aed102090833439befce22ed1b6" style="width: 100.0%; height: 100.0%;"><b>Sprick GmbH Bielefelder Papier- und Wellpappenwerke & Co.- Hauptverwaltung</b><br>Paper/Board — DEU<br><hr style='margin:3px'><b>LCOH: $78/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $65 + TES $13<br>Load: 10.1 MW_th (88 GWh/yr)<br>Solar: 159 MW | TES: 533 MWh / 44 MW<br>Solar CF: 0.130<br>Land: <b style=color:red>exceeds limit</b> (max 56 MW)</div>`)[0];
+                popup_ab2fedc44ce04bc0f0a6161258d9ca06.setContent(html_ab889aed102090833439befce22ed1b6);
+            
+        
+
+        circle_marker_0c3dd7669006a1e6871ed2c58236e312.bindPopup(popup_ab2fedc44ce04bc0f0a6161258d9ca06)
+        ;
+
+        
+    
+    
+            circle_marker_0c3dd7669006a1e6871ed2c58236e312.bindTooltip(
+                `<div>
+                     Sprick GmbH Bielefelder Papier- und Wellpappenwerke & Co.- Hauptverwaltung: $78/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bad9ea8e8750db792a95a0c0ef53368 = L.circleMarker(
+                [50.7786198, 13.1594074],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#48a75cff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.244827554509897, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_5094c3ab2d4132e4e7997c5c93a54235 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2e6bc4aef126991cebbe0b4826754c25 = $(`<div id="html_2e6bc4aef126991cebbe0b4826754c25" style="width: 100.0%; height: 100.0%;"><b>GRuNPERGA Papier Pulp Mill</b><br>Paper/Board — DEU<br><hr style='margin:3px'><b>LCOH: $68/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $56 + TES $12<br>Load: 3.3 MW_th (29 GWh/yr)<br>Solar: 45 MW | TES: 163 MWh / 14 MW<br>Solar CF: 0.141<br>Land: fits (max 680 MW)</div>`)[0];
+                popup_5094c3ab2d4132e4e7997c5c93a54235.setContent(html_2e6bc4aef126991cebbe0b4826754c25);
+            
+        
+
+        circle_marker_1bad9ea8e8750db792a95a0c0ef53368.bindPopup(popup_5094c3ab2d4132e4e7997c5c93a54235)
+        ;
+
+        
+    
+    
+            circle_marker_1bad9ea8e8750db792a95a0c0ef53368.bindTooltip(
+                `<div>
+                     GRuNPERGA Papier Pulp Mill: $68/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f23dd83e87723609fe5c9d6ddff596a = L.circleMarker(
+                [49.5342827, 8.4594229],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#40a45aff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.545881922132843, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_03baa3a44cf45690d9d4b853dff80d60 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d18c95daf360d59b33a8228a685f6547 = $(`<div id="html_d18c95daf360d59b33a8228a685f6547" style="width: 100.0%; height: 100.0%;"><b>Essity Operations Mannheim GmbH Pulp Mill</b><br>Tissue — DEU<br><hr style='margin:3px'><b>LCOH: $61/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $52 + TES $10<br>Load: 20.1 MW_th (176 GWh/yr)<br>Solar: 253 MW | TES: 804 MWh / 67 MW<br>Solar CF: 0.146<br>Land: fits (max 257 MW)</div>`)[0];
+                popup_03baa3a44cf45690d9d4b853dff80d60.setContent(html_d18c95daf360d59b33a8228a685f6547);
+            
+        
+
+        circle_marker_2f23dd83e87723609fe5c9d6ddff596a.bindPopup(popup_03baa3a44cf45690d9d4b853dff80d60)
+        ;
+
+        
+    
+    
+            circle_marker_2f23dd83e87723609fe5c9d6ddff596a.bindTooltip(
+                `<div>
+                     Essity Operations Mannheim GmbH Pulp Mill: $61/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc208dc12d5369deee036919523e7aeb = L.circleMarker(
+                [50.4034989, 11.7007465],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#52aa5eff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.420772526018638, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_9c61cbf96d6bd50a117d4626749c8a5b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c1c2545701a5bcef0cd8f5a0aec2319a = $(`<div id="html_c1c2545701a5bcef0cd8f5a0aec2319a" style="width: 100.0%; height: 100.0%;"><b>Mercer Rosenthal GmbH - MR - Mercer International Group</b><br>Pulp — DEU<br><hr style='margin:3px'><b>LCOH: $76/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $63 + TES $13<br>Load: 7.7 MW_th (67 GWh/yr)<br>Solar: 117 MW | TES: 413 MWh / 34 MW<br>Solar CF: 0.137<br>Land: fits (max 564 MW)</div>`)[0];
+                popup_9c61cbf96d6bd50a117d4626749c8a5b.setContent(html_c1c2545701a5bcef0cd8f5a0aec2319a);
+            
+        
+
+        circle_marker_dc208dc12d5369deee036919523e7aeb.bindPopup(popup_9c61cbf96d6bd50a117d4626749c8a5b)
+        ;
+
+        
+    
+    
+            circle_marker_dc208dc12d5369deee036919523e7aeb.bindTooltip(
+                `<div>
+                     Mercer Rosenthal GmbH - MR - Mercer International Group: $76/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e310ffeed47f4cc6a35d5c426640874 = L.circleMarker(
+                [48.7236271, 8.3557998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e7d985ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.408964772088574, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_056a6b015a448c1593e39b7817a731b0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b476e6c844ef213c5c6eba462a285969 = $(`<div id="html_b476e6c844ef213c5c6eba462a285969" style="width: 100.0%; height: 100.0%;"><b>Katz GmbH & Co. KG</b><br>Integrated — DEU<br><hr style='margin:3px'><b>LCOH: $195/MWh_th</b> (1.8× fossil @$110)<br>&nbsp;&nbsp;solar $188 + TES $8<br>Load: 35.9 MW_th (314 GWh/yr)<br>Solar: 1,641 MW | TES: 1,164 MWh / 97 MW<br>Solar CF: 0.128<br>Land: <b style=color:red>exceeds limit</b> (max 0 MW)</div>`)[0];
+                popup_056a6b015a448c1593e39b7817a731b0.setContent(html_b476e6c844ef213c5c6eba462a285969);
+            
+        
+
+        circle_marker_5e310ffeed47f4cc6a35d5c426640874.bindPopup(popup_056a6b015a448c1593e39b7817a731b0)
+        ;
+
+        
+    
+    
+            circle_marker_5e310ffeed47f4cc6a35d5c426640874.bindTooltip(
+                `<div>
+                     Katz GmbH & Co. KG: $195/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c04ba056237180570d4cd863874050e8 = L.circleMarker(
+                [43.1828069, -2.6605848],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#259c53ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.003930387960793, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_a5d6207d021aea5305035f7d2c6cac73 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c2dcdf2767d07c0ccfe539a3380256ab = $(`<div id="html_c2dcdf2767d07c0ccfe539a3380256ab" style="width: 100.0%; height: 100.0%;"><b>Smurfit Kappa Nervi√≥n Pulp Mill</b><br>Integrated — ESP<br><hr style='margin:3px'><b>LCOH: $39/MWh_th</b> (0.4× fossil @$110)<br>&nbsp;&nbsp;solar $31 + TES $8<br>Load: 32.1 MW_th (281 GWh/yr)<br>Solar: 206 MW | TES: 1,055 MWh / 88 MW<br>Solar CF: 0.175<br>Land: <b style=color:red>exceeds limit</b> (max 13 MW)</div>`)[0];
+                popup_a5d6207d021aea5305035f7d2c6cac73.setContent(html_c2dcdf2767d07c0ccfe539a3380256ab);
+            
+        
+
+        circle_marker_c04ba056237180570d4cd863874050e8.bindPopup(popup_a5d6207d021aea5305035f7d2c6cac73)
+        ;
+
+        
+    
+    
+            circle_marker_c04ba056237180570d4cd863874050e8.bindTooltip(
+                `<div>
+                     Smurfit Kappa Nervi√≥n Pulp Mill: $39/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8a7b7e3c1c21684a4cdd8407b90e24bf = L.circleMarker(
+                [42.4108321, -8.6759041],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2a9d54ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.346107800929222, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_312c3bcbd5978b40ef430e9e54a4d9e5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_20551dc53b97fb169fccb98637aec8df = $(`<div id="html_20551dc53b97fb169fccb98637aec8df" style="width: 100.0%; height: 100.0%;"><b>Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Pontevedra</b><br>Pulp — ESP<br><hr style='margin:3px'><b>LCOH: $43/MWh_th</b> (0.4× fossil @$110)<br>&nbsp;&nbsp;solar $36 + TES $7<br>Load: 70.0 MW_th (613 GWh/yr)<br>Solar: 522 MW | TES: 1,917 MWh / 160 MW<br>Solar CF: 0.189<br>Land: <b style=color:red>exceeds limit</b> (max 16 MW)</div>`)[0];
+                popup_312c3bcbd5978b40ef430e9e54a4d9e5.setContent(html_20551dc53b97fb169fccb98637aec8df);
+            
+        
+
+        circle_marker_8a7b7e3c1c21684a4cdd8407b90e24bf.bindPopup(popup_312c3bcbd5978b40ef430e9e54a4d9e5)
+        ;
+
+        
+    
+    
+            circle_marker_8a7b7e3c1c21684a4cdd8407b90e24bf.bindTooltip(
+                `<div>
+                     Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Pontevedra: $43/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3bcd6a0bea196485901f448ec0370dc0 = L.circleMarker(
+                [43.5275013, -6.7240832],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#269c53ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.93214907068102, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_9955743fd546353c98bae698fbf856db = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c58d302d0b69aef7d46a367b295d1b0e = $(`<div id="html_c58d302d0b69aef7d46a367b295d1b0e" style="width: 100.0%; height: 100.0%;"><b>Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Navia</b><br>Pulp — ESP<br><hr style='margin:3px'><b>LCOH: $40/MWh_th</b> (0.4× fossil @$110)<br>&nbsp;&nbsp;solar $34 + TES $6<br>Load: 93.1 MW_th (815 GWh/yr)<br>Solar: 647 MW | TES: 2,399 MWh / 200 MW<br>Solar CF: 0.185<br>Land: <b style=color:red>exceeds limit</b> (max 469 MW)</div>`)[0];
+                popup_9955743fd546353c98bae698fbf856db.setContent(html_c58d302d0b69aef7d46a367b295d1b0e);
+            
+        
+
+        circle_marker_3bcd6a0bea196485901f448ec0370dc0.bindPopup(popup_9955743fd546353c98bae698fbf856db)
+        ;
+
+        
+    
+    
+            circle_marker_3bcd6a0bea196485901f448ec0370dc0.bindTooltip(
+                `<div>
+                     Grupo Empresarial ENCE S.A. Divis√≠on de Celulosa - Pulp Mill Navia: $40/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9dacbf3adc0a25208cff726542e1064 = L.circleMarker(
+                [62.5907343, 25.7521142],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.853415322373051, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_7f9225c3a257685ef04cc2775bffe94b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f3932531df512cd9a43f8edae9eacc75 = $(`<div id="html_f3932531df512cd9a43f8edae9eacc75" style="width: 100.0%; height: 100.0%;"><b>Mets√§ Fibre Oy - √Ñ√§nekoski Mill</b><br>Paper/Board — FIN<br><hr style='margin:3px'><b>LCOH: $402/MWh_th</b> (3.7× fossil @$110)<br>&nbsp;&nbsp;solar $166 + TES $235<br>Load: 63.5 MW_th (556 GWh/yr)<br>Solar: 1,973 MW | TES: 61,788 MWh / 5,149 MW<br>Solar CF: 0.116<br>Land: <b style=color:red>exceeds limit</b> (max 258 MW)</div>`)[0];
+                popup_7f9225c3a257685ef04cc2775bffe94b.setContent(html_f3932531df512cd9a43f8edae9eacc75);
+            
+        
+
+        circle_marker_e9dacbf3adc0a25208cff726542e1064.bindPopup(popup_7f9225c3a257685ef04cc2775bffe94b)
+        ;
+
+        
+    
+    
+            circle_marker_e9dacbf3adc0a25208cff726542e1064.bindTooltip(
+                `<div>
+                     Mets√§ Fibre Oy - √Ñ√§nekoski Mill: $402/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb47f1b011abfb9874fe22c9aa4d5a98 = L.circleMarker(
+                [60.1671177, 24.9517049],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fce08aff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.78941644937666, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_68bf882490446e9d3f57c79e9d4db215 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f1f0d6bc9018c1c87851680e64625267 = $(`<div id="html_f1f0d6bc9018c1c87851680e64625267" style="width: 100.0%; height: 100.0%;"><b>UPM Group - Paper Industry</b><br>Integrated — FIN<br><hr style='margin:3px'><b>LCOH: $213/MWh_th</b> (1.9× fossil @$110)<br>&nbsp;&nbsp;solar $182 + TES $30<br>Load: 90.9 MW_th (796 GWh/yr)<br>Solar: 3,093 MW | TES: 11,434 MWh / 953 MW<br>Solar CF: 0.140<br>Land: <b style=color:red>exceeds limit</b> (max 29 MW)</div>`)[0];
+                popup_68bf882490446e9d3f57c79e9d4db215.setContent(html_f1f0d6bc9018c1c87851680e64625267);
+            
+        
+
+        circle_marker_eb47f1b011abfb9874fe22c9aa4d5a98.bindPopup(popup_68bf882490446e9d3f57c79e9d4db215)
+        ;
+
+        
+    
+    
+            circle_marker_eb47f1b011abfb9874fe22c9aa4d5a98.bindTooltip(
+                `<div>
+                     UPM Group - Paper Industry: $213/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f5d979ce6735ee10400233d7ba9d4cb7 = L.circleMarker(
+                [61.1282381, 28.4669153],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f3ab6dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.901017364989855, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_1a9f93aa7200dd0a6dcca17d2ec4aa02 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1eba1ff61a7ff4a84c030412e208b034 = $(`<div id="html_1eba1ff61a7ff4a84c030412e208b034" style="width: 100.0%; height: 100.0%;"><b>Mets√§ Board Cartonboard Division Joutseno Mill</b><br>Integrated — FIN<br><hr style='margin:3px'><b>LCOH: $270/MWh_th</b> (2.5× fossil @$110)<br>&nbsp;&nbsp;solar $232 + TES $38<br>Load: 92.6 MW_th (811 GWh/yr)<br>Solar: 4,009 MW | TES: 14,648 MWh / 1,221 MW<br>Solar CF: 0.126<br>Land: <b style=color:red>exceeds limit</b> (max 740 MW)</div>`)[0];
+                popup_1a9f93aa7200dd0a6dcca17d2ec4aa02.setContent(html_1eba1ff61a7ff4a84c030412e208b034);
+            
+        
+
+        circle_marker_f5d979ce6735ee10400233d7ba9d4cb7.bindPopup(popup_1a9f93aa7200dd0a6dcca17d2ec4aa02)
+        ;
+
+        
+    
+    
+            circle_marker_f5d979ce6735ee10400233d7ba9d4cb7.bindTooltip(
+                `<div>
+                     Mets√§ Board Cartonboard Division Joutseno Mill: $270/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4f74caf59754dca9894fc3dafed466f3 = L.circleMarker(
+                [61.1279785, 28.4477818],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f3ab6dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.200291186697896, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_e1c02d4bf2260cd5e9b2b355cc6d9fb8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0b45f204c543daeb59960b5c966b284d = $(`<div id="html_0b45f204c543daeb59960b5c966b284d" style="width: 100.0%; height: 100.0%;"><b>Mets√§ Fibre Oy - Joutseno Mill</b><br>Integrated — FIN<br><hr style='margin:3px'><b>LCOH: $270/MWh_th</b> (2.5× fossil @$110)<br>&nbsp;&nbsp;solar $232 + TES $38<br>Load: 97.3 MW_th (852 GWh/yr)<br>Solar: 4,214 MW | TES: 15,397 MWh / 1,283 MW<br>Solar CF: 0.126<br>Land: <b style=color:red>exceeds limit</b> (max 505 MW)</div>`)[0];
+                popup_e1c02d4bf2260cd5e9b2b355cc6d9fb8.setContent(html_0b45f204c543daeb59960b5c966b284d);
+            
+        
+
+        circle_marker_4f74caf59754dca9894fc3dafed466f3.bindPopup(popup_e1c02d4bf2260cd5e9b2b355cc6d9fb8)
+        ;
+
+        
+    
+    
+            circle_marker_4f74caf59754dca9894fc3dafed466f3.bindTooltip(
+                `<div>
+                     Mets√§ Fibre Oy - Joutseno Mill: $270/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_926950c27e6f44041be7912ff9bc4424 = L.circleMarker(
+                [61.0663059, 28.2307043],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f0a067ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.81017531433873, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_34c9f8c45f75c514dfd211c7315f5e19 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ddf2fef0f04f1a0e4c9b4176aceed1f2 = $(`<div id="html_ddf2fef0f04f1a0e4c9b4176aceed1f2" style="width: 100.0%; height: 100.0%;"><b>UPM Group - Paper Industry - Kaukas Mill</b><br>Tissue — FIN<br><hr style='margin:3px'><b>LCOH: $282/MWh_th</b> (2.6× fossil @$110)<br>&nbsp;&nbsp;solar $245 + TES $37<br>Load: 62.9 MW_th (551 GWh/yr)<br>Solar: 2,879 MW | TES: 9,573 MWh / 798 MW<br>Solar CF: 0.127<br>Land: <b style=color:red>exceeds limit</b> (max 372 MW)</div>`)[0];
+                popup_34c9f8c45f75c514dfd211c7315f5e19.setContent(html_ddf2fef0f04f1a0e4c9b4176aceed1f2);
+            
+        
+
+        circle_marker_926950c27e6f44041be7912ff9bc4424.bindPopup(popup_34c9f8c45f75c514dfd211c7315f5e19)
+        ;
+
+        
+    
+    
+            circle_marker_926950c27e6f44041be7912ff9bc4424.bindTooltip(
+                `<div>
+                     UPM Group - Paper Industry - Kaukas Mill: $282/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42380fc72d079ff1f78f2061a3f942f1 = L.circleMarker(
+                [63.6744036, 22.6966088],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e26143ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.53522897881027, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_26f75d7d8865aec46838a5ce3811a238 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_49e12fef993d89d0fd3202d622da9e08 = $(`<div id="html_49e12fef993d89d0fd3202d622da9e08" style="width: 100.0%; height: 100.0%;"><b>UPM Group - Paper Industry - Pietarsaari Mill</b><br>Paper/Board — FIN<br><hr style='margin:3px'><b>LCOH: $348/MWh_th</b> (3.2× fossil @$110)<br>&nbsp;&nbsp;solar $131 + TES $216<br>Load: 27.9 MW_th (245 GWh/yr)<br>Solar: 685 MW | TES: 25,020 MWh / 2,085 MW<br>Solar CF: 0.127<br>Land: <b style=color:red>exceeds limit</b> (max 286 MW)</div>`)[0];
+                popup_26f75d7d8865aec46838a5ce3811a238.setContent(html_49e12fef993d89d0fd3202d622da9e08);
+            
+        
+
+        circle_marker_42380fc72d079ff1f78f2061a3f942f1.bindPopup(popup_26f75d7d8865aec46838a5ce3811a238)
+        ;
+
+        
+    
+    
+            circle_marker_42380fc72d079ff1f78f2061a3f942f1.bindTooltip(
+                `<div>
+                     UPM Group - Paper Industry - Pietarsaari Mill: $348/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97facb87594e20f191fece3d0d037a8f = L.circleMarker(
+                [61.1108083, 21.4601152],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fbdf8aff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.175644671265777, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_33662a8f3f2a8dd3ae269e2d92f120c8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a772c2342159339f5a628d2aa80a9979 = $(`<div id="html_a772c2342159339f5a628d2aa80a9979" style="width: 100.0%; height: 100.0%;"><b>Mets√§ Fibre Oy - Rauma Mill</b><br>Paper/Board — FIN<br><hr style='margin:3px'><b>LCOH: $212/MWh_th</b> (1.9× fossil @$110)<br>&nbsp;&nbsp;solar $190 + TES $22<br>Load: 17.5 MW_th (153 GWh/yr)<br>Solar: 622 MW | TES: 1,578 MWh / 132 MW<br>Solar CF: 0.142<br>Land: <b style=color:red>exceeds limit</b> (max 164 MW)</div>`)[0];
+                popup_33662a8f3f2a8dd3ae269e2d92f120c8.setContent(html_a772c2342159339f5a628d2aa80a9979);
+            
+        
+
+        circle_marker_97facb87594e20f191fece3d0d037a8f.bindPopup(popup_33662a8f3f2a8dd3ae269e2d92f120c8)
+        ;
+
+        
+    
+    
+            circle_marker_97facb87594e20f191fece3d0d037a8f.bindTooltip(
+                `<div>
+                     Mets√§ Fibre Oy - Rauma Mill: $212/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_990b90e3209bbd5823c88a7f5c471a17 = L.circleMarker(
+                [62.596, 25.741],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.191139647567184, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_f2d742f59abcfe98adef647809627231 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_886b9792211f6f412e87d07c578b2dbf = $(`<div id="html_886b9792211f6f412e87d07c578b2dbf" style="width: 100.0%; height: 100.0%;"><b>Aanekoski Bioproduct Pulp Mill</b><br>Tissue — FIN<br><hr style='margin:3px'><b>LCOH: $402/MWh_th</b> (3.7× fossil @$110)<br>&nbsp;&nbsp;solar $168 + TES $233<br>Load: 113.8 MW_th (997 GWh/yr)<br>Solar: 3,574 MW | TES: 109,912 MWh / 9,159 MW<br>Solar CF: 0.116<br>Land: <b style=color:red>exceeds limit</b> (max 282 MW)</div>`)[0];
+                popup_f2d742f59abcfe98adef647809627231.setContent(html_886b9792211f6f412e87d07c578b2dbf);
+            
+        
+
+        circle_marker_990b90e3209bbd5823c88a7f5c471a17.bindPopup(popup_f2d742f59abcfe98adef647809627231)
+        ;
+
+        
+    
+    
+            circle_marker_990b90e3209bbd5823c88a7f5c471a17.bindTooltip(
+                `<div>
+                     Aanekoski Bioproduct Pulp Mill: $402/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0ca2beb57d89aed086c6b1ee82c807d8 = L.circleMarker(
+                [62.919186, 30.230598],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#da3a2dff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_50b1e2a48d7e958ee490fcf7fce5a660 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e9fe1cd591cb49bd67ad16df99f243a0 = $(`<div id="html_e9fe1cd591cb49bd67ad16df99f243a0" style="width: 100.0%; height: 100.0%;"><b>Enocell Pulp Mill</b><br>Integrated — FIN<br><hr style='margin:3px'><b>LCOH: $388/MWh_th</b> (3.5× fossil @$110)<br>&nbsp;&nbsp;solar $196 + TES $192<br>Load: 188.9 MW_th (1,655 GWh/yr)<br>Solar: 6,927 MW | TES: 150,199 MWh / 12,517 MW<br>Solar CF: 0.112<br>Land: <b style=color:red>exceeds limit</b> (max 32 MW)</div>`)[0];
+                popup_50b1e2a48d7e958ee490fcf7fce5a660.setContent(html_e9fe1cd591cb49bd67ad16df99f243a0);
+            
+        
+
+        circle_marker_0ca2beb57d89aed086c6b1ee82c807d8.bindPopup(popup_50b1e2a48d7e958ee490fcf7fce5a660)
+        ;
+
+        
+    
+    
+            circle_marker_0ca2beb57d89aed086c6b1ee82c807d8.bindTooltip(
+                `<div>
+                     Enocell Pulp Mill: $388/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c54c038a3dd96ce805b70a423b1f9dd6 = L.circleMarker(
+                [62.22108, 21.144193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef9c64ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.10890641708735, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_fc0f5c3dc1fdbc54ece3d3cfa7a8625d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f995151ae0064303cb8340364cca422b = $(`<div id="html_f995151ae0064303cb8340364cca422b" style="width: 100.0%; height: 100.0%;"><b>Kaskinen Pulp Mill</b><br>Paper/Board — FIN<br><hr style='margin:3px'><b>LCOH: $286/MWh_th</b> (2.6× fossil @$110)<br>&nbsp;&nbsp;solar $217 + TES $69<br>Load: 17.1 MW_th (149 GWh/yr)<br>Solar: 692 MW | TES: 4,887 MWh / 407 MW<br>Solar CF: 0.138<br>Land: fits (max 0 MW)</div>`)[0];
+                popup_fc0f5c3dc1fdbc54ece3d3cfa7a8625d.setContent(html_f995151ae0064303cb8340364cca422b);
+            
+        
+
+        circle_marker_c54c038a3dd96ce805b70a423b1f9dd6.bindPopup(popup_fc0f5c3dc1fdbc54ece3d3cfa7a8625d)
+        ;
+
+        
+    
+    
+            circle_marker_c54c038a3dd96ce805b70a423b1f9dd6.bindTooltip(
+                `<div>
+                     Kaskinen Pulp Mill: $286/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_901ad431b90dab29610e4364a0abdc22 = L.circleMarker(
+                [61.111671, 21.466299],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fbdf8aff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.761646473041946, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_7929039f07c656e843aaefe56256c831 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8bace7e62415455050d8c1e34f8aa2a9 = $(`<div id="html_8bace7e62415455050d8c1e34f8aa2a9" style="width: 100.0%; height: 100.0%;"><b>Rauma Pulp Mill</b><br>Paper/Board — FIN<br><hr style='margin:3px'><b>LCOH: $212/MWh_th</b> (1.9× fossil @$110)<br>&nbsp;&nbsp;solar $190 + TES $22<br>Load: 29.9 MW_th (262 GWh/yr)<br>Solar: 1,062 MW | TES: 2,694 MWh / 225 MW<br>Solar CF: 0.142<br>Land: <b style=color:red>exceeds limit</b> (max 182 MW)</div>`)[0];
+                popup_7929039f07c656e843aaefe56256c831.setContent(html_8bace7e62415455050d8c1e34f8aa2a9);
+            
+        
+
+        circle_marker_901ad431b90dab29610e4364a0abdc22.bindPopup(popup_7929039f07c656e843aaefe56256c831)
+        ;
+
+        
+    
+    
+            circle_marker_901ad431b90dab29610e4364a0abdc22.bindTooltip(
+                `<div>
+                     Rauma Pulp Mill: $212/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27e7d6595ade69b73643759ea33e3369 = L.circleMarker(
+                [44.629661, -0.975188],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#259c53ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.838710378130873, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_2247b4073273a7fd7249618e39d06254 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fae4bf6e2667d346deace043c49fa6cb = $(`<div id="html_fae4bf6e2667d346deace043c49fa6cb" style="width: 100.0%; height: 100.0%;"><b>Facture Biganos Pulp and Paper Mill</b><br>Paper/Board — FRA<br><hr style='margin:3px'><b>LCOH: $39/MWh_th</b> (0.4× fossil @$110)<br>&nbsp;&nbsp;solar $32 + TES $7<br>Load: 9.6 MW_th (84 GWh/yr)<br>Solar: 75 MW | TES: 273 MWh / 23 MW<br>Solar CF: 0.170<br>Land: fits (max 0 MW)</div>`)[0];
+                popup_2247b4073273a7fd7249618e39d06254.setContent(html_fae4bf6e2667d346deace043c49fa6cb);
+            
+        
+
+        circle_marker_27e7d6595ade69b73643759ea33e3369.bindPopup(popup_2247b4073273a7fd7249618e39d06254)
+        ;
+
+        
+    
+    
+            circle_marker_27e7d6595ade69b73643759ea33e3369.bindTooltip(
+                `<div>
+                     Facture Biganos Pulp and Paper Mill: $39/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3440795871918869f30c4b5b96ab54ff = L.circleMarker(
+                [48.210464, 6.425649],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45a65bff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.885499785429112, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_76f7873cedd0317d8a2816f4311115ee = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3092751a5407d5473b194fda6b27f484 = $(`<div id="html_3092751a5407d5473b194fda6b27f484" style="width: 100.0%; height: 100.0%;"><b>Golbey Pulp and Paper Mill</b><br>Integrated — FRA<br><hr style='margin:3px'><b>LCOH: $65/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $54 + TES $11<br>Load: 2.3 MW_th (20 GWh/yr)<br>Solar: 30 MW | TES: 108 MWh / 9 MW<br>Solar CF: 0.154<br>Land: fits (max 541 MW)</div>`)[0];
+                popup_76f7873cedd0317d8a2816f4311115ee.setContent(html_3092751a5407d5473b194fda6b27f484);
+            
+        
+
+        circle_marker_3440795871918869f30c4b5b96ab54ff.bindPopup(popup_76f7873cedd0317d8a2816f4311115ee)
+        ;
+
+        
+    
+    
+            circle_marker_3440795871918869f30c4b5b96ab54ff.bindTooltip(
+                `<div>
+                     Golbey Pulp and Paper Mill: $65/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b7315b32507f9e1de0a234bec44305b = L.circleMarker(
+                [44.207946, -1.249265],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#219b52ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.592311246859566, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_d17d5b052fdb452b14a5c977123bcbf2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a04247091107d26cbd22331ead50e9d5 = $(`<div id="html_a04247091107d26cbd22331ead50e9d5" style="width: 100.0%; height: 100.0%;"><b>Mimizan Pulp and Paper Mill - Paper Bags</b><br>Integrated — FRA<br><hr style='margin:3px'><b>LCOH: $36/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $29 + TES $7<br>Load: 20.4 MW_th (179 GWh/yr)<br>Solar: 144 MW | TES: 603 MWh / 50 MW<br>Solar CF: 0.176<br>Land: fits (max 148 MW)</div>`)[0];
+                popup_d17d5b052fdb452b14a5c977123bcbf2.setContent(html_a04247091107d26cbd22331ead50e9d5);
+            
+        
+
+        circle_marker_9b7315b32507f9e1de0a234bec44305b.bindPopup(popup_d17d5b052fdb452b14a5c977123bcbf2)
+        ;
+
+        
+    
+    
+            circle_marker_9b7315b32507f9e1de0a234bec44305b.bindTooltip(
+                `<div>
+                     Mimizan Pulp and Paper Mill - Paper Bags: $36/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0402e07242f56f0ea9c921d610391b19 = L.circleMarker(
+                [45.876393, 0.817428],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#33a056ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.915848751769685, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_e5efa6e11ac9cbe96fe6c2788c881fa9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ea026f194b7f9ad019343b6a8b86b0f1 = $(`<div id="html_ea026f194b7f9ad019343b6a8b86b0f1" style="width: 100.0%; height: 100.0%;"><b>Saillat-sur-Vienne Pulp and Paper Mill</b><br>Pulp — FRA<br><hr style='margin:3px'><b>LCOH: $50/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $43 + TES $8<br>Load: 10.0 MW_th (88 GWh/yr)<br>Solar: 103 MW | TES: 318 MWh / 26 MW<br>Solar CF: 0.160<br>Land: fits (max 814 MW)</div>`)[0];
+                popup_e5efa6e11ac9cbe96fe6c2788c881fa9.setContent(html_ea026f194b7f9ad019343b6a8b86b0f1);
+            
+        
+
+        circle_marker_0402e07242f56f0ea9c921d610391b19.bindPopup(popup_e5efa6e11ac9cbe96fe6c2788c881fa9)
+        ;
+
+        
+    
+    
+            circle_marker_0402e07242f56f0ea9c921d610391b19.bindTooltip(
+                `<div>
+                     Saillat-sur-Vienne Pulp and Paper Mill: $50/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5cbbb2b38a7e403c5e15058c5d108d8e = L.circleMarker(
+                [43.780612, 4.652488],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a9850ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.267764510747885, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_a89b71c8a7331d44384729beaaebb719 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_37a2df9f030b6b622db57486f2634407 = $(`<div id="html_37a2df9f030b6b622db57486f2634407" style="width: 100.0%; height: 100.0%;"><b>Tarascon Pulp Mill</b><br>Paper/Board — FRA<br><hr style='margin:3px'><b>LCOH: $27/MWh_th</b> (0.2× fossil @$110)<br>&nbsp;&nbsp;solar $21 + TES $5<br>Load: 7.0 MW_th (61 GWh/yr)<br>Solar: 36 MW | TES: 147 MWh / 12 MW<br>Solar CF: 0.210<br>Land: fits (max 2,186 MW)</div>`)[0];
+                popup_a89b71c8a7331d44384729beaaebb719.setContent(html_37a2df9f030b6b622db57486f2634407);
+            
+        
+
+        circle_marker_5cbbb2b38a7e403c5e15058c5d108d8e.bindPopup(popup_a89b71c8a7331d44384729beaaebb719)
+        ;
+
+        
+    
+    
+            circle_marker_5cbbb2b38a7e403c5e15058c5d108d8e.bindTooltip(
+                `<div>
+                     Tarascon Pulp Mill: $27/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4552370371d67937cf9f166a55b9368a = L.circleMarker(
+                [45.85666053657, 17.3978741551187],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32a056ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.098444307331726, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_34bf5cb75944f02502516947bb51317d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f2598265ffce32a9f3bbfe37c0574d53 = $(`<div id="html_f2598265ffce32a9f3bbfe37c0574d53" style="width: 100.0%; height: 100.0%;"><b>Drava Paper Mill</b><br>Paper/Board — HRV<br><hr style='margin:3px'><b>LCOH: $50/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $42 + TES $8<br>Load: 0.8 MW_th (7 GWh/yr)<br>Solar: 6 MW | TES: 26 MWh / 2 MW<br>Solar CF: 0.169<br>Land: fits (max 5,263 MW)</div>`)[0];
+                popup_34bf5cb75944f02502516947bb51317d.setContent(html_f2598265ffce32a9f3bbfe37c0574d53);
+            
+        
+
+        circle_marker_4552370371d67937cf9f166a55b9368a.bindPopup(popup_34bf5cb75944f02502516947bb51317d)
+        ;
+
+        
+    
+    
+            circle_marker_4552370371d67937cf9f166a55b9368a.bindTooltip(
+                `<div>
+                     Drava Paper Mill: $50/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_01db9048fcad7e608c7685e1aff64f7a = L.circleMarker(
+                [45.2997443, 14.7213856],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#35a157ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.428863329383174, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_b3488326fd8d1c934601fc4db9520508 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5d0f88b33fb12b54aa2d3c2c2af0fb2c = $(`<div id="html_5d0f88b33fb12b54aa2d3c2c2af0fb2c" style="width: 100.0%; height: 100.0%;"><b>Drvenjaƒça d.d. Pulp Mill</b><br>Paper/Board — HRV<br><hr style='margin:3px'><b>LCOH: $53/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $44 + TES $8<br>Load: 0.1 MW_th (1 GWh/yr)<br>Solar: 1 MW | TES: 4 MWh / 0 MW<br>Solar CF: 0.168<br>Land: fits (max 1 MW)</div>`)[0];
+                popup_b3488326fd8d1c934601fc4db9520508.setContent(html_5d0f88b33fb12b54aa2d3c2c2af0fb2c);
+            
+        
+
+        circle_marker_01db9048fcad7e608c7685e1aff64f7a.bindPopup(popup_b3488326fd8d1c934601fc4db9520508)
+        ;
+
+        
+    
+    
+            circle_marker_01db9048fcad7e608c7685e1aff64f7a.bindTooltip(
+                `<div>
+                     Drvenjaƒça d.d. Pulp Mill: $53/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4b3e60b03545c821ced9adef2c53a11d = L.circleMarker(
+                [46.927179, 18.9365433],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#33a056ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.572837675815251, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_35d348d391e333d92879fd2511d693f5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f07141119adf8b2e2c18061c8088f0b1 = $(`<div id="html_f07141119adf8b2e2c18061c8088f0b1" style="width: 100.0%; height: 100.0%;"><b>Dunacell Kft. Pulp Mill</b><br>Pulp — HUN<br><hr style='margin:3px'><b>LCOH: $50/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $41 + TES $9<br>Load: 1.6 MW_th (14 GWh/yr)<br>Solar: 12 MW | TES: 61 MWh / 5 MW<br>Solar CF: 0.168<br>Land: fits (max 3,326 MW)</div>`)[0];
+                popup_35d348d391e333d92879fd2511d693f5.setContent(html_f07141119adf8b2e2c18061c8088f0b1);
+            
+        
+
+        circle_marker_4b3e60b03545c821ced9adef2c53a11d.bindPopup(popup_35d348d391e333d92879fd2511d693f5)
+        ;
+
+        
+    
+    
+            circle_marker_4b3e60b03545c821ced9adef2c53a11d.bindTooltip(
+                `<div>
+                     Dunacell Kft. Pulp Mill: $50/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36b24ad6305bfe4c0485cb9d5d42fcd2 = L.circleMarker(
+                [54.356974, 18.485606],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#71b466ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.78328430431312, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_b22e58412921113a91d04bbe1d61b707 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9e03475a23416dae7444e12de8b0cd17 = $(`<div id="html_9e03475a23416dae7444e12de8b0cd17" style="width: 100.0%; height: 100.0%;"><b>Global Cellulose Fibers - Gdansk Modified Fiber Plant - International Paper</b><br>Pulp — POL<br><hr style='margin:3px'><b>LCOH: $100/MWh_th</b> (0.9× fossil @$110)<br>&nbsp;&nbsp;solar $86 + TES $15<br>Load: 76.0 MW_th (666 GWh/yr)<br>Solar: 1,203 MW | TES: 4,567 MWh / 381 MW<br>Solar CF: 0.140<br>Land: fits (max 1,214 MW)</div>`)[0];
+                popup_b22e58412921113a91d04bbe1d61b707.setContent(html_9e03475a23416dae7444e12de8b0cd17);
+            
+        
+
+        circle_marker_36b24ad6305bfe4c0485cb9d5d42fcd2.bindPopup(popup_b22e58412921113a91d04bbe1d61b707)
+        ;
+
+        
+    
+    
+            circle_marker_36b24ad6305bfe4c0485cb9d5d42fcd2.bindTooltip(
+                `<div>
+                     Global Cellulose Fibers - Gdansk Modified Fiber Plant - International Paper: $100/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9fe95927daafef16b85086f6a41e1012 = L.circleMarker(
+                [50.573395, 19.319579],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4fa95eff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.009617473483964, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_b31975f14a49192a6ae8085f990433a2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4da10a8df4d77c44a26e003cbb66bf47 = $(`<div id="html_4da10a8df4d77c44a26e003cbb66bf47" style="width: 100.0%; height: 100.0%;"><b>Schumacher Packaging Myszk√≥w Pulp Mill</b><br>Paper/Board — POL<br><hr style='margin:3px'><b>LCOH: $74/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $61 + TES $12<br>Load: 16.4 MW_th (144 GWh/yr)<br>Solar: 185 MW | TES: 847 MWh / 71 MW<br>Solar CF: 0.140<br>Land: fits (max 794 MW)</div>`)[0];
+                popup_b31975f14a49192a6ae8085f990433a2.setContent(html_4da10a8df4d77c44a26e003cbb66bf47);
+            
+        
+
+        circle_marker_9fe95927daafef16b85086f6a41e1012.bindPopup(popup_b31975f14a49192a6ae8085f990433a2)
+        ;
+
+        
+    
+    
+            circle_marker_9fe95927daafef16b85086f6a41e1012.bindTooltip(
+                `<div>
+                     Schumacher Packaging Myszk√≥w Pulp Mill: $74/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cee084d83df3de503bbaedfca1291ec8 = L.circleMarker(
+                [53.393136, 18.378309],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#74b567ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.930339306370255, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_362f96b20b0a4a6087850922ddd2aeac = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_27b7e58a585879db494510ea6875884e = $(`<div id="html_27b7e58a585879db494510ea6875884e" style="width: 100.0%; height: 100.0%;"><b>Mondi ≈öwiecie Pulp Mill</b><br>Integrated — POL<br><hr style='margin:3px'><b>LCOH: $103/MWh_th</b> (0.9× fossil @$110)<br>&nbsp;&nbsp;solar $86 + TES $17<br>Load: 64.5 MW_th (565 GWh/yr)<br>Solar: 1,028 MW | TES: 4,438 MWh / 370 MW<br>Solar CF: 0.134<br>Land: fits (max 2,361 MW)</div>`)[0];
+                popup_362f96b20b0a4a6087850922ddd2aeac.setContent(html_27b7e58a585879db494510ea6875884e);
+            
+        
+
+        circle_marker_cee084d83df3de503bbaedfca1291ec8.bindPopup(popup_362f96b20b0a4a6087850922ddd2aeac)
+        ;
+
+        
+    
+    
+            circle_marker_cee084d83df3de503bbaedfca1291ec8.bindTooltip(
+                `<div>
+                     Mondi ≈öwiecie Pulp Mill: $103/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_46a9cf23a9dd0bf243b8ecb4d9d6a1f8 = L.circleMarker(
+                [40.050547, -8.875138],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1e9a51ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.198983201289547, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_7b9c7471615d5e7591d57d0b4903e2e3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_04f84ccef08a7c23d6667ae25fa7f075 = $(`<div id="html_04f84ccef08a7c23d6667ae25fa7f075" style="width: 100.0%; height: 100.0%;"><b>Leirosa Bleached Eucalyptus Pulp Mill</b><br>Pulp — PRT<br><hr style='margin:3px'><b>LCOH: $34/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $29 + TES $5<br>Load: 3.2 MW_th (28 GWh/yr)<br>Solar: 18 MW | TES: 71 MWh / 6 MW<br>Solar CF: 0.214<br>Land: fits (max 266 MW)</div>`)[0];
+                popup_7b9c7471615d5e7591d57d0b4903e2e3.setContent(html_04f84ccef08a7c23d6667ae25fa7f075);
+            
+        
+
+        circle_marker_46a9cf23a9dd0bf243b8ecb4d9d6a1f8.bindPopup(popup_7b9c7471615d5e7591d57d0b4903e2e3)
+        ;
+
+        
+    
+    
+            circle_marker_46a9cf23a9dd0bf243b8ecb4d9d6a1f8.bindTooltip(
+                `<div>
+                     Leirosa Bleached Eucalyptus Pulp Mill: $34/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4267f4a09b9a9c0d96bfca587f3bef0c = L.circleMarker(
+                [39.471564, -8.333286],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1d9951ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.248404724835989, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_c5d279fc2375e8ece430f066cfa4c7dd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e222772b563f0fe2ee074e1d46045064 = $(`<div id="html_e222772b563f0fe2ee074e1d46045064" style="width: 100.0%; height: 100.0%;"><b>Celbi Caima Dissolving Pulp Mill</b><br>Pulp — PRT<br><hr style='margin:3px'><b>LCOH: $33/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $27 + TES $6<br>Load: 3.3 MW_th (29 GWh/yr)<br>Solar: 18 MW | TES: 80 MWh / 7 MW<br>Solar CF: 0.213<br>Land: fits (max 631 MW)</div>`)[0];
+                popup_c5d279fc2375e8ece430f066cfa4c7dd.setContent(html_e222772b563f0fe2ee074e1d46045064);
+            
+        
+
+        circle_marker_4267f4a09b9a9c0d96bfca587f3bef0c.bindPopup(popup_c5d279fc2375e8ece430f066cfa4c7dd)
+        ;
+
+        
+    
+    
+            circle_marker_4267f4a09b9a9c0d96bfca587f3bef0c.bindTooltip(
+                `<div>
+                     Celbi Caima Dissolving Pulp Mill: $33/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa8ef457ae2c7850d6e2f38ca350ff55 = L.circleMarker(
+                [40.6845188, -8.5901778],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#239b52ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.750598350012979, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_5601d935e28d2196fcec8f777214ec82 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_58d42a6c5034a33ce3832c4631a23b1c = $(`<div id="html_58d42a6c5034a33ce3832c4631a23b1c" style="width: 100.0%; height: 100.0%;"><b>The Navigator Company - Cacia Pulp Mill</b><br>Pulp — PRT<br><hr style='margin:3px'><b>LCOH: $37/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $30 + TES $7<br>Load: 9.2 MW_th (81 GWh/yr)<br>Solar: 55 MW | TES: 262 MWh / 22 MW<br>Solar CF: 0.204<br>Land: fits (max 304 MW)</div>`)[0];
+                popup_5601d935e28d2196fcec8f777214ec82.setContent(html_58d42a6c5034a33ce3832c4631a23b1c);
+            
+        
+
+        circle_marker_aa8ef457ae2c7850d6e2f38ca350ff55.bindPopup(popup_5601d935e28d2196fcec8f777214ec82)
+        ;
+
+        
+    
+    
+            circle_marker_aa8ef457ae2c7850d6e2f38ca350ff55.bindTooltip(
+                `<div>
+                     The Navigator Company - Cacia Pulp Mill: $37/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf7ee2cf4e8a8e1a65d29e43e90186ab = L.circleMarker(
+                [40.059689, -8.853132],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1e9a51ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.080096160945002, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_0e3add346397d73826a3a83c2ea27867 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_79fc7cfc059007390024cb173802f772 = $(`<div id="html_79fc7cfc059007390024cb173802f772" style="width: 100.0%; height: 100.0%;"><b>Figueira da Foz BEKP Pulp and Paper Mill</b><br>Integrated — PRT<br><hr style='margin:3px'><b>LCOH: $34/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $29 + TES $5<br>Load: 42.7 MW_th (374 GWh/yr)<br>Solar: 238 MW | TES: 968 MWh / 81 MW<br>Solar CF: 0.214<br>Land: fits (max 457 MW)</div>`)[0];
+                popup_0e3add346397d73826a3a83c2ea27867.setContent(html_79fc7cfc059007390024cb173802f772);
+            
+        
+
+        circle_marker_cf7ee2cf4e8a8e1a65d29e43e90186ab.bindPopup(popup_0e3add346397d73826a3a83c2ea27867)
+        ;
+
+        
+    
+    
+            circle_marker_cf7ee2cf4e8a8e1a65d29e43e90186ab.bindTooltip(
+                `<div>
+                     Figueira da Foz BEKP Pulp and Paper Mill: $34/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33932989bedcaa6deea7632cdf587cc1 = L.circleMarker(
+                [38.8603802, -9.126352],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1c9950ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.676300141358148, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_23928710e786baf6e5450c453f173944 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8f47eb04c98685b9d021bfb3569dd57d = $(`<div id="html_8f47eb04c98685b9d021bfb3569dd57d" style="width: 100.0%; height: 100.0%;"><b>Fapajal - F√°brica de Papel do Tojal S.A. Pulp Mill</b><br>Paper/Board — PRT<br><hr style='margin:3px'><b>LCOH: $32/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $27 + TES $5<br>Load: 21.1 MW_th (185 GWh/yr)<br>Solar: 112 MW | TES: 414 MWh / 34 MW<br>Solar CF: 0.218<br>Land: fits (max 742 MW)</div>`)[0];
+                popup_23928710e786baf6e5450c453f173944.setContent(html_8f47eb04c98685b9d021bfb3569dd57d);
+            
+        
+
+        circle_marker_33932989bedcaa6deea7632cdf587cc1.bindPopup(popup_23928710e786baf6e5450c453f173944)
+        ;
+
+        
+    
+    
+            circle_marker_33932989bedcaa6deea7632cdf587cc1.bindTooltip(
+                `<div>
+                     Fapajal - F√°brica de Papel do Tojal S.A. Pulp Mill: $32/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e352912f7237de54c6145b629c2fb45 = L.circleMarker(
+                [38.49203572, -8.807280032],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a9850ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.937074307518678, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_0fde02f3ba62e469f415f3132f958542 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a225d756cc38182d2886c9163f8cca7f = $(`<div id="html_a225d756cc38182d2886c9163f8cca7f" style="width: 100.0%; height: 100.0%;"><b>The Navigator Company - Set√∫bal Mill</b><br>Integrated — PRT<br><hr style='margin:3px'><b>LCOH: $30/MWh_th</b> (0.3× fossil @$110)<br>&nbsp;&nbsp;solar $25 + TES $5<br>Load: 41.2 MW_th (361 GWh/yr)<br>Solar: 202 MW | TES: 773 MWh / 64 MW<br>Solar CF: 0.222<br>Land: <b style=color:red>exceeds limit</b> (max 72 MW)</div>`)[0];
+                popup_0fde02f3ba62e469f415f3132f958542.setContent(html_a225d756cc38182d2886c9163f8cca7f);
+            
+        
+
+        circle_marker_2e352912f7237de54c6145b629c2fb45.bindPopup(popup_0fde02f3ba62e469f415f3132f958542)
+        ;
+
+        
+    
+    
+            circle_marker_2e352912f7237de54c6145b629c2fb45.bindTooltip(
+                `<div>
+                     The Navigator Company - Set√∫bal Mill: $30/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_edf7751240d9998c94d61d954647936b = L.circleMarker(
+                [48.8633371, 21.7287537],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4fa95eff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.042787911749219, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_005f264feed42dc88558082c673c1b00 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2e389abdb3c423c7087bbcd0d21146fe = $(`<div id="html_2e389abdb3c423c7087bbcd0d21146fe" style="width: 100.0%; height: 100.0%;"><b>Bukocel a.s. Pulpmill - Buk√≥za Holding Pulp Mill</b><br>Pulp — SVK<br><hr style='margin:3px'><b>LCOH: $73/MWh_th</b> (0.7× fossil @$110)<br>&nbsp;&nbsp;solar $61 + TES $12<br>Load: 10.7 MW_th (94 GWh/yr)<br>Solar: 127 MW | TES: 512 MWh / 43 MW<br>Solar CF: 0.143<br>Land: fits (max 3,534 MW)</div>`)[0];
+                popup_005f264feed42dc88558082c673c1b00.setContent(html_2e389abdb3c423c7087bbcd0d21146fe);
+            
+        
+
+        circle_marker_edf7751240d9998c94d61d954647936b.bindPopup(popup_005f264feed42dc88558082c673c1b00)
+        ;
+
+        
+    
+    
+            circle_marker_edf7751240d9998c94d61d954647936b.bindTooltip(
+                `<div>
+                     Bukocel a.s. Pulpmill - Buk√≥za Holding Pulp Mill: $73/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2fb53ab076d74100363930c255353d26 = L.circleMarker(
+                [49.0782433, 19.3182058],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#46a65bff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.694037480834446, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_0cd63cacae015098e972ae3a631584a5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cce3f9fcd3aa34cea15f8f607484332c = $(`<div id="html_cce3f9fcd3aa34cea15f8f607484332c" style="width: 100.0%; height: 100.0%;"><b>Mondi SCP Pulp Mill</b><br>Integrated — SVK<br><hr style='margin:3px'><b>LCOH: $66/MWh_th</b> (0.6× fossil @$110)<br>&nbsp;&nbsp;solar $54 + TES $12<br>Load: 4.7 MW_th (42 GWh/yr)<br>Solar: 50 MW | TES: 243 MWh / 20 MW<br>Solar CF: 0.145<br>Land: fits (max 323 MW)</div>`)[0];
+                popup_0cd63cacae015098e972ae3a631584a5.setContent(html_cce3f9fcd3aa34cea15f8f607484332c);
+            
+        
+
+        circle_marker_2fb53ab076d74100363930c255353d26.bindPopup(popup_0cd63cacae015098e972ae3a631584a5)
+        ;
+
+        
+    
+    
+            circle_marker_2fb53ab076d74100363930c255353d26.bindTooltip(
+                `<div>
+                     Mondi SCP Pulp Mill: $66/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88d75f92e7ec0bd1a0908e98622d6ae8 = L.circleMarker(
+                [45.9561765, 15.4921437],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#33a056ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.963426423040666, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_1f4dc02c0a3f50207d20d342266c117a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2efe70d31ea16c8062f8f6dc73ee9285 = $(`<div id="html_2efe70d31ea16c8062f8f6dc73ee9285" style="width: 100.0%; height: 100.0%;"><b>VIPAP VIDEM KR≈†KO d.d. Pulp Mill</b><br>Integrated — SVN<br><hr style='margin:3px'><b>LCOH: $50/MWh_th</b> (0.5× fossil @$110)<br>&nbsp;&nbsp;solar $41 + TES $9<br>Load: 16.1 MW_th (141 GWh/yr)<br>Solar: 127 MW | TES: 593 MWh / 49 MW<br>Solar CF: 0.162<br>Land: fits (max 994 MW)</div>`)[0];
+                popup_1f4dc02c0a3f50207d20d342266c117a.setContent(html_2efe70d31ea16c8062f8f6dc73ee9285);
+            
+        
+
+        circle_marker_88d75f92e7ec0bd1a0908e98622d6ae8.bindPopup(popup_1f4dc02c0a3f50207d20d342266c117a)
+        ;
+
+        
+    
+    
+            circle_marker_88d75f92e7ec0bd1a0908e98622d6ae8.bindTooltip(
+                `<div>
+                     VIPAP VIDEM KR≈†KO d.d. Pulp Mill: $50/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_780c0318dd005527a95e8c45cae36255 = L.circleMarker(
+                [59.2957139419109, 14.1316787525493],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a1c373ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.220845534287864, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_2ad60d1930916d23bd703a848d8dd03f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a8af8a6b4c906bc081e176666f67500f = $(`<div id="html_a8af8a6b4c906bc081e176666f67500f" style="width: 100.0%; height: 100.0%;"><b>Nordic Paper</b><br>Paper/Board — SWE<br><hr style='margin:3px'><b>LCOH: $139/MWh_th</b> (1.3× fossil @$110)<br>&nbsp;&nbsp;solar $117 + TES $22<br>Load: 1.0 MW_th (9 GWh/yr)<br>Solar: 24 MW | TES: 90 MWh / 8 MW<br>Solar CF: 0.140<br>Land: fits (max 587 MW)</div>`)[0];
+                popup_2ad60d1930916d23bd703a848d8dd03f.setContent(html_a8af8a6b4c906bc081e176666f67500f);
+            
+        
+
+        circle_marker_780c0318dd005527a95e8c45cae36255.bindPopup(popup_2ad60d1930916d23bd703a848d8dd03f)
+        ;
+
+        
+    
+    
+            circle_marker_780c0318dd005527a95e8c45cae36255.bindTooltip(
+                `<div>
+                     Nordic Paper: $139/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b503e7b62deb39b1a3ac69168db86fd = L.circleMarker(
+                [63.2900474, 18.7166166],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f09f66ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.946699269912272, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_dcfffc61cdf1117af31b0a7e60a06980 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_67d787af2ff74eeb5475917a2dad0e62 = $(`<div id="html_67d787af2ff74eeb5475917a2dad0e62" style="width: 100.0%; height: 100.0%;"><b>Domsj√∂ Fabriker AB</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $283/MWh_th</b> (2.6× fossil @$110)<br>&nbsp;&nbsp;solar $241 + TES $41<br>Load: 2.5 MW_th (22 GWh/yr)<br>Solar: 125 MW | TES: 424 MWh / 35 MW<br>Solar CF: 0.138<br>Land: fits (max 355 MW)</div>`)[0];
+                popup_dcfffc61cdf1117af31b0a7e60a06980.setContent(html_67d787af2ff74eeb5475917a2dad0e62);
+            
+        
+
+        circle_marker_8b503e7b62deb39b1a3ac69168db86fd.bindPopup(popup_dcfffc61cdf1117af31b0a7e60a06980)
+        ;
+
+        
+    
+    
+            circle_marker_8b503e7b62deb39b1a3ac69168db86fd.bindTooltip(
+                `<div>
+                     Domsj√∂ Fabriker AB: $283/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_92bb13ba3e5c360b611e3bc834426281 = L.circleMarker(
+                [60.128161, 18.643501],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c5ce7cff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.9683973392464384, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_57b4a938e47a1279bc987b500047c096 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_78da751639d1dd0f520c6dd77fd5fc88 = $(`<div id="html_78da751639d1dd0f520c6dd77fd5fc88" style="width: 100.0%; height: 100.0%;"><b>Stora Enso Consumer Board Fors Mill</b><br>Integrated — SWE<br><hr style='margin:3px'><b>LCOH: $169/MWh_th</b> (1.5× fossil @$110)<br>&nbsp;&nbsp;solar $141 + TES $27<br>Load: 2.5 MW_th (22 GWh/yr)<br>Solar: 75 MW | TES: 286 MWh / 24 MW<br>Solar CF: 0.134<br>Land: <b style=color:red>exceeds limit</b> (max 6 MW)</div>`)[0];
+                popup_57b4a938e47a1279bc987b500047c096.setContent(html_78da751639d1dd0f520c6dd77fd5fc88);
+            
+        
+
+        circle_marker_92bb13ba3e5c360b611e3bc834426281.bindPopup(popup_57b4a938e47a1279bc987b500047c096)
+        ;
+
+        
+    
+    
+            circle_marker_92bb13ba3e5c360b611e3bc834426281.bindTooltip(
+                `<div>
+                     Stora Enso Consumer Board Fors Mill: $169/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59015de99b97d78aa9f86b435e794251 = L.circleMarker(
+                [57.0932528661614, 16.5531215056192],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6eb366ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.771587765914827, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_51d38a7aabe927db43a1304665e4db31 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5242bc1f779eb8205deb51f57bb4efde = $(`<div id="html_5242bc1f779eb8205deb51f57bb4efde" style="width: 100.0%; height: 100.0%;"><b>S√∂dra Cell AB - S√∂dra Cell M√∂nster√•s</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $98/MWh_th</b> (0.9× fossil @$110)<br>&nbsp;&nbsp;solar $81 + TES $17<br>Load: 5.0 MW_th (44 GWh/yr)<br>Solar: 86 MW | TES: 354 MWh / 29 MW<br>Solar CF: 0.148<br>Land: <b style=color:red>exceeds limit</b> (max 80 MW)</div>`)[0];
+                popup_51d38a7aabe927db43a1304665e4db31.setContent(html_5242bc1f779eb8205deb51f57bb4efde);
+            
+        
+
+        circle_marker_59015de99b97d78aa9f86b435e794251.bindPopup(popup_51d38a7aabe927db43a1304665e4db31)
+        ;
+
+        
+    
+    
+            circle_marker_59015de99b97d78aa9f86b435e794251.bindTooltip(
+                `<div>
+                     S√∂dra Cell AB - S√∂dra Cell M√∂nster√•s: $98/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_83b1e1759d7b683a4176c88750771478 = L.circleMarker(
+                [56.1938314, 14.748156],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#65b063ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.194052083767961, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_79d6ce6310aad9773ecd94206368ab5f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2c15da73a446c2cc29088b588404c091 = $(`<div id="html_2c15da73a446c2cc29088b588404c091" style="width: 100.0%; height: 100.0%;"><b>S√∂dra Cell AB - S√∂dra Cell M√∂rrum</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $91/MWh_th</b> (0.8× fossil @$110)<br>&nbsp;&nbsp;solar $77 + TES $14<br>Load: 3.1 MW_th (28 GWh/yr)<br>Solar: 50 MW | TES: 185 MWh / 15 MW<br>Solar CF: 0.148<br>Land: fits (max 752 MW)</div>`)[0];
+                popup_79d6ce6310aad9773ecd94206368ab5f.setContent(html_2c15da73a446c2cc29088b588404c091);
+            
+        
+
+        circle_marker_83b1e1759d7b683a4176c88750771478.bindPopup(popup_79d6ce6310aad9773ecd94206368ab5f)
+        ;
+
+        
+    
+    
+            circle_marker_83b1e1759d7b683a4176c88750771478.bindTooltip(
+                `<div>
+                     S√∂dra Cell AB - S√∂dra Cell M√∂rrum: $91/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_45961b7225e15e4b4d05a570106284a4 = L.circleMarker(
+                [56.043586, 14.4629943],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#66b064ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.668494817238063, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_4ca934eb780f38a228ab78083b1a0aab = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_26087f17caabc8494584acf4593870fa = $(`<div id="html_26087f17caabc8494584acf4593870fa" style="width: 100.0%; height: 100.0%;"><b>Sylvamo Nym√∂lla Mill - Sylvamo Pulp Mill</b><br>Integrated — SWE<br><hr style='margin:3px'><b>LCOH: $92/MWh_th</b> (0.8× fossil @$110)<br>&nbsp;&nbsp;solar $78 + TES $14<br>Load: 4.7 MW_th (41 GWh/yr)<br>Solar: 76 MW | TES: 274 MWh / 23 MW<br>Solar CF: 0.147<br>Land: fits (max 1,201 MW)</div>`)[0];
+                popup_4ca934eb780f38a228ab78083b1a0aab.setContent(html_26087f17caabc8494584acf4593870fa);
+            
+        
+
+        circle_marker_45961b7225e15e4b4d05a570106284a4.bindPopup(popup_4ca934eb780f38a228ab78083b1a0aab)
+        ;
+
+        
+    
+    
+            circle_marker_45961b7225e15e4b4d05a570106284a4.bindTooltip(
+                `<div>
+                     Sylvamo Nym√∂lla Mill - Sylvamo Pulp Mill: $92/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1ec1890f6ad25321e7920237004114b3 = L.circleMarker(
+                [59.3234598, 13.4595214],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#98c071ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.689636513069313, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_b13b84f41033d76e0fd65d128a22da61 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5f299591ea067f074cbc306e49fe3fd9 = $(`<div id="html_5f299591ea067f074cbc306e49fe3fd9" style="width: 100.0%; height: 100.0%;"><b>Stora Enso Packaging Boards Skoghall Mill - Udden</b><br>Integrated — SWE<br><hr style='margin:3px'><b>LCOH: $132/MWh_th</b> (1.2× fossil @$110)<br>&nbsp;&nbsp;solar $109 + TES $23<br>Load: 8.9 MW_th (78 GWh/yr)<br>Solar: 204 MW | TES: 845 MWh / 70 MW<br>Solar CF: 0.142<br>Land: <b style=color:red>exceeds limit</b> (max 173 MW)</div>`)[0];
+                popup_b13b84f41033d76e0fd65d128a22da61.setContent(html_5f299591ea067f074cbc306e49fe3fd9);
+            
+        
+
+        circle_marker_1ec1890f6ad25321e7920237004114b3.bindPopup(popup_b13b84f41033d76e0fd65d128a22da61)
+        ;
+
+        
+    
+    
+            circle_marker_1ec1890f6ad25321e7920237004114b3.bindTooltip(
+                `<div>
+                     Stora Enso Packaging Boards Skoghall Mill - Udden: $132/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9bed1fb88a4fd114dc43e9af5b5a2c7 = L.circleMarker(
+                [62.390811, 17.306927],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e98054ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.752906015049688, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_516261ecf1ea60f026b7d545ccd5b5be = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_56363ee35de3f16877cf83a207fb4967 = $(`<div id="html_56363ee35de3f16877cf83a207fb4967" style="width: 100.0%; height: 100.0%;"><b>SCA Ortviken Pulp Mill</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $315/MWh_th</b> (2.9× fossil @$110)<br>&nbsp;&nbsp;solar $89 + TES $226<br>Load: 2.0 MW_th (18 GWh/yr)<br>Solar: 38 MW | TES: 1,879 MWh / 157 MW<br>Solar CF: 0.137<br>Land: fits (max 146 MW)</div>`)[0];
+                popup_516261ecf1ea60f026b7d545ccd5b5be.setContent(html_56363ee35de3f16877cf83a207fb4967);
+            
+        
+
+        circle_marker_f9bed1fb88a4fd114dc43e9af5b5a2c7.bindPopup(popup_516261ecf1ea60f026b7d545ccd5b5be)
+        ;
+
+        
+    
+    
+            circle_marker_f9bed1fb88a4fd114dc43e9af5b5a2c7.bindTooltip(
+                `<div>
+                     SCA Ortviken Pulp Mill: $315/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_488c0051f6e3f17e59b2eb28805b1f1a = L.circleMarker(
+                [62.4854563, 17.3248651],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f7bd77ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.036122279016894, "stroke": true, "weight": 1.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_311fcd670f7e9f51ddc7bbadcfe8e873 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_958d830659d187ed97533a9f8beab767 = $(`<div id="html_958d830659d187ed97533a9f8beab767" style="width: 100.0%; height: 100.0%;"><b>SCA Massa √ñstrands massafabrik SCA Graphic Sundsvall AB Pulp Mill</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $251/MWh_th</b> (2.3× fossil @$110)<br>&nbsp;&nbsp;solar $210 + TES $42<br>Load: 6.0 MW_th (53 GWh/yr)<br>Solar: 265 MW | TES: 1,036 MWh / 86 MW<br>Solar CF: 0.138<br>Land: <b style=color:red>exceeds limit</b> (max 252 MW)</div>`)[0];
+                popup_311fcd670f7e9f51ddc7bbadcfe8e873.setContent(html_958d830659d187ed97533a9f8beab767);
+            
+        
+
+        circle_marker_488c0051f6e3f17e59b2eb28805b1f1a.bindPopup(popup_311fcd670f7e9f51ddc7bbadcfe8e873)
+        ;
+
+        
+    
+    
+            circle_marker_488c0051f6e3f17e59b2eb28805b1f1a.bindTooltip(
+                `<div>
+                     SCA Massa √ñstrands massafabrik SCA Graphic Sundsvall AB Pulp Mill: $251/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd45b04f1503d013383484797c1f48bd = L.circleMarker(
+                [57.2502804, 12.1823234],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#65b063ff", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.7900038341674565, "stroke": true, "weight": 0.5}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+        var popup_a76d9e84237a69eda474b136f7772af8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ce709f34b3f944a0246399ce8e6297c1 = $(`<div id="html_ce709f34b3f944a0246399ce8e6297c1" style="width: 100.0%; height: 100.0%;"><b>S√∂dra Cell AB - S√∂dra Cell V√§r√∂</b><br>Pulp — SWE<br><hr style='margin:3px'><b>LCOH: $91/MWh_th</b> (0.8× fossil @$110)<br>&nbsp;&nbsp;solar $76 + TES $15<br>Load: 5.1 MW_th (45 GWh/yr)<br>Solar: 81 MW | TES: 310 MWh / 26 MW<br>Solar CF: 0.144<br>Land: fits (max 1,399 MW)</div>`)[0];
+                popup_a76d9e84237a69eda474b136f7772af8.setContent(html_ce709f34b3f944a0246399ce8e6297c1);
+            
+        
+
+        circle_marker_dd45b04f1503d013383484797c1f48bd.bindPopup(popup_a76d9e84237a69eda474b136f7772af8)
+        ;
+
+        
+    
+    
+            circle_marker_dd45b04f1503d013383484797c1f48bd.bindTooltip(
+                `<div>
+                     S√∂dra Cell AB - S√∂dra Cell V√§r√∂: $91/MWh
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e88e7776048554694a2ffb3fe104b848 = L.circleMarker(
+                [47.9770957, 13.8161934],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            circle_marker_e88e7776048554694a2ffb3fe104b848.bindTooltip(
+                `<div>
+                     Laakirchen Papier AG Pulp Mill: skipped_no_load
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ce61c216de8d9ef73f40d9aa2676dd6c = L.circleMarker(
+                [47.9915494, 13.8000831],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            circle_marker_ce61c216de8d9ef73f40d9aa2676dd6c.bindTooltip(
+                `<div>
+                     UPM-Kymmene Steyrermuhl Austria Pulp Mill: skipped_no_load
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa92d41b9aab4356a9c753a5b591dc5b = L.circleMarker(
+                [47.2969362, 11.5903444],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            circle_marker_aa92d41b9aab4356a9c753a5b591dc5b.bindTooltip(
+                `<div>
+                     Papierfabrik Wattens GmbH & Co KG - Delfort: skipped_no_load
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b65d7a8d1f36945e914da2b9a95b6a9a = L.circleMarker(
+                [60.170885, 24.806265],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            circle_marker_b65d7a8d1f36945e914da2b9a95b6a9a.bindTooltip(
+                `<div>
+                     Mets√§ Fibre Oy Pulp Mill: skipped_no_load
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb710d83beddd969b737b7daf85dea6c = L.circleMarker(
+                [62.3822834, 21.2277852],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+        
+    
+            circle_marker_fb710d83beddd969b737b7daf85dea6c.bindTooltip(
+                `<div>
+                     Mets√§ Board Linerboard and Paper Division Kaskinen Mill: skipped_no_load
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+    var color_map_129fce9689f0c00cf8f85470bdfb9ce7 = {};
+
+    
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.color = d3.scale.threshold()
+              .domain([30.121953486687847, 30.86160352977956, 31.601253572871276, 32.340903615962986, 33.0805536590547, 33.820203702146415, 34.55985374523813, 35.299503788329844, 36.03915383142156, 36.77880387451327, 37.51845391760499, 38.2581039606967, 38.997754003788415, 39.73740404688013, 40.477054089971844, 41.21670413306356, 41.95635417615527, 42.69600421924699, 43.4356542623387, 44.175304305430416, 44.91495434852213, 45.654604391613844, 46.39425443470556, 47.13390447779727, 47.87355452088899, 48.6132045639807, 49.352854607072416, 50.09250465016413, 50.832154693255845, 51.57180473634756, 52.31145477943927, 53.05110482253099, 53.7907548656227, 54.53040490871442, 55.27005495180613, 56.009704994897845, 56.74935503798956, 57.489005081081274, 58.22865512417299, 58.9683051672647, 59.70795521035642, 60.44760525344813, 61.187255296539846, 61.92690533963156, 62.666555382723274, 63.40620542581499, 64.1458554689067, 64.88550551199842, 65.62515555509013, 66.36480559818185, 67.10445564127356, 67.84410568436527, 68.58375572745699, 69.3234057705487, 70.06305581364042, 70.80270585673213, 71.54235589982385, 72.28200594291556, 73.02165598600727, 73.76130602909899, 74.5009560721907, 75.24060611528242, 75.98025615837413, 76.71990620146585, 77.45955624455756, 78.19920628764928, 78.93885633074099, 79.6785063738327, 80.41815641692442, 81.15780646001613, 81.89745650310785, 82.63710654619956, 83.37675658929128, 84.11640663238299, 84.8560566754747, 85.59570671856642, 86.33535676165813, 87.07500680474985, 87.81465684784156, 88.55430689093328, 89.29395693402499, 90.0336069771167, 90.77325702020842, 91.51290706330013, 92.25255710639185, 92.99220714948356, 93.73185719257528, 94.47150723566699, 95.2111572787587, 95.95080732185042, 96.69045736494213, 97.43010740803385, 98.16975745112556, 98.90940749421728, 99.64905753730899, 100.38870758040069, 101.12835762349242, 101.86800766658413, 102.60765770967585, 103.34730775276756, 104.08695779585926, 104.82660783895099, 105.5662578820427, 106.30590792513442, 107.04555796822613, 107.78520801131783, 108.52485805440956, 109.26450809750126, 110.00415814059299, 110.7438081836847, 111.48345822677642, 112.22310826986813, 112.96275831295983, 113.70240835605156, 114.44205839914328, 115.18170844223499, 115.9213584853267, 116.6610085284184, 117.40065857151014, 118.14030861460184, 118.87995865769356, 119.61960870078528, 120.35925874387699, 121.0989087869687, 121.8385588300604, 122.57820887315214, 123.31785891624385, 124.05750895933556, 124.79715900242728, 125.53680904551898, 126.27645908861071, 127.01610913170241, 127.75575917479414, 128.49540921788585, 129.23505926097755, 129.97470930406928, 130.71435934716098, 131.4540093902527, 132.19365943334444, 132.93330947643614, 133.67295951952786, 134.41260956261956, 135.1522596057113, 135.891909648803, 136.63155969189472, 137.37120973498642, 138.11085977807812, 138.85050982116985, 139.59015986426155, 140.32980990735328, 141.069459950445, 141.8091099935367, 142.54876003662844, 143.28841007972014, 144.02806012281187, 144.76771016590357, 145.5073602089953, 146.247010252087, 146.9866602951787, 147.72631033827042, 148.46596038136212, 149.20561042445385, 149.94526046754558, 150.68491051063728, 151.424560553729, 152.1642105968207, 152.90386063991244, 153.64351068300414, 154.38316072609587, 155.12281076918757, 155.86246081227927, 156.602110855371, 157.3417608984627, 158.08141094155442, 158.82106098464615, 159.56071102773785, 160.30036107082958, 161.04001111392128, 161.779661157013, 162.5193112001047, 163.25896124319644, 163.99861128628814, 164.73826132937987, 165.47791137247157, 166.2175614155633, 166.957211458655, 167.69686150174672, 168.43651154483845, 169.17616158793015, 169.91581163102185, 170.65546167411355, 171.3951117172053, 172.134761760297, 172.8744118033887, 173.61406184648044, 174.35371188957214, 175.09336193266387, 175.8330119757556, 176.5726620188473, 177.312312061939, 178.0519621050307, 178.79161214812245, 179.53126219121415, 180.27091223430585, 181.01056227739758, 181.75021232048928, 182.489862363581, 183.2295124066727, 183.96916244976444, 184.70881249285614, 185.44846253594784, 186.1881125790396, 186.9277626221313, 187.667412665223, 188.4070627083147, 189.14671275140645, 189.88636279449815, 190.62601283758985, 191.36566288068158, 192.10531292377328, 192.844962966865, 193.58461300995674, 194.32426305304844, 195.06391309614014, 195.80356313923184, 196.5432131823236, 197.2828632254153, 198.022513268507, 198.76216331159873, 199.50181335469043, 200.24146339778216, 200.98111344087386, 201.72076348396558, 202.46041352705728, 203.20006357014898, 203.93971361324074, 204.67936365633244, 205.41901369942414, 206.15866374251584, 206.89831378560757, 207.6379638286993, 208.377613871791, 209.11726391488273, 209.85691395797443, 210.59656400106616, 211.33621404415788, 212.07586408724958, 212.81551413034128, 213.55516417343298, 214.29481421652474, 215.03446425961644, 215.77411430270814, 216.51376434579987, 217.25341438889157, 217.9930644319833, 218.732714475075, 219.47236451816673, 220.21201456125843, 220.95166460435013, 221.69131464744189, 222.43096469053359, 223.17061473362529, 223.91026477671699, 224.6499148198087, 225.38956486290044, 226.12921490599214, 226.86886494908387, 227.60851499217557, 228.34816503526727, 229.08781507835903, 229.82746512145073, 230.56711516454243, 231.30676520763413, 232.0464152507259, 232.7860652938176, 233.5257153369093, 234.26536538000101, 235.00501542309271, 235.74466546618444, 236.48431550927614, 237.22396555236787, 237.96361559545957, 238.70326563855127, 239.44291568164303, 240.18256572473473, 240.92221576782643, 241.66186581091813, 242.40151585400986, 243.1411658971016, 243.8808159401933, 244.62046598328502, 245.36011602637672, 246.09976606946842, 246.83941611256017, 247.57906615565187, 248.31871619874357, 249.05836624183527, 249.798016284927, 250.53766632801873, 251.27731637111043, 252.01696641420216, 252.75661645729386, 253.4962665003856, 254.2359165434773, 254.97556658656902, 255.71521662966072, 256.4548666727524, 257.19451671584414, 257.9341667589359, 258.67381680202755, 259.4134668451193, 260.153116888211, 260.89276693130273, 261.6324169743944, 262.37206701748613, 263.11171706057786, 263.85136710366953, 264.5910171467613, 265.330667189853, 266.0703172329447, 266.8099672760364, 267.5496173191281, 268.28926736221985, 269.0289174053116, 269.7685674484033, 270.508217491495, 271.2478675345867, 271.98751757767843, 272.72716762077016, 273.46681766386183, 274.20646770695356, 274.9461177500453, 275.685767793137, 276.4254178362287, 277.1650678793204, 277.90471792241215, 278.6443679655039, 279.38401800859555, 280.1236680516873, 280.863318094779, 281.6029681378707, 282.34261818096246, 283.08226822405413, 283.82191826714586, 284.56156831023753, 285.30121835332926, 286.040868396421, 286.7805184395127, 287.52016848260445, 288.2598185256961, 288.99946856878785, 289.7391186118796, 290.4787686549713, 291.21841869806303, 291.9580687411547, 292.69771878424643, 293.43736882733816, 294.1770188704299, 294.91666891352156, 295.6563189566133, 296.395968999705, 297.1356190427967, 297.8752690858884, 298.6149191289802, 299.3545691720719, 300.0942192151636, 300.8338692582553, 301.573519301347, 302.31316934443873, 303.0528193875304, 303.79246943062213, 304.53211947371386, 305.2717695168056, 306.0114195598973, 306.75106960298905, 307.4907196460807, 308.23036968917245, 308.9700197322642, 309.70966977535585, 310.4493198184476, 311.18896986153925, 311.928619904631, 312.66826994772276, 313.40791999081443, 314.14757003390616, 314.8872200769979, 315.62687012008956, 316.3665201631813, 317.106170206273, 317.8458202493647, 318.5854702924564, 319.32512033554815, 320.0647703786399, 320.8044204217316, 321.54407046482333, 322.283720507915, 323.02337055100674, 323.7630205940984, 324.50267063719014, 325.24232068028186, 325.98197072337354, 326.7216207664653, 327.46127080955705, 328.2009208526487, 328.94057089574045, 329.6802209388322, 330.41987098192385, 331.1595210250156, 331.8991710681073, 332.638821111199, 333.3784711542907, 334.1181211973825, 334.85777124047416, 335.5974212835659, 336.33707132665756, 337.0767213697493, 337.816371412841, 338.5560214559327, 339.2956714990244, 340.03532154211615, 340.7749715852078, 341.5146216282996, 342.25427167139134, 342.993921714483, 343.73357175757474, 344.47322180066647, 345.21287184375814, 345.95252188684987, 346.69217192994154, 347.43182197303327, 348.17147201612505, 348.9111220592167, 349.65077210230845, 350.3904221454002, 351.13007218849185, 351.8697222315836, 352.6093722746753, 353.349022317767, 354.0886723608587, 354.82832240395044, 355.56797244704217, 356.3076224901339, 357.0472725332256, 357.7869225763173, 358.526572619409, 359.2662226625007, 360.0058727055924, 360.74552274868415, 361.4851727917758, 362.22482283486755, 362.96447287795934, 363.704122921051, 364.44377296414274, 365.18342300723447, 365.92307305032614, 366.66272309341787, 367.4023731365096, 368.14202317960127, 368.881673222693, 369.6213232657848, 370.36097330887645, 371.1006233519682, 371.84027339505985, 372.5799234381516, 373.3195734812433, 374.059223524335, 374.7988735674267, 375.53852361051844, 376.2781736536101, 377.0178236967019, 377.7574737397936, 378.4971237828853, 379.236773825977, 379.97642386906875, 380.7160739121604, 381.45572395525215, 382.1953739983438, 382.93502404143555, 383.6746740845273, 384.414324127619, 385.15397417071074, 385.89362421380247, 386.63327425689414, 387.37292429998587, 388.1125743430776, 388.85222438616927, 389.591874429261, 390.3315244723527, 391.07117451544445, 391.8108245585362, 392.5504746016279, 393.2901246447196, 394.0297746878113, 394.769424730903, 395.5090747739947, 396.24872481708644, 396.9883748601781, 397.72802490326984, 398.4676749463616, 399.2073249894533])
+              .range(['#1a9850ff', '#1b9850ff', '#1b9950ff', '#1c9951ff', '#1d9951ff', '#1e9a51ff', '#1f9a51ff', '#209a51ff', '#219a52ff', '#229b52ff', '#239b52ff', '#249b52ff', '#259c53ff', '#269c53ff', '#269c53ff', '#279c53ff', '#289d54ff', '#299d54ff', '#2a9d54ff', '#2b9e54ff', '#2c9e55ff', '#2d9e55ff', '#2e9e55ff', '#2f9f55ff', '#309f56ff', '#319f56ff', '#31a056ff', '#32a056ff', '#33a056ff', '#34a057ff', '#35a157ff', '#36a157ff', '#37a157ff', '#38a258ff', '#39a258ff', '#3aa258ff', '#3ba358ff', '#3ca359ff', '#3ca359ff', '#3da359ff', '#3ea459ff', '#3fa45aff', '#40a45aff', '#41a55aff', '#42a55aff', '#43a55aff', '#44a55bff', '#45a65bff', '#46a65bff', '#47a65bff', '#47a75cff', '#48a75cff', '#49a75cff', '#4aa75cff', '#4ba85dff', '#4ca85dff', '#4da85dff', '#4ea95dff', '#4fa95eff', '#50a95eff', '#51a95eff', '#52aa5eff', '#52aa5fff', '#53aa5fff', '#54ab5fff', '#55ab5fff', '#56ab5fff', '#57ac60ff', '#58ac60ff', '#59ac60ff', '#5aac60ff', '#5bad61ff', '#5cad61ff', '#5dad61ff', '#5dae61ff', '#5eae62ff', '#5fae62ff', '#60ae62ff', '#61af62ff', '#62af63ff', '#63af63ff', '#64b063ff', '#65b063ff', '#66b064ff', '#67b064ff', '#68b164ff', '#68b164ff', '#69b164ff', '#6ab265ff', '#6bb265ff', '#6cb265ff', '#6db265ff', '#6eb366ff', '#6fb366ff', '#70b366ff', '#71b466ff', '#72b467ff', '#73b467ff', '#74b467ff', '#74b567ff', '#75b568ff', '#76b568ff', '#77b668ff', '#78b668ff', '#79b669ff', '#7ab769ff', '#7bb769ff', '#7cb769ff', '#7db769ff', '#7eb86aff', '#7fb86aff', '#7fb86aff', '#80b96aff', '#81b96bff', '#82b96bff', '#83b96bff', '#84ba6bff', '#85ba6cff', '#86ba6cff', '#87bb6cff', '#88bb6cff', '#89bb6dff', '#8abb6dff', '#8abc6dff', '#8bbc6dff', '#8cbc6dff', '#8dbd6eff', '#8ebd6eff', '#8fbd6eff', '#90bd6eff', '#91be6fff', '#92be6fff', '#93be6fff', '#94bf6fff', '#95bf70ff', '#95bf70ff', '#96bf70ff', '#97c070ff', '#98c071ff', '#99c071ff', '#9ac171ff', '#9bc171ff', '#9cc172ff', '#9dc272ff', '#9ec272ff', '#9fc272ff', '#a0c272ff', '#a0c373ff', '#a1c373ff', '#a2c373ff', '#a3c473ff', '#a4c474ff', '#a5c474ff', '#a6c474ff', '#a7c574ff', '#a8c575ff', '#a9c575ff', '#aac675ff', '#abc675ff', '#abc676ff', '#acc676ff', '#adc776ff', '#aec776ff', '#afc777ff', '#b0c877ff', '#b1c877ff', '#b2c877ff', '#b3c877ff', '#b4c978ff', '#b5c978ff', '#b6c978ff', '#b6ca78ff', '#b7ca79ff', '#b8ca79ff', '#b9cb79ff', '#bacb79ff', '#bbcb7aff', '#bccb7aff', '#bdcc7aff', '#becc7aff', '#bfcc7bff', '#c0cd7bff', '#c1cd7bff', '#c1cd7bff', '#c2cd7bff', '#c3ce7cff', '#c4ce7cff', '#c5ce7cff', '#c6cf7cff', '#c7cf7dff', '#c8cf7dff', '#c9cf7dff', '#cad07dff', '#cbd07eff', '#ccd07eff', '#ccd17eff', '#cdd17eff', '#ced17fff', '#cfd17fff', '#d0d27fff', '#d1d27fff', '#d2d280ff', '#d3d380ff', '#d4d380ff', '#d5d380ff', '#d6d380ff', '#d7d481ff', '#d8d481ff', '#d8d481ff', '#d9d581ff', '#dad582ff', '#dbd582ff', '#dcd682ff', '#ddd682ff', '#ded683ff', '#dfd683ff', '#e0d783ff', '#e1d783ff', '#e2d784ff', '#e3d884ff', '#e3d884ff', '#e4d884ff', '#e5d885ff', '#e6d985ff', '#e7d985ff', '#e8d985ff', '#e9da85ff', '#eada86ff', '#ebda86ff', '#ecda86ff', '#eddb86ff', '#eedb87ff', '#eedb87ff', '#efdc87ff', '#f0dc87ff', '#f1dc88ff', '#f2dc88ff', '#f3dd88ff', '#f4dd88ff', '#f5dd89ff', '#f6de89ff', '#f7de89ff', '#f8de89ff', '#f9de8aff', '#f9df8aff', '#fadf8aff', '#fbdf8aff', '#fce08aff', '#fde08bff', '#fee08bff', '#fee08bff', '#fedf8aff', '#fedf8aff', '#fede8aff', '#fedd89ff', '#fedc89ff', '#fddc88ff', '#fddb88ff', '#fdda88ff', '#fdda87ff', '#fdd987ff', '#fdd886ff', '#fdd886ff', '#fcd786ff', '#fcd685ff', '#fcd585ff', '#fcd584ff', '#fcd484ff', '#fcd384ff', '#fbd383ff', '#fbd283ff', '#fbd182ff', '#fbd082ff', '#fbd082ff', '#fbcf81ff', '#face81ff', '#face80ff', '#facd80ff', '#facc80ff', '#facb7fff', '#facb7fff', '#faca7eff', '#f9c97eff', '#f9c97eff', '#f9c87dff', '#f9c77dff', '#f9c77cff', '#f9c67cff', '#f8c57cff', '#f8c47bff', '#f8c47bff', '#f8c37aff', '#f8c27aff', '#f8c27aff', '#f8c179ff', '#f7c079ff', '#f7bf78ff', '#f7bf78ff', '#f7be78ff', '#f7bd77ff', '#f7bd77ff', '#f6bc76ff', '#f6bb76ff', '#f6ba76ff', '#f6ba75ff', '#f6b975ff', '#f6b874ff', '#f5b874ff', '#f5b774ff', '#f5b673ff', '#f5b673ff', '#f5b572ff', '#f5b472ff', '#f5b371ff', '#f4b371ff', '#f4b271ff', '#f4b170ff', '#f4b170ff', '#f4b06fff', '#f4af6fff', '#f3ae6fff', '#f3ae6eff', '#f3ad6eff', '#f3ac6dff', '#f3ac6dff', '#f3ab6dff', '#f2aa6cff', '#f2a96cff', '#f2a96bff', '#f2a86bff', '#f2a76bff', '#f2a76aff', '#f2a66aff', '#f1a569ff', '#f1a569ff', '#f1a469ff', '#f1a368ff', '#f1a268ff', '#f1a267ff', '#f0a167ff', '#f0a067ff', '#f0a066ff', '#f09f66ff', '#f09e65ff', '#f09d65ff', '#f09d65ff', '#ef9c64ff', '#ef9b64ff', '#ef9b63ff', '#ef9a63ff', '#ef9963ff', '#ef9862ff', '#ee9862ff', '#ee9761ff', '#ee9661ff', '#ee9661ff', '#ee9560ff', '#ee9460ff', '#ed945fff', '#ed935fff', '#ed925fff', '#ed915eff', '#ed915eff', '#ed905dff', '#ed8f5dff', '#ec8f5dff', '#ec8e5cff', '#ec8d5cff', '#ec8c5bff', '#ec8c5bff', '#ec8b5bff', '#eb8a5aff', '#eb8a5aff', '#eb8959ff', '#eb8859ff', '#eb8859ff', '#eb8758ff', '#ea8658ff', '#ea8557ff', '#ea8557ff', '#ea8457ff', '#ea8356ff', '#ea8356ff', '#ea8255ff', '#e98155ff', '#e98055ff', '#e98054ff', '#e97f54ff', '#e97e53ff', '#e97e53ff', '#e87d53ff', '#e87c52ff', '#e87b52ff', '#e87b51ff', '#e87a51ff', '#e87950ff', '#e87950ff', '#e77850ff', '#e7774fff', '#e7774fff', '#e7764eff', '#e7754eff', '#e7744eff', '#e6744dff', '#e6734dff', '#e6724cff', '#e6724cff', '#e6714cff', '#e6704bff', '#e56f4bff', '#e56f4aff', '#e56e4aff', '#e56d4aff', '#e56d49ff', '#e56c49ff', '#e56b48ff', '#e46a48ff', '#e46a48ff', '#e46947ff', '#e46847ff', '#e46846ff', '#e46746ff', '#e36646ff', '#e36645ff', '#e36545ff', '#e36444ff', '#e36344ff', '#e36344ff', '#e26243ff', '#e26143ff', '#e26142ff', '#e26042ff', '#e25f42ff', '#e25e41ff', '#e25e41ff', '#e15d40ff', '#e15c40ff', '#e15c40ff', '#e15b3fff', '#e15a3fff', '#e1593eff', '#e0593eff', '#e0583eff', '#e0573dff', '#e0573dff', '#e0563cff', '#e0553cff', '#e0553cff', '#df543bff', '#df533bff', '#df523aff', '#df523aff', '#df513aff', '#df5039ff', '#de5039ff', '#de4f38ff', '#de4e38ff', '#de4d38ff', '#de4d37ff', '#de4c37ff', '#dd4b36ff', '#dd4b36ff', '#dd4a36ff', '#dd4935ff', '#dd4835ff', '#dd4834ff', '#dd4734ff', '#dc4634ff', '#dc4633ff', '#dc4533ff', '#dc4432ff', '#dc4432ff', '#dc4332ff', '#db4231ff', '#db4131ff', '#db4130ff', '#db4030ff', '#db3f30ff', '#db3f2fff', '#da3e2fff', '#da3d2eff', '#da3c2eff', '#da3c2dff', '#da3b2dff', '#da3a2dff', '#da3a2cff', '#d9392cff', '#d9382bff', '#d9372bff', '#d9372bff', '#d9362aff', '#d9352aff', '#d83529ff', '#d83429ff', '#d83329ff', '#d83328ff', '#d83228ff', '#d83127ff', '#d73027ff', '#d73027ff']);
+    
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.x = d3.scale.linear()
+              .domain([30.121953486687847, 399.2073249894533])
+              .range([0, 450 - 50]);
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.legend = L.control({position: 'topright'});
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.legend.addTo(map_5b4a57cfe77f440e0918d0110643bd54);
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.xAxis = d3.svg.axis()
+        .scale(color_map_129fce9689f0c00cf8f85470bdfb9ce7.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([30.121953486687847, 214.66463923807058, 399.2073249894533]);
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.g = color_map_129fce9689f0c00cf8f85470bdfb9ce7.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.g.selectAll("rect")
+        .data(color_map_129fce9689f0c00cf8f85470bdfb9ce7.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_129fce9689f0c00cf8f85470bdfb9ce7.x(color_map_129fce9689f0c00cf8f85470bdfb9ce7.color.domain()[i - 1]) : color_map_129fce9689f0c00cf8f85470bdfb9ce7.x.range()[0],
+            x1: i < color_map_129fce9689f0c00cf8f85470bdfb9ce7.color.domain().length ? color_map_129fce9689f0c00cf8f85470bdfb9ce7.x(color_map_129fce9689f0c00cf8f85470bdfb9ce7.color.domain()[i]) : color_map_129fce9689f0c00cf8f85470bdfb9ce7.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_129fce9689f0c00cf8f85470bdfb9ce7.g.call(color_map_129fce9689f0c00cf8f85470bdfb9ce7.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("Solar + IHB LCOH ($/MWh_th) \u2014 fossil steam benchmark ~$45\u2013110/MWh (Agora Industry 2025)");
+</script>
+</html>

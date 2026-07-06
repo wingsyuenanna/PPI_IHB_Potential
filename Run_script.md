@@ -11,8 +11,8 @@ Each stage writes its own output. A final merge step will combine everything onc
 | 1b. Heat demand            | Excel workbook (formulas)                            | `heat_demand/pulp_paper_heat_demand_corrected.xlsx`           |
 | 2. Fossil share (optional) | `heat_demand/fossil_share/calculate_fossil_share.py` | `heat_demand/fossil_share/fossil_share_lookup.csv`            |
 | 3. Land availability       | `land_availability/` scripts                         | `land_availability/outputs/land_availability_by_facility.csv` |
-| 4. Solar radiation         | PVGIS (TODO)                                         | `solar_radiation/outputs/solar_radiation_by_facility.csv`     |
-| 5. Final merge             | TODO                                                 | `outputs/facilities_analysis.csv`                             |
+| 4. Solar radiation         | `solar_radiation/pull_pvgis.py`                      | `solar_radiation/outputs/solar_radiation_by_facility.csv`     |
+| 5. Final merge             | `merge_eu_pulp_paper_ihb_sites.py`                   | `outputs/eu_pulp_paper_ihb_site_assessment_2024.csv`          |
 
 
 ---
@@ -65,10 +65,21 @@ python3 land_availability/merge_land_availability.py \
 - `available_land_km2` = `bare_sparse_km2` + `cropland_km2` (built-up excluded)
 - DEM: SRTM where available; Copernicus GLO-30 above 60°N (Finland / northern Sweden)
 
-## 4. Solar radiation (TODO)
+## 4. Solar radiation (PVGIS)
 
-Pull PVGIS data per facility lat/lon → `solar_radiation/outputs/solar_radiation_by_facility.csv`
+```bash
+python3 solar_radiation/pull_pvgis.py
+```
 
-## 5. Final merge (TODO)
+- Input: `heat_demand/facilities/facilities_2024_eu.csv`
+- Hourly profiles: `solar_radiation/outputs/hourly_profiles/{source_id}_2023.parquet`
+- Summary: `solar_radiation/outputs/solar_radiation_by_facility.csv`
+- PVGIS-ERA5, 2023, 1 kWp, 0% loss, tilt = |latitude|, azimuth = south (0°) in NH
 
-Join facilities + heat demand (from workbook export) + land + solar into `outputs/facilities_analysis.csv`
+## 5. Final merge
+
+```bash
+python3 merge_eu_pulp_paper_ihb_sites.py
+```
+
+Joins Climate TRACE facilities, workbook heat demand, 5 km land availability, and 2023 PVGIS solar into `outputs/eu_pulp_paper_ihb_site_assessment_2024.csv`.
