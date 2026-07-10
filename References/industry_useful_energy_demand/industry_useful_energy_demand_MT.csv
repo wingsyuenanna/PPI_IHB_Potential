@@ -1,0 +1,8 @@
+energy_demand_type,Primary Steel (TWh),Secondary Steel (TWh),Chemicals (TWh),Cement (TWh),Pulp and Paper (TWh),"Food, Beverages and Tobacco (TWh)",Transport Equipment (TWh),Machinery and Equipment (TWh),Textiles and Leather (TWh),Wood and Wood Products (TWh),Non-ferrous Metals (TWh),Ceramics and Glass (TWh)
+Electricity Other,0.0,0.0,0.0,0.0,0.0,0.018180172371207594,0.00449741324290131,0.024234945932975704,0.008208939333250682,0.0,0.0,0.0
+Electricity Thermal,0.0,0.0,0.0,0.0,0.0,0.020835475452542076,0.007196027951690564,0.03694007688010604,0.007831668081397914,0.0,0.0,0.0
+Non-electric process heat (100-400 C),0.0,0.0,0.0,0.0,0.0,0.0003467902857852805,0.0,0.0,0.0,0.0,0.0,0.0
+Non-electric process heat (400-1000 C),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.00016585493114595697,0.0,0.0,0.0,0.0
+Non-electric process heat (<100 C),0.0,0.0,0.0,0.0,0.0,0.0031918465528810516,5.380084270689404e-10,5.914650121989194e-07,0.0008635933333038367,0.0,0.0,0.0
+Non-electric process heat (>1000 C),0.0,0.0,0.0,0.0,0.0,0.0,4.393735487729678e-10,0.00013544819376919815,0.0,0.0,0.0,0.0
+Steam (non-electric boilers),0.0,0.0,0.0,0.0,0.0,0.015488722521117878,2.3758587949649092e-05,0.004871669436319439,0.003844716490477694,0.0,0.0,0.0

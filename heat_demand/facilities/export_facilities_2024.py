@@ -1,4 +1,4 @@
-"""Export facility data from Climate TRACE and sync annual output into the heat demand workbook."""
+"""Export EU manufacturing facilities from the facility master and sync annual output into the heat demand workbook."""
 
 from __future__ import annotations
 
@@ -9,24 +9,30 @@ import pandas as pd
 from openpyxl import load_workbook
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = PROJECT_ROOT / "Input" / "pulp-and-paper_emissions_sources_v5_7_0.xlsm"
+DEFAULT_INPUT = PROJECT_ROOT / "Input" / "facility_master_2024_v6.csv"
 DEFAULT_OUTPUT = PROJECT_ROOT / "heat_demand" / "facilities" / "facilities_2024_eu.csv"
 DEFAULT_WORKBOOK = (
     PROJECT_ROOT / "heat_demand" / "pulp_paper_heat_demand_corrected.xlsx"
 )
-SOURCE_SHEET = "pulp-and-paper_emissions_source"
 FACILITIES_SHEET = "Facilities"
 ANNUAL_OUTPUT_COLUMN = 6  # column F: annual_output_t
-HEADER_ROW = 2
 DATA_START_ROW = 3
+# The facility master's manufacturing sector spans every industrial subsector
+# (food-beverage, textiles, glass, cement, iron-and-steel, pulp-and-paper, lime,
+# chemicals, other-metals, petrochemical, aluminum). Power generation and
+# mineral extraction are separate sectors and are excluded.
+SECTOR = "manufacturing"
 
+# EU28 (EU27 + United Kingdom). The facility master currently has no GBR
+# pulp-and-paper sources, so the exported set matches EU27 in practice.
 EU_ISO3_COUNTRIES = {
     "AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
     "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD",
-    "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE",
+    "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE", "GBR",
 }
 
-SITE_COLUMNS = [
+# Columns carried through from the facility master, in output order.
+MASTER_COLUMNS = [
     "source_id",
     "source_name",
     "source_type",
@@ -35,59 +41,53 @@ SITE_COLUMNS = [
     "subsector",
     "lat",
     "lon",
-    "gas",
-    "activity_units",
     "capacity_units",
-    "emissions_factor",
-    "emissions_factor_units",
-    "temporal_granularity",
+    "capacity",
+    "capacity_factor",
+    "co2e_100yr",
 ]
-
-
-def load_emissions_source(path: Path, sheet_name: str = SOURCE_SHEET) -> pd.DataFrame:
-    return pd.read_excel(path, sheet_name=sheet_name, header=0, engine="openpyxl")
 
 
 def export_facilities_2024(
     path: Path,
     year: int = 2024,
-    sheet_name: str = SOURCE_SHEET,
+    sector: str = SECTOR,
+    subsectors: list[str] | None = None,
     eu_only: bool = True,
 ) -> pd.DataFrame:
-    """Return one row per facility for the requested year."""
-    data = load_emissions_source(path, sheet_name=sheet_name)
-    data["year"] = data["start_time"].dt.year
-    year_data = data[data["year"] == year].copy()
+    """Return one row per EU manufacturing facility from the facility master.
 
-    if year_data.empty:
-        raise ValueError(f"No records found for year {year} in {path}")
+    ``annual_output_t`` is derived from the updated production capacity as
+    ``capacity * capacity_factor``. ``annual_capacity_t`` preserves the updated
+    production capacity under the name used by downstream consumers. Pass
+    ``subsectors`` to restrict the export to specific industries.
+    """
+    data = pd.read_csv(path)
 
-    site_info = year_data.groupby("source_id", as_index=False).first()[SITE_COLUMNS]
-    annual_metrics = (
-        year_data.groupby("source_id", as_index=False)
-        .agg(
-            year=("year", "first"),
-            months_reported=("start_time", "count"),
-            annual_output=("activity", "sum"),
-            annual_emissions_co2e=("emissions_quantity", "sum"),
-            annual_capacity=("capacity", "sum"),
-            capacity_factor=("capacity_factor", "first"),
-        )
-    )
-
-    facilities = site_info.merge(annual_metrics, on="source_id", how="inner")
-    facilities = facilities.rename(
-        columns={
-            "annual_output": "annual_output_t",
-            "annual_emissions_co2e": "annual_emissions_co2e_t",
-            "annual_capacity": "annual_capacity_t",
-        }
-    )
-
+    facilities = data[data["sector"] == sector].copy()
+    if subsectors:
+        facilities = facilities[facilities["subsector"].isin(subsectors)]
     if eu_only:
         facilities = facilities[facilities["iso3_country"].isin(EU_ISO3_COUNTRIES)]
 
-    return facilities.sort_values(["iso3_country", "source_name"]).reset_index(drop=True)
+    if facilities.empty:
+        raise ValueError(
+            f"No {sector} facilities found for the requested region in {path}"
+        )
+
+    facilities = facilities[MASTER_COLUMNS].copy()
+    facilities["year"] = year
+    facilities["annual_capacity_t"] = facilities["capacity"]
+    facilities["annual_output_t"] = (
+        facilities["capacity"] * facilities["capacity_factor"]
+    )
+    facilities = facilities.rename(
+        columns={"co2e_100yr": "annual_emissions_co2e_t"}
+    )
+
+    return facilities.sort_values(["iso3_country", "source_name"]).reset_index(
+        drop=True
+    )
 
 
 def sync_annual_output_to_workbook(
@@ -140,15 +140,26 @@ def sync_annual_output_to_workbook(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Export EU pulp-and-paper facilities from Climate TRACE and optionally "
-            "sync annual_output_t into pulp_paper_heat_demand_corrected.xlsx."
+            "Export EU manufacturing facilities from the facility master and "
+            "optionally sync annual_output_t into "
+            "pulp_paper_heat_demand_corrected.xlsx."
         )
     )
     parser.add_argument(
         "--input",
         type=Path,
         default=DEFAULT_INPUT,
-        help="Path to the Climate TRACE emissions source workbook.",
+        help="Path to the facility master CSV.",
+    )
+    parser.add_argument(
+        "--subsector",
+        action="append",
+        dest="subsectors",
+        help=(
+            "Restrict the export to one or more manufacturing subsectors "
+            "(repeatable, e.g. --subsector cement --subsector glass). "
+            "Defaults to all manufacturing subsectors."
+        ),
     )
     parser.add_argument(
         "--output",
@@ -166,7 +177,7 @@ def main() -> None:
         "--year",
         type=int,
         default=2024,
-        help="Calendar year to export.",
+        help="Calendar year label for the exported facilities.",
     )
     parser.add_argument(
         "--no-sync-workbook",
@@ -175,7 +186,9 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    facilities = export_facilities_2024(args.input, year=args.year)
+    facilities = export_facilities_2024(
+        args.input, year=args.year, subsectors=args.subsectors
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     facilities.to_csv(args.output, index=False)
     print(f"Wrote {len(facilities)} EU facilities to {args.output}")

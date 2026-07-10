@@ -1,0 +1,5 @@
+subsector,n,median,p10,p90
+cement,156,0.57,0.28,1.0
+glass,148,1.12,0.6,1.12
+iron-and-steel,74,3.59,0.21,16.41
+pulp-and-paper,19,1.91,0.81,46.38
