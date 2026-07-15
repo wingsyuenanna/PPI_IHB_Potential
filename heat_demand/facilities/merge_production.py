@@ -103,19 +103,44 @@ HEAT_ESTIMATE_PARAMS: dict[str, dict[str, float]] = {
 }
 
 # SEC-based parameters (heat_method = production_sec), applied where a
-# tier-1/2 production value exists: fuel_energy = production_t * sec / 1000.
-# sec is fuel input for process heat in GJ per tonne of the product named
-# by capacity_units; eff converts fuel to useful heat (1.0 for direct-fired
-# kilns/furnaces where heat demand is conventionally the fuel input, 0.85
-# for steam-boiler sectors). Keyed by subsector, then source_type
-# ("default" catches the rest). Sources in METHODS.md section 4.
+# tier-1/2 production value exists: fuel_energy = production_t * sec / 1000,
+# useful_heat = fuel_energy * eff.
+# `sec` is FUEL INPUT for process heat (GJ per tonne of the product named by
+# capacity_units); `eff` is the process's USEFUL THERMAL EFFICIENCY (useful
+# heat delivered to the process / fuel input), taken from independent
+# engineering literature — NOT from the JRC-IDEES / IndustryHeat-EU
+# useful-energy reference we validate against, so the comparison stays
+# non-circular. Earlier revisions used eff = 1.0 for direct-fired kilns
+# (a fuel-accounting convention that reports fuel input, not the useful heat
+# an electrified furnace must supply); each eff below is now a sourced
+# furnace/boiler efficiency. Keyed by subsector, then source_type
+# ("default" catches the rest). Full sources in METHODS.md section 4.
 SEC_PARAMS: dict[str, dict[str, dict[str, float]]] = {
-    "cement": {"default": {"sec_gj_t": 2.8, "eff": 1.0}},  # t of cement
-    "lime": {"default": {"sec_gj_t": 4.5, "eff": 1.0}},  # t of lime
-    "glass": {"default": {"sec_gj_t": 6.5, "eff": 1.0}},  # t of glass
+    # eff = cement pyroprocessing first-law efficiency; hot clinker, hot
+    # calcination-CO2 exhaust and shell radiation are the losses. 0.60:
+    # Madlool et al. 2011 (Renew. Sustain. Energy Rev. 15:2042) report
+    # 50-60% kiln-system energy efficiency; consistent with BAT ~3.0 vs
+    # theoretical ~1.8 GJ/t clinker (IEA Cement Roadmap).
+    "cement": {"default": {"sec_gj_t": 2.8, "eff": 0.60}},  # t of cement
+    # eff = lime kiln efficiency, EU mix of shaft (~0.80) and rotary (~0.55)
+    # kilns; EU BREF Cement/Lime/MgO (typical 4-5 GJ/t vs theoretical ~3.2).
+    "lime": {"default": {"sec_gj_t": 4.5, "eff": 0.65}},  # t of lime
+    # eff = glass melting-furnace efficiency; large flue-gas + structural
+    # losses. 0.45: Beerkens 2008 (energy benchmarking of glass furnaces);
+    # Schmitz et al. 2011 (regenerative melting 40-50%).
+    "glass": {"default": {"sec_gj_t": 6.5, "eff": 0.45}},  # t of glass
     "pulp-and-paper": {"default": {"sec_gj_t": 10.5, "eff": 0.85}},
     "petrochemical-steam-cracking": {
-        "default": {"sec_gj_t": 17.0, "eff": 1.0}  # t of ethylene
+        # t of ethylene. 35.9 = total cracking-furnace duty (external fuel +
+        # byproduct fuel-gas firing), the hotmaps benchmark ethylene SEC
+        # (earlier 17.0 counted external fuel only, halving cracker heat and
+        # understating the duty an electrified furnace must supply — the
+        # byproduct methane/H2 tail gas is fossil-derived and must also be
+        # decarbonized). eff = 0.90: a fired heater with strong convection-
+        # section heat recovery (feed preheat + HP process steam), so the
+        # useful fraction is high (Ren, Patel & Blok 2006, Energy 31:425;
+        # Ullmann's "Ethylene"). Least-certain efficiency here — see METHODS.
+        "default": {"sec_gj_t": 35.9, "eff": 0.90}
     },
     "iron-and-steel": {  # t of crude steel, by route
         # Final-consumption scope: coke ovens and blast furnaces are booked
@@ -124,22 +149,28 @@ SEC_PARAMS: dict[str, dict[str, dict[str, float]]] = {
         # BF/BOF 4.8 = sinter 1.20 t x 2.24 GJ/t + rolled 0.90 t x 2.39 GJ/t
         # (hotmaps benchmarks); whole-route value incl. coke ovens + BF was
         # 19.0. Mixed routes are averages of the constituent routes.
-        "BF/BOF": {"sec_gj_t": 4.8, "eff": 1.0},
-        "BOF": {"sec_gj_t": 4.8, "eff": 1.0},
-        "EAF": {"sec_gj_t": 2.5, "eff": 1.0},
-        "DRI-EAF": {"sec_gj_t": 12.0, "eff": 1.0},
-        "BOF,EAF": {"sec_gj_t": 3.7, "eff": 1.0},
-        "DRI-EAF,BF/BOF": {"sec_gj_t": 8.4, "eff": 1.0},
-        "default": {"sec_gj_t": 4.8, "eff": 1.0},
+        # eff = 0.70: reheating/sinter furnaces with recuperation, 65-75%
+        # (IEA Iron & Steel Roadmap; worldsteel energy statistics).
+        "BF/BOF": {"sec_gj_t": 4.8, "eff": 0.70},
+        "BOF": {"sec_gj_t": 4.8, "eff": 0.70},
+        "EAF": {"sec_gj_t": 2.5, "eff": 0.70},
+        "DRI-EAF": {"sec_gj_t": 12.0, "eff": 0.70},
+        "BOF,EAF": {"sec_gj_t": 3.7, "eff": 0.70},
+        "DRI-EAF,BF/BOF": {"sec_gj_t": 8.4, "eff": 0.70},
+        "default": {"sec_gj_t": 4.8, "eff": 0.70},
     },
     "chemicals": {  # t of chemical, by product
-        "ammonia": {"sec_gj_t": 9.0, "eff": 1.0},
+        # ammonia/methanol reformers are fired heaters with heat recovery,
+        # eff 0.90 (as steam cracking); soda-ash is steam-boiler-led, 0.85.
+        "ammonia": {"sec_gj_t": 9.0, "eff": 0.90},
         "soda_ash": {"sec_gj_t": 10.0, "eff": 0.85},
-        "methanol": {"sec_gj_t": 9.0, "eff": 1.0},
+        "methanol": {"sec_gj_t": 9.0, "eff": 0.90},
     },
     "aluminum": {  # t of alumina (Refinery) / t of aluminum (Smelting)
+        # Refinery = Bayer digestion/calcination steam (0.85 boiler); Smelting
+        # = anode-bake + cast-house fired furnaces, eff 0.65 (IAI energy data).
         "Refinery": {"sec_gj_t": 11.0, "eff": 0.85},
-        "Smelting": {"sec_gj_t": 3.0, "eff": 1.0},
+        "Smelting": {"sec_gj_t": 3.0, "eff": 0.65},
     },
 }
 

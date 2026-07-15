@@ -1,9 +1,9 @@
 subsector,n,methods_sec_twh,benchmark_sec_twh,ratio_benchmark_over_methods
-aluminum,28,10.481,11.249,1.073
-cement,198,108.359,104.295,0.963
-chemicals,48,46.678,61.706,1.322
-glass,148,36.141,43.642,1.208
-iron-and-steel,112,145.358,157.891,1.086
-lime,62,20.308,16.698,0.822
-petrochemical-steam-cracking,36,82.562,174.352,2.112
+aluminum,28,10.115,11.249,1.112
+cement,198,65.015,104.295,1.604
+chemicals,48,43.895,61.706,1.406
+glass,148,16.263,43.642,2.683
+iron-and-steel,112,101.751,157.891,1.552
+lime,62,13.2,16.698,1.265
+petrochemical-steam-cracking,36,156.917,174.352,1.111
 pulp-and-paper,79,54.053,42.88,0.793

@@ -117,26 +117,49 @@ corrections.
 
 For tier-1/2 facilities: `fuel_energy_TJ = production_t × SEC ÷ 1000`,
 `useful_heat_TJ = fuel_energy_TJ × eff`. SEC is **fuel input for process
-heat, GJ per tonne of the product named by `capacity_units`**; eff = 1.0
-for direct-fired kilns/furnaces (heat demand conventionally equals fuel
-input, as in the hotmaps methodology), 0.85 for steam-boiler processes.
+heat, GJ per tonne of the product named by `capacity_units`**; `eff` is the
+process's **useful thermal efficiency** — useful heat delivered to the
+process ÷ fuel input.
 
-| Subsector (product) | source_type | SEC (GJ/t) | eff | Basis |
+**Efficiencies are independent engineering-literature values, not derived
+from the JRC-IDEES / IndustryHeat-EU useful-energy reference we validate
+against**, so the reconciliation stays non-circular. Earlier revisions set
+`eff = 1.0` for direct-fired kilns (the hotmaps fuel-accounting convention,
+which reports fuel *consumed* rather than useful heat *delivered*); this
+made kiln sectors read 150–200% of a useful-energy benchmark and — more
+importantly — would oversize an electrified replacement, which only has to
+supply the useful heat. Each `eff` below is now a sourced furnace or boiler
+efficiency. The remaining bracket is physical: useful heat sits below fuel
+input (this table) and below Eurostat *final* energy, and near the
+JRC-IDEES *useful*-energy reference.
+
+| Subsector (product) | source_type | SEC (GJ/t) | eff | Basis (SEC ‖ efficiency) |
 |---|---|---|---|---|
-| cement (t cement) | all | 2.8 | 1.0 | ~3.5 GJ/t clinker thermal (IEA/CSI GNR, IEA Cement Roadmap 2018) × ~0.77 EU clinker-to-cement ratio (Cembureau) |
-| lime (t lime) | all | 4.5 | 1.0 | EU average across kiln types, range 3.6–7.5 GJ/t (EuLA; EU BREF Cement/Lime/Magnesium Oxide) |
-| glass (t glass) | all | 6.5 | 1.0 | EU average melting + working energy (Schmitz et al. 2011, *Energy consumption and CO₂ emissions of the European glass industry*) |
-| pulp-and-paper (t pulp & paper) | all | 10.5 | 0.85 | CEPI Key Statistics, heat use per tonne produced; **~60% of this heat is biomass-supplied** (black liquor etc.), so fossil-replaceable heat is much smaller — see benchmark.md |
-| steam cracking (t ethylene) | all | 17.0 | 1.0 | Typical naphtha cracker fuel SEC per t ethylene (IEA petrochemicals analyses; Ren et al. 2006) |
-| iron-and-steel (t crude steel) | BF/BOF, BOF | 4.8 | 1.0 | **Final-consumption scope**: sinter (1.20 t × 2.24 GJ/t) + rolling (0.90 t × 2.39 GJ/t) from the hotmaps benchmarks. Coke ovens and blast furnaces (~12 GJ/t more; whole route 19 GJ/t per worldsteel/IEA) are **excluded** — Eurostat books them in the transformation sector, not iron & steel final energy, so including them made the bottom-up incomparable to the top-down |
-| | EAF | 2.5 | 1.0 | Fuel only (NG burners + reheating furnace); electricity excluded |
-| | DRI-EAF | 12.0 | 1.0 | NG for DRI (~10 GJ/t DRI) + EAF fuel; DRI gas is industry final consumption, so kept |
-| | mixed routes | 3.7–8.4 | 1.0 | Averages of the constituent routes |
-| chemicals | ammonia (t NH₃) | 9.0 | 1.0 | Reformer **fuel** share only; feedstock gas (~18 GJ/t) excluded (IEA Ammonia Technology Roadmap 2021) |
-| | soda_ash (t) | 10.0 | 0.85 | Solvay process steam + kilns (EU BREF Large Volume Inorganic Chemicals) |
-| | methanol (t) | 9.0 | 1.0 | Fuel share only, feedstock excluded (IEA/IRENA methanol analyses) |
-| aluminum | Refinery (t alumina) | 11.0 | 0.85 | Bayer process steam + calcination (IAI / IEA aluminium data) |
-| | Smelting (t aluminum) | 3.0 | 1.0 | Anode baking + cast-house furnaces; smelting electricity excluded |
+| cement (t cement) | all | 2.8 | **0.60** | SEC: ~3.5 GJ/t clinker thermal (IEA/CSI GNR, IEA Cement Roadmap 2018) × ~0.77 EU clinker-to-cement ratio (Cembureau). **eff:** cement pyroprocessing first-law efficiency 50–60% (Madlool et al. 2011, *Renew. Sustain. Energy Rev.* 15:2042); losses are hot clinker, calcination-CO₂ exhaust, shell radiation |
+| lime (t lime) | all | 4.5 | **0.65** | SEC: EU average across kiln types, 3.6–7.5 GJ/t (EuLA; EU BREF Cement/Lime/MgO). **eff:** EU mix of shaft (~0.80) and rotary (~0.55) lime kilns (BREF) |
+| glass (t glass) | all | 6.5 | **0.45** | SEC: EU average melting + working energy (Schmitz et al. 2011, *Energy consumption and CO₂ emissions of the European glass industry*). **eff:** glass melting-furnace efficiency 40–50%, high flue + structural loss (Beerkens 2008; Schmitz et al. 2011) |
+| pulp-and-paper (t pulp & paper) | all | 10.5 | 0.85 | SEC: CEPI Key Statistics, heat use per tonne produced; **~60% biomass-supplied** (black liquor). **eff:** industrial steam boiler (US DOE) |
+| steam cracking (t ethylene) | all | 35.9 | **0.90** | SEC: **total cracking-furnace duty** (external fuel + byproduct fuel-gas firing), hotmaps benchmark — chosen over 17.0 GJ/t external-fuel-only (Ren et al. 2006) because an electrified furnace must supply the whole duty (byproduct CH₄/H₂ tail gas is fossil and must also be decarbonized); reproduces IndustryHeat-EU per-facility values. **eff:** fired heater with strong convection heat recovery, high useful fraction (Ren, Patel & Blok 2006, *Energy* 31:425; Ullmann's *Ethylene*) — **least-certain efficiency** |
+| iron-and-steel (t crude steel) | BF/BOF, BOF | 4.8 | **0.70** | SEC: **final-consumption scope** — sinter (1.20 t × 2.24 GJ/t) + rolling (0.90 t × 2.39 GJ/t), hotmaps; coke ovens + blast furnaces excluded (Eurostat transformation sector). **eff:** reheating/sinter furnaces w/ recuperation, 65–75% (IEA Iron & Steel; worldsteel) |
+| | EAF | 2.5 | **0.70** | Fuel only (NG burners + reheating furnace); electricity excluded |
+| | DRI-EAF | 12.0 | **0.70** | NG for DRI (~10 GJ/t DRI) + EAF fuel; DRI gas kept (industry final consumption) |
+| | mixed routes | 3.7–8.4 | **0.70** | Averages of the constituent routes |
+| chemicals | ammonia (t NH₃) | 9.0 | **0.90** | SEC: reformer **fuel** share only; feedstock gas (~18 GJ/t) excluded (IEA Ammonia Technology Roadmap 2021). **eff:** primary reformer fired heater w/ heat recovery |
+| | soda_ash (t) | 10.0 | 0.85 | Solvay process steam + kilns (EU BREF LVIC); boiler-led |
+| | methanol (t) | 9.0 | **0.90** | Fuel share only, feedstock excluded (IEA/IRENA); reformer fired heater |
+| aluminum | Refinery (t alumina) | 11.0 | 0.85 | Bayer digestion/calcination steam (IAI / IEA); boiler-led |
+| | Smelting (t aluminum) | 3.0 | **0.65** | Anode baking + cast-house fired furnaces; smelting electricity excluded (IAI) |
+
+**Note on `eff` and electrification.** These efficiencies convert fuel input
+to the *useful heat the process needs*, which is the correct demand basis for
+sizing an electrified replacement. They are **not** the electricity-to-heat
+efficiency of the replacement technology (heat-pump COP, resistive/IHB
+delivery, ~0.9–0.95), which is applied separately in the LCOH model. The
+gas-vs-electric crossover is governed by the *ratio* of the two, which is
+modest at high temperature — electric heating mainly avoids the combustion
+flue-gas loss, not the process-inherent losses (hot product, off-gas). The
+steam-cracking efficiency (0.90) is the least certain and warrants a
+sensitivity run.
 
 ## 5. Temperature bands (`heat_temperature_bands.py`)
 
@@ -150,9 +173,10 @@ Each facility maps to a **recipe** of benchmark processes
 (weight = t process throughput per t product). For tier-1/2 facilities,
 banded heat = `production_t × Σ(weight × SEC_Fuels × band_share)`
 (`bench_heat_tj` — note this benchmark-based heat can differ from the
-section-4 estimate; petrochemical especially, where the benchmark
-ethylene SEC of 35.9 GJ/t includes byproduct fuel gas firing vs. 17 GJ/t
-external fuel). For tier-3 facilities the band shares are applied to the
+section-4 estimate for the remaining sectors; petrochemical now agrees,
+since section 4 adopts the benchmark 35.9 GJ/t total-furnace basis
+(external fuel + byproduct fuel-gas firing) rather than 17 GJ/t external
+fuel — see the steam-cracking note in section 4). For tier-3 facilities the band shares are applied to the
 emissions-derived `useful_heat_tj`.
 
 | Facility type | Recipe (process × weight) | Basis |

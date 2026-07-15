@@ -1,8 +1,9 @@
-sector,bottom_up_twh,top_down_heat_twh,useful_energy_twh,coverage_vs_eurostat_pct,coverage_vs_useful_pct
-Textile & leather,17.45,18.06,11.52,96.66,151.54
-Non-ferrous metals,10.48,40.0,22.2,26.2,47.21
-"Food, beverages & tobacco",110.51,191.67,103.01,57.66,107.28
-"Paper, pulp & printing",54.05,260.42,203.38,20.76,26.58
-Iron & steel,145.36,271.53,99.52,53.53,146.06
-Non-metallic minerals,164.81,306.94,181.95,53.69,90.58
-Chemical & petrochemical,129.24,359.72,172.5,35.93,74.92
+sector,bottom_up_twh,useful_energy_twh,top_down_heat_twh,coverage_vs_eurostat_pct,coverage_vs_useful_pct
+Textiles & Leather,17.45,11.52,18.06,96.66,151.54
+Non-ferrous Metals,10.11,22.2,40.0,25.29,45.56
+Cement (+lime),78.22,75.85,,,103.12
+Steel,101.75,99.52,271.53,37.47,102.24
+"Food, Bev & Tobacco",110.51,103.01,191.67,57.66,107.28
+Ceramics & Glass,16.26,106.1,,,15.33
+Chemicals,200.81,172.5,359.72,55.82,116.41
+Pulp & Paper,54.05,203.38,260.42,20.76,26.58
