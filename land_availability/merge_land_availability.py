@@ -14,10 +14,17 @@ DEFAULT_OUTPUT = (
 )
 DEFAULT_FACILITIES = PROJECT_ROOT / "heat_demand" / "facilities" / "facilities_2024_eu.csv"
 
-# Colocated solar: bare land and cropland only (exclude built-up — roofs/roads are not array siting).
+# Colocated solar siting land. Excludes built-up (roofs/roads), water, wetland,
+# snow/ice, and tree_cover — clearing forest for PV is generally not permitted.
+# Grassland and shrubland ARE included: they are developable open land, and many
+# EU mills (esp. Nordic pulp) sit in forest/grassland mosaics where bare+cropland
+# alone spuriously reports ~zero available land. Add "tree_cover_km2" only for a
+# forest-clearing sensitivity case.
 AVAILABLE_LAND_COLUMNS = [
     "bare_sparse_km2",
     "cropland_km2",
+    "grassland_km2",
+    "shrubland_km2",
 ]
 
 
@@ -76,7 +83,7 @@ def main() -> None:
         description=(
             "Process a downloaded GEE land-cover CSV into a standalone "
             "land_availability_by_facility.csv. "
-            "available_land_km2 = bare_sparse + cropland."
+            "available_land_km2 = bare_sparse + cropland + grassland + shrubland."
         )
     )
     parser.add_argument(

@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b8aa8" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="640" fill="#1e1e1e" />
+
+  <!-- Row 1: Inputs -->
+  <!-- Facility data -->
+  <rect x="40" y="40" width="300" height="100" rx="16" fill="#2f5876" stroke="#1a2f3d" stroke-width="2"/>
+  <text x="190" y="98" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Facility data</text>
+
+  <!-- Heat Demand Estimates -->
+  <rect x="450" y="40" width="300" height="100" rx="16" fill="#2f5876" stroke="#1a2f3d" stroke-width="2"/>
+  <text x="600" y="80" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Heat Demand</text>
+  <text x="600" y="118" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Estimates</text>
+
+  <!-- Solar + IHB / Land Availability -->
+  <rect x="860" y="40" width="300" height="100" rx="16" fill="#2f5876" stroke="#1a2f3d" stroke-width="2"/>
+  <text x="1010" y="80" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Solar + IHB</text>
+  <text x="1010" y="118" text-anchor="middle" font-size="28" font-weight="500" fill="#dbe6ec">Land Availability</text>
+
+  <!-- Converging arrows into Optimization -->
+  <path d="M 190 140 L 585 272" stroke="#5b8aa8" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 600 140 L 600 272" stroke="#5b8aa8" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 1010 140 L 615 272" stroke="#5b8aa8" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Row 2: Optimization -->
+  <rect x="470" y="280" width="260" height="100" rx="16" fill="#2f5876" stroke="#1a2f3d" stroke-width="2"/>
+  <text x="600" y="340" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Optimization</text>
+
+  <!-- Arrow into LCOH -->
+  <path d="M 600 380 L 600 462" stroke="#5b8aa8" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Row 3: LCOH / Solar + IHB Sizing -->
+  <rect x="410" y="470" width="380" height="130" rx="16" fill="#2f5876" stroke="#1a2f3d" stroke-width="2"/>
+  <text x="600" y="522" text-anchor="middle" font-size="32" font-weight="700" fill="#ffffff">LCOH</text>
+  <text x="600" y="566" text-anchor="middle" font-size="28" font-weight="500" fill="#dbe6ec">Solar + IHB Sizing</text>
+
+</svg>

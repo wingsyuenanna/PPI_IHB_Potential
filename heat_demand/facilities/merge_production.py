@@ -90,14 +90,19 @@ HEAT_ESTIMATE_PARAMS: dict[str, dict[str, float]] = {
     "food-beverage-tobacco": {
         # Level is superseded by the per-country rescaling below (Climate
         # TRACE food emissions only provide within-country allocation
-        # weights), so the share is left at the physical 1.0.
+        # weights), so the share is left at the physical 1.0. NOTE: because
+        # each country's food heat is rescaled to the JRC reference, the EF
+        # here is absorbed by the rescale and has no effect on food output.
         "combustion_share": 1.0,
-        "fuel_ef_tco2_per_tj": 0.75 * 56.1 + 0.25 * 77.4,  # 61.4
+        # 90% gas / 10% oil, matching the Eurostat nrg_d_indq energy-weighted
+        # fossil mix for EU food & textiles (implied EF ~58-60, vs the earlier
+        # 75/25 blend's 61.4 which is a few % too high for the gas-heavy mix).
+        "fuel_ef_tco2_per_tj": 0.90 * 56.1 + 0.10 * 77.4,  # 58.2
         "boiler_efficiency": 0.85,
     },
     "textiles-leather-apparel": {
         "combustion_share": 1.0,
-        "fuel_ef_tco2_per_tj": 0.75 * 56.1 + 0.25 * 77.4,  # 61.4
+        "fuel_ef_tco2_per_tj": 0.90 * 56.1 + 0.10 * 77.4,  # 58.2
         "boiler_efficiency": 0.85,
     },
 }

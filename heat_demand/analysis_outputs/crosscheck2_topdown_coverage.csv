@@ -1,9 +1,9 @@
 sector,bottom_up_twh,useful_energy_twh,top_down_heat_twh,coverage_vs_eurostat_pct,coverage_vs_useful_pct
-Textiles & Leather,17.45,11.52,18.06,96.66,151.54
+Textiles & Leather,18.45,11.52,18.06,102.18,160.18
 Non-ferrous Metals,10.11,22.2,40.0,25.29,45.56
 Cement (+lime),78.22,75.85,,,103.12
 Steel,101.75,99.52,271.53,37.47,102.24
 "Food, Bev & Tobacco",110.51,103.01,191.67,57.66,107.28
-Ceramics & Glass,16.26,106.1,,,15.33
-Chemicals,200.81,172.5,359.72,55.82,116.41
+Glass,16.26,106.1,,,15.33
+Chemicals,201.24,172.5,359.72,55.94,116.66
 Pulp & Paper,54.05,203.38,260.42,20.76,26.58

@@ -80,8 +80,8 @@ useful_heat_TJ  = fuel_energy_TJ × boiler_efficiency
 
 | Subsector | combustion share | fuel EF (tCO₂/TJ) | boiler eff. |
 |---|---|---|---|
-| food-beverage-tobacco | 1.0 | 61.4 | 0.85 |
-| textiles-leather-apparel | 1.0 | 61.4 | 0.85 |
+| food-beverage-tobacco | 1.0 | 58.2 | 0.85 |
+| textiles-leather-apparel | 1.0 | 58.2 | 0.85 |
 
 **Food country rescaling** (applied after the inversion, factor recorded in
 `food_country_scale`): Climate TRACE food emissions are modeled and badly
@@ -97,10 +97,12 @@ superseded and the share is back at the physical 1.0.
 
 Sources:
 - **Fuel emission factors**: IPCC 2006 Guidelines, Vol. 2, Table 2.3 —
-  natural gas 56.1 tCO₂/TJ, residual fuel oil 77.4 tCO₂/TJ. The 61.4 value
-  is a 75% gas / 25% oil mix, consistent with the fuel-share assumptions in
-  `estimating_heat_demand.md` and the gas-dominated mix reported for these
-  sectors in JRC-IDEES.
+  natural gas 56.1 tCO₂/TJ, residual fuel oil 77.4 tCO₂/TJ. The 58.2 value
+  is a 90% gas / 10% oil mix, matching the energy-weighted fossil fuel mix
+  for EU food and textiles in Eurostat `nrg_d_indq` 2024 (implied fossil EF
+  ~58–60 tCO₂/TJ). An earlier 75/25 blend gave 61.4, ~5% high for the
+  gas-dominated mix; for food this is absorbed by the per-country rescaling
+  below and only affects textiles (which keeps its inverted level).
 - **Combustion share 1.0**: food and textile processing have no process
   CO₂ — reported emissions are boiler/oven/dryer fuel. For food the level
   is then reset by the country rescaling above; textiles is left unscaled

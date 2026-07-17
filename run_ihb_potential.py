@@ -30,7 +30,10 @@ sys.path.insert(0, str(_ROOT / "flatblock_optimization"))
 CONFIG = {
     # ── Input data ────────────────────────────────────────────────────────────
     # Merged site assessment CSV — contains heat demand, land availability, solar metadata
-    "sites_csv": "outputs/eu_pulp_paper_ihb_site_assessment_2024.csv",
+    # Built by flatblock_optimization/inputs/build_sites_input.py from the new
+    # heat-demand + Eurostat fossil-share pipeline (replaceable_heat_mwh_th) plus
+    # land availability and solar-profile presence. Run that script to refresh.
+    "sites_csv": "outputs/eu_ihb_site_assessment_2024.csv",
     # BNEF costs by country and year (solar CAPEX/FOM, battery FOM, CRF)
     "bnef_costs_csv": "Input/bnef_country_costs.csv",
     # Thermal energy storage cost table (rows: cost components; cols: years 2025/2030/2035)
@@ -94,8 +97,13 @@ CONFIG = {
 
     # ── Land limit ────────────────────────────────────────────────────────────
     # MW of solar per km² of available land (utility-scale ground-mount ~80–100 MW/km²).
-    # Used to flag in the output whether the optimized solar capacity exceeds land limits.
+    # Solar capacity is hard-capped at available_land_km2 × mw_per_km2 in the solver.
     "mw_per_km2": 100.0,
+    # When a site cannot reach the availability target within its land cap, re-solve
+    # with the reliability floor removed and this high unserved penalty ($/MWh), so
+    # the model builds the max solar the land allows and we report the ACHIEVABLE
+    # reliability instead of returning infeasible. Large enough to dominate capex.
+    "maxserve_voll": 100000.0,
 
     # ── Output ────────────────────────────────────────────────────────────────
     "output_dir": "flatblock_optimization/output",
@@ -185,12 +193,10 @@ def run_one_site(row: dict, cfg: dict) -> tuple[dict, pd.DataFrame | None]:
     except Exception as e:
         return {**base, "status": "cost_load_error", "error": str(e), "load_target_mw": load_target_mw}, None
 
-    # Run optimization — decrement load until feasible (mirrors original run_scenario.py logic)
-    step_mw = load_target_mw * 0.05
-    current_load = load_target_mw
     results = None
     hourly_df = None
     feasible = False
+    meets_availability = False
 
     try:
         if cfg["storage_type"] == "heat":
@@ -207,48 +213,72 @@ def run_one_site(row: dict, cfg: dict) -> tuple[dict, pd.DataFrame | None]:
                     tes_temp_max_c=cfg["heat_tmax_c"],
                     tes_temp_min_c=steam_temp_c,
                     charge_discharge_ratio_min=cfg["heat_cd_ratio"],
+                    # Hard land cap: solar MW ≤ available land × density. 0/missing
+                    # land data leaves solar unbounded (see solver guard).
+                    max_solar_mw=available_land_km2 * cfg["mw_per_km2"],
                 )
         else:
             from solvers.optimize_flatblock_highs_unserved_v2 import run_flatblock_optimization_highs
             def _run(**kw):
                 return run_flatblock_optimization_highs(**kw)
 
-        while not feasible and current_load > 0:
+        # Stage 1: full load, must meet the availability target within the land cap.
+        results, hourly_df, feasible = _run(
+            site_id=source_id,
+            availability_factor=cfg["availability"],
+            site_params=row,
+            solar_profile_df=solar_df,
+            demand_profile=None,
+            input_costs=input_costs,
+            load_target=load_target_mw,
+        )
+        meets_availability = feasible
+
+        # Stage 2: if the land cap (or low solar CF) prevents hitting the target,
+        # drop the reliability floor and maximise served energy instead of failing.
+        # We keep the SAME full load and report the achievable reliability.
+        if not feasible:
             results, hourly_df, feasible = _run(
                 site_id=source_id,
-                availability_factor=cfg["availability"],
+                availability_factor=0.0,          # no hard unserved cap
                 site_params=row,
                 solar_profile_df=solar_df,
                 demand_profile=None,
                 input_costs=input_costs,
-                load_target=current_load,
+                load_target=load_target_mw,
+                VoLL=cfg["maxserve_voll"],         # penalise unserved -> build to land cap
             )
-            if not feasible:
-                current_load -= step_mw
 
     except Exception as e:
         return {
             **base,
             "status": "solver_error",
             "error": traceback.format_exc(),
-            "load_target_mw": current_load,
+            "load_target_mw": load_target_mw,
         }, None
 
     if not feasible or results is None:
         return {**base, "status": "infeasible", "load_target_mw": load_target_mw}, None
 
-    # Flag if optimized solar exceeds land limit
+    # Solar is now hard-capped at the land limit inside the solver, so instead
+    # of flagging violations we flag when that cap is BINDING (the site would
+    # have built more solar if it had the land — a sign land is constraining it).
     max_land_mw = available_land_km2 * cfg["mw_per_km2"]
     s_opt = results.get("S_opt_MW", 0)
-    exceeds_land = (available_land_km2 > 0) and (s_opt > max_land_mw)
+    exceeds_land = (max_land_mw > 0) and (s_opt >= max_land_mw * 0.999)
 
+    # Reliability achieved at full load (stage 1 ≥ target; stage 2 may be below).
+    achieved_reliability = results.get("Reliability_%", None)
     summary = {
         **base,
-        "status": "completed",
+        "status": "completed" if meets_availability else "below_availability_target",
         "load_target_mw": load_target_mw,
-        "feasible_load_mw": current_load,
+        "meets_availability_target": meets_availability,
+        "availability_target_pct": cfg["availability"] * 100,
+        "achieved_reliability_pct": achieved_reliability,
         "max_solar_land_mw": round(max_land_mw, 1),
-        "exceeds_land_limit": exceeds_land,
+        "land_cap_binding": exceeds_land,
+        "exceeds_land_limit": exceeds_land,  # kept for backward-compat (maps/CSV)
         **results,
     }
     return summary, hourly_df

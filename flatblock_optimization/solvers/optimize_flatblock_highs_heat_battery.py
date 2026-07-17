@@ -85,6 +85,7 @@ def run_flatblock_optimization_heat_battery_highs(
     tes_temp_max_c: float | None = None,
     tes_temp_min_c: float | None = None,
     charge_discharge_ratio_min: float | None = None,
+    max_solar_mw: float | None = None,
 ) -> Tuple[Optional[Dict[str, Any]], Optional[pd.DataFrame], bool]:
     """
     Minimize LCOE for solar + **heat storage (TES)** + optional unserved energy.
@@ -219,7 +220,10 @@ def run_flatblock_optimization_heat_battery_highs(
     # P_charge / P_discharge: max AC power (MW) the equipment can move per hour.
     # charge[t] / discharge[t]: actual dispatch each hour (<= those caps). The optimizer
     # picks both sizes and hourly profiles.
-    h.addVar(0, float("inf"))  # 0: S_MW
+    # Solar capacity is capped by land availability (MW the site's available
+    # land can host) when provided; otherwise unbounded.
+    solar_ub = max_solar_mw if (max_solar_mw is not None and max_solar_mw > 0) else float("inf")
+    h.addVar(0, solar_ub)  # 0: S_MW
     h.addVar(0, float("inf"))  # 1: P_charge_MW
     h.addVar(0, float("inf"))  # 2: P_discharge_MW
     h.addVar(0, float("inf"))  # 3: E_TES_MWh nameplate thermal energy capacity

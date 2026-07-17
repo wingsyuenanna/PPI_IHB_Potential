@@ -1,0 +1,36 @@
+eprtr_activity_code,eprtr_activity_name,nace_division,nace_code,nace_label,match_confidence,notes
+1(a),Petroleum Refineries,19,19.20,Manufacture of refined petroleum products,High,Single dedicated class direct match
+1(b),Coke Ovens,19,19.10,Manufacture of coke oven products,High,Distinct class from refining despite sharing Division 19
+2(b),Iron & Steel (blast furnace / BOF),24,24.10,Manufacture of basic iron and steel and of ferro-alloys,High,Direct match; downstream steel processing 24.20-24.34 excluded
+2(e)/(f),"Non-ferrous Metals (Pb, Zn, Cu, precious, Al)",24,24.41,Precious metals production,Moderate,One E-PRTR activity maps to five separate 4-digit classes split by metal
+2(e)/(f),"Non-ferrous Metals (Pb, Zn, Cu, precious, Al)",24,24.42,Aluminium production,Moderate,One E-PRTR activity maps to five separate 4-digit classes split by metal
+2(e)/(f),"Non-ferrous Metals (Pb, Zn, Cu, precious, Al)",24,24.43,"Lead, zinc and tin production",Moderate,One E-PRTR activity maps to five separate 4-digit classes split by metal
+2(e)/(f),"Non-ferrous Metals (Pb, Zn, Cu, precious, Al)",24,24.44,Copper production,Moderate,One E-PRTR activity maps to five separate 4-digit classes split by metal
+2(e)/(f),"Non-ferrous Metals (Pb, Zn, Cu, precious, Al)",24,24.45,Other non-ferrous metal production,Moderate,One E-PRTR activity maps to five separate 4-digit classes split by metal
+3(a),Cement Clinker Kilns,23,23.51,Manufacture of cement,High,Direct match
+3(b),Lime Production,23,23.52,Manufacture of lime and plaster,Moderate,Class also includes plaster manufacture which sits below E-PRTR Annex I threshold
+3(c),Glass Manufacturing,23,23.11,Manufacture of flat glass,Moderate,E-PRTR 3(c)(i-iii) sub-activities map roughly to flat/hollow/other glass classes
+3(c),Glass Manufacturing,23,23.12,Shaping and processing of flat glass,Moderate,E-PRTR 3(c)(i-iii) sub-activities map roughly to flat/hollow/other glass classes
+3(c),Glass Manufacturing,23,23.13,Manufacture of hollow glass,Moderate,E-PRTR 3(c)(i-iii) sub-activities map roughly to flat/hollow/other glass classes
+3(c),Glass Manufacturing,23,23.19,"Manufacture and processing of other glass, incl. technical glassware",Moderate,E-PRTR 3(c)(i-iii) sub-activities map roughly to flat/hollow/other glass classes
+3(e),Mineral Fibres (glass/stone wool),23,23.14,Manufacture of glass fibres,Low,Glass wool is a clean match to this class
+3(e),Mineral Fibres (glass/stone wool),23,23.99,Manufacture of other non-metallic mineral products n.e.c.,Low,Stone wool likely falls here; no dedicated mineral-wool class exists - verify per facility
+4(a),"Basic Organic Chemicals (organic chemicals, olefins, petrochems)",20,20.14,Manufacture of other organic basic chemicals,Moderate,Primary code for steam crackers and olefins production
+4(a),"Basic Organic Chemicals (organic chemicals, olefins, petrochems)",20,20.16,Manufacture of plastics in primary forms,Moderate,Downstream polymer output at integrated petrochemical sites
+4(a),"Basic Organic Chemicals (organic chemicals, olefins, petrochems)",20,20.17,Manufacture of synthetic rubber in primary forms,Moderate,Downstream polymer output at integrated petrochemical sites
+4(a) - H2 plants,Hydrogen Production (subset of 4a/4b),20,20.11,Manufacture of industrial gases,Moderate,Hydrogen is classified as an industrial gas - a distinct code from the rest of 4(a) useful for isolating H2/SMR facilities
+4(b)/(c),Basic Inorganic Chemicals & Fertilisers,20,20.13,Manufacture of other inorganic basic chemicals,Moderate,General inorganics eta approx 1.0
+4(b)/(c),Basic Inorganic Chemicals & Fertilisers,20,20.15,Manufacture of fertilisers and nitrogen compounds,Moderate,Ammonia/fertiliser fraction eta approx 0.75 per reference table
+5(b),Municipal Waste Incineration (WtE),38,38.21,Treatment and disposal of non-hazardous waste,Low,Default assumption but genuinely ambiguous - see alternate rows below
+5(b),Municipal Waste Incineration (WtE),35,35.11,Production of electricity,Low,Alternate classification if facility's registered primary activity is energy sales rather than waste treatment - verify per facility
+5(b),Municipal Waste Incineration (WtE),35,35.30,Steam and air conditioning supply,Low,Alternate classification same caveat as 35.11 row above
+5(a)/(c),Hazardous & Non-hazardous Waste Disposal,38,38.22,Treatment and disposal of hazardous waste,High,Hazardous fraction
+5(a)/(c),Hazardous & Non-hazardous Waste Disposal,38,38.21,Treatment and disposal of non-hazardous waste,High,Non-hazardous fraction
+6(a),Pulp & Paper Mills (integrated / kraft),17,17.11,Manufacture of pulp,High,Matches C1711 used previously in the fossil-share work
+6(a),Pulp & Paper Mills (integrated / kraft),17,17.12,Manufacture of paper and paperboard,High,Matches C17xP used previously in the fossil-share work
+6(b),Wood Products (panels sawmills),16,16.10,Sawmilling and planing of wood,High,Sawmill fraction
+6(b),Wood Products (panels sawmills),16,16.21,Manufacture of veneer sheets and wood-based panels,High,Panel production fraction
+8(b)/(b)(ii),Sugar Production (beet & cane),10,10.81,Manufacture of sugar,High,Direct match
+8(c)/(d)/(e),Dairy Brewing & Food Processing,10,10.51,Operation of dairies and cheese making,Moderate,Dairy fraction
+8(c)/(d)/(e),Dairy Brewing & Food Processing,11,11.05,Manufacture of beer,Moderate,Brewing fraction; general food processing spans additional 10.3x-10.8x classes not enumerated individually here
+9(c),Tanning / Other Activities,15,15.11,Tanning and dressing of leather; dressing and dyeing of fur,High,Direct match
