@@ -1,0 +1,9 @@
+2026-07-17 12:18:03,042 - INFO - Loading facilities from /private/tmp/claude-501/-Users-annayuen-Desktop-IECC-industrial-decarb-facility-IHB-potential/4e4adf83-0b6a-418b-ac9f-3897c87c116e/scratchpad/gbr_repull.csv
+2026-07-17 12:18:03,063 - INFO - Sites to process: 3
+2026-07-17 12:18:05,846 - INFO - [1/3] OK 38480916 (fetched)
+2026-07-17 12:18:05,960 - INFO - [2/3] OK 38477191 (fetched)
+2026-07-17 12:18:05,996 - INFO - [3/3] OK 38480914 (fetched)
+2026-07-17 12:18:06,029 - INFO - Done in 0:00:02.389739. Summary rows: 2199. Errors: 0
+2026-07-17 12:18:06,029 - INFO - Hourly profiles: /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/solar_radiation/outputs/hourly_profiles
+2026-07-17 12:18:06,029 - INFO - Summary CSV: /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/solar_radiation/outputs/solar_radiation_by_facility.csv
+2026-07-17 12:18:06,029 - INFO - Log file: /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/solar_radiation/logs/pvgis_pull_20260717_121803.log

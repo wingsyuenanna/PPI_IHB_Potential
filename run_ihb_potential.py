@@ -96,9 +96,11 @@ CONFIG = {
     "heat_cd_ratio": 4.0,
 
     # ── Land limit ────────────────────────────────────────────────────────────
-    # MW of solar per km² of available land (utility-scale ground-mount ~80–100 MW/km²).
+    # MW of solar per km² of available land. Utility-scale ground-mount with row
+    # spacing typically lands ~30–70 MW/km² (GCR-dependent); 50 is a mid, conservative
+    # value vs the ~100 nameplate-packing figure.
     # Solar capacity is hard-capped at available_land_km2 × mw_per_km2 in the solver.
-    "mw_per_km2": 100.0,
+    "mw_per_km2": 50.0,
     # When a site cannot reach the availability target within its land cap, re-solve
     # with the reliability floor removed and this high unserved penalty ($/MWh), so
     # the model builds the max solar the land allows and we report the ACHIEVABLE
@@ -154,7 +156,14 @@ def run_one_site(row: dict, cfg: dict) -> tuple[dict, pd.DataFrame | None]:
     replaceable_mwh = float(row.get("replaceable_heat_mwh_th", 0) or 0)
     available_land_km2 = float(row.get("available_land_km2", 0) or 0)
     classification = row.get("classification")
-    steam_temp_c = site_steam_temp(classification, cfg)
+    # Prefer the per-facility demand-weighted process temperature (set for every
+    # subsector by build_sites_input.py); fall back to the classification lookup
+    # (pulp) and finally the global default.
+    process_temp = row.get("process_temp_c")
+    if process_temp is not None and not pd.isna(process_temp) and float(process_temp) > 0:
+        steam_temp_c = float(process_temp)
+    else:
+        steam_temp_c = site_steam_temp(classification, cfg)
 
     base = {
         "source_id": source_id,

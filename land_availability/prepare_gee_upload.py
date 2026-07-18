@@ -21,6 +21,14 @@ def export_gee_upload_csv(facilities_path: Path) -> pd.DataFrame:
 
     upload = facilities[required].dropna(subset=["lat", "lon"]).copy()
     upload = upload.rename(columns={"iso3_country": "country_iso3"})
+    # Collapse embedded newlines/CR and runs of whitespace in names; GEE CSV
+    # ingestion treats an embedded newline as a row break and rejects the file.
+    upload["source_name"] = (
+        upload["source_name"]
+        .astype(str)
+        .str.replace(r"\s+", " ", regex=True)
+        .str.strip()
+    )
     return upload.sort_values(["country_iso3", "source_name"]).reset_index(drop=True)
 
 

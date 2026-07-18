@@ -1,0 +1,6 @@
+assumption,value,unit,note
+EUA carbon price,79.0,EUR/tCO2,Applied to the gas baseline cost; not disclosed whether/how it enters the HP LCOH figures
+Gas boiler efficiency (baseline),0.85,fraction,Used to convert gas price to gas_heat_cost_eur_mwh (does not fully reconcile alone - capex/O2M and/or carbon cost likely folded in)
+Low-temp heat pump COP,2.7,COP,Applies to low_temp_hp_lcoh_eur_mwh
+Steam heat pump COP,1.8,COP,"Applies to steam_hp_lcoh_eur_mwh (roughly 1.5x the low-temp HP LCOH throughout, driven by this COP gap)"
+Thermal storage round-trip efficiency,0.92,fraction,Applies to thermal_storage_lcoh_eur_mwh

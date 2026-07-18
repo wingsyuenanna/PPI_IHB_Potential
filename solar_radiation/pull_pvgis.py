@@ -34,8 +34,10 @@ def get_optimal_azimuth(lat: float) -> int:
 def build_timezone_cache(sites_df: pd.DataFrame, lat_col: str, lon_col: str) -> dict[tuple[float, float], str | None]:
     tf = TimezoneFinder()
     sites_df = sites_df.copy()
-    sites_df["lat_rounded"] = sites_df[lat_col].round(2)
-    sites_df["lon_rounded"] = sites_df[lon_col].round(2)
+    # Round the same way fetch_site does (round(float(x), 2)); pandas .round(2)
+    # can disagree on exact half-cent coords (e.g. 53.045), causing a cache miss.
+    sites_df["lat_rounded"] = sites_df[lat_col].apply(lambda v: round(float(v), 2))
+    sites_df["lon_rounded"] = sites_df[lon_col].apply(lambda v: round(float(v), 2))
     cache: dict[tuple[float, float], str | None] = {}
     for _, row in sites_df[["lat_rounded", "lon_rounded"]].drop_duplicates().iterrows():
         cache[(row["lat_rounded"], row["lon_rounded"])] = tf.timezone_at(
@@ -72,7 +74,10 @@ def process_hourly_profile(
 
     if local_tz:
         df = df.tz_convert(local_tz)
-        df.index = df.index.tz_localize(None)
+    # Always drop tz info so the index is naive before reindexing against the
+    # naive full_range below; leaving it tz-aware yields an all-NaN -> all-zero
+    # profile when local_tz is None (a timezone-cache miss).
+    df.index = df.index.tz_localize(None)
 
     df.index = df.index.floor("h")
     if df.index.duplicated().any():
@@ -190,6 +195,8 @@ def fetch_site(
             end_year=end_year,
             local_tz=timezone_cache.get((lat_rounded, lon_rounded)),
         )
+        if float(hourly_df["P_kWperkWp"].sum()) <= 0:
+            raise ValueError("PVGIS returned an empty / all-zero profile")
         summary = summarize_profile(
             hourly_df,
             source_id=source_id,
