@@ -1,0 +1,46 @@
+========================================================================
+MULTI-BAND HP + IHB — SCENARIO: land_15km
+Base params: 16 rep-days, 16 h storage, 92% RTE, 4x converter, 50 MWdc/km2, 2025 costs
+========================================================================
+
+HEAT
+  Sites ok:                 2,192
+  Replaceable heat:         522.3 TWh/y
+  Served heat:              372.7 TWh/y
+  Unserved:                 149.6 TWh/y
+  Heat-weighted reliability:71.4%
+  Median reliability:       94.0%
+
+COST (LCOH of served heat)
+  Heat-weighted LCOH:       $180/MWh
+  Median LCOH:              $200/MWh
+  P10 / P90:                $166 / $231/MWh
+
+SIZING
+  Total solar capacity:     674.5 GWdc
+  Total storage energy:     374.1 GWh_th
+  Median solar intensity:   3.1 MWdc/MWth
+  HW solar intensity:       11.3 MWdc/MWth
+  Median available land:    229.0 km2
+  HP / IHB load share (HW): 27% / 73%
+
+DELTA vs land_5km
+  Served heat:              +81.1 TWh/y
+  HW reliability:           +15.5 pp
+  Median reliability:       +0.0 pp
+  HW LCOH:                  $+51/MWh
+  Total solar:              +370.8 GWdc
+
+BY SUBSECTOR (heat-weighted)
+  subsector                            n  heat_TWh   served    LCOH   rel%
+  petrochemical-steam-cracking        36     152.3     89.7     153     59
+  iron-and-steel                     112     101.3     60.7     164     60
+  food-beverage-tobacco              868      98.4     92.5     202     94
+  cement                             198      54.1     34.9     179     65
+  chemicals                           49      43.1     32.2     210     75
+  pulp-and-paper                      79      18.2     18.0     243     99
+  textiles-leather-apparel           612      17.7     17.0     199     96
+  glass                              148      16.3     11.7     208     72
+  lime                                62      10.9      6.9     196     63
+  aluminum                            28      10.1      8.9     233     88
+========================================================================

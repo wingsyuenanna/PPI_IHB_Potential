@@ -10,12 +10,12 @@ Combines:
         assessment (curated Pulp/Integrated/Paper-Board/Tissue labels that set the
         heat-battery steam temperature; source_type cannot reproduce them)
 
-Writes outputs/eu_ihb_site_assessment_2024.csv — the file run_ihb_potential.py
-reads. Column `replaceable_heat_mwh_th` is what the optimizer sizes load against.
+Writes outputs/eu_ihb_site_assessment_2024.csv — the file
+run_multiband_potential.py reads. Column `replaceable_heat_mwh_th` is what the
+optimizer sizes load against.
 
 Only sites with a solar profile AND positive replaceable heat run (the optimizer
-filters on has_solar_data / has_replaceable_heat); today that is the 86 pulp &
-paper sites, but any facility gains eligibility as soon as a solar profile exists.
+filters on has_solar_data / has_replaceable_heat).
 """
 
 from __future__ import annotations

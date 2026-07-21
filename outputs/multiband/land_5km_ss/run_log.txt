@@ -1,0 +1,32 @@
+Running multi-band optimizer on 2192 sites (scenario=land_5km_ss, 16 rep-days, 8 workers)...
+  100/2192
+  200/2192
+  300/2192
+  400/2192
+  500/2192
+  600/2192
+  700/2192
+  800/2192
+  900/2192
+  1000/2192
+  1100/2192
+  1200/2192
+  1300/2192
+  1400/2192
+  1500/2192
+  1600/2192
+  1700/2192
+  1800/2192
+  1900/2192
+  2000/2192
+  2100/2192
+
+Wrote 2192 rows to outputs/multiband/land_5km_ss/by_facility.csv  (ok: 2192, failed: 0)
+Heat-weighted LCOH_served: $70/MWh
+Heat-weighted reliability: 59%
+Median solar intensity: 7.6 MWdc/MWth
+Met 90% availability: 1925/2192 sites (39% of heat)
+
+status counts:
+status
+ok    2192

@@ -1,2 +1,0 @@
-source_id,source_name,iso3_country,lat,lon,classification,replaceable_heat_mwh_th,available_land_km2,solar_capacity_factor,storage_type,project_start,steam_temp_c,status,load_target_mw
-44375522,Mets√§ Fibre Oy Pulp Mill,FIN,60.170885,24.806265,Pulp,0.0,0.4060580156443875,0.1402031232876712,heat,2025,175.0,skipped_no_load,0

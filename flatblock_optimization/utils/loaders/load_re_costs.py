@@ -40,7 +40,7 @@ def load_re_costs(bnef_filepath, battery_filepath, iso_country, start_year):
       Gives the full component breakdown so battery cost terms are non-zero.
 
     Returns a dictionary with keys: 'financial', 'solar', 'battery', compatible
-    with ``solvers.optimize_flatblock_highs_unserved_v2`` and related optimizers.
+    with ``optimize_flatblock_multiband_heatpump`` and related optimizers.
     """
     df = pd.read_csv(bnef_filepath)
     year = int(start_year)

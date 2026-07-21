@@ -1,2 +1,0 @@
-source_id,source_name,iso3_country,lat,lon,classification,replaceable_heat_mwh_th,available_land_km2,solar_capacity_factor,storage_type,project_start,steam_temp_c,status,load_target_mw
-44375524,Mets√§ Board Linerboard and Paper Division Kaskinen Mill,FIN,62.3822834,21.2277852,Pulp,0.0,0.2126957923889159,0.1352770091324201,heat,2030,175.0,skipped_no_load,0

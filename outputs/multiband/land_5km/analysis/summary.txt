@@ -1,0 +1,39 @@
+========================================================================
+MULTI-BAND HP + IHB — SCENARIO: land_5km
+Base params: 16 rep-days, 16 h storage, 92% RTE, 4x converter, 50 MWdc/km2, 2025 costs
+========================================================================
+
+HEAT
+  Sites ok:                 2,192
+  Replaceable heat:         522.3 TWh/y
+  Served heat:              291.6 TWh/y
+  Unserved:                 230.7 TWh/y
+  Heat-weighted reliability:55.8%
+  Median reliability:       94.0%
+
+COST (LCOH of served heat)
+  Heat-weighted LCOH:       $129/MWh
+  Median LCOH:              $200/MWh
+  P10 / P90:                $138 / $223/MWh
+
+SIZING
+  Total solar capacity:     303.7 GWdc
+  Total storage energy:     221.6 GWh_th
+  Median solar intensity:   2.9 MWdc/MWth
+  HW solar intensity:       5.1 MWdc/MWth
+  Median available land:    24.5 km2
+  HP / IHB load share (HW): 27% / 73%
+
+BY SUBSECTOR (heat-weighted)
+  subsector                            n  heat_TWh   served    LCOH   rel%
+  petrochemical-steam-cracking        36     152.3     41.8      60     27
+  iron-and-steel                     112     101.3     33.0      77     33
+  food-beverage-tobacco              868      98.4     92.5     201     94
+  cement                             198      54.1     32.3     157     60
+  chemicals                           49      43.1     30.1     165     70
+  pulp-and-paper                      79      18.2     18.0     243     99
+  textiles-leather-apparel           612      17.7     17.0     199     96
+  glass                              148      16.3     11.7     203     72
+  lime                                62      10.9      6.3     158     58
+  aluminum                            28      10.1      8.8     229     87
+========================================================================

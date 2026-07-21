@@ -226,61 +226,54 @@ python3 land_availability/merge_land_availability.py \
 
 ### 6. Technology Costs
 
-Country-level cost inputs are taken from Bloomberg for:
+Technology costs are country-level and expressed in **nominal 2025 USD**. CAPEX, fixed O&M, WACC, and CRF for fixed-axis solar PV, utility-scale batteries, and CCGT come from BloombergNEF tables compiled in `Input/bnef_country_costs.csv` (cost year **2025**; 2030 retained for sensitivity). Missing countries are proxied by income/region peers; UK facilities use Ireland as the price proxy. Solar CAPEX is annualized with the country CRF implied by BNEF WACC and a **25-year** lifetime.
 
-- Solar PV LCOE
-- Battery storage LCOE (IHB)
-- CCGT LCOE / fuel cost for heat generation
+**IHB / thermal storage** (from `flatblock_optimization/inputs/input_heat_battery_cost.csv`, 2025 base):
 
-Each facility uses the cost values for its country of operation.
+| Parameter | Value |
+|-----------|-------|
+| Thermal energy CAPEX | $100/kWh_th |
+| Fixed O&M | 2% of CAPEX / yr |
+| Lifetime | 25 years |
+| Discount rate (storage CRF) | 7% |
+| Round-trip efficiency | 92% |
+| Electric→heat efficiency | 98% (≤200 °C) / 95% (>200 °C) |
+| Inverter efficiency | 96.7% |
+| Max storage duration | 16 h |
+| Min charge:discharge power | 4:1 |
+| PV land intensity | 50 MWdc/km² |
 
-> **TODO:** Specify Bloomberg dataset vintage, currency, and whether costs are converted or escalated.
+Heat delivery COP: 2.7 (&lt;100 °C HP), 1.8 (100–200 °C steam HP), 1.0 (&gt;200 °C resistive/IHB). Primary multi-band runs exclude converter equipment CAPEX from LCOH (solar + storage only). Country CCGT LCOE is the fossil heat benchmark (~$130–140/MWh in EU 2025).
 
 ### 7. LCOH Calculations
 
-LCOH is computed for each facility under both supply paths, using replaceable heat demand, heat profile, solar resource, available land, and country-level costs.
+Per facility, a HiGHS LP sizes shared solar + per-band thermal storage over 16 representative PVGIS days (flat band loads; COP 2.7 / 1.8 / 1.0; 90% availability floor; land cap at 50 MWdc/km²). Primary LCOH excludes converter CAPEX and VoLL:
 
-**Renewable path (solar + IHB):**
+\[
+\mathrm{LCOH}_{served} = C_{ann} / Q_{served},\quad
+\mathrm{LCOH}_{total} = C_{ann} / Q_{demand}
+\]
 
-> **TODO:** Add equation(s) for solar array sizing, battery sizing, and LCOH for the solar + IHB path.
-
-**Fossil baseline (CCGT):**
-
-> **TODO:** Add equation(s) for LCOH for the CCGT path.
-
-**Comparison:**
-
-> **TODO:** Define decision criteria — e.g. solar+IHB LCOH below CCGT LCOH, minimum land area, minimum solar yield, etc.
+with \(C_{ann}\) = annualized solar (country CRF) + annualized thermal storage (7%, 25 yr, 2% O&M). Fossil screen: compare \(\mathrm{LCOH}_{served}\) to country BNEF CCGT LCOE (~$130–140/MWh EU 2025).
 
 ### 8. Site Screening and Results
 
-Facilities meeting the screening criteria are classified as potential IHB candidates. Summary outputs may include:
-
-- Total replaceable heat demand (global and by region/country)
-- Number and share of sites that are economically favorable
-- Distribution of LCOH deltas (renewable vs. CCGT)
-- Aggregate emissions reduction potential
-
-> **TODO:** Define output tables/maps and summary metrics to publish.
+Runnable fleet: 2,192 sites. Base (2025, solar+storage, 5 km): 1,925 sites meet 90% (39% of heat); HW reliability 59%; HW LCOH_served ~$82/MWh (median ≥90% ~$71). At 15 km: 2,148 sites (75% of heat); HW reliability 86%; HW LCOH ~$110/MWh (median ≥90% ~$74). Outputs: `outputs/multiband/<scenario>/by_facility.csv`, summary tables, dual LCOH maps.
 
 ### 9. Sensitivity Analysis
 
-Test how robust site rankings and aggregate results are to uncertainty in key inputs. Vary one parameter at a time (or in defined combinations) and compare changes in LCOH, candidate site count, and total replaceable heat.
-
-> **TODO:** Define sensitivity scenarios and ranges, for example:
-> - **Fossil share** — ±10–20% around sector-average values
-> - **Heat intensity** — ±10–20% by facility category
-> - **Technology costs** — solar PV, battery/IHB, and CCGT LCOE (e.g., ±20% or low/base/high country cases)
-> - **IHB round-trip efficiency** — impact on storage sizing and LCOH
-> - **Solar resource** — PVGIS year or inter-annual variability
-> - **Available land** — stricter vs. more permissive land classifications
-> - **Capacity factor** — production estimate uncertainty
->
-> **TODO:** Specify output format — tornado charts, site count vs. parameter curves, or maps showing how candidate sites change under each scenario.
+- **Land:** 5 km vs 15 km buffers.
+- **Heat demand:** sector low/base/high multipliers (fleet 388 / 522 / 697 TWh/y) via `--heat-case`.
+- Higher heat → fewer ≥90% sites / lower heat share; fleet HW LCOH can fall via composition (within-site median ΔLCOH ≈ 0).
+- Extensions: 2030 costs, converter CAPEX on/off, storage CAPEX path, RTE, stricter land masks.
 
 ## Limitations
 
-> **TODO:** Capture known limitations — e.g., reliance on sector-average intensity/fossil share, flat heat-load assumption from annual aggregation, simplified land screening, country-level rather than site-level costs, Climate TRACE data uncertainty.
+Sector-average SEC / fossil shares / Hotmaps band recipes; flat load; point-buffer land (not permitting); country BNEF + stylized IHB costs; converter CAPEX often excluded in primary LCOH; representative days suited to ≤16 h storage; CCGT LCOE is a coarse heat benchmark; Climate TRACE coverage is a screening-level floor.
+
+## Archive
+
+Superseded single-band runners, solvers, docs, and ~100 MB of hourly dumps live under [`archive/`](archive/) (`legacy_singleband/`, `flatblock_singleband_outputs_2025_2030.tar.gz`). Active entrypoint: `run_multiband_potential.py`.
 
 ## References
 

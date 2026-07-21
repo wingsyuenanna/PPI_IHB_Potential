@@ -1,0 +1,81 @@
+========================================================================
+MULTI-BAND HP + IHB OPTIMIZATION — FLEET SUMMARY
+Base case: 16 rep-days, 16 h storage, 92% RTE, 4x converter, 50 MWdc/km2, 2025 costs
+========================================================================
+
+RUN STATUS
+  Sites optimized:          2,192
+  Status ok:                2,192
+  Failed / other:           0
+  Solve time (sum):         246 s (4.1 min sequential)
+  Solve time (mean/median): 0.11 / 0.11 s
+
+HEAT
+  Replaceable heat:         522.3 TWh/y
+  Served (reliability×load):291.6 TWh/y
+  Unserved:                 230.7 TWh/y
+  Heat-weighted reliability:55.8%
+  Median reliability:       94.0%
+
+COST (LCOH of served heat)
+  Heat-weighted LCOH:       $129/MWh
+  Median LCOH:              $200/MWh
+  P10 / P90:                $138 / $223/MWh
+  HW LCOH solar share:      $28/MWh
+  HW LCOH converter share:  $61/MWh
+  HW LCOH storage share:    $4/MWh
+
+SIZING
+  Total solar capacity:     303.7 GWdc
+  Total storage energy:     221.6 GWh_th
+  Median solar intensity:   2.9 MWdc/MWth
+  HW solar intensity:       5.1 MWdc/MWth
+  HP load share (HW):       27% of thermal load
+  IHB load share (HW):      73% of thermal load
+
+vs GAS BENCHMARK (approx; screen EUR vs optimizer USD)
+  Sites below gas:          55 (3%)
+  Heat below gas:           179.9 TWh/y (34% of fleet)
+  Served heat below gas:    35.8 TWh/y
+
+BY SUBSECTOR (heat-weighted)
+  subsector                            n  heat_TWh   served    LCOH   rel%   HP%
+  petrochemical-steam-cracking        36     152.3     41.8      60     27     0
+  iron-and-steel                     112     101.3     33.0      77     33     0
+  food-beverage-tobacco              868      98.4     92.5     201     94    84
+  cement                             198      54.1     32.3     157     60     0
+  chemicals                           49      43.1     30.1     165     70    40
+  pulp-and-paper                      79      18.2     18.0     243     99    97
+  textiles-leather-apparel           612      17.7     17.0     199     96    90
+  glass                              148      16.3     11.7     203     72    22
+  lime                                62      10.9      6.3     158     58     0
+  aluminum                            28      10.1      8.8     229     87    75
+
+BY COUNTRY — top 15 by replaceable heat
+  iso        n  heat_TWh   served    LCOH   rel%
+  DEU      201     119.7     55.2     116     46
+  FRA      272      56.2     35.1     131     63
+  NLD       97      47.8     16.0      82     33
+  ITA      339      47.7     33.1     139     69
+  ESP      188      40.0     27.0     123     68
+  GBR      290      32.9     18.9     154     58
+  POL      179      30.7     20.7     173     67
+  BEL       66      30.4     12.6     105     41
+  SWE       27      15.1      7.0     129     46
+  AUT       33      14.7      6.7     105     46
+  CZE       45      11.7      7.4     154     63
+  ROU       54      10.8      7.4     154     68
+  PRT      158      10.0      7.2     127     72
+  FIN       29       8.8      4.3     143     49
+  HUN       16       8.5      5.8     137     68
+
+NOTES
+  LCOH_served = annualized system cost / served heat (excludes VoLL on unserved).
+  Reliability < 100% usually means land-capped solar cannot cover full load year-round.
+  High-temp (IHB) sites need more solar per MWth than HP-dominated sites (COP 1 vs 1.8–2.7).
+
+Files:
+  results CSV:  outputs/multiband_hp_ihb_by_facility.csv
+  run log:      outputs/multiband_run_log.txt
+  figures:      outputs/analysis/multiband_*.png
+========================================================================

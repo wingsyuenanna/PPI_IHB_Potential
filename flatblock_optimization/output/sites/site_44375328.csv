@@ -1,2 +1,0 @@
-source_id,source_name,iso3_country,lat,lon,classification,replaceable_heat_mwh_th,available_land_km2,solar_capacity_factor,storage_type,project_start,steam_temp_c,status,load_target_mw
-44375328,Laakirchen Papier AG Pulp Mill,AUT,47.9770957,13.8161934,Paper/Board,0.0,32.91475791131133,0.1572709292237443,heat,2025,180.0,skipped_no_load,0

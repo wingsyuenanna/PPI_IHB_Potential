@@ -1,0 +1,11 @@
+# Heat-demand sensitivity (solar+storage, no converter CAPEX, VoLL=0)
+Fleet heat: low 388 / base 522 / high 697 TWh/y
+
+| Land | Heat | Met 90% (n / heat) | HW reliability | HW LCOH all | Met90 HW LCOH | Met90 med LCOH |
+|------|------|--------------------|----------------|-------------|---------------|----------------|
+| 5km | low | 1957/2192 (49%) | 67% | $85/MWh | $87/MWh | $71/MWh |
+| 5km | base | 1925/2192 (39%) | 59% | $82/MWh | $88/MWh | $71/MWh |
+| 5km | high | 1844/2192 (38%) | 58% | $81/MWh | $84/MWh | $70/MWh |
+| 15km | low | 2156/2192 (83%) | 88% | $117/MWh | $110/MWh | $74/MWh |
+| 15km | base | 2148/2192 (75%) | 86% | $110/MWh | $107/MWh | $74/MWh |
+| 15km | high | 2135/2192 (72%) | 85% | $108/MWh | $104/MWh | $74/MWh |

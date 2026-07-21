@@ -1,0 +1,8 @@
+SCENARIO land_5km_ss
+Assumptions: solar+storage only, no converter CAPEX, no VoLL, 90% availability floor, cyclic daily SOC
+Sites ok: 2192
+Met 90%: 1925 sites (39% of replaceable heat)
+HW LCOH (all sites): $70/MWh
+HW reliability: 58.6%
+Met90 HW LCOH: $88/MWh
+Met90 solar/storage: $65 / $22/MWh
