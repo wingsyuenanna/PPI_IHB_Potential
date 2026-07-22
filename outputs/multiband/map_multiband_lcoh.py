@@ -133,6 +133,32 @@ class MapLegend(MacroElement):
         self.vmax = vmax
 
 
+class PanelLabel(MacroElement):
+    """Fixed label pinned to one DualMap pane (left or right)."""
+
+    def __init__(self, text: str, side: str = "left"):
+        super().__init__()
+        self.text = text
+        # DualMap panes are side-by-side; pin label to the relevant half of the viewport.
+        if side == "left":
+            pos = "left: 12px;"
+        else:
+            pos = "right: 12px;"
+        self._template = Template(
+            f"""
+            {{% macro html(this, kwargs) %}}
+            <div style="position: fixed; top: 72px; {pos} z-index: 9999;
+                        background: #1f4e79; color: white; padding: 6px 12px;
+                        border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.3);
+                        font-family: sans-serif; font-size: 13px; font-weight: 700;
+                        letter-spacing: 0.02em;">
+              {{{{ this.text }}}}
+            </div>
+            {{% endmacro %}}
+            """
+        )
+
+
 def build_dual_map(path_5: Path, path_15: Path, out_html: Path) -> None:
     sites = pd.read_csv(SITES, usecols=["source_id", "lat", "lon"], low_memory=False)
     df5 = load_scenario(path_5, sites)
@@ -180,16 +206,9 @@ def build_dual_map(path_5: Path, path_15: Path, out_html: Path) -> None:
     add_markers(dm.m1, df5, cmap, "5 km land", vmin, vmax)
     add_markers(dm.m2, df15, cmap, "15 km land", vmin, vmax)
 
-    folium.map.Marker(
-        location=center,
-        icon=folium.DivIcon(html='<div style="font-size:14px;font-weight:bold;background:white;'
-                                 'padding:2px 6px;border-radius:3px">5 km</div>'),
-    ).add_to(dm.m1)
-    folium.map.Marker(
-        location=center,
-        icon=folium.DivIcon(html='<div style="font-size:14px;font-weight:bold;background:white;'
-                                 'padding:2px 6px;border-radius:3px">15 km</div>'),
-    ).add_to(dm.m2)
+    # Fixed panel labels (not geographic markers)
+    dm.get_root().add_child(PanelLabel("Left: 5 km land buffer", side="left"))
+    dm.get_root().add_child(PanelLabel("Right: 15 km land buffer", side="right"))
 
     # Legend on the left (5 km) map panel — visible for DualMap
     dm.m1.get_root().add_child(MapLegend(vmin, vmax))

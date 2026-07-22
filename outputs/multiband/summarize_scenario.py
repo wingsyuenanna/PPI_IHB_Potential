@@ -47,7 +47,7 @@ def summarize(scenario: str, compare: str | None = None) -> Path:
 
     add("=" * 72)
     add(f"MULTI-BAND HP + IHB — SCENARIO: {scenario}")
-    add("Base params: 16 rep-days, 16 h storage, 92% RTE, 4x converter, 50 MWdc/km2, 2025 costs")
+    add("Base params: 16 rep-days, 16 h storage, 92% RTE, 50 MWdc/km2, 2025 costs")
     add("=" * 72)
     add("")
     add("HEAT")

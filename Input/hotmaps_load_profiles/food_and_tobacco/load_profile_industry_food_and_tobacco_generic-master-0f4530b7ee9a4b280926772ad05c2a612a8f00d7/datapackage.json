@@ -1,0 +1,122 @@
+{
+  "zenodoId": 4687179,
+  "doi": "10.5281/zenodo.4687179",
+  "name": "hotmaps_task_2.7_load_profile_industry_food_and_tobacco_generic",
+  "profile": "tabular-data-resource",
+  "datapackage_version": [
+    "1.0-beta"
+  ],
+  "title": "load_profile_industry_food_and_tobacco_generic",
+  "description": "In this repository the generic load profile for the sector industry and the subsector food_and_tobacco, modelled as part of WP 2.7, is published",
+  "version": "0.1.0",
+  "id": "906fc99b-774e-450d-b321-0042dd6d321b",
+  "created": "2018-03-07",
+  "keywords": [
+    "industry processes",
+    "energy system analysis",
+    "load profile"
+  ],
+  "licenses": [
+    {
+      "id": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+    }
+  ],
+  "sources": [
+    {
+      "name": "[1] [TrustEE - Report on current status of Process heat in Europe: sectors, processes, geographical distribution, system layouts and energy sources](https://www.trust-ee.eu/files/otherfiles/0000/0008/TrustEE_D1_1.pdf) AEE Intec, Fraunhofer ISE, Reen AG, Universidade de Evora, 2016.",
+      "path": "https://www.trust-ee.eu/files/otherfiles/0000/0008/TrustEE_D1_1.pdf"
+    },
+    {
+      "name": "[2] [Comparative Analysis of Operating Hours and Working Times in the European Union] Delson, Bauer, Cette, Smith, 2009,Heidelberg: Physica-Verlag.",
+      "path": ""
+    },
+    {
+      "name": "[3] [Employment at atypical working time as percentage of the total employment, by European socio-economic group](http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsa_esegatyp&lang=en) Eurostat, 2018, checked on 29.01.18.",
+      "path": "http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsa_esegatyp&lang=en"
+    },
+    {
+      "name": "[4] [Bevlkerung und Erwebsttigkeit. Erwerbsbeteiligung der Bevlkerung Ergebnisse des Mikrozensus zumArbeitsmarkt.](https://www.destatis.de/DE/Publikationen/Thematisch/Arbeitsmarkt/Erwerbstaetige/ErwerbsbeteiligungBevoelkung2010410167004.pdf?__blob=publicationFile) Federal Statistical Office Germany, 2016, Fachserie 1 Reihe 4.1, checked on 30.01.18.",
+      "path": "https://www.destatis.de/DE/Publikationen/Thematisch/Arbeitsmarkt/Erwerbstaetige/ErwerbsbeteiligungBevoelkung2010410167004.pdf?__blob=publicationFile"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Tobias Fleiter",
+      "email": "tobias.fleiter@isi.fraunhofer.de",
+      "role": "author",
+      "organization": "fraunhofer isi"
+    },
+    {
+      "title": "Matthias Kuehnbach",
+      "email": "matthias.kuehnbach@isi.fraunhofer.de",
+      "role": "author",
+      "organization": "fraunhofer isi"
+    },
+    {
+      "title": "Simon Marwitz",
+      "email": "simon.marwitz@isi.fraunhofer.de",
+      "role": "author",
+      "organization": "fraunhofer isi"
+    },
+    {
+      "title": "Anna-Lena Klingler",
+      "email": "anna-lena.klingler@isi.fraunhofer.de",
+      "role": "author",
+      "organization": "fraunhofer isi"
+    }
+  ],
+  "resources": [
+    {
+      "name": "lp_industry_food_and_tobacco_generic",
+      "title": "load_profile_industry_food_and_tobacco_generic",
+      "path": "data/hotmaps_task_2.7_load_profile_industry_food_and_tobacco_generic.csv",
+      "description": "In this repository the generic load profile for the sector industry and the subsector food_and_tobacco, modelled as part of WP 2.7, is published",
+      "format": "csv",
+      "bytes": "52200",
+      "encoding": "utf-8",
+      "spatial_resolution": "NUTS0",
+      "temporal_resolution": "hour",
+      "spatial_key_field": "NUTS0_code",
+      "schema": {
+        "fields": [
+          {
+            "name": "NUTS0_code",
+            "type": "string",
+            "unit": ""
+          },
+          {
+            "name": "process",
+            "type": "string",
+            "unit": ""
+          },
+          {
+            "name": "month",
+            "type": "int",
+            "unit": ""
+          },
+          {
+            "name": "daytype",
+            "type": "int",
+            "unit": ""
+          },
+          {
+            "name": "hour",
+            "type": "int",
+            "unit": ""
+          },
+          {
+            "name": "load",
+            "type": "double",
+            "unit": ""
+          }
+        ]
+      },
+      "dialect": {
+        "delimiter": ",",
+        "doubleQuote": true
+      }
+    }
+  ]
+}

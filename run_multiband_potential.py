@@ -5,9 +5,9 @@ heat into temperature bands, sizes one shared on-site solar array + per-band hea
 (<200 C) / resistive+thermal-battery (>200 C) over representative days, capped by land,
 and writes per-site LCOH / reliability / sizing under outputs/multiband/<scenario>/.
 
-Solar + storage LCOH (no converter CAPEX — HP/heat-battery is the converter; no VoLL).
-Hard 90% availability floor; land-limited sites get max-serve then cost-min.
-COP 2.7/1.8, 50 MWdc/km2, 16 h storage, 92% RTE, 16 rep-days, 2025 costs.
+Solar + thermal-storage LCOH only (no VoLL). Hard 90% availability floor; land-limited
+sites get max-serve then cost-min. COP 2.7/1.8/1.0, 50 MWdc/km2, 16 h storage, 92% RTE,
+16 rep-days, 2025 costs.
 
 Heat sensitivity (sector low/base/high bounds on assessment CSV):
 
@@ -53,10 +53,8 @@ CONFIG = {
     "mw_per_km2": 50.0,
     "round_trip_efficiency": 0.92,
     "max_storage_hours": 16.0,
-    "charge_discharge_ratio_min": 4.0,
     "n_representative_days": 16,
     "VoLL": 0.0,
-    "include_converter_cost": False,
     "output": "outputs/multiband/land_5km_ss/by_facility.csv",
     "max_workers": 8,
 }
@@ -116,11 +114,9 @@ def run_one_site(row: dict, cfg: dict) -> dict:
             sid, cfg["availability"], solar, costs, bl,
             round_trip_efficiency=cfg["round_trip_efficiency"],
             max_storage_hours=cfg["max_storage_hours"],
-            charge_discharge_ratio_min=cfg["charge_discharge_ratio_min"],
             n_representative_days=cfg["n_representative_days"],
             max_solar_mw=(land_km2 * cfg["mw_per_km2"]) if land_km2 >= 0 else None,
             VoLL=cfg["VoLL"],
-            include_converter_cost=cfg.get("include_converter_cost", False),
             project_start_year=int(cfg["project_start"]))
         if not ok:
             return {**base, "status": "not_optimal"}

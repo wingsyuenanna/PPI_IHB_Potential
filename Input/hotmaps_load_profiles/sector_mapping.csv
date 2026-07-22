@@ -1,0 +1,12 @@
+climate_trace_subsector,hotmaps_process,notes
+iron-and-steel,iron_and_steel,direct
+pulp-and-paper,paper,direct
+food-beverage-tobacco,food_and_tobacco,direct
+chemicals,chemicals_and_petrochemicals,direct
+petrochemical-steam-cracking,chemicals_and_petrochemicals,proxy: Hotmaps chemicals+petrochemicals
+cement,non_metalic_minerals,proxy: Hotmaps non-metallic minerals
+lime,non_metalic_minerals,proxy: Hotmaps non-metallic minerals
+glass,non_metalic_minerals,proxy: Hotmaps non-metallic minerals
+aluminum,,no Hotmaps industry profile — keep flat
+other-metals,,no Hotmaps industry profile — keep flat
+textiles-leather-apparel,,no Hotmaps industry profile — keep flat / optional food-like proxy

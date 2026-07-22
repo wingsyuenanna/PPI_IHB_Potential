@@ -2,8 +2,7 @@
 
 ## Solar + storage cases (current default)
 
-No converter CAPEX (HP / heat battery converts electricity → heat). No VoLL on unserved.
-Hard 90% availability floor; land-limited sites maximize served heat then cost-minimize.
+No VoLL on unserved. Hard 90% availability floor; land-limited sites maximize served heat then cost-minimize. LCOH is solar + thermal storage (HP / heat-battery equipment CAPEX not included).
 
 | Folder | Land buffer | Heat case |
 |--------|-------------|-----------|

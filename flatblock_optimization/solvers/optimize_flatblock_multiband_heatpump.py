@@ -2,9 +2,8 @@
 # Multi-band heat-pump + IHB optimization (HiGHS), representative-days formulation.
 #
 # One shared on-site solar array feeds B parallel temperature bands. Each band converts
-# electricity to heat via a COP (heat pump COP>1 below 200 C; resistive COP=1 above) and
-# charges a thermal store serving a flat load. Converter equipment CAPEX is optional
-# (default off when include_converter_cost=False — the HP / heat battery is the converter).
+# electricity to heat in the heat pump (COP>1 below 200 C) or heat battery / resistive
+# path (COP=1 above) and charges a thermal store serving the band load.
 #
 # Because storage is ~16 h it CYCLES DAILY (fills by day, drains overnight), so days are
 # effectively independent. We therefore cluster the year's 365 daily solar profiles into K
@@ -16,6 +15,7 @@
 # a two-phase solve maximizes served heat then minimizes solar+storage cost for that level.
 # Unserved is NOT costed in LCOH (VoLL may be 0). Each rep-day uses a cyclic SOC so overnight
 # load can draw heat stored the previous afternoon. Currency follows input_costs (USD).
+# LCOH is solar + thermal storage only (HP / heat-battery CAPEX not included).
 
 from __future__ import annotations
 
@@ -83,14 +83,6 @@ DEFAULT_COP_BY_BAND = {
     "heat_500C-1000C_tj": 1.0,
     "heat_above1000C_tj": 1.0,
 }
-DEFAULT_CONV_CAPEX_THERMAL_BY_BAND = {
-    "heat_below100C_tj": 700_000.0,
-    "heat_100C-200C_tj": 1_000_000.0,
-    "heat_200C-500C_tj": 150_000.0,
-    "heat_500C-1000C_tj": 200_000.0,
-    "heat_above1000C_tj": 200_000.0,
-}
-ZERO_CONV_CAPEX_BY_BAND = {b: 0.0 for b in DEFAULT_CONV_CAPEX_THERMAL_BY_BAND}
 
 
 def run_multiband_heatpump_optimization(
@@ -101,29 +93,24 @@ def run_multiband_heatpump_optimization(
     band_loads: Dict[str, float],
     *,
     cop_by_band: Dict[str, float] | None = None,
-    conv_capex_thermal_by_band: Dict[str, float] | None = None,
-    include_converter_cost: bool = False,
     round_trip_efficiency: float = 0.92,
     max_storage_hours: float = 16.0,
-    charge_discharge_ratio_min: float = 4.0,
     inverter_efficiency: float = 0.967,
-    conv_lifetime_years: int = 20,
-    conv_opex_frac: float = 0.02,
     max_solar_mw: float | None = None,
     VoLL: float = 0.0,
     n_representative_days: int | None = 16,
     project_start_year: int = 2025,
+    diurnal_shape_24: np.ndarray | None = None,
 ) -> Tuple[Optional[Dict[str, Any]], Optional[pd.DataFrame], bool]:
-    """Minimize solar (+ optional converter) + storage LCOH over representative days.
+    """Minimize solar + thermal-storage LCOH over representative days.
 
     Hard reliability floor at ``availability_factor``. Unserved is not included in LCOH
-    (VoLL defaults to 0). Converter CAPEX defaults off — COP still applies to energy.
+    (VoLL defaults to 0). COP still applies to electricity→heat in each band.
+
+    ``diurnal_shape_24``: optional length-24 multipliers (mean 1) applied to each band's
+    flat MW load so hour-t demand is ``load * shape[t]``. Same shape on every rep-day.
     """
     cop_by_band = cop_by_band or DEFAULT_COP_BY_BAND
-    if not include_converter_cost:
-        conv_capex_thermal_by_band = ZERO_CONV_CAPEX_BY_BAND
-    else:
-        conv_capex_thermal_by_band = conv_capex_thermal_by_band or DEFAULT_CONV_CAPEX_THERMAL_BY_BAND
 
     fin = input_costs["financial"]
     solar_p = input_costs["solar"]
@@ -138,13 +125,10 @@ def run_multiband_heatpump_optimization(
     if disc > 1.0:
         disc /= 100.0
     tes_energy_annual_per_mwh = capex_kwh * 1000.0 * (_crf(disc, life) + opex_frac)
-    conv_annual_factor = _crf(disc, conv_lifetime_years) + conv_opex_frac
 
     rte = float(np.clip(round_trip_efficiency, 0.05, 0.999))
     eta = float(np.sqrt(rte))
-    inv = float(np.clip(inverter_efficiency, 0.5, 1.0))
     h_max = float(max(0.5, max_storage_hours))
-    ratio_cd = float(max(charge_discharge_ratio_min, 1e-6))
     af = float(np.clip(availability_factor, 0.0, 1.0))
 
     ydf = solar_profile_df[solar_profile_df["year"] == solar_profile_df["year"].iloc[0]]
@@ -152,12 +136,23 @@ def run_multiband_heatpump_optimization(
     reps, weights = representative_days(g_full, n_representative_days)
     K, H = reps.shape
     total_days = float(weights.sum())
+    if diurnal_shape_24 is None:
+        shape24 = np.ones(H, dtype=float)
+    else:
+        shape24 = np.asarray(diurnal_shape_24, dtype=float).reshape(-1)
+        if len(shape24) != H:
+            raise ValueError(f"diurnal_shape_24 must have length {H}, got {len(shape24)}")
+        mu = float(shape24.mean())
+        if mu <= 0:
+            raise ValueError("diurnal_shape_24 mean must be > 0")
+        shape24 = shape24 / mu
 
     bands = [(b, float(load)) for b, load in band_loads.items() if load and load > 0]
     if not bands:
         return None, None, False
     nb = len(bands)
     total_load_MW = sum(load for _, load in bands)
+    # Mean load × hours × days — shape mean 1 preserves annual energy vs flat
     annual_load_MWh = total_load_MW * total_days * H
     target_unserved_cap = (1.0 - af) * annual_load_MWh
 
@@ -196,9 +191,6 @@ def run_multiband_heatpump_optimization(
         if objective == "cost":
             cost[0] = solar_cost_per_mw / annual_load_MWh
             for b, _ in bands:
-                cop = cop_by_band.get(b, 1.0)
-                conv_annual = conv_capex_thermal_by_band.get(b, 0.0) * cop * conv_annual_factor
-                cost[ix[(b, "P_ch")]] = conv_annual / annual_load_MWh
                 cost[ix[(b, "E")]] = tes_energy_annual_per_mwh / annual_load_MWh
             if VoLL > 0:
                 for j in range(nb):
@@ -230,13 +222,13 @@ def run_multiband_heatpump_optimization(
             cop = cop_by_band.get(b, 1.0)
             Pch, Pdis, E = ix[(b, "P_ch")], ix[(b, "P_dis")], ix[(b, "E")]
             row(NINF, 0, [E, Pdis], [1.0, -h_max])
-            row(0, HS_INF, [Pch, Pdis], [1.0, -ratio_cd])
             for c in range(K):
                 ch, dis, sc, un = (hidx(j, c, k) for k in
                                   ("charge", "discharge", "soc", "unserved"))
                 for t in range(H):
-                    # Thermal load balance: discharge + unserved = load
-                    row(load, load, [dis + t, un + t], [1.0, 1.0])
+                    # Thermal load balance: discharge + unserved = load × diurnal shape
+                    load_t = load * float(shape24[t])
+                    row(load_t, load_t, [dis + t, un + t], [1.0, 1.0])
                     # Cyclic daily SOC (hour 0 continues from hour 23) so overnight
                     # load can use heat stored the previous afternoon within the day.
                     prev = sc + (H - 1) if t == 0 else sc + t - 1
@@ -297,7 +289,7 @@ def run_multiband_heatpump_optimization(
     cv = np.asarray(h.getSolution().col_value, dtype=float)
     S_opt = float(cv[0])
     annual_solar_cost = solar_cost_per_mw * S_opt
-    per_band, total_unserved, annual_conv_cost, annual_tes_cost = {}, 0.0, 0.0, 0.0
+    per_band, total_unserved, annual_tes_cost = {}, 0.0, 0.0
     for j, (b, load) in enumerate(bands):
         cop = cop_by_band.get(b, 1.0)
         Pch, Pdis, E = (float(cv[ix[(b, k)]]) for k in ("P_ch", "P_dis", "E"))
@@ -306,14 +298,13 @@ def run_multiband_heatpump_optimization(
             un0 = hidx(j, c, "unserved")
             band_unserved += weights[c] * float(cv[un0:un0 + H].sum())
         total_unserved += band_unserved
-        annual_conv_cost += conv_capex_thermal_by_band.get(b, 0.0) * cop * conv_annual_factor * Pch
         annual_tes_cost += tes_energy_annual_per_mwh * E
         per_band[b] = {"load_MW": load, "cop": cop, "P_charge_MW": Pch,
                        "P_discharge_MW": Pdis, "E_TES_MWh": E, "unserved_MWh": band_unserved}
 
     served_MWh = max(annual_load_MWh - total_unserved, 0.0)
     reliability = served_MWh / annual_load_MWh * 100 if annual_load_MWh > 0 else 0.0
-    system_annual = annual_solar_cost + annual_conv_cost + annual_tes_cost
+    system_annual = annual_solar_cost + annual_tes_cost
     lcoh_served = system_annual / served_MWh if served_MWh > 0 else np.nan
     den = served_MWh if served_MWh > 0 else np.nan
 
@@ -325,11 +316,9 @@ def run_multiband_heatpump_optimization(
         "LCOH_total_$perMWh": system_annual / annual_load_MWh if annual_load_MWh > 0 else np.nan,
         "LCOH_served_$perMWh": lcoh_served,
         "LCOH_solar_$perMWh": annual_solar_cost / den if den == den else np.nan,
-        "LCOH_converter_$perMWh": annual_conv_cost / den if den == den else np.nan,
         "LCOH_storage_$perMWh": annual_tes_cost / den if den == den else np.nan,
         "Reliability_%": reliability, "Unserved_MWh": total_unserved,
         "met_availability_target": bool(met_availability),
-        "include_converter_cost": bool(include_converter_cost),
         "hp_load_MW": sum(v["load_MW"] for v in per_band.values() if v["cop"] > 1.0),
         "ihb_load_MW": sum(v["load_MW"] for v in per_band.values() if v["cop"] <= 1.0),
         "solve_seconds": elapsed, "project_start_year": int(project_start_year), "bands": per_band,

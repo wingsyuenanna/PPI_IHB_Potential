@@ -243,11 +243,11 @@ Technology costs are country-level and expressed in **nominal 2025 USD**. CAPEX,
 | Min charge:discharge power | 4:1 |
 | PV land intensity | 50 MWdc/km² |
 
-Heat delivery COP: 2.7 (&lt;100 °C HP), 1.8 (100–200 °C steam HP), 1.0 (&gt;200 °C resistive/IHB). Primary multi-band runs exclude converter equipment CAPEX from LCOH (solar + storage only). Country CCGT LCOE is the fossil heat benchmark (~$130–140/MWh in EU 2025).
+Heat delivery COP: 2.7 (&lt;100 °C HP), 1.8 (100–200 °C steam HP), 1.0 (&gt;200 °C resistive/IHB). Multi-band LCOH is solar + thermal storage only. Country CCGT LCOE is the fossil heat benchmark (~$130–140/MWh in EU 2025).
 
 ### 7. LCOH Calculations
 
-Per facility, a HiGHS LP sizes shared solar + per-band thermal storage over 16 representative PVGIS days (flat band loads; COP 2.7 / 1.8 / 1.0; 90% availability floor; land cap at 50 MWdc/km²). Primary LCOH excludes converter CAPEX and VoLL:
+Per facility, a HiGHS LP sizes shared solar + per-band thermal storage over 16 representative PVGIS days (flat band loads; COP 2.7 / 1.8 / 1.0; 90% availability floor; land cap at 50 MWdc/km²). LCOH excludes VoLL:
 
 \[
 \mathrm{LCOH}_{served} = C_{ann} / Q_{served},\quad
@@ -265,11 +265,11 @@ Runnable fleet: 2,192 sites. Base (2025, solar+storage, 5 km): 1,925 sites meet 
 - **Land:** 5 km vs 15 km buffers.
 - **Heat demand:** sector low/base/high multipliers (fleet 388 / 522 / 697 TWh/y) via `--heat-case`.
 - Higher heat → fewer ≥90% sites / lower heat share; fleet HW LCOH can fall via composition (within-site median ΔLCOH ≈ 0).
-- Extensions: 2030 costs, converter CAPEX on/off, storage CAPEX path, RTE, stricter land masks.
+- Extensions: 2030 costs, storage CAPEX path, RTE, stricter land masks.
 
 ## Limitations
 
-Sector-average SEC / fossil shares / Hotmaps band recipes; flat load; point-buffer land (not permitting); country BNEF + stylized IHB costs; converter CAPEX often excluded in primary LCOH; representative days suited to ≤16 h storage; CCGT LCOE is a coarse heat benchmark; Climate TRACE coverage is a screening-level floor.
+Sector-average SEC / fossil shares / Hotmaps band recipes; flat load; point-buffer land (not permitting); country BNEF + stylized IHB costs; HP / heat-battery equipment CAPEX omitted from LCOH; representative days suited to ≤16 h storage; CCGT LCOE is a coarse heat benchmark; Climate TRACE coverage is a screening-level floor.
 
 ## Archive
 
