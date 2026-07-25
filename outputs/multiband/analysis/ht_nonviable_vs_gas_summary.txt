@@ -1,0 +1,10 @@
+HT sites that do NOT meet 90% at low cost (5 km, HT-majority)
+Gas boiler benchmark: country gas_heat_cost from Input/industrial_heat_pump_costs/
+  (gas price / 0.85 boiler eff + EUA carbon); converted at EURUSD=1.08
+  Country range $66–$132/MWh; fleet HW $84/MWh
+  Agora Industry / Fraunhofer ISI (2025) EU range ~EUR 43–100/MWh (~$45–110), central ~$72
+
+HT-majority heat not viable (fail 90% OR above gas): 329.0 TWh (91%)
+  of which fail 90%: 281.0 TWh — HW CF 15.2%
+  of which met but above gas: 48.0 TWh — HW CF 15.0%
+HT fail vs HT met CF: 14.0% vs 15.9% median

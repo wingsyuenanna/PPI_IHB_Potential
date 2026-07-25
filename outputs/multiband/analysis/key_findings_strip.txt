@@ -1,0 +1,17 @@
+KEY FINDINGS (land_5km_ss_2030_liion / land_15km_ss_2030_liion, solar+Li-ion+IHB+HP, 2030 costs)
+
+FINDING 01 — FLEET
+522 TWh/y
+Replaceable fossil process heat across 2,192 EU sites with solar profiles (2024 heat inventory).
+
+FINDING 02 — 5 KM SCREEN
+40%
+Of fleet heat meets 90% availability with colocated land within 5 km (88% of sites; HW reliability 59%).
+
+FINDING 03 — LAND UNLOCK
+22% to 65%
+Of high-temperature heat (≥200 °C) clears 90% when land expands 5→15 km (+154 TWh/y unlocked).
+
+FINDING 04 — COST (2030)
+$72/MWh
+Heat-weighted LCOH among sites meeting 90% at 5 km (median $58/MWh); country gas-boiler benchmark ~$84/MWh; ~71% of met-90 heat is below the country gas benchmark (~28% of fleet heat).

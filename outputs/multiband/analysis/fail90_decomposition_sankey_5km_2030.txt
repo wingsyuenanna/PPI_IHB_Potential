@@ -1,0 +1,15 @@
+Scenario: land_5km_ss_2030_liion
+Fleet: 522.3 TWh → Met 206.7 / Miss 315.6
+Of met: below gas 146.8 / above gas 59.9
+Of miss: land-capped 313.3 / zero land 2.3
+Land-capped miss by sector:
+  Steam cracking: 150.0
+  Iron & steel: 88.6
+  Chemicals: 27.7
+  Cement: 14.7
+  Pulp & paper: 8.8
+  Aluminium: 8.8
+  Food & beverage: 6.0
+  Lime: 5.8
+  Glass: 2.5
+  Textiles: 0.4

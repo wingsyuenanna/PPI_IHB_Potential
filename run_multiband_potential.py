@@ -1,13 +1,14 @@
 """Fleet runner for the multi-band heat-pump + IHB hourly optimizer.
 
 For every runnable site (solar profile + positive replaceable heat), splits replaceable
-heat into temperature bands, sizes one shared on-site solar array + per-band heat pumps
-(<200 C) / resistive+thermal-battery (>200 C) over representative days, capped by land,
-and writes per-site LCOH / reliability / sizing under outputs/multiband/<scenario>/.
+heat into temperature bands and sizes one shared on-site solar array plus:
+  • <200 C — heat pumps buffered by shared Li-ion (BNEF utility-scale battery costs)
+  • ≥200 C — industrial heat battery with Energy Innovation CAPEX
+    ($100/kW-in, $300/kW-out, $5/kWh, 95% RTE), annualized at country BNEF CRF
 
-Solar + thermal-storage LCOH only (no VoLL). Hard 90% availability floor; land-limited
-sites get max-serve then cost-min. COP 2.7/1.8/1.0, 50 MWdc/km2, 16 h storage, 92% RTE,
-16 rep-days, 2025 costs.
+Hard 90% availability floor; land-limited sites get max-serve then cost-min.
+COP 2.7/1.8/1.0, 50 MWdc/km2, ≤16 h storage, 16 rep-days (or --n-representative-days 0
+for all calendar days); cost year via --project-start.
 
 Heat sensitivity (sector low/base/high bounds on assessment CSV):
 
@@ -16,6 +17,9 @@ Heat sensitivity (sector low/base/high bounds on assessment CSV):
     python run_multiband_potential.py --scenario land_5km_ss --heat-case low
     python run_multiband_potential.py --scenario land_5km_ss --heat-case high
     python run_multiband_potential.py --scenario land_15km_ss --heat-case low \\
+        --land-csv land_availability/outputs/land_availability_by_facility_15km.csv
+    python run_multiband_potential.py --scenario land_5km_ss_2030 --project-start 2030
+    python run_multiband_potential.py --scenario land_15km_ss_2030 --project-start 2030 \\
         --land-csv land_availability/outputs/land_availability_by_facility_15km.csv
 """
 from __future__ import annotations
@@ -47,11 +51,11 @@ CONFIG = {
     "battery_costs_csv": "flatblock_optimization/inputs/input_heat_battery_cost.csv",
     "solar_hourly_dir": "solar_radiation/outputs/hourly_profiles",
     "solar_year": 2023,
-    "project_start": "2025",
+    "project_start": "2030",
     "gbr_proxy": "IRL",
     "availability": 0.90,
     "mw_per_km2": 50.0,
-    "round_trip_efficiency": 0.92,
+    "round_trip_efficiency": 0.90,  # Li-ion RTE; IHB RTE comes from cost CSV (0.95)
     "max_storage_hours": 16.0,
     "n_representative_days": 16,
     "VoLL": 0.0,
@@ -155,7 +159,26 @@ def main() -> None:
                     help="Override available_land_km2 from this land-availability CSV")
     ap.add_argument("--heat-case", type=str, default="base", choices=["base", "low", "high"],
                     help="Use replaceable_heat_mwh_th{,_low,_high} from assessment CSV")
+    ap.add_argument("--project-start", type=str, default=None,
+                    help="Cost year for BNEF solar + Li-ion (default: CONFIG project_start)")
+    ap.add_argument(
+        "--n-representative-days",
+        type=int,
+        default=None,
+        help="Solar-day clusters (default: CONFIG, usually 16). "
+             "Use 0 or a value >=365 for all calendar days (full-year LP).",
+    )
     args = ap.parse_args()
+
+    cfg = dict(CONFIG)
+    if args.project_start:
+        cfg["project_start"] = str(args.project_start)
+    cfg["max_workers"] = args.max_workers
+    if args.n_representative_days is not None:
+        # 0 => None => solver uses every day in the solar year
+        cfg["n_representative_days"] = (
+            None if args.n_representative_days <= 0 else args.n_representative_days
+        )
 
     scenario = args.scenario
     if args.heat_case != "base" and not scenario.endswith(f"_heat_{args.heat_case}"):
@@ -178,13 +201,16 @@ def main() -> None:
         run = run.sort_values("replaceable_heat_mwh_th", ascending=False).head(args.limit)
     rows = run.to_dict("records")
     heat_twh = float(run["replaceable_heat_mwh_th"].sum() / 1e6)
+    n_rep = cfg["n_representative_days"]
+    rep_label = "full-year (all days)" if n_rep is None else f"{n_rep} rep-days"
     print(f"Running multi-band optimizer on {len(rows)} sites "
-          f"(scenario={scenario}, heat_case={args.heat_case}, {heat_twh:.1f} TWh, "
-          f"{CONFIG['n_representative_days']} rep-days, {args.max_workers} workers)...")
+          f"(scenario={scenario}, heat_case={args.heat_case}, project_start={cfg['project_start']}, "
+          f"{heat_twh:.1f} TWh, "
+          f"{rep_label}, {args.max_workers} workers)...")
 
     results = []
     with ProcessPoolExecutor(max_workers=args.max_workers) as ex:
-        futs = {ex.submit(run_one_site, r, CONFIG): int(r["source_id"]) for r in rows}
+        futs = {ex.submit(run_one_site, r, cfg): int(r["source_id"]) for r in rows}
         done = 0
         for fut in as_completed(futs):
             results.append(fut.result())
@@ -201,11 +227,21 @@ def main() -> None:
           f"failed: {len(out) - len(ok)})")
     if len(ok):
         w = ok["replaceable_heat_mwh_th"]
-        print(f"Heat-weighted LCOH_served: ${(ok['LCOH_served_$perMWh'] * w).sum() / w.sum():,.0f}/MWh")
+        # Prefer ≥90% cohort for headline LCOH; all-site demand-weighted LCOH is
+        # skewed by land-capped near-zero-serve outliers.
+        met = ok["met_availability_target"].astype(str).str.lower().isin(["true", "1"])
+        if met.any():
+            wm = ok.loc[met, "replaceable_heat_mwh_th"]
+            print(f"Heat-weighted LCOH_served (≥90%): "
+                  f"${(ok.loc[met, 'LCOH_served_$perMWh'] * wm).sum() / wm.sum():,.0f}/MWh "
+                  f"({met.sum()} sites)")
+        served_w = w * ok["Reliability_%"].astype(float) / 100.0
+        if served_w.sum() > 0:
+            print(f"Heat-weighted LCOH_served (served-MWh): "
+                  f"${(ok['LCOH_served_$perMWh'] * served_w).sum() / served_w.sum():,.0f}/MWh")
         print(f"Heat-weighted reliability: {(ok['Reliability_%'] * w).sum() / w.sum():.0f}%")
         print(f"Median solar intensity: {ok['solar_per_load_MWdc_per_MWth'].median():.1f} MWdc/MWth")
         if "met_availability_target" in ok.columns:
-            met = ok["met_availability_target"].astype(bool)
             print(f"Met {CONFIG['availability']:.0%} availability: "
                   f"{met.sum()}/{len(ok)} sites "
                   f"({100*ok.loc[met,'replaceable_heat_mwh_th'].sum()/w.sum():.0f}% of heat)")

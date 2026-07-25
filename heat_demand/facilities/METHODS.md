@@ -185,7 +185,7 @@ emissions-derived `useful_heat_tj`.
 |---|---|---|
 | cement | Clinker calcination-dry × 0.77 | EU clinker ratio (Cembureau); dry kilns dominant |
 | lime | Lime burning × 1.0 | |
-| glass | Container × 0.55, Flat × 0.30, Fiber × 0.05, Other × 0.10 | EU production mix (FEVE / Glass Alliance Europe) |
+| glass | Name-matched Container / Flat / Fiber / Other when possible; else EU mix 0.55/0.30/0.05/0.10. Lehr/annealing LT (~20%) folded into melt HT → IHB-only | Name keywords (Verallia, AGC, Isover, …); FEVE mix fallback |
 | steel BF/BOF, BOF | Sinter × 1.20, Rolled steel × 0.90 | Coke oven (0.30) and Blast furnace (0.95) excluded — Eurostat transformation sector (see §4); band shares now come from sinter + reheating/rolling only |
 | steel EAF | EAF × 1.0, Rolled steel × 0.90 | |
 | steel DRI-EAF | Direct reduction × 1.0, EAF × 1.0, Rolled × 0.90 | |
@@ -193,16 +193,24 @@ emissions-derived `useful_heat_tj`.
 | ammonia / soda ash / methanol | matching Basic chemicals process × 1.0 | |
 | steam cracking | Ethylene × 1.0 | |
 | aluminum Smelting | Aluminum primary × 1.0 | |
-| pulp & paper | Paper × 0.5 + pulp mix × 0.5; pulp split by source_type keywords (chemical/mechanical), "Pulp misc." → 70/30 chem/mech (CEPI EU mix) | coarse — the corrected workbook is authoritative for this sector |
-| food (tier 3) | band shares: equal-weight blend of Sugar, Dairy, Brewing, Meat, Bread & bakery, Starch | source_type is generic for 880/886 sites |
+| pulp & paper | Paper × 0.5 + pulp mix × 0.5; pulp split by source_type keywords (chemical/mechanical), "Pulp misc." → 70/30 chem/mech (CEPI EU mix). Hotmaps Paper ≥200 °C (~7%) folded into 100–200 °C → HP-only | coarse — the corrected workbook is authoritative for this sector |
+| food (tier 3) | Name-matched Hotmaps process (Sugar / Dairy / Brewing / Meat / Bread & bakery / Starch); unmatched → **Dairy** (HP-only), not an equal-weight blend | source_type is generic for ~99% of sites; keywords in `FOOD_NAME_RULES` |
 
 **External band splits** (processes missing from the benchmarks;
 `band_source = external`):
 
 - **Alumina refinery**: 75% at 100–200 °C (Bayer digestion steam), 25% at
-  500–1000 °C (calcination) — IAI Bayer process data.
-- **Textiles**: 55% <100 °C, 35% 100–200 °C, 10% 200–500 °C — dyeing /
-  finishing hot water and steam (Rehfeldt et al. 2018).
+  500–1000 °C (calcination) — IAI Bayer process data. **Genuine dual** HP+IHB
+  at the same site (kept).
+- **Textiles**: 55% <100 °C, 45% 100–200 °C — dyeing / finishing steam
+  (Rehfeldt et al. 2018). Prior 10% at 200–500 °C removed so textiles are
+  HP-only.
+
+**Dual-tech policy** (minimize facilities needing both HP and IHB): isolate
+IHB to processes that truly need ≥200 °C (sugar, bakery, glass melt, cement,
+steel, ammonia, crackers, …). Artificial cross-process blends and marginal
+Hotmaps HT tails are not used to force dual equipment. Remaining dual sites
+are alumina refineries and soda ash (co-located LT + HT unit operations).
 
 Mechanical pulp has a negative fuel SEC in the benchmarks (net heat
 producer); it is clamped to zero so recipes never subtract heat.

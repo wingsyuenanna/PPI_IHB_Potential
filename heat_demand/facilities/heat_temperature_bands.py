@@ -15,12 +15,18 @@ merge_production.py.
 Process recipes, external (non-benchmark) band splits, and caveats are
 documented in METHODS.md section 5. Keep that file in sync.
 
+Food and glass use source_name keyword matching to isolate processes so
+IHB (≥200 °C) is not artificially spread across HP-only sites. Unmatched
+food defaults to Dairy (HP-only). Textiles and pulp & paper are HP-only;
+glass melt is IHB-only (annealing LT folded into HT).
+
 Run merge_production.py first; this script consumes its output.
 """
 
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 import numpy as np
@@ -82,11 +88,35 @@ STEEL_RECIPES["DRI-EAF,BF/BOF"] = [
     (s, p, w / 2) for s, p, w in STEEL_RECIPES["DRI-EAF"] + STEEL_RECIPES["BF/BOF"]
 ]
 
-GLASS_RECIPE = [
+# EU production mix fallback when glass type cannot be inferred from the name
+# (FEVE / Glass Alliance Europe).
+GLASS_MIX_RECIPE = [
     ("Non-metallic minerals", "Container glass", 0.55),
     ("Non-metallic minerals", "Flat glass", 0.30),
     ("Non-metallic minerals", "Fiber glass", 0.05),
     ("Non-metallic minerals", "Other glass", 0.10),
+]
+
+# Name → single glass process (first match wins). Isolates flat/fiber/container
+# where possible; unmatched keep the EU mix. Each glass process still has
+# ~20% <200 °C (lehr/annealing) + melt HT — dual-tech is physical, not a blend artifact.
+GLASS_NAME_RULES: list[tuple[str, list[str]]] = [
+    ("Fiber glass", [
+        r"\bfiber", r"\bfibre", r"\bisover\b", r"\binsulation\b", r"\bursa\b",
+        r"\bknauf", r"\bglasswool", r"\bglass.?wool", r"\b3b-?fibre",
+    ]),
+    ("Flat glass", [
+        r"\bflat\b", r"\bfloat\b", r"\bpilkington", r"\bguardian", r"\bagc\b",
+        r"saint.?gobain glass", r"\bglaverbel", r"\bns?g\b",
+    ]),
+    ("Container glass", [
+        r"\bverallia", r"\bvetropack", r"\bower?s.?illinois", r"\boi\b",
+        r"\bgerresheimer", r"\bst[oö]lzle", r"\bbottle", r"\bcontainer",
+        r"\bhollow", r"\bsaverglass", r"\barc\b",
+    ]),
+    ("Other glass", [
+        r"\bswarovski", r"\bcrystal", r"\btableware", r"\bhousewares",
+    ]),
 ]
 
 # Pulp & paper: production is "t of pulp & paper"; assume half pulp, half
@@ -95,19 +125,66 @@ GLASS_RECIPE = [
 # to the EU mix ~70% chemical / 30% mechanical (CEPI).
 PAPER_HALF = ("Paper and Printing", "Paper", 0.5)
 
-# Food band profile: source_type is generic for 880/886 sites, so bands use
-# an equal-weight blend of the six benchmark food processes.
+# Hotmaps food processes. Climate TRACE source_type is generic for ~99% of
+# food sites, so we classify via source_name keywords. Unmatched sites get
+# Dairy (HP-only) — not an equal-weight blend — to avoid painting every plant
+# with Sugar/bakery IHB demand.
 FOOD_PROCESSES = [
     "Sugar", "Dairy", "Brewing", "Meat processing", "Bread & bakery", "Starch",
+]
+FOOD_DEFAULT_PROCESS = "Dairy"  # unmatched → HP-only (<200 °C)
+
+# Ordered rules: first match wins. Multilingual keywords from EU plant names.
+FOOD_NAME_RULES: list[tuple[str, list[str]]] = [
+    ("Sugar", [
+        r"\bsugar\b", r"\bzucker", r"\bsucr", r"\bazúcar", r"\bazucar",
+        r"\bcukier", r"\bcukrown", r"\bsuiker", r"\bsocker", r"\bsukker",
+        r"\bcukor", r"\bzahar", r"\bcukr", r"\bbeet\b", r"\brüben", r"\brueben",
+        r"\bsucrerie", r"nordzucker", r"südzucker", r"suedzucker", r"tereos",
+        r"cristal union", r"saint louis sucre", r"british sugar",
+    ]),
+    ("Bread & bakery", [
+        r"\bbakery\b", r"\bbäckerei", r"\bbaeckerei", r"\bboulanger", r"\bpain\b",
+        r"\bbread\b", r"\bbrot\b", r"\bbiscuit", r"\bcookie", r"\bcracker",
+        r"\bpatiss", r"\bpâtisserie", r"\bbaker",
+    ]),
+    ("Dairy", [
+        r"\bdairy\b", r"\bmilch", r"\bmilk\b", r"\blait\b", r"\blatte\b",
+        r"\bleche\b", r"\bmleko", r"\bmlecz", r"\bkaas\b", r"\bcheese",
+        r"\bfromag", r"\bkäse", r"\bkaese", r"\byogurt", r"\byoghurt",
+        r"\bbutter\b", r"\bcreamery", r"\bmolkere", r"\blaiterie", r"\bvalio\b",
+        r"arla\b", r"frieslandcampina", r"danone", r"lactalis", r"sodiaal",
+    ]),
+    ("Brewing", [
+        r"\bbrew", r"\bbrauerei", r"\bbrau\b", r"\bbrasserie", r"\bcervez",
+        r"\bbirra\b", r"\bpiwo\b", r"\bpivovar", r"\bmalt\b", r"\bmalz",
+        r"heineken", r"carlsberg", r"ab inbev", r"inbev", r"guinness",
+        r"\bdistill", r"\bwhisky", r"\bwhiskey", r"\bvodka", r"\bspirit",
+    ]),
+    ("Meat processing", [
+        r"\bmeat\b", r"\bfleisch", r"\bcarn[ei]", r"\bslaughter", r"\bschlacht",
+        r"\babattoir", r"\bmatadero", r"\bmacello", r"\bvlees", r"\bham\b",
+        r"\bpork\b", r"\bbeef\b", r"\bpoultry", r"\bchicken", r"\bturkey",
+        r"\bwurst", r"\bsausage", r"\bcharcut", r"tönnies", r"toennies",
+        r"vion\b", r"danish crown", r"smithfield",
+    ]),
+    ("Starch", [
+        r"\bstarch\b", r"\bstärke", r"\bstaerke", r"\bamidon", r"\bamido\b",
+        r"\bglucose\b", r"\bpotato starch", r"\btapioca", r"roquette",
+        r"tate.?lyle", r"avebe", r"\bhungrana",
+    ]),
 ]
 
 # External band splits for sectors/processes missing from the benchmarks
 # (flagged band_source = "external"). See METHODS.md section 5.
 EXTERNAL_BANDS: dict[str, dict[str, float]] = {
     # Bayer process: steam digestion ~150-250C + calcination ~1000C (IAI).
+    # Genuine co-located HP + IHB at the same refinery — keep dual.
     "alumina-refinery": {"100C-200C": 0.75, "500C-1000C": 0.25},
-    # Textile finishing/dyeing: mostly hot water/steam (Rehfeldt et al. 2018).
-    "textiles": {"below100C": 0.55, "100C-200C": 0.35, "200C-500C": 0.10},
+    # Textile finishing/dyeing: hot water/steam (Rehfeldt et al. 2018).
+    # Prior 10% at 200–500 °C forced every textile plant into dual HP+IHB;
+    # finishing steam is <200 °C, so assign HP-only.
+    "textiles": {"below100C": 0.55, "100C-200C": 0.45},
 }
 
 
@@ -122,6 +199,39 @@ def load_benchmarks(path: Path) -> pd.DataFrame:
     # recipes never subtract heat.
     bench["SEC_Fuels_GJ/t"] = bench["SEC_Fuels_GJ/t"].clip(lower=0).fillna(0.0)
     return bench.set_index(["Subsector", "Process"])
+
+
+def _match_name_rules(
+    name: str, source_type: str, rules: list[tuple[str, list[str]]]
+) -> str | None:
+    text = f"{name} {source_type}".lower()
+    for process, pats in rules:
+        for pat in pats:
+            if re.search(pat, text, flags=re.IGNORECASE):
+                return process
+    return None
+
+
+def food_process_for(row: pd.Series) -> tuple[str, str]:
+    """Return (Hotmaps process, match_source) for a food facility.
+
+    match_source is 'name' when a keyword hit, else 'default' (Dairy / HP-only).
+    """
+    matched = _match_name_rules(
+        str(row.get("source_name", "")), str(row.get("source_type", "")), FOOD_NAME_RULES
+    )
+    if matched:
+        return matched, "name"
+    return FOOD_DEFAULT_PROCESS, "default"
+
+
+def glass_recipe_for(row: pd.Series) -> tuple[list[tuple[str, str, float]], str]:
+    matched = _match_name_rules(
+        str(row.get("source_name", "")), str(row.get("source_type", "")), GLASS_NAME_RULES
+    )
+    if matched:
+        return [("Non-metallic minerals", matched, 1.0)], "name"
+    return GLASS_MIX_RECIPE, "eu_mix"
 
 
 def pulp_recipe(source_type: str) -> list[tuple[str, str, float]]:
@@ -149,7 +259,8 @@ def facility_recipe(row: pd.Series) -> list[tuple[str, str, float]] | None:
     if subsector == "lime":
         return [("Non-metallic minerals", "Lime burning", 1.0)]
     if subsector == "glass":
-        return GLASS_RECIPE
+        recipe, _ = glass_recipe_for(row)
+        return recipe
     if subsector == "iron-and-steel":
         return STEEL_RECIPES.get(source_type, STEEL_RECIPES["BF/BOF"])
     if subsector == "petrochemical-steam-cracking":
@@ -185,9 +296,48 @@ def band_shares_from_recipe(
     return total, {b: h / total for b, h in band_heat.items()}
 
 
-def food_band_shares(bench: pd.DataFrame) -> dict[str, float]:
-    recipe = [("Food and tobacco", p, 1.0) for p in FOOD_PROCESSES]
-    _, shares = band_shares_from_recipe(bench, recipe)
+def fold_ht_into_lt(shares: dict[str, float]) -> dict[str, float]:
+    """Move ≥200 °C share into 100–200 °C (steam proxy). Used for pulp & paper
+    where Hotmaps assigns a small drying slice above 200 °C that would otherwise
+    force every mill into dual HP+IHB for ~3–7% of heat."""
+    out = dict(shares)
+    ht = out.get("200C-500C", 0.0) + out.get("500C-1000C", 0.0) + out.get("above1000C", 0.0)
+    out["200C-500C"] = 0.0
+    out["500C-1000C"] = 0.0
+    out["above1000C"] = 0.0
+    out["100C-200C"] = out.get("100C-200C", 0.0) + ht
+    total = sum(out.values())
+    if total <= 0:
+        return out
+    return {b: out.get(b, 0.0) / total for b in BANDS}
+
+
+def fold_lt_into_ht(shares: dict[str, float]) -> dict[str, float]:
+    """Move <200 °C share into ≥200 °C bands (pro-rata). Used for glass melting
+    as the primary replaceable load; lehr/annealing (~20%) is often waste-heat
+    coupled to the furnace, so counting it separately forces dual HP+IHB at
+    every plant."""
+    out = dict(shares)
+    lt = out.get("below100C", 0.0) + out.get("100C-200C", 0.0)
+    out["below100C"] = 0.0
+    out["100C-200C"] = 0.0
+    ht_keys = ["200C-500C", "500C-1000C", "above1000C"]
+    ht_tot = sum(out.get(k, 0.0) for k in ht_keys)
+    if ht_tot > 0 and lt > 0:
+        for k in ht_keys:
+            out[k] = out.get(k, 0.0) + lt * (out.get(k, 0.0) / ht_tot)
+    elif lt > 0:
+        out["200C-500C"] = lt
+    total = sum(out.values())
+    if total <= 0:
+        return out
+    return {b: out.get(b, 0.0) / total for b in BANDS}
+
+
+def food_band_shares(bench: pd.DataFrame, process: str) -> dict[str, float]:
+    _, shares = band_shares_from_recipe(
+        bench, [("Food and tobacco", process, 1.0)]
+    )
     return shares
 
 
@@ -195,17 +345,26 @@ def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
     out = merged.copy()
     out["bench_heat_tj"] = np.nan
     out["band_source"] = pd.NA
+    out["process_match"] = pd.NA  # food/glass process label or blank
+    out["process_match_source"] = pd.NA  # name | default | eu_mix | …
     for band in BANDS:
         out[f"heat_{band}_tj"] = np.nan
 
-    food_shares = food_band_shares(bench)
+    food_share_cache = {
+        p: food_band_shares(bench, p) for p in FOOD_PROCESSES
+    }
 
     for idx, row in out.iterrows():
         subsector = row["subsector"]
 
         # Tier 3 and non-benchmark processes: split existing heat.
         if subsector == "food-beverage-tobacco":
-            heat, shares, source = row["useful_heat_tj"], food_shares, "benchmark"
+            process, match_src = food_process_for(row)
+            heat = row["useful_heat_tj"]
+            shares = food_share_cache[process]
+            source = "benchmark"
+            out.at[idx, "process_match"] = process
+            out.at[idx, "process_match_source"] = match_src
         elif subsector == "textiles-leather-apparel":
             heat, shares, source = (
                 row["useful_heat_tj"], EXTERNAL_BANDS["textiles"], "external",
@@ -220,6 +379,17 @@ def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
             if recipe is None or not row["production_t"] > 0:
                 continue
             sec_gj_t, shares = band_shares_from_recipe(bench, recipe)
+            # Pulp & paper: Hotmaps Paper process has ~7% ≥200 °C; folding that
+            # into steam avoids dual HP+IHB for a marginal drying slice.
+            if subsector == "pulp-and-paper":
+                shares = fold_ht_into_lt(shares)
+            if subsector == "glass":
+                _, match_src = glass_recipe_for(row)
+                label = recipe[0][1] if len(recipe) == 1 else "EU mix"
+                out.at[idx, "process_match"] = label
+                out.at[idx, "process_match_source"] = match_src
+                # Melt-primary: fold lehr/annealing LT into HT (IHB-only).
+                shares = fold_lt_into_ht(shares)
             heat, source = row["production_t"] * sec_gj_t / 1000, "benchmark"
 
         if pd.isna(heat):

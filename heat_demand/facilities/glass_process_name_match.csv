@@ -1,0 +1,354 @@
+source_id,source_name,process_match,process_match_source
+38469135,D.Swarovski Kg,,
+38469146,Saint-Gobain Isover Austria Gmbh,,
+38469184,Stölzle-Oberglas Gmbh,Container glass,name
+38469123,Vetropack Austria Gmbh,Container glass,name
+38469169,Vetropack Austria Gmbh,Container glass,name
+38468967,3B-Fibreglass,,
+38469196,Agc Flat Glass Europe - Site De Roux  (Ex-Glaverbel Sa),Flat glass,name
+38469213,Agc Glass Europe - Site De Moustier (Ex-Glaverbel Sa),Flat glass,name
+38469239,Agc Glass Europe Vestiging Mol,Flat glass,name
+38469208,Durobor Glassware Sa,,
+38469187,Emgo,,
+38469225,Gerresheimer Momignies Sa,Container glass,name
+38468968,Knauf Insulation,,
+38469190,Saint-Gobain Glass Sa,,
+38468966,Saverglass Md Verre,Container glass,name
+38469278,Ursa Benelux,,
+38468973,"""Rubin"" Ad",,
+38468969,Bi Ei Glas Bg Glass Manufacturing Company,EU mix,eu_mix
+38468970,Bi Ei Glass Bg Glass Manufacturing Company,,
+38468974,Rubin Invest Ad,,
+38468975,Rubin Traiding Glass Manufacturing Company,,
+38468972,Trakia Glass Bg Glass Manufacturing Company,EU mix,eu_mix
+38468985,"Crystal Bohemia, A.S. - Poděbrady",,
+38468981,Crystalite Bohemia S.R.O. - Světlá Nad Sázavou,,
+38468986,Glazura S.R.O.,,
+38468984,"Kavalierglass, A.S. Provozovna Sázava",,
+38468987,"Knauf Insulation, Spol. S R.O.",,
+38468982,"O-I Manufacturing Czech Republic, A.S., Závod Nové Sedlo",EU mix,eu_mix
+38468991,"O-I Manufacturing Czech Republic, A.S., Závod Rudolfova Huť",EU mix,eu_mix
+38468979,Saint-Gobain Adfors Cz S.R.O. - Závod 1 Litomyšl,,
+38468978,Vetropack Moravia Glass Akciová Společnost,Container glass,name
+38468990,Vitrablok - Závod Duchcov,,
+38468989,Závod Barevka,EU mix,eu_mix
+38468993,Závod Desná A Polubný,,
+38468983,Závod Příchovice,,
+38468988,"Závod Řetenice, Coating, Vedení Společnosti",EU mix,eu_mix
+38469134,Agc F Glass Gmbh,Flat glass,name
+38469064,Ardagh Glass Gmbh,,
+38469092,Ardagh Glass Gmbh,EU mix,eu_mix
+38469113,Ardagh Glass Gmbh,EU mix,eu_mix
+38469050,Ardagh Glass Gmbh,EU mix,eu_mix
+38469051,Ardagh Glass Gmbh,EU mix,eu_mix
+38469068,Ardagh Glass Gmbh Werk Bad Münder,EU mix,eu_mix
+38469066,Ardagh Glass Gmbh Werk Obernkirchen,EU mix,eu_mix
+38469095,Ardagh Group,EU mix,eu_mix
+38469119,Euroglas Ag,EU mix,eu_mix
+38469121,Euroglas Gmbh,EU mix,eu_mix
+38469111,Gerresheimer Essen Gmbh,Container glass,name
+38469060,Gerresheimer Lohr Gmbh,Container glass,name
+38469150,Gerresheimer Tettau Gmbh,Container glass,name
+38469062,Glasfaserherstellungsanlage - Saint-Gobain Isover G+H Ag Werk Lübz,,
+38469106,Glaswerk Ernstthal Gmbh,,
+38469128,Gmb Glasmanufaktur Brandenburg Gmbh,EU mix,eu_mix
+38469100,Guardian Flachglas Gmbh,Flat glass,name
+38469103,Heraeus Quarzglas Gmbh & Co. Kg,,
+38469126,Knauf Insulation Gmbh,,
+38469149,Kristall-Glasfabrik Amberg Gmbh,,
+38469061,Ledvance Gmbh,,
+38469141,"Nachtmann Gmbh, Werk Weiden",,
+38469069,Noelle + Von Campe Glashütte Gmbh,EU mix,eu_mix
+38469124,Noelle + Von Campe Gmbh & Co.Kg,,
+38469071,O-I Glasspack Gmbh & Co. Kg Glashütte Holzminden,EU mix,eu_mix
+38469145,O-I Glasspack Gmbh & Co. Kg Werk Bernsdorf,EU mix,eu_mix
+38469065,O-I Glasspack Gmbh & Co. Kg Werk Rinteln,EU mix,eu_mix
+38469107,"O-I Glasspack Gmbh&Co.Kg, Werk Achern",,
+38469057,Pilkington Deutschland Ag,Flat glass,name
+38469084,Pilkington Deutschland Ag -Werk Gladbeck-,Flat glass,name
+38469118,Pq Germany Gmbh,,
+38469115,Saint Gobain Glass Flachglas Torgau Gmbh,Flat glass,name
+38469081,Saint-Gobain Glass Deutschland Gmbh,Flat glass,name
+38469082,Saint-Gobain Glass Deutschland Gmbh,,
+38469109,Saint-Gobain Glass Deutschland Gmbh,Flat glass,name
+38469080,Saint-Gobain Glass Deutschland Gmbh,,
+38469052,Saint-Gobain Isover G+H Ag,,
+38469083,Saint-Gobain Isover G+H Ag,,
+38469099,Saint-Gobain Isover G+H Ag,,
+38469094,Schott Ag,,
+38469072,Schott Ag,,
+38469058,"Schott Ag, Standort Mitterteich, Werk 1",,
+38469130,Schott Technical Glass Solutions Gmbh,,
+38469054,Sgd Kipfenberg Gmbh,EU mix,eu_mix
+38469116,"Ursa Deutschland Gmbh (Ehemals Fa. Pfleiderer) , Werk Delitzsch",,
+38469046,Ursa Deutschland Gmbh Werk Delitzsch,,
+38469053,Verallia Deutschland Ag,Container glass,name
+38469075,Verallia Deutschland Ag,Container glass,name
+38469055,Verallia Deutschland Ag,Container glass,name
+38469093,Verallia Deutschland Ag,Container glass,name
+38469131,Walther-Glas Deutschland Gmbh,,
+38469079,Weck Glaswerk Gmbh,,
+38469104,"Wiegand- Glashüttenwerke  Gmbh, Werk Schleusingen",EU mix,eu_mix
+38469105,Wiegand-Glashüttenwerke Gmbh,,
+38469059,Wiegand-Glashüttenwerke Gmbh Werk Steinbach A.Wald,EU mix,eu_mix
+38469044,Wiegla Gmbh,,
+38469056,Zwiesel Kristallglas Ag,,
+38469000,Ardagh Glass Holmegaard A/S,EU mix,eu_mix
+38469002,Leca Danmark A/S,,
+38468999,Rockwool A/S,,
+38468998,Rockwool A/S - Vamdrup,,
+38469003,Saint-Gobain Isover A/S,,
+38469001,Saint-Gobain Isover A/S,,
+38469285,Agc Flatglass Iberica,Flat glass,name
+38469279,"Aiala Vidrio,  S.A. (Vidrala)",EU mix,eu_mix
+38469298,Ba Glass Spain Villafranca,,
+38469269,"Ba Glass Spain, S.L.",,
+38469296,"Bonet Spain, S.L",,
+38469256,Castellar Vidrio,,
+38469237,Cerfrit,,
+38469234,Coloresmalt,,
+38469286,Colorificio Cerámico Bonet,,
+38469275,Colorobbia España,,
+38469235,Coloronda,,
+38469267,"Crisnova Vidrio, S.A.",EU mix,eu_mix
+38469277,Endeka Ceramics-Vall D´Alba,,
+38469299,Esmaldur,,
+38469231,Esmalglass,,
+38469226,Esmaltes,,
+38469297,Ferro Spain Nules,,
+38469284,Ferro Spain-Almassora,,
+38469229,Fritta Slu,,
+38469242,"Fábrica De Alcalá De Guadaira (Saint Gobain Vicasa, S.A.)",,
+38469255,"Fábrica De Alcalá De Guadaira (Vidriera Rovira, S.L.)",EU mix,eu_mix
+38469288,"Fábrica De Jerez (Saint Gobain Vicasa, S.A.)",,
+38469261,"Guardian Industries Navarra, S.L.U.",Flat glass,name
+38469280,"Guardian Llodio Uno, S.L.",Flat glass,name
+38469240,Kerafrit S.A.,,
+38469291,Ocv Reinforcements Alcala Spain S.L.,,
+38469276,Quimicer,,
+38469316,Ramon Clemente,,
+38469264,Saint Gobain Cristaleria - Fábrica De Avilés,EU mix,eu_mix
+38469246,Saint Gobain Vicasa - Azuqueca,,
+38469268,Saint-Gobain Cristaleria,,
+38469290,Saint-Gobain Glass.- Fabrica De Renedo,Flat glass,name
+38469270,"Saint-Gobain Isover Ibérica, S.L.",Fiber glass,name
+38469289,Schott Iberica,,
+38469314,Smalticeram España,,
+38469227,Torrecid I Y Ii,,
+38469253,Ursa Iberica Aislantes,,
+38469247,Verallia - Zgz (Anterior S.Gobain Vicasa),Container glass,name
+38469273,Verallia Spain,Container glass,name
+38469244,"Verallia-Spain, S.A. - Burgos",Container glass,name
+38469272,"Verescence La Granja, S.L.U.",EU mix,eu_mix
+38469228,Vernis,,
+38469313,Vidres,,
+38469287,Vidriera Del Atlántico S.A.,,
+38469271,Vidrieras Canarias S.A.,,
+38469224,Vidrieria Rovira,EU mix,eu_mix
+38469315,Vidrierias Masip,,
+38469282,"Vidriería Y Cristalería De Lamiaco, S.A. (Vidriería Y Cristalería De Lamiaco S.A.)",,
+38469319,"Vidrios Reciclados San Miguel, S.L.",,
+38469004,"O-I Production Estonia As, Järvakandi Klaasitehas",EU mix,eu_mix
+38469006,"Ahlstrom Glassfibre Oy, Karhulan Tehdas",,
+38469012,"Evonik Silica Finland Oy, Taavetin Tehdas",,
+38469008,"Fiskars Finland Oy Ab, Iittalan Lasitehdas",,
+38469005,"O-I Manufacturing Finland Oy, Pakkauslasitehdas",,
+38469007,Pilkington Lahden Lasitehdas Oy,,
+38469014,"Saint-Gobain Finland Oy, Isover Forssan Lasivillatehdas",,
+38469013,"Saint-Gobain Finland Oy, Isover, Hyvinkään Lasivillatehdas",,
+38469017,Agc France Sas Boussois,Flat glass,name
+38469039,Agc Interpane Glass France Sas,Flat glass,name
+38469016,Arc France - Site D'Arques,Container glass,name
+38469009,Corning Sas,,
+38468971,Duralex International,,
+38469048,Eurofloat,EU mix,eu_mix
+38469031,Euroglas,EU mix,eu_mix
+38469018,Eurokera,,
+38468976,Holophane,,
+38469032,Isover St Gobain,,
+38468994,Keraglass,,
+38468996,Knauf Insulation,,
+38469049,Manufacture De Baccarat,,
+38469029,O-I Manufactruing France Vayres,,
+38469023,O-I Manufacturing France - Usine De Puy-Guillaume,EU mix,eu_mix
+38469019,O-I Manufacturing Wingles,EU mix,eu_mix
+38468997,Ocv Chambery(Usine B),,
+38469030,Oi Manufacturing France,,
+38469025,Oi Manufacturing France Reims,,
+38469026,Oi Manufacturing France Usine De Labegude,Container glass,name
+38469028,Oi Manufacturing Gironcourt,Container glass,name
+38469027,Oi Manufacturing Usine De Veauche,Container glass,name
+38468995,Oi Vergèze,,
+38468965,Sa  Alphaglass,,
+38469015,Saint Gobain Glass France,,
+38469036,Saint Gobain Glass France,Flat glass,name
+38468980,Saint Gobain Isover,,
+38469033,Saverglass,Container glass,name
+38469022,Sgd Usine De Sucy En Brie,,
+38469020,Stölzle Masnières Parfumerie,Container glass,name
+38469034,Tourres & Cie,,
+38469041,Ursa France,,
+38469035,Usine De Guimerville,EU mix,eu_mix
+38469010,Usine De L'Ardoise,,
+38469038,Verallia,Container glass,name
+38469021,Verallia,Container glass,name
+38469024,Verallia - Usine De Chalon Sur Saône,Container glass,name
+38469037,Verallia France Usine De Lagnieu,Container glass,name
+38468960,Verallia Verrerie De Oiry,Container glass,name
+38468961,Verallia-Vauxrot,Container glass,name
+38469040,Verescence France Sas - Usine De Mers,EU mix,eu_mix
+38469011,Verreries Brosse Sas,EU mix,eu_mix
+38468962,Voa - Verrrerie D'Albi,,
+38469344,Allied Glass - Knottingley Site,,
+38469310,Allied Glass Knottingley,,
+38469302,Ardagh Glass (Worksop) Ltd,,
+38469338,Ardagh Glass Barnsley,EU mix,eu_mix
+38469301,Ardagh Glass Barnsley,EU mix,eu_mix
+38469345,Ardagh Glass Headlands,,
+38469349,Ardagh Glass Wheatley,EU mix,eu_mix
+38469295,"Ardagh Glass, Portland Place, Irvine",,
+38469341,Beatson Clark Plc,EU mix,eu_mix
+38469312,Cowley Hill Works,,
+38469322,Cowley Hill Works,,
+38469342,Eggbrough Site,EU mix,eu_mix
+38469292,Encirc Ltd.,,
+38469317,Fibre Glass Wigan  ,,
+38469307,Greengate  Works,EU mix,eu_mix
+38469337,Guardian Industries Uk Ltd,,
+38469340,Leeds,,
+38469339,O-I Manufacturing Uk Limited,,
+38469309,O-I Manufacturing Uk Ltd,,
+38469294,O-I Manufacturing Uk Ltd Glasshouse Loan Allo,EU mix,eu_mix
+38469281,Pont-Y-Felin,,
+38469283,Queensferry Mineral Fibre Works,,
+38469347,"Quinn Glass, Elton",,
+38469358,Ravenhead Insulation Works,,
+38469274,Saint-Gobain Isover ,,
+38469311,Sia Abrafoam Ltd,,
+38469318,Stolzle Flaconnage Limited,,
+38469293,"Superglass Insulations Ltd, Stirling",,
+38469343,Watson Street Works,,
+38469346,Weeland Road,,
+38469151,Ba Glass Greece S.A.,,
+38469157,Ge Hungary Kft.,,
+38469158,Ge Hungary Zrt.,,
+38469152,Ge Hungary Zrt.,,
+38469155,Guardian Orosháza Korlátolt Felelősségű Társaság,Flat glass,name
+38469156,Lighttech Lámpatechnológiai Kft.,,
+38469154,O-I Manufacturing Magyarország Kft.,EU mix,eu_mix
+38469153,R-Glass Hungary Kft.,,
+38469073,Agc Flat Glass Italia S.R.L. - Sito Di Cuneo,Flat glass,name
+38469140,Agc Flat Glass Italia Srl - Stabilimanto Do Salerno,,
+38469117,Ardagh Glass Italy Srl A Su,EU mix,eu_mix
+38469183,Bormioli Pharma Spa - Stabilimento Di Bergantino,EU mix,eu_mix
+38469164,Bormioli Rocco E Figlio Spa – Stab. Di Trezzano Sul Naviglio,EU mix,eu_mix
+38469076,Bormioli Rocco Spa - Stabilimento Di Altare,,
+38469102,Bormioli Rocco Spa - Stabilimento Di Fidenza,,
+38469114,Corning Pharmaceutical Glass,EU mix,eu_mix
+38469166,Corsico Vetro Srl,EU mix,eu_mix
+38469142,Manfredonia Vetro S.P.A.,,
+38469148,O-I Manufacturing Italy  Stabilimento Di Castel Maggiore (Bo),,
+38469070,O-I Manufacturing Italy S.P.A. - Stabilimento Di Aprilia,,
+38469074,O-I Manufacturing Italy S.P.A. Stabilimento Di Asti,,
+38469127,O-I Manufacturing Italy Spa - Stabilimento Di Bari,EU mix,eu_mix
+38469133,O-I Manufacturing Italy Spa - Stabilimento Di Marsala,,
+38469167,O-I Manufacturing Italy Spa San Polo Di Piave,EU mix,eu_mix
+38469091,O-I Manufacturing Italy Spa Stabilimento Di Villotta,,
+38469101,O-I Manufacturing Italy Spa-Stabilimento Di Mezzocorona,EU mix,eu_mix
+38469085,Ocv Italia S.R.L. - Stabilimento Di Besana In Brianza,,
+38469120,Pilkington Italia S.P.A,Flat glass,name
+38469174,Pilkington Italia S.P.A.,,
+38469139,Pilkington Italia S.P.A.Stabilimento Di San Salvo,,
+38469089,Pilkington Italia Spa,,
+38469086,Saint Gobain Ppc Italia Spa Attività Isover-  Stabilimento Di Vidalengo,,
+38469112,Saint-Gobain Glass Italia S.P.A.,Flat glass,name
+38469129,San Domenico Vetraria Spa,,
+38469138,Seves Spa,,
+38469160,Sisecam Flat Glass Italy Srl,Flat glass,name
+38469177,Sisecam Flat Glass South Italy Srl,Flat glass,name
+38469143,Stabilimento Di Altare,,
+38469077,Stabilimento Di Carcare,EU mix,eu_mix
+38469078,Stabilimento Di Dego,EU mix,eu_mix
+38469098,Stabilimento Di Gazzo Veronese,EU mix,eu_mix
+38469096,Stabilimento Di Lonigo,EU mix,eu_mix
+38469110,Stabilimento Di Pescia,EU mix,eu_mix
+38469180,Stabilimento Di San Gemini,EU mix,eu_mix
+38469144,Stabilimento Di Villa Poma,EU mix,eu_mix
+38469125,Vebad Spa ,,
+38469175,Vetreria Cooperativa Piegarese Soc. Coop. ,EU mix,eu_mix
+38469087,Vetreria Di Borgonovo,,
+38469122,Vetrerie Meridionali Spa,EU mix,eu_mix
+38469097,Vetrerie Riunite Spa,,
+38469159,Vetri Speciali S.P.A. - Stabilimento Di Ormelle,EU mix,eu_mix
+38469161,Vetri Speciali S.P.A. - Stabilimento Di Pergine Valsugana,EU mix,eu_mix
+38469090,Vetri Speciali S.P.A. - Stabilimento San Vito Al Tagliamento,,
+38469108,Zignago Vetro Stabilimento Di Empoli,EU mix,eu_mix
+38469088,Zignago Vetro Stabilimento Di Fossalta Di Portogruaro,EU mix,eu_mix
+38469185,"Ab ""Panevėžio Stiklas""",,
+38469188,"Uab ""Kauno Stiklas""",EU mix,eu_mix
+38469191,Guardian Luxguard I S.À R.L.,Flat glass,name
+38469194,Guardian Luxguard Ii S.À R.L.,Flat glass,name
+38469197,Agc Flatglass Nederland Bv,,
+38469212,Ardagh Glass Dongen Bv,EU mix,eu_mix
+38469220,Ardagh Glass Moerdijk,EU mix,eu_mix
+38469215,"Electric Glass Fiber Nl, B.V.",,
+38469200,Johnson Matthey Bv,,
+38469202,O-I Netherlands Bv (Leerdam),EU mix,eu_mix
+38469199,O-I Netherlands Bv (Maastricht),EU mix,eu_mix
+38469201,O-I Netherlands Bv (Schiedam),EU mix,eu_mix
+38469214,Saint Gobain Construction Products,,
+38469181,91-Plus Huta Szkła Szczakowa Sp. Z O.O. W Upadłości,,
+38469206,Ardagh Glass S.A.,EU mix,eu_mix
+38469204,Ardagh Glass S.A.,EU mix,eu_mix
+38469205,Ardagh Glass S.A.,EU mix,eu_mix
+38469203,Ba Glass Poland Sp. Z O.O.,EU mix,eu_mix
+38469186,Ba Glass Poland Sp. Z O.O. Zakład Produkcyjny W Jedlicach,EU mix,eu_mix
+38469195,"Cp Glass  S.A. Kraków, Oddział Huta Szkła ""Orzesze""",EU mix,eu_mix
+38469218,Euroglas Polska Sp. Z O.O.,EU mix,eu_mix
+38469209,Guardian Częstochowa Sp. Z O. O.,Flat glass,name
+38469189,Heinz Glas Działdowo Sp. Z O.O.,,
+38469176,"Huta Szkla,,Jaroszowiec"" Sp .Z O.O.",EU mix,eu_mix
+38469219,"Huta Szkła ""Czechy"" S.A.",EU mix,eu_mix
+38469172,"Huta Szkła ""Feniks"" Sylwester Renasik",,
+38469217,"Huta Szkła ""Jaroszowiec"" Sp. Z O.O., Zakład W Wałbrzychu",,
+38469216,"Huta Szkła Gospodarczego ""Irena"" S.A.",,
+38469168,"Huta Szkła Gospodarczego ""Tarnów"" S.A.",,
+38469173,Huta Szkła Kryształowego Violetta S.A.,,
+38469171,Krosglass S.A.,,
+38469179,"Krosnieńskie Huty Szkła ""Krosno"" S.A.",,
+38469223,Krosno Glass Spółka Z Ograniczoną Odpowiedzialnością,,
+38469221,Philips Lighting Poland Spółka Z O.O.,,
+38469207,Pilkington Polska Sp. Z O.O.,Flat glass,name
+38468992,"Rockwool, A.S., Výrobní Závod Bohumín",,
+38469193,Saint-Gobain Innovative Materials Polska Spółka Z O.O. Oddział Glass,EU mix,eu_mix
+38469170,"Spółdzielnia Pracy Huta Szkła ""Sława"" W Kielcach",,
+38469222,Stolzle Częstochowa Sp. Z O.O.,Container glass,name
+38469178,Tdp Sp. Z O.O.,,
+38469182,Ursa Polska Sp. Z O.O.,,
+38469192,Zakład Isover W Gliwicach,,
+38469211,Zakład Produkcyjny Antoninek,,
+38469210,Zakład Produkcyjny Jarosław,EU mix,eu_mix
+38469198,"Zakłady Chemiczne ""Rudniki"" S.A.",,
+38469236,"Ba Glass Portugal, S.A. Unidade Fabril Da Venda Nova (Ci)",EU mix,eu_mix
+38469233,"Ba Glass Portugal, Sa - Unidade Fabril Da Marinha Grande (Ci)",,
+38469238,"Ba Glass Portugal, Sa - Unidade Fabril De Avintes (Ci)",EU mix,eu_mix
+38469241,"Crisal - Cristalaria Automática, Sa (Ci)",,
+38469232,"Gallovidro, S.A. (Ci)",,
+38469245,"Saint - Gobain Glass Portugal, Vidro Plano S.A.",,
+38469230,Santos Barosa Vidros Sa (Ci),EU mix,eu_mix
+38469243,"Verallia Portugal, S.A (Ci)",,
+38469250,Ba Glass Romania Sa,,
+38469252,Saint Gobain Construction Products Romania - Punct De Lucru Isover Ploiesti,,
+38469251,Sc Ges Glass Srl,,
+38469249,Sc Saint Gobain Sticla Romania Srl,EU mix,eu_mix
+38469258,"Johns Manville Slovakia, A.S.-Výroba Skla A Súvisiacej Prevádzky",,
+38469259,"Rona, A.S. - Výroba Skla A Sklárskych Výrobkov",,
+38469260,Vetropack Nemšová S.R.O. - Výroba Skla A Sklárskych Výrobkov,Container glass,name
+38469266,Steklarna Hrastnik - Pe Special,,
+38469262,Steklarna Hrastnik - Pe Vitrum,EU mix,eu_mix
+38469265,Steklarna Rogaška,,
+38469263,Ursa Slovenija,,
+38468977,Vetropack Straža D.D.,Container glass,name
+38469334,Ardagh Glass Limmared Ab,EU mix,eu_mix
+38469335,Pilkington Floatglas Ab,,
+38469324,"Saint-Gobain Sweden Ab, Isover",,

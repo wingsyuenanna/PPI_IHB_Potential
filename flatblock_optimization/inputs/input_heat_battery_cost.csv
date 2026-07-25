@@ -5,3 +5,21 @@ Thermal Lifetime yr,year,25,,
 Thermal Discount rate,fraction,0.07,,
 Thermal Eff <=200C,,0.98,,
 Thermal Eff >200C,,0.95,,
+IHB input CAPEX $/kW,$/kW,105.66,116.66,128.8
+IHB delivery CAPEX $/kW,$/kW,316.99,349.99,386.41
+IHB storage CAPEX $/kWh,$/kWh,5.28,5.83,6.44
+IHB storage CAPEX low $/kWh,$/kWh,1.58,1.75,1.93
+IHB storage CAPEX high $/kWh,$/kWh,10.57,11.67,12.88
+IHB RTE,fraction,0.95,0.95,0.95
+IHB OPEX frac/yr,% of capex,0.0,0.0,0.0
+IHB source year,year,2023,2023,2023
+HP CAPEX below100C $/kWth,$/kWth,831.73,918.3,1013.87
+HP CAPEX 100C-200C $/kWth,$/kWth,1033.72,1141.31,1260.1
+HP FOM below100C $/kWth/yr,$/kWth-yr,14.26,15.74,17.38
+HP FOM 100C-200C $/kWth/yr,$/kWth-yr,21.39,23.61,26.07
+HP VOM $/MWhth,$/MWhth,0,0,0
+HP lifetime yr,year,25,25,25
+HP source year,year,2021,2021,2021
+USD inflation index CPI-U,index 1982-84=100,321.962,355.472,392.470
+USD inflate from HP source yr,factor,1.188183,1.311850,1.448389
+USD inflate from IHB source yr,factor,1.056642,1.166618,1.288041

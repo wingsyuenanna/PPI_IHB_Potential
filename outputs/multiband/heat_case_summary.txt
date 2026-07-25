@@ -1,11 +1,8 @@
-# Heat-demand sensitivity (solar+storage, no converter CAPEX, VoLL=0)
-Fleet heat: low 388 / base 522 / high 697 TWh/y
+Heat-case sensitivity under 2030 costs (solar+storage)
 
-| Land | Heat | Met 90% (n / heat) | HW reliability | HW LCOH all | Met90 HW LCOH | Met90 med LCOH |
-|------|------|--------------------|----------------|-------------|---------------|----------------|
-| 5km | low | 1957/2192 (49%) | 67% | $85/MWh | $87/MWh | $71/MWh |
-| 5km | base | 1925/2192 (39%) | 59% | $82/MWh | $88/MWh | $71/MWh |
-| 5km | high | 1844/2192 (38%) | 58% | $81/MWh | $84/MWh | $70/MWh |
-| 15km | low | 2156/2192 (83%) | 88% | $117/MWh | $110/MWh | $74/MWh |
-| 15km | base | 2148/2192 (75%) | 86% | $110/MWh | $107/MWh | $74/MWh |
-| 15km | high | 2135/2192 (72%) | 85% | $108/MWh | $104/MWh | $74/MWh |
+land_5km_ss_2030: fleet 522.3 TWh | met heat 39% | HW LCOH $49 | HW rel 59%
+land_5km_ss_2030_heat_low: fleet 388.4 TWh | met heat 49% | HW LCOH $53 | HW rel 67%
+land_5km_ss_2030_heat_high: fleet 696.6 TWh | met heat 38% | HW LCOH $48 | HW rel 58%
+land_15km_ss_2030: fleet 522.3 TWh | met heat 75% | HW LCOH $79 | HW rel 86%
+land_15km_ss_2030_heat_low: fleet 388.4 TWh | met heat 83% | HW LCOH $85 | HW rel 88%
+land_15km_ss_2030_heat_high: fleet 696.6 TWh | met heat 72% | HW LCOH $76 | HW rel 85%

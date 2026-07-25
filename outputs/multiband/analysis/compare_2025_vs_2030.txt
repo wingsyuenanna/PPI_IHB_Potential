@@ -1,0 +1,12 @@
+2025 vs 2030 cost years (solar+storage multiband, 90% floor)
+2030: BNEF 2030 PV + thermal storage CAPEX $20/kWh (vs $100 in 2025)
+Land/heat/solar profiles unchanged.
+
+         scenario cost_year  n_sites  met_sites  met_sites_pct  met_heat_pct  hw_reliability  hw_lcoh_all  hw_lcoh_met  median_lcoh_met
+      land_5km_ss      2025     2192       1925           87.8          39.4            58.6         70.0         87.4             70.7
+ land_5km_ss_2030      2030     2192       1925           87.8          39.4            58.6         49.0         60.6             45.9
+     land_15km_ss      2025     2192       2148           98.0          74.7            86.0        108.7        106.5             73.8
+land_15km_ss_2030      2030     2192       2148           98.0          74.7            86.0         78.5         77.0             48.5
+
+5km: met heat 39% -> 39%  |  HW LCOH met $87 -> $61  |  HW reliability 59% -> 59%
+15km: met heat 75% -> 75%  |  HW LCOH met $106 -> $77  |  HW reliability 86% -> 86%

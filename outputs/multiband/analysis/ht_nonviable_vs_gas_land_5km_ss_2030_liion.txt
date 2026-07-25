@@ -1,0 +1,8 @@
+Scenario: land_5km_ss_2030_liion
+EURUSD=1.08; GBR gas proxied to IRL
+Gas boiler country range: $66–$132/MWh (HW $84)
+HT-majority n=604, heat=359.9 TWh
+  Fail 90%: n=183, heat=281.2 TWh, HW CF 15.2%, med CF 14.0%
+  Met & below gas: n=232, heat=45.5 TWh, HW CF 19.1%
+  HT fail med CF 14.0% vs HT met 16.0% — solar is not the main separator
+Cite: Agora Industry & Agora Energiewende, The business case for electrifying industrial heat (PDF linked in script docstring).
