@@ -1,0 +1,30 @@
+Full-fleet availability sweep — 15 km, floors 10–100% (step 10 pp)
+Sites with complete sweeps: 2191
+
+Fleet heat-weighted served % by *fixed* availability floor:
+ availability_floor  served_pct  served_twh  hw_LCOH_eur
+                0.1        10.0        51.0         34.6
+                0.2        20.0       101.9         35.1
+                0.3        30.0       152.9         36.2
+                0.4        40.0       203.9         37.3
+                0.5        49.9       254.5         38.1
+                0.6        59.8       304.6         39.4
+                0.7        69.5       354.2         43.3
+                0.8        78.8       401.7         53.3
+                0.9        86.9       443.1         81.4
+                1.0        93.4       476.0        208.0
+
+Per-site LCOH knee (floor before sharpest upturn; else max≤gas / min LCOH):
+  Heat-weighted knee floor: 88.8%
+  Fleet served at knee:     85.3%  (434.9 TWh)
+  HW LCOH at knee:          €72.4/MWh
+  Knee methods: {'before_max_jump': 2157, 'max_below_gas': 34}
+
+Comparison:
+  Fixed 90% floor (main fleet): 86.1%
+  Gas-capped step-from-90:      84.4%
+  Per-site LCOH knee:           85.3%
+
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_15km_long.csv
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_knee_15km.csv
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_15km_by_floor.csv

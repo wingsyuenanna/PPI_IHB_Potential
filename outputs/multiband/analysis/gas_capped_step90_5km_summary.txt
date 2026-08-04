@@ -1,0 +1,10 @@
+Gas-capped step-from-90% (5 km, step=5 pp, 2030 costs)
+Sites: 2192  ok: 2167  above_gas_all: 25
+Direction: stepped up 1583 | stepped down 609
+Fleet process heat: 522.3 TWh
+Heat served at α* (LCOH≤country gas): 307.0 TWh (58.8% of fleet)
+Heat-weighted α* (floor): 95.4%
+Heat-weighted achieved availability: 58.8%
+Mean α* (site): 91.2%
+New solves (excl. reused 90%): 4034
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/gas_capped_step90_5km.csv

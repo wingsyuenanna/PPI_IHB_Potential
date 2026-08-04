@@ -1,0 +1,17 @@
+Full-fleet availability sweep — 5 km, floors 10–100% (step 10 pp)
+Sites with complete sweeps: 2192
+
+ availability_floor  served_pct  served_twh  hw_LCOH_eur
+                0.1         9.5        49.8         34.4
+                0.2        17.7        92.7         34.4
+                0.3        25.2       131.4         35.3
+                0.4        31.9       166.8         36.4
+                0.5        38.2       199.7         37.2
+                0.6        44.2       231.1         38.2
+                0.7        49.8       260.1         40.4
+                0.8        54.7       285.8         45.9
+                0.9        59.0       308.3         61.8
+                1.0        62.2       324.8        131.3
+
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_5km_long.csv
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_5km_by_floor.csv
