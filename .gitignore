@@ -1,0 +1,10 @@
+# Large local-only archives (exceed GitHub 100MB limit; keep on disk)
+archive/2026-08-06_cleanup/jrc_idees.tar.gz
+archive/2026-08-06_cleanup/solar_hourly_profiles.tar.gz
+
+# Local env / noise
+.venv/
+.DS_Store
+**/__pycache__/
+*.pyc
+~$*

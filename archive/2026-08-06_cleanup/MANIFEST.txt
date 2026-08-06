@@ -1,0 +1,56 @@
+Staged 4424 analysis clutter files
+Creating archive/2026-08-06_cleanup/analysis_clutter.tar.gz (1 members)...
+  + archive/2026-08-06_cleanup/_stage_analysis_clutter -> outputs/multiband/analysis_clutter_2026-08-06
+  wrote 5.1 MB
+  removed dir archive/2026-08-06_cleanup/_stage_analysis_clutter
+Creating archive/2026-08-06_cleanup/solar_hourly_profiles.tar.gz (1 members)...
+  + solar_radiation/outputs/hourly_profiles -> solar_radiation/outputs/hourly_profiles
+  wrote 225.3 MB
+  removed dir solar_radiation/outputs/hourly_profiles
+Creating archive/2026-08-06_cleanup/jrc_idees.tar.gz (1 members)...
+  + References/jrc_idees -> References/jrc_idees
+  wrote 816.8 MB
+  removed dir References/jrc_idees
+Creating archive/2026-08-06_cleanup/hotmaps_load_profiles.tar.gz (1 members)...
+  + Input/hotmaps_load_profiles -> Input/hotmaps_load_profiles
+  wrote 24.2 MB
+  removed dir Input/hotmaps_load_profiles
+Older scenarios to archive: 16
+Creating archive/2026-08-06_cleanup/older_multiband_scenarios.tar.gz (16 members)...
+  + outputs/multiband/land_15km -> outputs/multiband/land_15km
+  + outputs/multiband/land_15km_ss -> outputs/multiband/land_15km_ss
+  + outputs/multiband/land_15km_ss_2030 -> outputs/multiband/land_15km_ss_2030
+  + outputs/multiband/land_15km_ss_2030_heat_high -> outputs/multiband/land_15km_ss_2030_heat_high
+  + outputs/multiband/land_15km_ss_2030_heat_low -> outputs/multiband/land_15km_ss_2030_heat_low
+  + outputs/multiband/land_15km_ss_2030_liion_fullyear -> outputs/multiband/land_15km_ss_2030_liion_fullyear
+  + outputs/multiband/land_15km_ss_heat_high -> outputs/multiband/land_15km_ss_heat_high
+  + outputs/multiband/land_15km_ss_heat_low -> outputs/multiband/land_15km_ss_heat_low
+  + outputs/multiband/land_5km -> outputs/multiband/land_5km
+  + outputs/multiband/land_5km_ss -> outputs/multiband/land_5km_ss
+  + outputs/multiband/land_5km_ss_2030 -> outputs/multiband/land_5km_ss_2030
+  + outputs/multiband/land_5km_ss_2030_heat_high -> outputs/multiband/land_5km_ss_2030_heat_high
+  + outputs/multiband/land_5km_ss_2030_heat_low -> outputs/multiband/land_5km_ss_2030_heat_low
+  + outputs/multiband/land_5km_ss_2030_liion_fullyear -> outputs/multiband/land_5km_ss_2030_liion_fullyear
+  + outputs/multiband/land_5km_ss_heat_high -> outputs/multiband/land_5km_ss_heat_high
+  + outputs/multiband/land_5km_ss_heat_low -> outputs/multiband/land_5km_ss_heat_low
+  wrote 7.3 MB
+  removed dir outputs/multiband/land_15km
+  removed dir outputs/multiband/land_15km_ss
+  removed dir outputs/multiband/land_15km_ss_2030
+  removed dir outputs/multiband/land_15km_ss_2030_heat_high
+  removed dir outputs/multiband/land_15km_ss_2030_heat_low
+  removed dir outputs/multiband/land_15km_ss_2030_liion_fullyear
+  removed dir outputs/multiband/land_15km_ss_heat_high
+  removed dir outputs/multiband/land_15km_ss_heat_low
+  removed dir outputs/multiband/land_5km
+  removed dir outputs/multiband/land_5km_ss
+  removed dir outputs/multiband/land_5km_ss_2030
+  removed dir outputs/multiband/land_5km_ss_2030_heat_high
+  removed dir outputs/multiband/land_5km_ss_2030_heat_low
+  removed dir outputs/multiband/land_5km_ss_2030_liion_fullyear
+  removed dir outputs/multiband/land_5km_ss_heat_high
+  removed dir outputs/multiband/land_5km_ss_heat_low
+
+NOTE: jrc_idees.tar.gz and solar_hourly_profiles.tar.gz are gitignored
+(local-only) because they exceed GitHub's 100MB file limit. They remain
+on disk under this folder for restore.

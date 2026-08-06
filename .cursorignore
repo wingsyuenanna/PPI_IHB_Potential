@@ -1,0 +1,24 @@
+# Compressed archives (do not index)
+archive/**/*.tar.gz
+archive/**/*.tgz
+archive/**/*.zip
+
+# Local Python env
+.venv/
+
+# Regenerable bulky data — ignored if re-extracted from archive
+solar_radiation/outputs/hourly_profiles/
+References/jrc_idees/
+Input/hotmaps_load_profiles/
+
+# One-off per-site curve dumps (if regenerated)
+outputs/multiband/analysis/lcoh_vs_availability_[0-9]*
+outputs/multiband/analysis/dispatch_*
+outputs/multiband/analysis/ht_fail_*
+outputs/multiband/analysis/**/__pycache__/
+
+# OS / editor noise
+.DS_Store
+**/__pycache__/
+*.pyc
+~$*
