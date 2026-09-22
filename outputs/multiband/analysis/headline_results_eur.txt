@@ -1,0 +1,17 @@
+Headline multiband results (EUR)
+FX: EURUSD = 1.08  →  € = $ / 1.08
+Scenarios: land_5km_ss_2030_liion / land_15km_ss_2030_liion
+
+5 km land:
+  Heat served:              59% of fleet demand
+  Avg LCOH (all served):    €62/MWh
+  ≥90% reliability cohort:  €67/MWh · 1,925 sites · 40% of demand
+
+15 km land:
+  Heat served:              86% of fleet demand
+  Avg LCOH (all served):    €81/MWh
+  ≥90% reliability cohort:  €79/MWh · 2,148 sites · 75% of demand
+
+USD equivalents (model native):
+  5 km:  $67/MWh all-served · $72/MWh ≥90%
+  15 km: $87/MWh all-served · $85/MWh ≥90%

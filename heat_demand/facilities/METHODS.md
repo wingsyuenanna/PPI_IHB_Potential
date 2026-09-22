@@ -87,13 +87,15 @@ useful_heat_TJ  = fuel_energy_TJ × boiler_efficiency
 `food_country_scale`): Climate TRACE food emissions are modeled and badly
 mis-allocated between countries (Portugal ~20× too high, Spain ~2.6×), so
 they are used **only as within-country allocation weights**. Each country's
-food heat total is scaled to the useful-energy reference
-(`References/industry_useful_energy_demand_<CC>.csv`, non-electric process
-heat + steam rows). GBR has no reference file and uses the aggregate EU-26
-factor. Consequence: food facility values are downscaled country by country
-(EU food total ≈ 103 TWh, the reference level, ≈54% of the Eurostat ×
-heat-share yardstick); the earlier EU-wide combustion-share calibration is
-superseded and the share is back at the physical 1.0.
+food heat total is scaled to the JRC-IDEES-2023 useful-energy reference
+(`References/jrc_idees/extracted/2023/industry_useful_energy_demand_<CC>.csv`,
+row `Non-electric heat useful energy demand` = Low-enthalpy + Steam + Other
+− electric process rows). Legacy IndustryHeat-EU Madeddu temperature-band
+CSVs remain under `References/industry_useful_energy_demand/` for comparison.
+GBR has no reference file and uses the aggregate EU-26 factor. Consequence:
+food facility values are downscaled country by country to the IDEES food
+heat level; the earlier EU-wide combustion-share calibration is superseded
+and the share is back at the physical 1.0.
 
 Sources:
 - **Fuel emission factors**: IPCC 2006 Guidelines, Vol. 2, Table 2.3 —

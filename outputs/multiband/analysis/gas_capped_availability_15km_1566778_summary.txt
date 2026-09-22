@@ -1,0 +1,8 @@
+Gas-capped availability (15 km land, 2030 costs)
+Sites attempted: 1  ok: 1  above_gas_all: 0
+Fleet replaceable heat: 0.8 TWh
+Heat served at α* (LCOH≤gas): 0.7 TWh (86.0% of fleet)
+Mean α* (site-weighted): 86.0%
+Heat-weighted achieved reliability: 86.0%
+Sites with α*=0: 0
+Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/gas_capped_availability_15km_1566778.csv

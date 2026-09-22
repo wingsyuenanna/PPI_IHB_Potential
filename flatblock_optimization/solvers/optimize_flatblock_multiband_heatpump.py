@@ -26,6 +26,8 @@ import pandas as pd
 from highspy import Highs, HighsModelStatus
 
 HS_INF = 1e30
+# Post-solve: treat charge & discharge both above this (MW) as simultaneous.
+SIMULTANEOUS_EPS_MW = 1e-6
 
 DEFAULT_COP_BY_BAND = {
     "heat_below100C_tj": 2.7,
@@ -52,6 +54,36 @@ def _kmeans(X: np.ndarray, K: int, iters: int = 60, seed: int = 0):
             if len(m):
                 C[k] = m.mean(0)
     return labels, C
+
+
+def _simultaneous_cd_stats(
+    charge_by_day: List[np.ndarray],
+    discharge_by_day: List[np.ndarray],
+    weights: np.ndarray,
+    eps: float = SIMULTANEOUS_EPS_MW,
+) -> Dict[str, float]:
+    """Post-process: hours where charge and discharge both exceed ``eps`` (MW).
+
+    Returns unweighted hour count, weight-sum of those hours (≈ annual hours if
+    weights sum to ~365), and weight-sum of min(ch, dis) on those hours (MWh/yr).
+    """
+    n_hours = 0
+    weighted_hours = 0.0
+    weighted_overlap_mwh = 0.0
+    for c, (ch, dis) in enumerate(zip(charge_by_day, discharge_by_day)):
+        both = (ch > eps) & (dis > eps)
+        n = int(both.sum())
+        if n == 0:
+            continue
+        n_hours += n
+        w = float(weights[c])
+        weighted_hours += w * n
+        weighted_overlap_mwh += w * float(np.minimum(ch[both], dis[both]).sum())
+    return {
+        "hours": float(n_hours),
+        "hours_weighted": weighted_hours,
+        "overlap_MWh_weighted": weighted_overlap_mwh,
+    }
 
 
 def representative_days(g: np.ndarray, n_rep: int | None, seed: int = 0):
@@ -97,7 +129,9 @@ def run_multiband_heatpump_optimization(
     IHB bands (COP≤1): solar → resistive charge → thermal store → process heat.
 
     If ``return_hourly``, the second return value is a DataFrame of hourly dispatch
-    on each representative day (MW electrical or thermal as labeled).
+    on each representative day (MW electrical or thermal as labeled), including
+    ``liion_simultaneous`` / ``ihb_simultaneous`` boolean flags.
+    Results always include post-solve simultaneous charge/discharge diagnostics.
     """
     del inverter_efficiency  # reserved; charge draws solar MWac-equivalent directly
     cop_by_band = cop_by_band or DEFAULT_COP_BY_BAND
@@ -556,6 +590,45 @@ def run_multiband_heatpump_optimization(
     lcoh_served = system_annual / served_MWh if served_MWh > 1e-9 else np.nan
     den = served_MWh if served_MWh > 1e-9 else np.nan
 
+    # Post-process: flag hours with simultaneous charge & discharge (LP can allow this).
+    li_ch_days: List[np.ndarray] = []
+    li_dis_days: List[np.ndarray] = []
+    ihb_ch_days: List[np.ndarray] = []
+    ihb_dis_days: List[np.ndarray] = []
+    for c in range(K):
+        if n_hp:
+            li_ch_days.append(np.asarray(cv[li_ch0(c):li_ch0(c) + H], dtype=float))
+            li_dis_days.append(np.asarray(cv[li_dis0(c):li_dis0(c) + H], dtype=float))
+        else:
+            li_ch_days.append(np.zeros(H))
+            li_dis_days.append(np.zeros(H))
+        if n_ihb:
+            ch_sum = np.zeros(H)
+            dis_sum = np.zeros(H)
+            for j in ihb_idx:
+                p = ihb_pos[j]
+                ch_sum += cv[ihb_ch0(p, c):ihb_ch0(p, c) + H]
+                dis_sum += cv[ihb_dis0(p, c):ihb_dis0(p, c) + H]
+            ihb_ch_days.append(ch_sum)
+            ihb_dis_days.append(dis_sum)
+        else:
+            ihb_ch_days.append(np.zeros(H))
+            ihb_dis_days.append(np.zeros(H))
+
+    li_sim = _simultaneous_cd_stats(li_ch_days, li_dis_days, weights)
+    # IHB exclusivity is per thermal store (band), not on the sum across bands.
+    ihb_band_hours = 0.0
+    ihb_band_hours_w = 0.0
+    ihb_band_overlap = 0.0
+    for j in ihb_idx:
+        p = ihb_pos[j]
+        ch_days = [np.asarray(cv[ihb_ch0(p, c):ihb_ch0(p, c) + H], dtype=float) for c in range(K)]
+        dis_days = [np.asarray(cv[ihb_dis0(p, c):ihb_dis0(p, c) + H], dtype=float) for c in range(K)]
+        st = _simultaneous_cd_stats(ch_days, dis_days, weights)
+        ihb_band_hours += st["hours"]
+        ihb_band_hours_w += st["hours_weighted"]
+        ihb_band_overlap += st["overlap_MWh_weighted"]
+
     results = {
         "site": site_id,
         "n_bands": nb,
@@ -582,6 +655,15 @@ def run_multiband_heatpump_optimization(
         "ihb_load_MW": sum(load for _, load, cop in bands if cop <= 1.0),
         "solve_seconds": elapsed,
         "project_start_year": int(project_start_year),
+        "liion_simultaneous_hours": li_sim["hours"],
+        "liion_simultaneous_hours_weighted": li_sim["hours_weighted"],
+        "liion_simultaneous_overlap_MWh_weighted": li_sim["overlap_MWh_weighted"],
+        "ihb_simultaneous_hours": ihb_band_hours,
+        "ihb_simultaneous_hours_weighted": ihb_band_hours_w,
+        "ihb_simultaneous_overlap_MWh_weighted": ihb_band_overlap,
+        "no_simultaneous_charge_discharge": bool(
+            li_sim["hours"] == 0 and ihb_band_hours == 0
+        ),
         "bands": per_band,
     }
 
@@ -590,8 +672,8 @@ def run_multiband_heatpump_optimization(
         rows = []
         for c in range(K):
             solar_mw = S_opt * reps[c]
-            li_ch = cv[li_ch0(c):li_ch0(c) + H] if n_hp else np.zeros(H)
-            li_dis = cv[li_dis0(c):li_dis0(c) + H] if n_hp else np.zeros(H)
+            li_ch = li_ch_days[c]
+            li_dis = li_dis_days[c]
             li_soc = cv[li_soc0(c):li_soc0(c) + H] if n_hp else np.zeros(H)
             hp_direct = np.zeros(H)
             hp_from_batt = np.zeros(H)
@@ -604,19 +686,22 @@ def run_multiband_heatpump_optimization(
                 hp_from_batt += cv[hp_from_batt0(p, c):hp_from_batt0(p, c) + H]
                 hp_un += cv[hp_un0(p, c):hp_un0(p, c) + H]
                 hp_load += load * shape24
-            ihb_ch = np.zeros(H)
-            ihb_dis = np.zeros(H)
+            ihb_ch = ihb_ch_days[c]
+            ihb_dis = ihb_dis_days[c]
             ihb_soc = np.zeros(H)
             ihb_un = np.zeros(H)
             ihb_load = np.zeros(H)
+            # Per-band IHB simultaneous (OR across bands) for hourly flag.
+            ihb_sim_hour = np.zeros(H, dtype=bool)
             for j in ihb_idx:
                 p = ihb_pos[j]
                 _, load, _cop = bands[j]
-                ihb_ch += cv[ihb_ch0(p, c):ihb_ch0(p, c) + H]
-                ihb_dis += cv[ihb_dis0(p, c):ihb_dis0(p, c) + H]
+                ch_b = cv[ihb_ch0(p, c):ihb_ch0(p, c) + H]
+                dis_b = cv[ihb_dis0(p, c):ihb_dis0(p, c) + H]
                 ihb_soc += cv[ihb_soc0(p, c):ihb_soc0(p, c) + H]
                 ihb_un += cv[ihb_un0(p, c):ihb_un0(p, c) + H]
                 ihb_load += load * shape24
+                ihb_sim_hour |= (ch_b > SIMULTANEOUS_EPS_MW) & (dis_b > SIMULTANEOUS_EPS_MW)
             for t in range(H):
                 rows.append({
                     "rep_day": c,
@@ -628,6 +713,9 @@ def run_multiband_heatpump_optimization(
                     "solar_to_ihb_charge_MW": float(ihb_ch[t]),
                     "liion_discharge_to_hp_MW": float(li_dis[t]),
                     "liion_soc_MWh": float(li_soc[t]),
+                    "liion_simultaneous": bool(
+                        li_ch[t] > SIMULTANEOUS_EPS_MW and li_dis[t] > SIMULTANEOUS_EPS_MW
+                    ),
                     "hp_electric_in_MW": float(hp_direct[t] + hp_from_batt[t]),
                     "hp_heat_out_MW": float(
                         sum(
@@ -644,6 +732,7 @@ def run_multiband_heatpump_optimization(
                     "ihb_soc_MWh": float(ihb_soc[t]),
                     "ihb_load_MW": float(ihb_load[t]),
                     "ihb_unserved_MW": float(ihb_un[t]),
+                    "ihb_simultaneous": bool(ihb_sim_hour[t]),
                 })
         hourly_df = pd.DataFrame(rows)
 

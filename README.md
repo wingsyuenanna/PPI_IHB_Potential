@@ -138,17 +138,17 @@ Re-run with `--overwrite` to refresh all profiles; already-downloaded sites are 
 |-----------|-------|-------|
 | Radiation database | **PVGIS-ERA5** | Reanalysis-based irradiance |
 | Year | **2023** | Single calendar year |
-| System size | **1 kWp** | Output normalized per kWp installed |
+| System size | **1 kWp DC** | PVGIS `peakpower=1`: DC nameplate of the panels (STC), not AC inverter rating |
 | System losses | **0%** | Idealized resource; apply losses in LCOH/sizing step |
 | Tilt | **\|latitude\|** | Steep latitude-tilt rule from prior workflow; not necessarily optimal fixed tilt |
 | Azimuth | **0°** (south) in Northern Hemisphere; **180°** in Southern Hemisphere | |
-| Output variable | **P** (W) → `P_kWperkWp` | Hourly AC power per kWp, kW/kWp |
+| Output variable | **P** (W) → `P_kWperkWp` | Hourly power per 1 kWp DC of panels, kW/kWp |
 
 Timestamps from PVGIS (UTC) are converted to the local timezone at each coordinate (via `timezonefinder`), rounded to the nearest hour, deduplicated, and reindexed to a complete local hourly series for the target year (missing hours filled with 0).
 
 #### Summary metrics
 
-- **`annual_yield_kwh_per_kwp`** — sum of hourly `P_kWperkWp` (= kWh per kWp per year)
+- **`annual_yield_kwh_per_kwp`** — sum of hourly `P_kWperkWp` (= kWh per kWp-DC per year)
 - **`solar_capacity_factor`** — `annual_yield_kwh_per_kwp / 8760`
 
 For the current EU facility set (2023), annual yield ranges from ~950 kWh/kWp (northern Finland) to ~1,950 kWh/kWp (southern Portugal), consistent with latitude and the tilt/loss assumptions above.

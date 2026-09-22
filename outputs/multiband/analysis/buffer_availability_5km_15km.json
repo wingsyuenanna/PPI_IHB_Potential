@@ -1,0 +1,108 @@
+{
+  "fleet": [
+    {
+      "buffer_km": 5,
+      "n_sites": 2192,
+      "process_heat_TWh": 522.3055935422275,
+      "served_heat_TWh": 308.3251948444364,
+      "served_share_pct": 59.03157053199524,
+      "hw_availability_pct": 59.03157053199524,
+      "median_availability_pct": 90.0,
+      "met90_heat_share_pct": 39.572970051123825,
+      "met90_n_sites": 1925
+    },
+    {
+      "buffer_km": 15,
+      "n_sites": 2192,
+      "process_heat_TWh": 522.3055935422275,
+      "served_heat_TWh": 449.81857231062315,
+      "served_share_pct": 86.1217222009812,
+      "hw_availability_pct": 86.1217222009812,
+      "median_availability_pct": 90.0,
+      "met90_heat_share_pct": 74.72138495549629,
+      "met90_n_sites": 2148
+    }
+  ],
+  "sector": [
+    {
+      "sector": "Steam cracking",
+      "process_heat_TWh": 152.3,
+      "served_TWh_5km": 45.8,
+      "served_TWh_15km": 124.6,
+      "availability_pct_5km": 30.1,
+      "availability_pct_15km": 81.8
+    },
+    {
+      "sector": "Iron & steel",
+      "process_heat_TWh": 101.4,
+      "served_TWh_5km": 40.4,
+      "served_TWh_15km": 83.9,
+      "availability_pct_5km": 39.9,
+      "availability_pct_15km": 82.8
+    },
+    {
+      "sector": "Food & beverage",
+      "process_heat_TWh": 98.4,
+      "served_TWh_5km": 87.0,
+      "served_TWh_15km": 88.5,
+      "availability_pct_5km": 88.4,
+      "availability_pct_15km": 90.0
+    },
+    {
+      "sector": "Cement",
+      "process_heat_TWh": 54.1,
+      "served_TWh_5km": 44.1,
+      "served_TWh_15km": 48.6,
+      "availability_pct_5km": 81.5,
+      "availability_pct_15km": 89.8
+    },
+    {
+      "sector": "Chemicals",
+      "process_heat_TWh": 43.1,
+      "served_TWh_5km": 32.5,
+      "served_TWh_15km": 38.8,
+      "availability_pct_5km": 75.5,
+      "availability_pct_15km": 90.0
+    },
+    {
+      "sector": "Pulp & paper",
+      "process_heat_TWh": 18.2,
+      "served_TWh_5km": 14.1,
+      "served_TWh_15km": 16.3,
+      "availability_pct_5km": 77.3,
+      "availability_pct_15km": 89.6
+    },
+    {
+      "sector": "Textiles",
+      "process_heat_TWh": 17.7,
+      "served_TWh_5km": 15.8,
+      "served_TWh_15km": 15.9,
+      "availability_pct_5km": 89.6,
+      "availability_pct_15km": 90.0
+    },
+    {
+      "sector": "Glass",
+      "process_heat_TWh": 16.3,
+      "served_TWh_5km": 14.3,
+      "served_TWh_15km": 14.6,
+      "availability_pct_5km": 88.2,
+      "availability_pct_15km": 90.0
+    },
+    {
+      "sector": "Lime",
+      "process_heat_TWh": 10.9,
+      "served_TWh_5km": 8.2,
+      "served_TWh_15km": 9.7,
+      "availability_pct_5km": 74.8,
+      "availability_pct_15km": 88.8
+    },
+    {
+      "sector": "Aluminium",
+      "process_heat_TWh": 10.1,
+      "served_TWh_5km": 6.1,
+      "served_TWh_15km": 8.9,
+      "availability_pct_5km": 60.3,
+      "availability_pct_15km": 88.1
+    }
+  ]
+}

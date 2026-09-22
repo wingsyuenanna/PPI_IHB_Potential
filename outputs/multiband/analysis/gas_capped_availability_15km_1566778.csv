@@ -1,0 +1,2 @@
+source_id,source_name,iso3_country,subsector,replaceable_heat_mwh_th,available_land_km2,status,alpha_star,Reliability_%,served_frac,served_mwh,LCOH_served_eur_perMWh,gas_heat_cost_eur_mwh,S_opt_MW,solar_per_load_MWdc_per_MWth,n_solves
+1566778,ArcelorMittal Duisburg steel plant,DEU,iron-and-steel,764715.6706976481,60.970834047246726,ok,0.8602,86.02,0.8602,657808.4199341169,77.61823738148018,83.00941176470587,1368.8141224413791,15.680091532121079,8

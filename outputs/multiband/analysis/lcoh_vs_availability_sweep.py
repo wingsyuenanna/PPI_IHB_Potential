@@ -28,7 +28,12 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "flatblock_optimization"))
 
-from run_multiband_potential import CONFIG, run_one_site  # noqa: E402
+from run_multiband_potential import (  # noqa: E402
+    CONFIG,
+    HEAT_CASE_COL,
+    apply_heat_case,
+    run_one_site,
+)
 
 EURUSD = 1.08
 SITES = ROOT / "outputs" / "eu_ihb_site_assessment_2024.csv"
@@ -79,8 +84,9 @@ def _compact_legend(ax) -> None:
     )
 
 
-def load_site(source_id: int, land_km: int) -> dict:
+def load_site(source_id: int, land_km: int, heat_case: str = "base") -> dict:
     sites = pd.read_csv(SITES, low_memory=False)
+    sites = apply_heat_case(sites, heat_case)
     row = sites[sites["source_id"] == source_id]
     if row.empty:
         raise SystemExit(f"source_id {source_id} not in {SITES}")
@@ -98,6 +104,7 @@ def load_site(source_id: int, land_km: int) -> dict:
     if hit.empty:
         raise SystemExit(f"source_id {source_id} not in {land_csv}")
     r["available_land_km2"] = float(hit.iloc[0][land_col])
+    r["heat_case"] = heat_case
     return r
 
 
@@ -107,8 +114,11 @@ def sweep(
     floors: list[float],
     project_start: str = "2030",
     n_rep_days: int = 16,
+    heat_case: str = "base",
 ) -> pd.DataFrame:
-    site = load_site(source_id, land_km)
+    if heat_case not in HEAT_CASE_COL:
+        raise ValueError(f"heat_case must be one of {list(HEAT_CASE_COL)}")
+    site = load_site(source_id, land_km, heat_case=heat_case)
     cfg = dict(CONFIG)
     cfg["project_start"] = project_start
     cfg["n_representative_days"] = n_rep_days
@@ -125,6 +135,7 @@ def sweep(
                     "availability_floor": af,
                     "status": res.get("status"),
                     "source_id": source_id,
+                    "heat_case": heat_case,
                 }
             )
             continue
@@ -137,6 +148,7 @@ def sweep(
                 "iso3_country": res.get("iso3_country"),
                 "subsector": res.get("subsector"),
                 "land_km": land_km,
+                "heat_case": heat_case,
                 "available_land_km2": res.get("available_land_km2"),
                 "replaceable_heat_mwh_th": float(
                     site.get("replaceable_heat_mwh_th") or res.get("replaceable_heat_mwh_th") or 0
@@ -162,8 +174,14 @@ def sweep(
 
 
 def _sweep_one(args: tuple) -> pd.DataFrame:
-    sid, land_km, floors, project_start, n_rep = args
-    return sweep(sid, land_km, floors, project_start=project_start, n_rep_days=n_rep)
+    if len(args) == 5:
+        sid, land_km, floors, project_start, n_rep = args
+        heat_case = "base"
+    else:
+        sid, land_km, floors, project_start, n_rep, heat_case = args
+    return sweep(
+        sid, land_km, floors, project_start=project_start, n_rep_days=n_rep, heat_case=heat_case
+    )
 
 
 def pick_sample(

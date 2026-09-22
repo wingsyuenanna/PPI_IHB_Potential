@@ -1,0 +1,21 @@
+5 km vs 15 km — process heat & availability
+Source: land_*_ss_2030_liion (2,192 sites; 2030 Li-ion + IHB + HP)
+Availability = heat-weighted Reliability_% = served / demand
+
+FLEET
+buffer   process_heat_TWh   served_TWh   avg_availability_%   met90_heat_%   sites_met90
+5 km               522.3        308.3                59.0           39.6   1925 / 2192
+15 km              522.3        449.8                86.1           74.7   2148 / 2192
+
+BY SECTOR
+sector              demand_TWh   served_5   served_15   avail_5%   avail_15%
+Steam cracking           152.3       45.8      124.6       30.1       81.8
+Iron & steel             101.4       40.4       83.9       39.9       82.8
+Food & beverage           98.4       87.0       88.5       88.4       90.0
+Cement                    54.1       44.1       48.6       81.5       89.8
+Chemicals                 43.1       32.5       38.8       75.5       90.0
+Pulp & paper              18.2       14.1       16.3       77.3       89.6
+Textiles                  17.7       15.8       15.9       89.6       90.0
+Glass                     16.3       14.3       14.6       88.2       90.0
+Lime                      10.9        8.2        9.7       74.8       88.8
+Aluminium                 10.1        6.1        8.9       60.3       88.1

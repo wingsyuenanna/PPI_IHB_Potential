@@ -164,7 +164,6 @@ def main() -> None:
         ax.legend(loc="lower right", fontsize=8, frameon=False)
         fig.tight_layout()
         fig.savefig(OUT / "compare_hp_cost_impact_lcoh.png", dpi=160)
-        fig.savefig(OUT / "compare_hp_cost_impact_lcoh.pdf")
         plt.close(fig)
         print("Wrote", OUT / "compare_hp_cost_impact_lcoh.png")
 

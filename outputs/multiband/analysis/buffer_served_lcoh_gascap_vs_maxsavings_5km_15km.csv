@@ -1,5 +1,5 @@
 metric,5km,15km
-served_gas_capped,58.8% (307 TWh),84.4% (441 TWh)
-lcoh_gas_capped,€55/MWh,€62/MWh
-served_max_savings,53.2% (278 TWh),72.1% (377 TWh)
+served_max_heat,58.8% (307 TWh),84.4% (441 TWh)
+lcoh_max_heat,€55/MWh,€62/MWh
+served_max_savings,53.4% (278 TWh),73.9% (377 TWh)
 lcoh_max_savings,€41/MWh,€42/MWh

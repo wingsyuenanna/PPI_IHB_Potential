@@ -174,6 +174,7 @@ def fetch_site(
         lon_col: lon,
         "raddatabase": RAD_DATABASE,
         "pvcalculation": 1,
+        # 1 kWp is DC-side panel nameplate (STC), not AC inverter rating.
         "peakpower": 1,
         "loss": 0,
         "angle": tilt_deg,

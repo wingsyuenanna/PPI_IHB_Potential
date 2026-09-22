@@ -152,7 +152,6 @@ def plot_flat_charge_discharge(
     )
     fig.tight_layout(rect=[0, 0.03, 1, 1])
     fig.savefig(outfile, dpi=160)
-    fig.savefig(outfile.with_suffix(".pdf"))
     plt.close(fig)
     print("Wrote", outfile)
 

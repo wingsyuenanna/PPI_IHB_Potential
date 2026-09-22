@@ -56,17 +56,18 @@ FILL_CONFIDENCE = {"high", "medium"}
 # Food heat is rescaled per country to the useful-energy reference: Climate
 # TRACE food emissions are modeled and badly mis-allocated between countries
 # (Portugal ~20x too high, Spain ~2.6x), so they serve only as within-country
-# allocation weights. Reference = non-electric process heat + steam rows of
-# References/industry_useful_energy_demand_<CC>.csv. Countries without a
-# reference file (GBR) use the aggregate EU-26 factor.
-FOOD_REF_DIR = PROJECT_ROOT / "References" / "industry_useful_energy_demand"
+# allocation weights. Reference = JRC-IDEES-2023 non-electric heat UED
+# (Low-enthalpy + Steam + Other − electric process rows) from
+# References/jrc_idees/extracted/2023/industry_useful_energy_demand_<CC>.csv.
+# Legacy IndustryHeat-EU Madeddu temperature-band CSVs remain under
+# References/industry_useful_energy_demand/ for comparison only.
+# Countries without a reference file (GBR) use the aggregate EU-26 factor.
+FOOD_REF_DIR = (
+    PROJECT_ROOT / "References" / "jrc_idees" / "extracted" / "2023"
+)
 FOOD_REF_COLUMN = "Food, Beverages and Tobacco (TWh)"
 FOOD_REF_HEAT_ROWS = [
-    "Non-electric process heat (<100 C)",
-    "Non-electric process heat (100-400 C)",
-    "Non-electric process heat (400-1000 C)",
-    "Non-electric process heat (>1000 C)",
-    "Steam (non-electric boilers)",
+    "Non-electric heat useful energy demand",
 ]
 ISO3_TO_REF_CC = {
     "AUT": "AT", "BEL": "BE", "BGR": "BG", "CYP": "CY", "CZE": "CZ",
