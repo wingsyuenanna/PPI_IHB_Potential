@@ -29,29 +29,29 @@ DEFAULT_SITES = PROJECT_ROOT / "outputs" / "eu_ihb_site_assessment_2024.csv"
 # absolute band loads scale with total heat in the optimizer.
 SECTOR_HEAT_BOUNDS: dict[str, tuple[float, float, str]] = {
     "cement": (
-        0.85,
-        1.60,
-        "Kiln η 50–60% (low); high ≈ Hotmaps/METHODS SEC gap (~+60%)",
+        0.50 / 0.60,  # kiln η bottom / base
+        104 / 65,  # Hotmaps fuel total / methods useful total
+        "Low: kiln η 0.50/0.60, same SEC. High: Hotmaps fuel 104 TWh / methods useful 65 TWh",
     ),
     "lime": (
-        0.80,
-        1.50,
-        "SEC literature 3.6–7.5 GJ/t around base 4.5; kiln η mix",
+        3.6 / 4.5,  # SEC floor / base
+        7.5 / 4.5,  # SEC ceiling / base
+        "SEC literature endpoints 3.6 and 7.5 GJ/t around base 4.5",
     ),
     "glass": (
-        0.85,
-        2.00,
-        "Furnace η 40–50% (low); high capped Hotmaps/METHODS gap (~2.7× raw)",
+        0.40 / 0.45,  # furnace η bottom / base
+        1 / 0.45,  # η = 1 (fuel counts in full) / base η
+        "Low: furnace η 0.40/0.45, same SEC. High: no efficiency discount / base η 0.45",
     ),
     "iron-and-steel": (
         0.90,
-        1.55,
-        "Low: lean final-consumption scope; high: SEC ~7.5 GJ/t to close Eurostat gap",
+        7.5 / 4.8,  # raised BF/BOF SEC / base SEC
+        "Low: lean final-consumption SEC floor. High: SEC 7.5/4.8 GJ/t",
     ),
     "petrochemical-steam-cracking": (
-        0.47,
+        17 / 35.9,  # external fuel only / full furnace duty
         1.00,
-        "Low: external fuel only 17 GJ/t vs base total duty 35.9; high = base",
+        "Low: external fuel only 17/35.9 GJ/t. High = base full duty",
     ),
     "chemicals": (
         0.85,
@@ -75,8 +75,8 @@ SECTOR_HEAT_BOUNDS: dict[str, tuple[float, float, str]] = {
     ),
     "aluminum": (
         0.90,
-        1.15,
-        "Smaller METHODS vs Hotmaps gap (~+11%)",
+        1.11,
+        "High: METHODS vs Hotmaps gap 1.11",
     ),
     "other-metals": (
         0.85,

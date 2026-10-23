@@ -38,7 +38,7 @@ No VoLL on unserved. Hard 90% availability floor; land-limited sites maximize se
 2025 cost counterparts (sensitivity): `land_5km_ss/`, `land_15km_ss/`, and matching `_heat_*` folders.
 
 Heat bounds (sector multipliers) live on `outputs/eu_ihb_site_assessment_2024.csv`:
-`replaceable_heat_mwh_th_low` / `_high`. Fleet totals: **388 / 522 / 697 TWh/y** (low / base / high).
+`replaceable_heat_mwh_th_low` / `_high`. Fleet totals: **389 / 522 / 703 TWh/y** (low / base / high).
 
 Comparison: [`analysis/compare_2025_vs_2030.txt`](analysis/compare_2025_vs_2030.txt).
 Map: [`map_lcoh_5km_15km_ss.html`](map_lcoh_5km_15km_ss.html) — 2030 Li-ion HP + IHB; shows **max serve → then min LCOH** (black outline = met 90% floor; red = land-capped max-serve). Defaults to `land_*_ss_2030_liion/`.

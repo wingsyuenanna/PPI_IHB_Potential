@@ -88,7 +88,6 @@ def solve_one(row: dict, shape: np.ndarray | None) -> dict:
         max_storage_hours=CONFIG["max_storage_hours"],
         n_representative_days=CONFIG["n_representative_days"],
         max_solar_mw=(land * CONFIG["mw_per_km2"]) if land >= 0 else None,
-        VoLL=CONFIG["VoLL"],
         project_start_year=int(CONFIG["project_start"]),
         diurnal_shape_24=shape,
     )

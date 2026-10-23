@@ -263,7 +263,7 @@ Runnable fleet: 2,192 sites. Base (2025, solar+storage, 5 km): 1,925 sites meet 
 ### 9. Sensitivity Analysis
 
 - **Land:** 5 km vs 15 km buffers.
-- **Heat demand:** sector low/base/high multipliers (fleet 388 / 522 / 697 TWh/y) via `--heat-case`.
+- **Heat demand:** sector low/base/high multipliers (fleet 389 / 522 / 703 TWh/y) via `--heat-case`.
 - Higher heat → fewer ≥90% sites / lower heat share; fleet HW LCOH can fall via composition (within-site median ΔLCOH ≈ 0).
 - Extensions: 2030 costs, storage CAPEX path, RTE, stricter land masks.
 

@@ -21,6 +21,7 @@ Analyze / plot only (after sweeps):
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -87,6 +88,15 @@ def _job(args: tuple) -> tuple[int, pd.DataFrame | None, str]:
 
 
 def run_sweep(land_km: int, heat_case: str, max_workers: int) -> None:
+    # HiGHS/BLAS otherwise take one thread pool per worker and oversubscribe.
+    for key in (
+        "OMP_NUM_THREADS",
+        "OPENBLAS_NUM_THREADS",
+        "MKL_NUM_THREADS",
+        "VECLIB_MAXIMUM_THREADS",
+        "NUMEXPR_NUM_THREADS",
+    ):
+        os.environ.setdefault(key, "1")
     prior = pd.read_csv(PRIOR[land_km])
     ids = sorted(int(x) for x in prior.loc[prior["status"] == "ok", "source_id"].unique())
     print(

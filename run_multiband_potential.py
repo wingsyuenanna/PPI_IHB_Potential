@@ -58,7 +58,6 @@ CONFIG = {
     "round_trip_efficiency": 0.90,  # Li-ion RTE; IHB RTE comes from cost CSV (0.95)
     "max_storage_hours": 16.0,
     "n_representative_days": 16,
-    "VoLL": 0.0,
     "output": "outputs/multiband/land_5km_ss/by_facility.csv",
     "max_workers": 8,
 }
@@ -120,7 +119,6 @@ def run_one_site(row: dict, cfg: dict) -> dict:
             max_storage_hours=cfg["max_storage_hours"],
             n_representative_days=cfg["n_representative_days"],
             max_solar_mw=(land_km2 * cfg["mw_per_km2"]) if land_km2 >= 0 else None,
-            VoLL=cfg["VoLL"],
             project_start_year=int(cfg["project_start"]))
         if not ok:
             return {**base, "status": "not_optimal"}

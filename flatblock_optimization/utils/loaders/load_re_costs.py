@@ -31,7 +31,6 @@ HP_ROW_CAPEX_LT = "HP CAPEX below100C $/kWth"
 HP_ROW_CAPEX_MT = "HP CAPEX 100C-200C $/kWth"
 HP_ROW_FOM_LT = "HP FOM below100C $/kWth/yr"
 HP_ROW_FOM_MT = "HP FOM 100C-200C $/kWth/yr"
-HP_ROW_VOM = "HP VOM $/MWhth"
 HP_ROW_LIFE = "HP lifetime yr"
 
 # BNEF 4h utility battery embeds energy in the $/kW price; implied $/kWh = capex/duration.
@@ -130,7 +129,6 @@ def load_re_costs(bnef_filepath, battery_filepath, iso_country, start_year):
         "HP CAPEX 100C-200C $/kWth": get_optional_battery_row(HP_ROW_CAPEX_MT, 1141.31),
         "HP FOM below100C $/kWth/yr": get_optional_battery_row(HP_ROW_FOM_LT, 15.74),
         "HP FOM 100C-200C $/kWth/yr": get_optional_battery_row(HP_ROW_FOM_MT, 23.61),
-        "HP VOM $/MWhth": get_optional_battery_row(HP_ROW_VOM, 0.0),
         "HP lifetime yr": get_optional_battery_row(HP_ROW_LIFE, 25.0),
     }
 

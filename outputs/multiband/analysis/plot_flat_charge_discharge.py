@@ -54,7 +54,6 @@ def solve(row: pd.Series) -> tuple[dict, pd.DataFrame]:
         max_storage_hours=CONFIG["max_storage_hours"],
         n_representative_days=CONFIG["n_representative_days"],
         max_solar_mw=(land * CONFIG["mw_per_km2"]) if land >= 0 else None,
-        VoLL=CONFIG["VoLL"],
         project_start_year=2030,
         return_hourly=True,
     )
