@@ -30,13 +30,14 @@ def solve(row: pd.Series) -> tuple[dict, pd.DataFrame]:
     sid = int(r["source_id"])
     iso = str(r["iso3_country"])
     if iso == "GBR":
-        iso = CONFIG["gbr_proxy"]
+        iso = CONFIG["gbr_proxy"] or iso
     bl = band_loads_for(r)
     solar = pd.read_parquet(
         ROOT / CONFIG["solar_hourly_dir"] / f"{sid}_{CONFIG['solar_year']}.parquet",
         columns=["timestamp", "year", "P_kWperkWp"],
     )
     solar["timestamp"] = pd.to_datetime(solar["timestamp"])
+    solar["P_kWperkWp"] = solar["P_kWperkWp"] * (1.0 - CONFIG["pv_system_loss"])
     costs = load_re_costs(
         str(ROOT / CONFIG["bnef_costs_csv"]),
         str(ROOT / CONFIG["battery_costs_csv"]),

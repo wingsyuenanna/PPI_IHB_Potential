@@ -226,7 +226,7 @@ python3 land_availability/merge_land_availability.py \
 
 ### 6. Technology Costs
 
-Technology costs are country-level and expressed in **nominal 2025 USD**. CAPEX, fixed O&M, WACC, and CRF for fixed-axis solar PV, utility-scale batteries, and CCGT come from BloombergNEF tables compiled in `Input/bnef_country_costs.csv` (cost year **2025**; 2030 retained for sensitivity). Missing countries are proxied by income/region peers; UK facilities use Ireland as the price proxy. Solar CAPEX is annualized with the country CRF implied by BNEF WACC and a **25-year** lifetime.
+Technology costs are country-level USD for **cost year 2030** (see `research_notes/baseline_inputs_and_assumptions.md` for the full input list). PV and utility-scale Li-ion CAPEX, fixed O&M and variable O&M (battery only; PV VOM is 0) come from BloombergNEF tables compiled in `Input/bnef_country_costs.csv`; countries without BNEF data use region-and-income peer means. The capital recovery factor (CRF) is **IRENA-sourced** (`crf_source = irena`), not BNEF-derived, and is applied to all components. UK facilities use their own GBR rows. Heat pump (Rissman 2022, 2021 USD) and IHB (Energy Innovation 2023, 2023 USD) costs are CPI-inflated to 2030 USD. PVGIS output is reduced by a 14% system loss in the model. Heat demand is a 2024 snapshot and is not projected to 2030.
 
 **IHB / thermal storage** (from `flatblock_optimization/inputs/input_heat_battery_cost.csv`, 2025 base):
 
@@ -243,11 +243,11 @@ Technology costs are country-level and expressed in **nominal 2025 USD**. CAPEX,
 | Min charge:discharge power | 4:1 |
 | PV land intensity | 50 MWdc/km² |
 
-Heat delivery COP: 2.7 (&lt;100 °C HP), 1.8 (100–200 °C steam HP), 1.0 (&gt;200 °C resistive/IHB). Multi-band LCOH is solar + thermal storage only. Country CCGT LCOE is the fossil heat benchmark (~$130–140/MWh in EU 2025).
+Heat delivery COP: 3.7 (&lt;100 °C HP), 2.2 (100–200 °C HP), 1.0 (&gt;200 °C resistive/IHB). Multi-band LCOH is solar + thermal storage only. Country CCGT LCOE is the fossil heat benchmark (~$130–140/MWh in EU 2025).
 
 ### 7. LCOH Calculations
 
-Per facility, a HiGHS LP sizes shared solar + per-band thermal storage over 16 representative PVGIS days (flat band loads; COP 2.7 / 1.8 / 1.0; 90% availability floor; land cap at 50 MWdc/km²). LCOH excludes VoLL:
+Per facility, a HiGHS LP sizes shared solar + per-band thermal storage over 16 representative PVGIS days (flat band loads; COP 3.7 / 2.2 / 1.0; 90% availability floor; land cap at 50 MWdc/km²). LCOH excludes VoLL:
 
 \[
 \mathrm{LCOH}_{served} = C_{ann} / Q_{served},\quad
@@ -258,7 +258,7 @@ with \(C_{ann}\) = annualized solar (country CRF) + annualized thermal storage (
 
 ### 8. Site Screening and Results
 
-Runnable fleet: 2,192 sites. Base (2025, solar+storage, 5 km): 1,925 sites meet 90% (39% of heat); HW reliability 59%; HW LCOH_served ~$82/MWh (median ≥90% ~$71). At 15 km: 2,148 sites (75% of heat); HW reliability 86%; HW LCOH ~$110/MWh (median ≥90% ~$74). Outputs: `outputs/multiband/<scenario>/by_facility.csv`, summary tables, dual LCOH maps.
+Runnable fleet: 2,192 sites (10 subsectors, 27 countries, 522 TWh/yr replaceable heat). Baseline results (2030 costs, Li-ion + heat pump below 200 °C, IHB at or above 200 °C, COP 3.7/2.2, 14% PV loss, VOM included) are in `outputs/multiband/<scenario>/by_facility.csv`; quote numbers only from those CSVs, not from `run_log.txt`.
 
 ### 9. Sensitivity Analysis
 

@@ -7,7 +7,7 @@ heat into temperature bands and sizes one shared on-site solar array plus:
     ($100/kW-in, $300/kW-out, $5/kWh, 95% RTE), annualized at country BNEF CRF
 
 Hard 90% availability floor; land-limited sites get max-serve then cost-min.
-COP 2.7/1.8/1.0, 50 MWdc/km2, ≤16 h storage, 16 rep-days (or --n-representative-days 0
+COP 3.7/2.2/1.0, 50 MWdc/km2, ≤16 h storage, 16 rep-days (or --n-representative-days 0
 for all calendar days); cost year via --project-start.
 
 Heat sensitivity (sector low/base/high bounds on assessment CSV):
@@ -52,7 +52,8 @@ CONFIG = {
     "solar_hourly_dir": "solar_radiation/outputs/hourly_profiles",
     "solar_year": 2023,
     "project_start": "2030",
-    "gbr_proxy": "IRL",
+    "gbr_proxy": None,  # GBR has its own BNEF PV/battery rows; set "IRL" to restore the old proxy
+    "pv_system_loss": 0.14,  # PVGIS default system loss; PVGIS series were pulled with 0% loss
     "availability": 0.90,
     "mw_per_km2": 50.0,
     "round_trip_efficiency": 0.90,  # Li-ion RTE; IHB RTE comes from cost CSV (0.95)
@@ -110,6 +111,7 @@ def run_one_site(row: dict, cfg: dict) -> dict:
         solar = pd.read_parquet(_ROOT / cfg["solar_hourly_dir"] / f"{sid}_{cfg['solar_year']}.parquet",
                                 columns=["timestamp", "year", "P_kWperkWp"])
         solar["timestamp"] = pd.to_datetime(solar["timestamp"])
+        solar["P_kWperkWp"] = solar["P_kWperkWp"] * (1.0 - cfg["pv_system_loss"])
         costs = load_re_costs(str(_ROOT / cfg["bnef_costs_csv"]), str(_ROOT / cfg["battery_costs_csv"]),
                               price_iso, cfg["project_start"])
         land_km2 = float(row.get("available_land_km2", 0) or 0)

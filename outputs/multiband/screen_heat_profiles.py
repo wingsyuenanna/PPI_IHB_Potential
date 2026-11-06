@@ -68,13 +68,14 @@ def lt_share(row: dict) -> float:
 def solve_one(row: dict, shape: np.ndarray | None) -> dict:
     sid = int(row["source_id"])
     iso = str(row["iso3_country"])
-    price_iso = CONFIG["gbr_proxy"] if iso == "GBR" else iso
+    price_iso = (CONFIG["gbr_proxy"] or iso) if iso == "GBR" else iso
     bl = band_loads_for(row)
     solar = pd.read_parquet(
         ROOT / CONFIG["solar_hourly_dir"] / f"{sid}_{CONFIG['solar_year']}.parquet",
         columns=["timestamp", "year", "P_kWperkWp"],
     )
     solar["timestamp"] = pd.to_datetime(solar["timestamp"])
+    solar["P_kWperkWp"] = solar["P_kWperkWp"] * (1.0 - CONFIG["pv_system_loss"])
     costs = load_re_costs(
         str(ROOT / CONFIG["bnef_costs_csv"]),
         str(ROOT / CONFIG["battery_costs_csv"]),

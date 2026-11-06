@@ -8,3 +8,11 @@ archive/2026-08-06_cleanup/solar_hourly_profiles.tar.gz
 **/__pycache__/
 *.pyc
 ~$*
+
+# LaTeX build output
+conference_submissions/manuscript/build/
+
+# Licensed BNEF files: keep on disk, do not publish
+Input/bnef/input/BNEF_raw_data_2024.xlsx
+Input/2026-01-26 - Energy Storage Systems Cost Survey 2025.xlsx
+Input/Energy Storage Systems Cost Survey 2025 _ Full Report _ BloombergNEF.pdf

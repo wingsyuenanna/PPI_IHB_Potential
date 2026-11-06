@@ -1,0 +1,982 @@
+[
+  {
+    "ISO3": "ABW",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "AFG",
+    "income_group": "LIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "AGO",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "ALB",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "AND",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "ARE",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ARG",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "ARM",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "ATG",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "AUS",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "AUT",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "AZE",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "BDI",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "BEL",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "BEN",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "BFA",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "BGD",
+    "income_group": "LMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "BGR",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "BHR",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "BHS",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "BIH",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "BLR",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "BLZ",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "BOL",
+    "income_group": "LMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "BRA",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "BRB",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "BRN",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "BTN",
+    "income_group": "LMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "BWA",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "CAF",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "CAN",
+    "income_group": "HIC",
+    "wb_region": "North America"
+  },
+  {
+    "ISO3": "CHE",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "CHL",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "CHN",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "CIV",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "CMR",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "COD",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "COG",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "COL",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "COM",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "CPV",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "CRI",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "CYP",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "CZE",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "DEU",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "DJI",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "DMA",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "DNK",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "DOM",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "DZA",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ECU",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "EGY",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ERI",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "ESP",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "EST",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "ETH",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "FIN",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "FJI",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "FRA",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "FSM",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "GAB",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GBR",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "GEO",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "GHA",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GIN",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GMB",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GNB",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GNQ",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "GRC",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "GRD",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "GTM",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "GUY",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "HKG",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "HND",
+    "income_group": "LMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "HRV",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "HTI",
+    "income_group": "LIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "HUN",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "IDN",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "IND",
+    "income_group": "LMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "IRL",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "IRN",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "IRQ",
+    "income_group": "UMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ISL",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "ISR",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ITA",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "JAM",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "JOR",
+    "income_group": "UMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "JPN",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "KAZ",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "KEN",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "KGZ",
+    "income_group": "LMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "KHM",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "KIR",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "KNA",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "KOR",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "KWT",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "LAO",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "LBN",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "LBR",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "LBY",
+    "income_group": "UMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "LCA",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "LKA",
+    "income_group": "LMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "LSO",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "LTU",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "LUX",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "LVA",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "MAC",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "MAR",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "MDA",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "MDG",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MDV",
+    "income_group": "UMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "MEX",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "MHL",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "MKD",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "MLI",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MLT",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "MMR",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "MNE",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "MNG",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "MOZ",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MRT",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MUS",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MWI",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "MYS",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "NAM",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "NER",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "NGA",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "NIC",
+    "income_group": "LMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "NLD",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "NOR",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "NPL",
+    "income_group": "LIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "NRU",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "NZL",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "OMN",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "PAK",
+    "income_group": "LMIC",
+    "wb_region": "South Asia"
+  },
+  {
+    "ISO3": "PAN",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "PER",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "PHL",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "PLW",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "PNG",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "POL",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "PRI",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "PRT",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "PRY",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "QAT",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ROU",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "RUS",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "RWA",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SAU",
+    "income_group": "HIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "SDN",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SEN",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SGP",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "SLB",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "SLE",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SLV",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "SMR",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "SOM",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SRB",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "SSD",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "STP",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SUR",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "SVK",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "SVN",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "SWE",
+    "income_group": "HIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "SWZ",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SYC",
+    "income_group": "HIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "SYR",
+    "income_group": "LIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "TCD",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "TGO",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "THA",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "TJK",
+    "income_group": "LMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "TKM",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "TLS",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "TON",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "TTO",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "TUN",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "TUR",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "TUV",
+    "income_group": "UMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "TWN",
+    "income_group": "HIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "TZA",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "UGA",
+    "income_group": "LIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "UKR",
+    "income_group": "LMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "URY",
+    "income_group": "HIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "USA",
+    "income_group": "HIC",
+    "wb_region": "North America"
+  },
+  {
+    "ISO3": "UVK",
+    "income_group": "UMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "UZB",
+    "income_group": "LMIC",
+    "wb_region": "Europe & Central Asia"
+  },
+  {
+    "ISO3": "VCT",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "VEN",
+    "income_group": "UMIC",
+    "wb_region": "Latin America & Caribbean"
+  },
+  {
+    "ISO3": "VNM",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "VUT",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "WBG",
+    "income_group": "LMIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "WSM",
+    "income_group": "LMIC",
+    "wb_region": "East Asia & Pacific"
+  },
+  {
+    "ISO3": "YEM",
+    "income_group": "LIC",
+    "wb_region": "Middle East & North Africa"
+  },
+  {
+    "ISO3": "ZAF",
+    "income_group": "UMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "ZMB",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  },
+  {
+    "ISO3": "ZWE",
+    "income_group": "LMIC",
+    "wb_region": "Sub-Saharan Africa"
+  }
+]

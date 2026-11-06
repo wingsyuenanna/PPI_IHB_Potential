@@ -81,6 +81,8 @@ def load_re_costs(bnef_filepath, battery_filepath, iso_country, start_year):
     solar_params = {
         "Capex": float(pv_capex),
         "Fixed O&M": float(pv_fom) * 1000.0,  # $/kW-yr -> $/MW-yr
+        # Variable O&M, $/MWh generated (BNEF vom_$/mwh; 0 for PV in current file).
+        "VOM $/MWh": 0.0 if pd.isna(pv_row.get("vom_$/mwh")) else float(pv_row.get("vom_$/mwh")),
     }
 
     batt_df = pd.read_csv(battery_filepath)
@@ -164,6 +166,13 @@ def load_re_costs(bnef_filepath, battery_filepath, iso_country, start_year):
     batt_params["Li-ion duration_h"] = LIION_DURATION_H
     batt_params["Li-ion Fixed O&M $/MW-yr"] = float(fom_batt_kwyr) * 1000.0
     batt_params["Fixed O&M"] = batt_params["Li-ion Fixed O&M $/MW-yr"]  # legacy key
+
+    # Variable O&M, $/MWh discharged (BNEF vom_$/mwh); median fallback like CAPEX/FOM.
+    li_vom = batt_bnef.get("vom_$/mwh")
+    if pd.isna(li_vom):
+        same_batt = df[(df["year"] == year) & (df["technology"] == BATTERY_TECH)]
+        li_vom = same_batt["vom_$/mwh"].median()
+    batt_params["Li-ion VOM $/MWh"] = 0.0 if pd.isna(li_vom) else float(li_vom)
 
     return {"financial": fin_params, "solar": solar_params, "battery": batt_params}
 

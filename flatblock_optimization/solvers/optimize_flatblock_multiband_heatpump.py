@@ -29,9 +29,10 @@ HS_INF = 1e30
 # Post-solve: treat charge & discharge both above this (MW) as simultaneous.
 SIMULTANEOUS_EPS_MW = 1e-6
 
+# HP COPs from Rissman (2022) Table 3: 3.7 (80-100 C unit), 2.2 (100-180 C unit).
 DEFAULT_COP_BY_BAND = {
-    "heat_below100C_tj": 2.7,
-    "heat_100C-200C_tj": 1.8,
+    "heat_below100C_tj": 3.7,
+    "heat_100C-200C_tj": 2.2,
     "heat_200C-500C_tj": 1.0,
     "heat_500C-1000C_tj": 1.0,
     "heat_above1000C_tj": 1.0,
@@ -149,6 +150,8 @@ def run_multiband_heatpump_optimization(
     li_energy_annual_per_mwh = li_capex_kwh * 1000.0 * CRF
     # FOM charged on discharge power rating (MW)
     li_power_annual_per_mw = li_fom_per_mw
+    # VOM: BNEF $/MWh, charged on energy discharged from the battery.
+    li_vom_per_mwh = float(batt.get("Li-ion VOM $/MWh", 0.0))
 
     # IHB — Energy Innovation CAPEX inflated to project-start USD (COST_YEAR_INFLATION.md);
     # finance with country BNEF CRF
@@ -184,6 +187,9 @@ def run_multiband_heatpump_optimization(
     ydf = solar_profile_df[solar_profile_df["year"] == solar_profile_df["year"].iloc[0]]
     g_full = ydf["P_kWperkWp"].to_numpy(dtype=float)
     reps, weights = representative_days(g_full, n_representative_days)
+    # PV VOM: $/MWh generated. reps is kW/kWp-DC = MWh/MWdc per hour, so the
+    # weighted sum is annual MWh generated per MWdc installed.
+    solar_cost_per_mw += float(solar_p.get("VOM $/MWh", 0.0)) * float((weights[:, None] * reps).sum())
     K, H = reps.shape
     total_days = float(weights.sum())
     if diurnal_shape_24 is None:
@@ -303,6 +309,8 @@ def run_multiband_heatpump_optimization(
             if n_hp:
                 cost[li_E] = li_energy_annual_per_mwh / annual_load_MWh
                 cost[li_Pdis] = li_power_annual_per_mw / annual_load_MWh
+                for c in range(K):
+                    cost[li_dis0(c):li_dis0(c) + H] = li_vom_per_mwh * weights[c] / annual_load_MWh
             if n_ihb:
                 cost[ihb_Pch] = ihb_in_annual_per_mw / annual_load_MWh
                 cost[ihb_Pdis] = ihb_out_annual_per_mw / annual_load_MWh
@@ -517,7 +525,14 @@ def run_multiband_heatpump_optimization(
     if n_hp:
         li_E_mwh = float(cv[li_E])
         li_P_mw = float(cv[li_Pdis])
-        annual_li_cost = li_energy_annual_per_mwh * li_E_mwh + li_power_annual_per_mw * li_P_mw
+        li_discharge_mwh = sum(
+            weights[c] * float(cv[li_dis0(c):li_dis0(c) + H].sum()) for c in range(K)
+        )
+        annual_li_cost = (
+            li_energy_annual_per_mwh * li_E_mwh
+            + li_power_annual_per_mw * li_P_mw
+            + li_vom_per_mwh * li_discharge_mwh
+        )
 
     annual_ihb_cost = 0.0
     ihb_E_total = 0.0
