@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+
+% ---------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{authblk}
+\usepackage[hidelinks]{hyperref}
+
+% Text subscripts used in the model
+\newcommand{\Li}{\mathrm{Li}}
+\newcommand{\IHB}{\mathrm{IHB}}
+\newcommand{\HP}{\mathrm{HP}}
+\newcommand{\PV}{\mathrm{PV}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\dis}{\mathrm{dis}}
+\newcommand{\Eload}{E_{\mathrm{load}}}
+
+% ---------------------------------------------------------------
+% Title page
+% ---------------------------------------------------------------
+\title{\textbf{Facility-Level Techno-Economic Potential of Electrified Industrial Process Heat in European Manufacturing}}
+
+\author[1,*]{Anna Yuen}
+\author[1]{Emilia Chojikiewicz}
+\author[2]{Amol Phadke}
+\affil[1]{Energy and Resources Group, University of California, Berkeley, United States}
+\affil[2]{Goldman School of Public Policy, University of California, Berkeley, United States}
+\affil[*]{Corresponding author. Email: \href{mailto:anna_yuen@berkeley.edu}{anna\_yuen@berkeley.edu}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Keywords:} Industrial decarbonisation, heat pumps, heat batteries, off-grid solar PV, techno-economic analysis
+
+% ---------------------------------------------------------------
+\section{Optimization}
+\label{sec:optimization}
+% ---------------------------------------------------------------
+
+Two phases solve:
+\begin{itemize}
+  \item The first phase sets the availability floor: attempt to meet that availability floor.
+  \item If that is not possible, the second phase minimizes the unserved demand and runs the optimization with that maximizing availability given the land available and solar radiation.
+\end{itemize}
+
+\subsection*{Objective}
+
+\begin{equation}
+\begin{split}
+\min\; Z = \frac{1}{\Eload}\Big[\, & c_{\PV}P_{\PV} + c_{\Li,E}E_{\Li} + c_{\Li,P}P_{\Li}^{\dis} \\
+ & + c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB} + \sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP} \Big], \qquad Z = \mathrm{LCOH}
+\end{split}
+\label{eq:objective}
+\end{equation}
+
+\begin{equation}
+\Eload = \sum_{b} L_{b}\sum_{k} w_{k}H
+\label{eq:eload}
+\end{equation}
+
+\subsection*{LCOH by components}
+
+\begin{equation}
+Z = Z_{\mathrm{solar}} + Z_{\text{Li-ion}} + Z_{\IHB} + Z_{\HP} + Z_{\mathrm{unserved}}
+\end{equation}
+
+\begin{align}
+Z_{\mathrm{solar}}   &= \frac{c_{\PV}P_{\PV}}{\Eload} \\
+Z_{\text{Li-ion}}    &= \frac{c_{\Li,E}E_{\Li} + c_{\Li,P}P_{\Li}^{\dis}}{\Eload} \\
+Z_{\IHB}             &= \frac{c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB}}{\Eload} \\
+Z_{\HP}              &= \frac{1}{\Eload}\sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP}
+\end{align}
+
+\subsection*{Constraints}
+
+\paragraph{Shared solar limit:}
+\begin{equation}
+\sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{dir}} + p_{\Li,k,t}^{\ch} + p_{\IHB,k,t}^{\ch} \leq P_{\PV}\, g_{k,t}
+\label{eq:solar}
+\end{equation}
+
+\paragraph{Storage state of charge:}
+\begin{align}
+s_{\Li,k,t}  &= s_{\Li,k,t-1} + \eta_{\Li}\, p_{\Li,k,t}^{\ch} - \frac{p_{\Li,k,t}^{\dis}}{\eta_{\Li}} \label{eq:soc-li}\\
+s_{\IHB,k,t} &= s_{\IHB,k,t-1} + \eta_{\IHB}\, p_{\IHB,k,t}^{\ch} - \frac{p_{\IHB,k,t}^{\dis}}{\eta_{\IHB}} \label{eq:soc-ihb}
+\end{align}
+\begin{equation}
+\eta_{\Li} = \sqrt{RTE_{\Li}}, \qquad \eta_{\IHB} = \sqrt{RTE_{\IHB}}
+\end{equation}
+
+\paragraph{Storage rate limit} for each storage $j \in \{\Li, \IHB\}$:
+\begin{equation}
+s_{j,k,t} \leq E_{j}, \qquad p_{j,k,t}^{\ch} \leq P_{j}^{\ch}, \qquad p_{j,k,t}^{\dis} \leq P_{j}^{\dis}
+\label{eq:rate}
+\end{equation}
+
+\paragraph{Maximum storage duration:}
+\begin{equation}
+E_{j} \leq h_{\max}\, P_{j}^{\dis}
+\label{eq:duration}
+\end{equation}
+
+\paragraph{Li-ion discharge to HP bands:}
+\begin{equation}
+p_{\Li,k,t}^{\dis} = \sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{batt}}
+\label{eq:li-dis}
+\end{equation}
+
+\paragraph{HP heat balance and capacity:}
+\begin{align}
+COP_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) + u_{b,k,t} &= L_{b}\,\sigma_{t} \label{eq:hp-balance}\\
+COP_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) &\leq P_{b}^{\HP} \label{eq:hp-cap}
+\end{align}
+
+\paragraph{IHB discharge across temperature heat bands:}
+\begin{equation}
+y_{b,k,t} + u_{b,k,t} = L_{b}\,\sigma_{t}
+\label{eq:ihb-balance}
+\end{equation}
+
+\paragraph{Availability:}
+\begin{equation}
+\sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq (1 - AF)\,\Eload
+\label{eq:availability}
+\end{equation}
+
+\paragraph{Bounds:}
+\begin{gather}
+0 \leq P_{\PV} \leq P_{\PV}^{\max} \label{eq:pv-bound}\\
+P_{j}^{\ch},\, P_{j}^{\dis},\, E_{j},\, P_{b}^{\HP},\, x_{b,k,t}^{\mathrm{dir}},\, x_{b,k,t}^{\mathrm{batt}},\, y_{b,k,t},\, p_{j,k,t}^{\ch},\, p_{j,k,t}^{\dis},\, s_{j,k,t},\, u_{b,k,t} \geq 0 \label{eq:nonneg}
+\end{gather}
+
+\subsection*{Phase 2: Lexicographic/hierarchical optimization}
+
+Minimize the unmet amount, then minimize cost subject to that service level:
+\begin{equation}
+\min\; U = \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t}
+\label{eq:phase2-U}
+\end{equation}
+
+Minimize unserved at every hour of every representative day and run the same optimization but with the optimal unserved amount ($U^{*}$):
+% NOTE: the Word draft read "s.t. constraints 1--8, 10". Below this is interpreted as
+% all constraints except availability (eq:availability); adjust the references if needed.
+\begin{equation}
+\min\; Z \quad \text{s.t. constraints (\ref{eq:solar})--(\ref{eq:ihb-balance}), (\ref{eq:pv-bound})--(\ref{eq:nonneg}), and} \quad \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq U^{*}
+\label{eq:phase2-Z}
+\end{equation}
+
+\subsection*{Nomenclature}
+
+\begin{table}[h]
+\centering
+\caption{Symbols used in the optimization model.}
+\label{tab:symbols}
+\begin{tabular}{>{$}l<{$} p{0.65\textwidth}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\mathcal{B}^{\HP},\ \mathcal{B}^{\IHB} & Bands served by heat pump (COP $>$ 1) or by IHB (COP $\leq$ 1) \\
+g_{k,t} & Solar capacity factor in hour $t$ of representative day $k$ (MW per MW installed) \\
+L_{b} & Flat heat load of band $b$ (MW$_{\mathrm{th}}$) \\
+\sigma_{t} & Diurnal load shape, mean 1 (all 1 if flat) \\
+y_{b,k,t} & IHB heat delivered to band $b$ \\
+p_{j,k,t}^{\ch},\ p_{j,k,t}^{\dis},\ s_{j,k,t} & Charge, discharge and state of charge of storage $j$ \\
+\eta_{j} & One-way efficiency, the square root of round-trip efficiency \\
+h_{\max} & Maximum storage duration, 16\,h by default \\
+AF & Availability factor, which sets the share of heat that must be served \\
+P_{\PV}^{\max} & Optional solar cap from land limits (no cap if unset) \\
+H & Number of hours in representative days \\
+x & Electricity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

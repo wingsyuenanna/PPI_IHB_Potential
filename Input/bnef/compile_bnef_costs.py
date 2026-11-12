@@ -67,6 +67,10 @@ bnef2IRENA = {
 
 DEFAULT_INFLATION = 0.03   # fallback when IMF data is missing
 
+# Dollar basis. True = real 2025 USD: CRF uses IRENA's real WACC directly (no inflation uplift),
+# consistent with real-dollar CAPEX/FOM. False = old nominal basis (real WACC x IMF CPI forecast).
+REAL_BASIS = True
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # HELPERS
@@ -102,7 +106,10 @@ def build_crf_table(irena_path: str, inflation_path: str, lifetime: int) -> pd.D
         (1 + real_wacc) * (1 + cost_of_cap_df['inflation_rate'] / 100) - 1
     )
 
-    i_col = cost_of_cap_df['WACC_Nominal']
+    # Rate used for the CRF: real WACC on the real-dollar basis, nominal WACC otherwise.
+    # (The output column is still named WACC_Nominal / wacc_nominal; it holds the rate used.)
+    i_col = real_wacc if REAL_BASIS else cost_of_cap_df['WACC_Nominal']
+    cost_of_cap_df['WACC_Nominal'] = i_col
     cf    = (1 + i_col) ** lifetime
     cost_of_cap_df['CRF'] = (i_col * cf) / (cf - 1)
 

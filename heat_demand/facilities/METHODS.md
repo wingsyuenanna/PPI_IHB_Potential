@@ -18,17 +18,24 @@ Pipeline (run in order):
    using `Input/industryBenchmarks_2014.csv` →
    `facilities_2024_eu_heat_bands.csv` / `.xlsx`.
 5. `apply_dedup.py` — executes the reviewed duplicate-site decisions
-   (`../analysis_outputs/duplicate_sites_flagged.csv`: 72 deletions, the
+   (`../analysis_outputs/duplicate_sites_flagged.csv`: 78 deletions, the
    Ardagh Barnsley merge, sourced capacity corrections) →
    `facilities_2024_eu_deduplicated.csv` / `.xlsx` (**use this file for
    analysis**).
+6. `../fossil_share/apply_fossil_share.py` → `facilities_2024_eu_replaceable.csv`.
+7. `export_heat_inputs_table.py` → `heat_demand_inputs.csv`: one row per sector/route
+   with production source, Hotmaps process recipe, SEC and source, efficiency and source,
+   band shares and source, fossil-share basis, and resulting heat. **Check this table to
+   see what data goes into the heat estimate.**
+8. `../analysis_outputs/build_validation_tables.py`, then
+   `conference_submissions/manuscript/figures/make_fig_validation.py` (Supplementary Note 1).
 
 ## 0. Climate TRACE data cleaning
 
 Deduplicate facilities by identical names, identical coordinates, identical capacity/heat values (near-impossible by coincidence), known ownership renames, and known single-mill locations.
 Row-level decisions (which source_id to delete, with sources validating the
 true capacity) are in `../analysis_outputs/duplicate_sites_flagged.csv` —
-72 rows deleted across 69 groups; the cleaned dataset is
+78 rows deleted across 67 groups; the cleaned dataset is
 `facilities_2024_eu_deduplicated.csv` / `.xlsx`. Review-flagged rows were
 resolved against the bottom-up vs top-down sector comparison: over-counted
 sectors (food) lean delete, under-counted sectors (glass, non-ferrous) lean
@@ -137,6 +144,10 @@ efficiency. The remaining bracket is physical: useful heat sits below fuel
 input (this table) and below Eurostat *final* energy, and near the
 JRC-IDEES *useful*-energy reference.
 
+> **2026-11-11 (efficiency):** every `eff` value below is superseded. Fuel-to-heat efficiency is now 0.94 for boiler steam and 0.75 for direct process heating (Saad et al. 2026, ERL 21 094023, SI Table S3), mixed by each facility's steam fraction: heat ≥500 °C is direct-fired; heat <500 °C takes the sector's steam share of non-electric useful heat in IndustryHeat-EU EU27 (`References/industry_useful_energy_demand/..._EU27.csv`); alumina digestion (67%) is steam (Deloitte/ARENA 2022). See `heat_efficiency()` in `merge_production.py`; per-facility values are in the `heat_eff` and `steam_frac` columns, and per-route values in `heat_demand_inputs.csv`.
+
+> **2026-11-11:** SEC is now computed in `merge_production.py` from the Hotmaps benchmark SEC of each facility's process recipe (`heat_temperature_bands.facility_recipe`), the same recipe used for the band split. The SEC values in the table below are superseded except for alumina refineries (10.0 GJ/t, Deloitte/ARENA roadmap). Hotmaps SECs now in use: cement 2.70, lime 3.70, glass 4.92–10.92 by type (EU mix 7.85), pulp & paper 2.75–9.07 by pulp type (unspecified 7.18), steam cracking 35.9, BF/BOF 4.84, EAF 3.13, DRI-EAF 18.13, ammonia 11.27, soda ash 11.33, methanol 15.03, aluminium smelting 5.20. Efficiencies (eff) are unchanged. Food is rescaled to JRC-IDEES-2023 (`References/jrc_idees/extracted/2023`, restored from the archive); the script now stops if that folder is missing.
+
 | Subsector (product) | source_type | SEC (GJ/t) | eff | Basis (SEC ‖ efficiency) |
 |---|---|---|---|---|
 | cement (t cement) | all | 2.8 | **0.60** | SEC: ~3.5 GJ/t clinker thermal (IEA/CSI GNR, IEA Cement Roadmap 2018) × ~0.77 EU clinker-to-cement ratio (Cembureau). **eff:** cement pyroprocessing first-law efficiency 50–60% (Madlool et al. 2011, *Renew. Sustain. Energy Rev.* 15:2042); losses are hot clinker, calcination-CO₂ exhaust, shell radiation |
@@ -151,7 +162,7 @@ JRC-IDEES *useful*-energy reference.
 | chemicals | ammonia (t NH₃) | 9.0 | **0.90** | SEC: reformer **fuel** share only; feedstock gas (~18 GJ/t) excluded (IEA Ammonia Technology Roadmap 2021). **eff:** primary reformer fired heater w/ heat recovery |
 | | soda_ash (t) | 10.0 | 0.85 | Solvay process steam + kilns (EU BREF LVIC); boiler-led |
 | | methanol (t) | 9.0 | **0.90** | Fuel share only, feedstock excluded (IEA/IRENA); reformer fired heater |
-| aluminum | Refinery (t alumina) | 11.0 | 0.85 | Bayer digestion/calcination steam (IAI / IEA); boiler-led |
+| aluminum | Refinery (t alumina) | 10.0 | 0.85 | 10.5 GJ/t average refinery energy (Deloitte/ARENA alumina roadmap 2022, §3.1) less ~5% electric drives (Chart 3.1; AAC Fact Sheet #3 2023). Was 11.0 ("IAI / IEA", unverified) until 2026-11-11; boiler-led |
 | | Smelting (t aluminum) | 3.0 | **0.65** | Anode baking + cast-house fired furnaces; smelting electricity excluded (IAI) |
 
 **Note on `eff` and electrification.** These efficiencies convert fuel input
@@ -187,7 +198,7 @@ emissions-derived `useful_heat_tj`.
 |---|---|---|
 | cement | Clinker calcination-dry × 0.77 | EU clinker ratio (Cembureau); dry kilns dominant |
 | lime | Lime burning × 1.0 | |
-| glass | Name-matched Container / Flat / Fiber / Other when possible; else EU mix 0.55/0.30/0.05/0.10. Lehr/annealing LT (~20%) folded into melt HT → IHB-only | Name keywords (Verallia, AGC, Isover, …); FEVE mix fallback |
+| glass | Name-matched Container / Flat / Fiber / Other when possible; else EU mix 0.55/0.30/0.05/0.10. Benchmark bands kept as reported (lehr/annealing LT ~20% and melt HT; the earlier fold into IHB-only was removed 2026-11-05, `FOLD_MINOR_BANDS = False`) | Name keywords (Verallia, AGC, Isover, …); FEVE mix fallback |
 | steel BF/BOF, BOF | Sinter × 1.20, Rolled steel × 0.90 | Coke oven (0.30) and Blast furnace (0.95) excluded — Eurostat transformation sector (see §4); band shares now come from sinter + reheating/rolling only |
 | steel EAF | EAF × 1.0, Rolled steel × 0.90 | |
 | steel DRI-EAF | Direct reduction × 1.0, EAF × 1.0, Rolled × 0.90 | |
@@ -195,8 +206,9 @@ emissions-derived `useful_heat_tj`.
 | ammonia / soda ash / methanol | matching Basic chemicals process × 1.0 | |
 | steam cracking | Ethylene × 1.0 | |
 | aluminum Smelting | Aluminum primary × 1.0 | |
-| pulp & paper | Paper × 0.5 + pulp mix × 0.5; pulp split by source_type keywords (chemical/mechanical), "Pulp misc." → 70/30 chem/mech (CEPI EU mix). Hotmaps Paper ≥200 °C (~7%) folded into 100–200 °C → HP-only | coarse — the corrected workbook is authoritative for this sector |
-| food (tier 3) | Name-matched Hotmaps process (Sugar / Dairy / Brewing / Meat / Bread & bakery / Starch); unmatched → **Dairy** (HP-only), not an equal-weight blend | source_type is generic for ~99% of sites; keywords in `FOOD_NAME_RULES` |
+| pulp & paper | Paper × 0.5 + pulp mix × 0.5; pulp split by source_type keywords (chemical/mechanical), "Pulp misc." → 70/30 chem/mech (CEPI EU mix). Hotmaps Paper ≥200 °C (~7%) kept as reported (earlier fold into 100–200 °C removed 2026-11-05, `FOLD_MINOR_BANDS = False`) | coarse — the corrected workbook is authoritative for this sector |
+| alumina refinery | 67% 200–500 °C (digestion steam 175–400 °C) / 33% >1000 °C (calcination ~1100 °C); AAC Fact Sheet #3 2023, Deloitte/ARENA roadmap 2022, Barnes et al. ICSOBA 2024. Changed 2026-11-11 from unsourced 75% 100–200 / 25% 500–1000 °C | |
+| food (tier 3) | Name-matched Hotmaps process (Sugar / Dairy / Brewing / Meat / Bread & bakery / Starch); unmatched → **IndustryHeat-EU EU-27 food split** (20.4% <100 °C, 73.7% steam → 100–200 °C, 5.9% 100–400 °C → 200–500 °C). Changed 2026-11-11 from a Dairy default (90% <100 °C), which put 72% of food heat below 100 °C vs ~20% in IndustryHeat-EU | source_type is generic for ~99% of sites; keywords in `FOOD_NAME_RULES` |
 
 **External band splits** (processes missing from the benchmarks;
 `band_source = external`):
@@ -204,9 +216,10 @@ emissions-derived `useful_heat_tj`.
 - **Alumina refinery**: 75% at 100–200 °C (Bayer digestion steam), 25% at
   500–1000 °C (calcination) — IAI Bayer process data. **Genuine dual** HP+IHB
   at the same site (kept).
-- **Textiles**: 55% <100 °C, 45% 100–200 °C — dyeing / finishing steam
-  (Rehfeldt et al. 2018). Prior 10% at 200–500 °C removed so textiles are
-  HP-only.
+- **Textiles**: 32.2% <100 °C, 67.8% 100–200 °C — EU-27 textile and leather useful heat in
+  the IndustryHeat-EU / Madeddu dataset (`References/industry_useful_energy_demand`): 3.711 TWh
+  below 100 °C and 7.807 TWh steam, nothing above 400 °C. Steam is assigned to 100–200 °C.
+  The earlier 55/45 split and 10% at 200–500 °C were removed (2026-11-05); textiles are HP-only.
 
 **Dual-tech policy** (minimize facilities needing both HP and IHB): isolate
 IHB to processes that truly need ≥200 °C (sugar, bakery, glass melt, cement,

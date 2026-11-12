@@ -15,10 +15,9 @@ merge_production.py.
 Process recipes, external (non-benchmark) band splits, and caveats are
 documented in METHODS.md section 5. Keep that file in sync.
 
-Food and glass use source_name keyword matching to isolate processes so
-IHB (≥200 °C) is not artificially spread across HP-only sites. Unmatched
-food defaults to Dairy (HP-only). Textiles and pulp & paper are HP-only;
-glass melt is IHB-only (annealing LT folded into HT).
+Food and glass use source_name keyword matching to isolate processes.
+Unmatched food uses the IndustryHeat-EU EU-27 food sector split. Textiles are HP-only;
+glass keeps its benchmark bands (annealing LT and melt HT; see FOLD_MINOR_BANDS).
 
 Run merge_production.py first; this script consumes its output.
 """
@@ -126,13 +125,14 @@ GLASS_NAME_RULES: list[tuple[str, list[str]]] = [
 PAPER_HALF = ("Paper and Printing", "Paper", 0.5)
 
 # Hotmaps food processes. Climate TRACE source_type is generic for ~99% of
-# food sites, so we classify via source_name keywords. Unmatched sites get
-# Dairy (HP-only) — not an equal-weight blend — to avoid painting every plant
-# with Sugar/bakery IHB demand.
+# food sites, so we classify via source_name keywords. Unmatched sites use the
+# IndustryHeat-EU EU-27 food sector split (EXTERNAL_BANDS["food-default"]).
+# Before 2026-11-11 they defaulted to Dairy (90% <100 C), which put ~72% of
+# food heat below 100 C vs ~20% in IndustryHeat-EU and overstated HP COP.
 FOOD_PROCESSES = [
     "Sugar", "Dairy", "Brewing", "Meat processing", "Bread & bakery", "Starch",
 ]
-FOOD_DEFAULT_PROCESS = "Dairy"  # unmatched → HP-only (<200 °C)
+FOOD_DEFAULT_LABEL = "EU food mix (IndustryHeat-EU)"
 
 # Ordered rules: first match wins. Multilingual keywords from EU plant names.
 FOOD_NAME_RULES: list[tuple[str, list[str]]] = [
@@ -177,14 +177,33 @@ FOOD_NAME_RULES: list[tuple[str, list[str]]] = [
 
 # External band splits for sectors/processes missing from the benchmarks
 # (flagged band_source = "external"). See METHODS.md section 5.
+# False (2026-11-05): keep Hotmaps benchmark bands as reported for glass and pulp & paper.
+# True restores the old simplification: glass lehr/annealing LT folded into melt HT (IHB-only)
+# and paper >=200 C folded into 100-200 C (HP-only). The LP sizes HP and IHB separately,
+# so leaving the bands split is handled by the optimizer.
+FOLD_MINOR_BANDS = False
+
 EXTERNAL_BANDS: dict[str, dict[str, float]] = {
-    # Bayer process: steam digestion ~150-250C + calcination ~1000C (IAI).
-    # Genuine co-located HP + IHB at the same refinery — keep dual.
-    "alumina-refinery": {"100C-200C": 0.75, "500C-1000C": 0.25},
-    # Textile finishing/dyeing: hot water/steam (Rehfeldt et al. 2018).
-    # Prior 10% at 200–500 °C forced every textile plant into dual HP+IHB;
-    # finishing steam is <200 °C, so assign HP-only.
-    "textiles": {"below100C": 0.55, "100C-200C": 0.45},
+    # Bayer process (changed 2026-11-11; was 75% 100-200 C / 25% 500-1000 C, "IAI",
+    # unsourced). Thermal energy split excluding ~5% electric drives: digestion
+    # 63-64% and calcination 31% of refinery energy -> 67% / 33% (Australian
+    # Aluminium Council Fact Sheet #3, Jul 2023; Deloitte/ARENA alumina roadmap,
+    # Nov 2022, Chart 3.1). Digestion steam is supplied at 175-230 C (low-temp
+    # digestion) or 325-400 C (high-temp) (roadmap s4.2.1) -> 200-500 C band.
+    # Calcination at ~1100 C (Barnes et al., ICSOBA 2024) / >1000 C (AAC) -> >1000 C.
+    "alumina-refinery": {"200C-500C": 0.67, "above1000C": 0.33},
+    # Textiles: no Hotmaps process. Split from the IndustryHeat-EU (Madeddu et al. 2020) EU-27
+    # textile and leather useful heat (References/industry_useful_energy_demand): 3.711 TWh
+    # below 100 C and 7.807 TWh steam, nothing above 400 C. Steam is placed in 100-200 C
+    # (HP-only; the earlier 10% at 200-500 C is removed). Shares = 3.711/11.518 and 7.807/11.518.
+    "textiles": {"below100C": 0.322, "100C-200C": 0.678},
+    # Food default (name not matched): IndustryHeat-EU (Madeddu et al. 2020) EU-27
+    # "Food, Beverages and Tobacco" non-electric useful heat, summed over
+    # References/industry_useful_energy_demand/*.csv: 42.07 TWh <100 C, 151.80 TWh
+    # steam, 12.15 TWh 100-400 C, nothing above 400 C (total 206.02 TWh). Steam is
+    # placed in 100-200 C (as for textiles); 100-400 C is placed in 200-500 C
+    # (conservative: served by the IHB, not a heat pump).
+    "food-default": {"below100C": 0.204, "100C-200C": 0.737, "200C-500C": 0.059},
 }
 
 
@@ -215,14 +234,15 @@ def _match_name_rules(
 def food_process_for(row: pd.Series) -> tuple[str, str]:
     """Return (Hotmaps process, match_source) for a food facility.
 
-    match_source is 'name' when a keyword hit, else 'default' (Dairy / HP-only).
+    match_source is 'name' when a keyword hit, else 'default' (IndustryHeat-EU
+    EU food split; see EXTERNAL_BANDS["food-default"]).
     """
     matched = _match_name_rules(
         str(row.get("source_name", "")), str(row.get("source_type", "")), FOOD_NAME_RULES
     )
     if matched:
         return matched, "name"
-    return FOOD_DEFAULT_PROCESS, "default"
+    return FOOD_DEFAULT_LABEL, "default"
 
 
 def glass_recipe_for(row: pd.Series) -> tuple[list[tuple[str, str, float]], str]:
@@ -341,6 +361,34 @@ def food_band_shares(bench: pd.DataFrame, process: str) -> dict[str, float]:
     return shares
 
 
+def band_shares_for(row: pd.Series, bench: pd.DataFrame) -> dict[str, float] | None:
+    """Temperature-band shares for one facility, same rules as apply_bands().
+
+    Used by merge_production.py to set the fuel-to-heat efficiency, which depends on
+    how much of a facility's heat is at or above 500 C (direct-fired by necessity).
+    Returns None where apply_bands() would leave the facility unsplit.
+    """
+    subsector = row["subsector"]
+    if subsector == "food-beverage-tobacco":
+        process, match_src = food_process_for(row)
+        if match_src == "default":
+            return EXTERNAL_BANDS["food-default"]
+        return food_band_shares(bench, process)
+    if subsector == "textiles-leather-apparel":
+        return EXTERNAL_BANDS["textiles"]
+    if subsector == "aluminum" and row["source_type"] == "Refinery":
+        return EXTERNAL_BANDS["alumina-refinery"]
+    recipe = facility_recipe(row)
+    if recipe is None:
+        return None
+    _, shares = band_shares_from_recipe(bench, recipe)
+    if FOLD_MINOR_BANDS and subsector == "pulp-and-paper":
+        shares = fold_ht_into_lt(shares)
+    if FOLD_MINOR_BANDS and subsector == "glass":
+        shares = fold_lt_into_ht(shares)
+    return shares
+
+
 def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
     out = merged.copy()
     out["bench_heat_tj"] = np.nan
@@ -361,8 +409,10 @@ def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
         if subsector == "food-beverage-tobacco":
             process, match_src = food_process_for(row)
             heat = row["useful_heat_tj"]
-            shares = food_share_cache[process]
-            source = "benchmark"
+            if match_src == "default":
+                shares, source = EXTERNAL_BANDS["food-default"], "external"
+            else:
+                shares, source = food_share_cache[process], "benchmark"
             out.at[idx, "process_match"] = process
             out.at[idx, "process_match_source"] = match_src
         elif subsector == "textiles-leather-apparel":
@@ -381,7 +431,7 @@ def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
             sec_gj_t, shares = band_shares_from_recipe(bench, recipe)
             # Pulp & paper: Hotmaps Paper process has ~7% ≥200 °C; folding that
             # into steam avoids dual HP+IHB for a marginal drying slice.
-            if subsector == "pulp-and-paper":
+            if FOLD_MINOR_BANDS and subsector == "pulp-and-paper":
                 shares = fold_ht_into_lt(shares)
             if subsector == "glass":
                 _, match_src = glass_recipe_for(row)
@@ -389,7 +439,8 @@ def apply_bands(merged: pd.DataFrame, bench: pd.DataFrame) -> pd.DataFrame:
                 out.at[idx, "process_match"] = label
                 out.at[idx, "process_match_source"] = match_src
                 # Melt-primary: fold lehr/annealing LT into HT (IHB-only).
-                shares = fold_lt_into_ht(shares)
+                if FOLD_MINOR_BANDS:
+                    shares = fold_lt_into_ht(shares)
             heat, source = row["production_t"] * sec_gj_t / 1000, "benchmark"
 
         if pd.isna(heat):

@@ -23,8 +23,10 @@ ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent
 OUT_STEM = "country_scatter_avail_lcoh_5km_15km"
 
-# Eurostat 2025 EU27 industrial gas → heat (η=0.85) + EUA €79/t
-GAS93 = 63.25 / 0.85 + (0.202 / 0.85) * 79
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 LABEL = {
@@ -128,7 +130,7 @@ def country_agg_max_heat_under_gas(path: Path) -> tuple[pd.DataFrame, float, flo
     return agg, fa, fl
 
 
-def fleet_max_savings(path: Path, gas_eur: float = GAS93) -> tuple[float, float]:
+def fleet_max_savings(path: Path, gas_eur: float = GAS_EU) -> tuple[float, float]:
     """Per site: pick floor maximizing served × (gas − LCOH); return fleet HW stats."""
     long = pd.read_csv(path, low_memory=False)
     if "status" in long.columns:
@@ -163,7 +165,7 @@ def plot_panel(
 ) -> None:
     plot = agg[agg["demand_twh"] >= 0.5].copy()
 
-    ax.axhline(GAS93, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
+    ax.axhline(GAS_EU, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
     ax.axvline(fa_mh, color=C_MH, ls=LS_MH, lw=1.2, zorder=1)
     ax.axhline(fl_mh, color=C_MH, ls=LS_MH, lw=1.2, zorder=1)
     ax.axvline(fa_ms, color=C_MS, ls=LS_MS, lw=1.2, zorder=1)
@@ -291,7 +293,7 @@ def main() -> None:
             markeredgecolor="white", markeredgewidth=0.5,
             markersize=6, label="Other",
         ),
-        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS93:.0f}"),
+        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS_EU:.0f}"),
         Line2D([0], [0], color=C_MH, ls=LS_MH, lw=1.2, label="Fleet max heat"),
         Line2D([0], [0], color=C_MS, ls=LS_MS, lw=1.2, label="Fleet max savings"),
     ]

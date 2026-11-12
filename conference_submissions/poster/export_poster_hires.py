@@ -21,7 +21,7 @@ import numpy as np
 from matplotlib.lines import Line2D
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]  # repo root (script lives in conference_submissions/poster/)
 ANALYSIS = ROOT / "outputs" / "multiband" / "analysis"
 OUT = Path(__file__).resolve().parent / "poster_figures"
 SRC_PPTX = Path(__file__).resolve().parent / "W&S_Integration_poster_final.pptx"

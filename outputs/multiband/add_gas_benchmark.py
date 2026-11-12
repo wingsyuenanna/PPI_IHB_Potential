@@ -1,7 +1,7 @@
 """Attach country gas-boiler heat cost to multiband results and plot HT non-viable sites.
 
 Gas boiler LCOH by country comes from Input/industrial_heat_pump_costs/
-(eu_heat_pump_costs_by_country.csv): industrial gas price / 0.85 boiler efficiency
+(eu_heat_pump_costs_by_country.csv): industrial gas price / 0.94 boiler efficiency (Saad et al. 2026)
 plus EUA carbon (see eu_heat_pump_cost_assumptions.csv). Converted to USD at
 EURUSD for comparison with LCOH_served_$perMWh.
 

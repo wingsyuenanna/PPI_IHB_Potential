@@ -28,7 +28,7 @@ OUT_STEM = "heat_case_hockey_sticks_lcoh_availability"
 CASE_STYLE = {
     "low": {"color": "#009E73", "marker": "o", "label": "Low demand (388 TWh)", "lw": 2.0},
     "base": {"color": "#0072B2", "marker": "s", "label": "Base (522 TWh)", "lw": 2.0},
-    "high": {"color": "#D55E00", "marker": "^", "label": "High demand (697 TWh)", "lw": 2.0},
+    "high": {"color": "#D55E00", "marker": "^", "label": "High demand (703 TWh)", "lw": 2.0},
 }
 EURUSD = 1.08
 YMAX = 160.0  # clip 100%-floor spikes for readability

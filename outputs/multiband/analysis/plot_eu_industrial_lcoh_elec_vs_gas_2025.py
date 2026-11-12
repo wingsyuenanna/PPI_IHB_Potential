@@ -20,12 +20,11 @@ OUT = Path(__file__).resolve().parent
 OUT_STEM = "eu_industrial_lcoh_elec_vs_gas_2025"
 
 # Eurostat 2025 EU-27 industrial (nrg_pc_205 / nrg_pc_203, X_VAT)
-ELEC = 162.0  # €/MWh
-GAS = 63.25  # €/MWh (matches GAS93 construction used elsewhere)
-ETA = 0.85
-EUA = 79.0  # €/tCO2
-EF_GAS = 0.202  # tCO2 / MWh_fuel
-RTE = 0.95
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_PRICE_EU as GAS, ETA_BOILER as ETA, EUA, EF_NG, ELEC_PRICE_EU as ELEC, RTE_GRID as RTE  # from input files
+EF_GAS = round(EF_NG, 3)  # tCO2 / MWh_fuel
 
 # Shared palette (also used on LCOH–availability plot)
 # Gas purple · grid elec medium gray · 15 km vermillion on hockey stick

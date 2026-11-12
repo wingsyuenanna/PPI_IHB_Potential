@@ -15,7 +15,7 @@
     {
       "name": "bibtex",
       "command": "/Library/TeX/texbin/bibtex",
-      "args": ["%OUTDIR%/%DOCFILE%"],
+      "args": ["build/%DOCFILE%"],
       "env": { "PATH": "/Library/TeX/texbin:/usr/bin:/bin" }
     }
   ],
@@ -23,7 +23,7 @@
     { "name": "pdflatex x2", "tools": ["pdflatex", "pdflatex"] },
     { "name": "pdflatex, bibtex, pdflatex x2", "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"] }
   ],
-  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.recipe.default": "pdflatex, bibtex, pdflatex x2",
   "latex-workshop.latex.outDir": "%DIR%/build",
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab"

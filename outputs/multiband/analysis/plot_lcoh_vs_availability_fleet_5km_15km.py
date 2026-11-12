@@ -18,8 +18,10 @@ from matplotlib.lines import Line2D
 OUT = Path(__file__).resolve().parent
 OUT_STEM = "lcoh_vs_availability_fleet_avg_5km_15km"
 
-GAS93 = 63.25 / 0.85 + (0.202 / 0.85) * 79
-ELEC171 = 162.0 / 0.95  # grid electricity ÷ 0.95 RTE (industrial heat battery)
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_EU, ELEC_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 # Shared gas / grid-elec colors with EU-27 bar chart; curve markers distinct
@@ -64,7 +66,7 @@ def max_savings_point(km: int) -> tuple[float, float]:
     if long["lcoh"].isna().all():
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (GAS93 - long["lcoh"])
+    long["surplus"] = long["served"] * (GAS_EU - long["lcoh"])
     long = long.dropna(subset=["source_id", "surplus", "served", "lcoh"])
     best = long.loc[long.groupby("source_id")["surplus"].idxmax()]
     return _fleet(best["heat"], best["served"], best["lcoh"])
@@ -142,8 +144,8 @@ def main() -> None:
     # Distinct dash patterns (not colour-only): gas dash-dot, grid densely dotted.
     LS_GAS = (0, (5.5, 1.6, 1.2, 1.6))
     LS_ELEC = (0, (1.1, 1.3))
-    ax.axhline(GAS93, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
-    ax.axhline(ELEC171, color=C_ELEC, ls=LS_ELEC, lw=1.2, zorder=1)
+    ax.axhline(GAS_EU, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
+    ax.axhline(ELEC_EU, color=C_ELEC, ls=LS_ELEC, lw=1.2, zorder=1)
     ax.set_xlim(0, 100)
     ax.set_ylim(0, 215)
     ax.set_xlabel("Heat-weighted availability achieved (%)", fontsize=8, labelpad=2)
@@ -156,8 +158,8 @@ def main() -> None:
     leg = [
         Line2D([0], [0], color=C5, marker="o", lw=1.6, label="5 km"),
         Line2D([0], [0], color=C15, marker="s", ls="--", lw=1.6, label="15 km"),
-        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS93:.0f}"),
-        Line2D([0], [0], color=C_ELEC, ls=LS_ELEC, lw=1.2, label=f"Grid elec. €{ELEC171:.0f}"),
+        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS_EU:.0f}"),
+        Line2D([0], [0], color=C_ELEC, ls=LS_ELEC, lw=1.2, label=f"Grid elec. €{ELEC_EU:.0f}"),
         Line2D(
             [0], [0], marker="o", color="w", markerfacecolor=C_MS,
             markeredgecolor="#222", markersize=6, label="Max € savings",

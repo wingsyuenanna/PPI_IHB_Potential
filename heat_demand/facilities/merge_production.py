@@ -40,6 +40,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import heat_temperature_bands as htb
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MATCHED = (
     PROJECT_ROOT / "heat_demand" / "facilities" / "facilities_matched_hotmaps_2014.csv"
@@ -80,6 +82,71 @@ ISO3_TO_REF_CC = {
 
 TJ_TO_MWH = 1e6 / 3600  # 277.78 MWh per TJ
 
+# Fuel-to-heat efficiency (changed 2026-11-11). Replaces the per-sector `eff`
+# values, several of which were unsourced. Efficiency depends on how heat is
+# delivered, following Saad et al. 2026 (Environ. Res. Lett. 21 094023, SI Table S3):
+#   boiler steam, natural gas      0.94
+#   direct process heating (kilns, furnaces, any fuel) 0.75
+# Each facility's split between the two:
+#   - the model places boiler steam in the 100-200 C band (and below), so heat at
+#     or above 200 C is direct-fired;
+#   - steam fraction = the sector's steam share of non-electric useful heat in
+#     IndustryHeat-EU (EU27), capped at the facility's share of heat below 200 C;
+#   - exception: alumina digestion (67% of refinery heat, 200-500 C band) is boiler
+#     steam at 175-400 C per the Deloitte/ARENA alumina roadmap (2022, s4.2.1).
+#   eff = steam_frac * 0.94 + (1 - steam_frac) * 0.75
+BOILER_EFF = 0.94
+DIRECT_EFF = 0.75
+STEAM_BANDS = ("below100C", "100C-200C")
+STEAM_SHARE_FILE = (
+    PROJECT_ROOT / "References" / "industry_useful_energy_demand"
+    / "industry_useful_energy_demand_EU27.csv"
+)
+STEAM_ROW = "Steam (non-electric boilers)"
+NONELEC_ROWS = [
+    STEAM_ROW,
+    "Non-electric process heat (<100 C)",
+    "Non-electric process heat (100-400 C)",
+    "Non-electric process heat (400-1000 C)",
+    "Non-electric process heat (>1000 C)",
+]
+# Study subsector -> IndustryHeat-EU column (steel split by route below)
+STEAM_SECTOR_COLUMN = {
+    "cement": "Cement (TWh)",
+    "lime": "Cement (TWh)",
+    "glass": "Ceramics and Glass (TWh)",
+    "iron-and-steel": "Primary Steel (TWh)",
+    "chemicals": "Chemicals (TWh)",
+    "petrochemical-steam-cracking": "Chemicals (TWh)",
+    "aluminum": "Non-ferrous Metals (TWh)",
+    "pulp-and-paper": "Pulp and Paper (TWh)",
+    "food-beverage-tobacco": "Food, Beverages and Tobacco (TWh)",
+    "textiles-leather-apparel": "Textiles and Leather (TWh)",
+}
+ALUMINA_DIGESTION_STEAM_FRAC = 0.67
+
+
+def load_steam_shares() -> dict[str, float]:
+    """IndustryHeat-EU EU27 steam share of non-electric useful heat, by column."""
+    ref = pd.read_csv(STEAM_SHARE_FILE, index_col=0)
+    nonelec = ref.loc[NONELEC_ROWS].sum()
+    return (ref.loc[STEAM_ROW] / nonelec).to_dict()
+
+
+def heat_efficiency(row: pd.Series, bench: pd.DataFrame, steam: dict[str, float]):
+    """Return (efficiency, steam fraction) for one facility; see comment above."""
+    sub = row["subsector"]
+    if sub == "aluminum" and row["source_type"] == "Refinery":
+        f_steam = ALUMINA_DIGESTION_STEAM_FRAC
+    else:
+        shares = htb.band_shares_for(row, bench) or {}
+        f_low = sum(shares.get(b, 0.0) for b in STEAM_BANDS)
+        col = STEAM_SECTOR_COLUMN[sub]
+        if sub == "iron-and-steel" and str(row["source_type"]) == "EAF":
+            col = "Secondary Steel (TWh)"
+        f_steam = min(steam[col], f_low)
+    return f_steam * BOILER_EFF + (1.0 - f_steam) * DIRECT_EFF, f_steam
+
 # All emission factors, SEC values, and their literature sources are
 # documented in heat_demand/facilities/METHODS.md. Keep that file in sync
 # with any change made here.
@@ -99,12 +166,10 @@ HEAT_ESTIMATE_PARAMS: dict[str, dict[str, float]] = {
         # fossil mix for EU food & textiles (implied EF ~58-60, vs the earlier
         # 75/25 blend's 61.4 which is a few % too high for the gas-heavy mix).
         "fuel_ef_tco2_per_tj": 0.90 * 56.1 + 0.10 * 77.4,  # 58.2
-        "boiler_efficiency": 0.85,
     },
     "textiles-leather-apparel": {
         "combustion_share": 1.0,
         "fuel_ef_tco2_per_tj": 0.90 * 56.1 + 0.10 * 77.4,  # 58.2
-        "boiler_efficiency": 0.85,
     },
 }
 
@@ -121,6 +186,10 @@ HEAT_ESTIMATE_PARAMS: dict[str, dict[str, float]] = {
 # an electrified furnace must supply); each eff below is now a sourced
 # furnace/boiler efficiency. Keyed by subsector, then source_type
 # ("default" catches the rest). Full sources in METHODS.md section 4.
+# NOTE (2026-11-11): SEC_PARAMS now only (a) lists which subsectors use the SEC
+# route and (b) supplies the alumina-refinery SEC. All other `sec_gj_t` values are
+# superseded by the Hotmaps recipe SEC, and every `eff` is superseded by
+# heat_efficiency() above. The old values and comments are kept for the record.
 SEC_PARAMS: dict[str, dict[str, dict[str, float]]] = {
     # eff = cement pyroprocessing first-law efficiency; hot clinker, hot
     # calcination-CO2 exhaust and shell radiation are the losses. 0.60:
@@ -142,10 +211,11 @@ SEC_PARAMS: dict[str, dict[str, dict[str, float]]] = {
         # (earlier 17.0 counted external fuel only, halving cracker heat and
         # understating the duty an electrified furnace must supply — the
         # byproduct methane/H2 tail gas is fossil-derived and must also be
-        # decarbonized). eff = 0.90: a fired heater with strong convection-
-        # section heat recovery (feed preheat + HP process steam), so the
-        # useful fraction is high (Ren, Patel & Blok 2006, Energy 31:425;
-        # Ullmann's "Ethylene"). Least-certain efficiency here — see METHODS.
+        # decarbonized). 35.9 sits in the 30-36 GJ/t range Ren, Patel & Blok
+        # 2006 (Energy 31:425) report for European/world crackers, whose SEC
+        # includes byproduct fuel gas and excludes feedstock. eff = 0.90 is an
+        # ASSUMPTION (fired heater with convection-section heat recovery); Ren
+        # et al. give no furnace efficiency. Least-certain efficiency here.
         "default": {"sec_gj_t": 35.9, "eff": 0.90}
     },
     "iron-and-steel": {  # t of crude steel, by route
@@ -173,9 +243,12 @@ SEC_PARAMS: dict[str, dict[str, dict[str, float]]] = {
         "methanol": {"sec_gj_t": 9.0, "eff": 0.90},
     },
     "aluminum": {  # t of alumina (Refinery) / t of aluminum (Smelting)
-        # Refinery = Bayer digestion/calcination steam (0.85 boiler); Smelting
+        # Refinery: 10.0 GJ/t = 10.5 GJ/t average refinery energy (Deloitte/ARENA
+        # alumina roadmap 2022, s3.1) less the ~5% used by electric drives
+        # (roadmap Chart 3.1 "Other 5%"; AAC Fact Sheet #3 2023). Was 11.0 ("IAI;
+        # IEA", unverified) until 2026-11-11. eff 0.85 boiler. Smelting
         # = anode-bake + cast-house fired furnaces, eff 0.65 (IAI energy data).
-        "Refinery": {"sec_gj_t": 11.0, "eff": 0.85},
+        "Refinery": {"sec_gj_t": 10.0, "eff": 0.85},
         "Smelting": {"sec_gj_t": 3.0, "eff": 0.65},
     },
 }
@@ -199,6 +272,10 @@ OUTPUT_COLUMNS = [
     "production_year",
     "data_tier",
     "fuel_energy_tj",
+    "sec_gj_t",
+    "sec_source",
+    "heat_eff",
+    "steam_frac",
     "useful_heat_tj",
     "useful_heat_mwh",
     "heat_method",
@@ -275,7 +352,17 @@ def estimate_heat_from_emissions(merged: pd.DataFrame) -> pd.DataFrame:
     merged["useful_heat_tj"] = np.nan
     merged["heat_method"] = pd.NA
 
-    # SEC route: fuel input for heat per tonne of product.
+    # SEC route: fuel input for heat per tonne of product. Since 2026-11-11 the
+    # SEC is the Hotmaps benchmark SEC of the facility's process recipe (the same
+    # recipe heat_temperature_bands.py uses for the band split), so SEC and band
+    # shares share one source. SEC_PARAMS supplies eff, and the SEC only where no
+    # Hotmaps recipe exists (alumina refineries: Deloitte/ARENA roadmap).
+    bench = htb.load_benchmarks(htb.DEFAULT_BENCHMARKS)
+    steam = load_steam_shares()
+    merged["sec_gj_t"] = np.nan
+    merged["sec_source"] = pd.NA
+    merged["heat_eff"] = np.nan
+    merged["steam_frac"] = np.nan
     for subsector, by_type in SEC_PARAMS.items():
         for m_idx in merged.index[
             (merged["subsector"] == subsector) & merged["production_t"].gt(0)
@@ -285,9 +372,20 @@ def estimate_heat_from_emissions(merged: pd.DataFrame) -> pd.DataFrame:
             )
             if params is None:
                 continue
-            fuel_tj = merged.at[m_idx, "production_t"] * params["sec_gj_t"] / 1000
+            recipe = htb.facility_recipe(merged.loc[m_idx])
+            if recipe is not None:
+                sec, _ = htb.band_shares_from_recipe(bench, recipe)
+                sec_source = "hotmaps"
+            else:
+                sec, sec_source = params["sec_gj_t"], "sec_params"
+            merged.at[m_idx, "sec_gj_t"] = sec
+            merged.at[m_idx, "sec_source"] = sec_source
+            fuel_tj = merged.at[m_idx, "production_t"] * sec / 1000
             merged.at[m_idx, "fuel_energy_tj"] = fuel_tj
-            merged.at[m_idx, "useful_heat_tj"] = fuel_tj * params["eff"]
+            eff, f_steam = heat_efficiency(merged.loc[m_idx], bench, steam)
+            merged.at[m_idx, "heat_eff"] = eff
+            merged.at[m_idx, "steam_frac"] = f_steam
+            merged.at[m_idx, "useful_heat_tj"] = fuel_tj * eff
             merged.at[m_idx, "heat_method"] = "production_sec"
 
     # Emissions-inversion route for facilities without production.
@@ -302,7 +400,13 @@ def estimate_heat_from_emissions(merged: pd.DataFrame) -> pd.DataFrame:
         )
         fuel_tj = combustion_co2e / params["fuel_ef_tco2_per_tj"]
         merged.loc[rows, "fuel_energy_tj"] = fuel_tj
-        merged.loc[rows, "useful_heat_tj"] = fuel_tj * params["boiler_efficiency"]
+        effs = merged.loc[rows].apply(
+            lambda r: heat_efficiency(r, bench, steam), axis=1, result_type="expand"
+        ) if rows.any() else None
+        if effs is not None:
+            merged.loc[rows, "heat_eff"] = effs[0]
+            merged.loc[rows, "steam_frac"] = effs[1]
+            merged.loc[rows, "useful_heat_tj"] = fuel_tj * effs[0]
         merged.loc[rows, "heat_method"] = "emissions_fuel_inversion"
 
     merged = rescale_food_to_country_reference(merged)
@@ -335,6 +439,12 @@ def rescale_food_to_country_reference(merged: pd.DataFrame) -> pd.DataFrame:
     ].gt(0)
     merged["food_country_scale"] = np.nan
 
+    if not any(FOOD_REF_DIR.glob("industry_useful_energy_demand_*.csv")):
+        raise FileNotFoundError(
+            f"Food reference files missing in {FOOD_REF_DIR}. Restore with: "
+            "tar -xzf archive/2026-08-06_cleanup/jrc_idees.tar.gz -C . "
+            "'References/jrc_idees/extracted/2023'"
+        )
     target_total_tj = 0.0
     original_total_tj = 0.0
     for iso3, group in merged[food].groupby("iso3_country"):

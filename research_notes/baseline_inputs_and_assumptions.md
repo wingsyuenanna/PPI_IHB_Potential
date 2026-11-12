@@ -25,7 +25,7 @@ Baseline outputs, recomputed 2026-11-05 from the current by_facility.csv (pre-VO
 
 ## 2. Heat demand inputs
 
-- **Facilities:** Climate TRACE 2024 facility master (`Input/facility_master_2024_v6.csv`), EU manufacturing, deduplicated (72 rows deleted, Ardagh Barnsley merged). Final file: `heat_demand/facilities/facilities_2024_eu_replaceable.csv` (2,415 rows, 2,192 with replaceable heat > 0).
+- **Facilities:** Climate TRACE 2024 facility master (`Input/facility_master_2024_v6.csv`), EU manufacturing, deduplicated (78 rows deleted, Ardagh Barnsley merged). Final file: `heat_demand/facilities/facilities_2024_eu_replaceable.csv` (2,415 rows, 2,192 with replaceable heat > 0).
 - **Production source tiers:** (1) Climate TRACE capacity × capacity factor. (2) Hotmaps 2014 production where Climate TRACE is a country-level artifact (tier 2 is 2014 vintage). (3) No production: heat is back-calculated from CO2e.
 - **Heat formula:** useful heat = production × SEC × η. Replaceable heat = useful heat × fossil share. Electricity is excluded everywhere.
 - **SEC (GJ/t) and η:**
@@ -102,6 +102,14 @@ Baseline outputs, recomputed 2026-11-05 from the current by_facility.csv (pre-VO
 ## 7. Gas benchmark (comparison only, not in the optimization)
 
 - `Input/industrial_heat_pump_costs/eu_heat_pump_costs_by_country.csv`: industrial gas price ÷ 0.85 boiler efficiency, plus EUA carbon at €79/tCO2, converted at EURUSD 1.08. GBR uses IRL.
+
+## 8b. Heat inputs regenerated 2026-11-06
+
+Re-ran `heat_temperature_bands.py`, `apply_dedup.py`, `apply_fossil_share.py`, `build_sites_input.py` and `heat_sensitivity_bounds.py` with: glass and paper bands kept as reported (`FOLD_MINOR_BANDS = False`) and textiles at 32.2%/67.8% (<100 / 100-200 C, IndustryHeat-EU). Total replaceable heat unchanged at 522.3 TWh; <100 C 98.1 -> 94.9, 100-200 C 93.1 -> 105.7, 200-500 C 44.6 -> 40.8, 500-1000 C 357.2 -> 355.0, >1000 C 152.5 -> 149.1 TWh. `outputs/eu_ihb_site_assessment_2024.csv` is current. Baseline runs NOT yet redone.
+
+## 8a. Dollar basis decided 2026-11-05: real 2025 USD
+
+HP/IHB costs inflated only to 2025 (x1.188 / x1.057), flat in the 2030 column; BNEF 2030 costs taken as real 2025 USD; CRF from IRENA real WACC (no IMF inflation uplift). `Input/bnef_country_costs.csv` and `flatblock_optimization/inputs/input_heat_battery_cost.csv` were regenerated/edited accordingly. Baseline NOT yet rerun. Gas benchmark is a 2025 price (consistent).
 
 ## 8. Decisions made 2026-11-05 (code changed, baseline NOT yet rerun)
 

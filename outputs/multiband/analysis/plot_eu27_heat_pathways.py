@@ -18,7 +18,10 @@ import pandas as pd
 OUT = Path(__file__).resolve().parent
 OUT_STEM = "buffer_served_lcoh_gascap_vs_maxsavings_5km_15km"
 
-GAS93 = 63.25 / 0.85 + (0.202 / 0.85) * 79
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 # Okabe–Ito-adjacent neutrals for a clean table
@@ -58,7 +61,7 @@ def max_savings(km: int) -> tuple[float, float, float]:
     if long["lcoh"].isna().all():
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (GAS93 - long["lcoh"])
+    long["surplus"] = long["served"] * (GAS_EU - long["lcoh"])
     long = long.dropna(subset=["source_id", "surplus", "served", "lcoh"])
     best = long.loc[long.groupby("source_id")["surplus"].idxmax()]
     return _fleet(best["heat"], best["served"], best["lcoh"])
@@ -145,7 +148,7 @@ def main() -> None:
         0.5,
         0.08,
         "Max heat served = highest availability with LCOH ≤ country gas heat price\n"
-        f"(fuel/η + EUA; EU avg ~€{GAS93:.0f}/MWh).\n"
+        f"(fuel/η + EUA; EU avg ~€{GAS_EU:.0f}/MWh).\n"
         "Max € savings = per-site floor maximizing served × (gas − LCOH)\n"
         "at that EU-average gas heat cost.",
         ha="center",

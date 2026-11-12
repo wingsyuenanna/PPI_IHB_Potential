@@ -1,6 +1,8 @@
 assumption,value,unit,note
-EUA carbon price,79.0,EUR/tCO2,Applied to the gas baseline cost; not disclosed whether/how it enters the HP LCOH figures
-Gas boiler efficiency (baseline),0.85,fraction,Used to convert gas price to gas_heat_cost_eur_mwh (does not fully reconcile alone - capex/O2M and/or carbon cost likely folded in)
+EUA carbon price,73.43,EUR/tCO2,2025 EU ETS allowance price (ICAP). Applied to the gas baseline cost; not disclosed whether/how it enters the HP LCOH figures
+Gas boiler efficiency (baseline),0.94,fraction,"Natural-gas boiler fuel-to-heat efficiency, Saad et al. 2026 SI Table S3 (Vakkilainen 2017). gas_heat_cost_eur_mwh = (gas price + EUA x 0.202 tCO2/MWh) / 0.94. Was 0.85 until 2026-11-11"
 Low-temp heat pump COP,2.7,COP,Applies to low_temp_hp_lcoh_eur_mwh
 Steam heat pump COP,1.8,COP,"Applies to steam_hp_lcoh_eur_mwh (roughly 1.5x the low-temp HP LCOH throughout, driven by this COP gap)"
 Thermal storage round-trip efficiency,0.92,fraction,Applies to thermal_storage_lcoh_eur_mwh
+Grid electricity band (nrg_pc_205),MWH2000-19999,Eurostat band code,"Grid-electricity reference for plots: EU27_2020, X_VAT, mean 2025-S1/S2 from eurostat_nrg_pc_205_XVAT_2025_EU27.csv. Band ID (2,000-19,999 MWh/yr) reproduces the earlier hard-coded EUR 162/MWh"
+IHB round-trip efficiency (grid reference),0.95,fraction,Grid electricity reference heat cost = electricity price / RTE (industrial heat battery charged from grid); matches model IHB RTE

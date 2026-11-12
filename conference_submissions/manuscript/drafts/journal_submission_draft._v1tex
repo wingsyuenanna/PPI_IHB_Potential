@@ -1,0 +1,511 @@
+% =================================================================
+%  Nature Energy  -  Analysis  -  manuscript draft
+%
+%  Limits (Nature Energy Content Types page, Analysis):
+%    * Main text  <= 3,000 words  (excl. abstract, Methods, references, figure legends)
+%    * Abstract   100-150 words, unreferenced
+%    * Display items <= 8 (figures and/or tables)
+%  Structure: Introduction (no heading) / Results (topical subheadings) /
+%             Discussion (NO subheadings) / Methods (topical subheadings)
+%
+%  Text tagged  % [WISO26 ...]  is copied verbatim from the WISO26 manuscript
+%  (only LaTeX escaping and \cite{} keys changed). Text tagged % [Journal draft]
+%  is copied verbatim from journal_submission_draft.docx. Everything else is
+%  structure or a red TODO note.
+%
+%  Word count of main text:   texcount -inc main.tex  (Intro + Results + Discussion)
+% =================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[super,sort&compress,comma]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\onehalfspacing
+
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+% ---- Model notation (from your optimization .tex) ----
+\newcommand{\Li}{\mathrm{Li}}
+\newcommand{\IHB}{\mathrm{IHB}}
+\newcommand{\HP}{\mathrm{HP}}
+\newcommand{\PV}{\mathrm{PV}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\dis}{\mathrm{dis}}
+\newcommand{\Eload}{E_{\mathrm{load}}}
+
+% -----------------------------------------------------------------
+\begin{document}
+
+\begin{flushleft}
+{\Large\bfseries Facility-Level Techno-Economic Potential of Electrified Industrial Process Heat in European Manufacturing}
+\todo{check title-length limit}
+
+\bigskip
+Anna Yuen$^{1,*}$, Emilia Chojkiewicz$^{1}$, Amol A. Phadke$^{2}$
+
+\medskip
+\small
+$^{1}$Energy and Resources Group, University of California, Berkeley, CA, USA.\\
+$^{2}$Goldman School of Public Policy, University of California, Berkeley, CA, USA.\\
+$^{*}$e-mail: \href{mailto:anna_yuen@berkeley.edu}{anna\_yuen@berkeley.edu}
+\end{flushleft}
+
+% =================================================================
+\section*{Abstract}
+% 100-150 words, no references, avoid abbreviations.
+% [Journal draft] (~210 words) -> rewrite to <=150.
+Industrial process heat dominates manufacturing emissions in the EU. Roughly 75\% of energy used for industrial process heat is powered by fossil fuels. Yet, there are readily available solutions that can continuously generate process heat. Industrial heat pumps and thermal energy storage solutions paired with on-site solar PV can be a solution to bring power to heat generation quickly and cost competitively with natural gas. Using a dataset of 2,192 facilities of different manufacturing sectors from Climate TRACE, each facility is modelled with co-located, off-grid solar PV with industrial heat pumps and batteries installed in 2030. Under this modelled configuration, 59\% of fossil-fuelled process heat can be decarbonized using solar PV within a 5\,km buffer zone around each facility site at an average levelised cost of heat of \texteuro55/MWh. After expanding the buffer zone to 15\,km, the share of possible decarbonized heat rises to 84\% of process heat at \texteuro62/MWh against an EU average gas-heat cost of \texteuro93/MWh. Each facility is optimized to provide the highest availability and highest savings under its country's gas costs. These results show that Southern Europe can cost-competitively decarbonize over 95\% of its heat demand. Central Europe (Rhine-Meuse Region), where most of the large, heat intensive sources are located, can decarbonize over 70\% of its heat demand using on-site solar plus storage.
+\todo{update numbers to final baseline run (85.0\% / 59.6\%?); keep $\le$150 words}
+
+% =================================================================
+%  MAIN TEXT  (target ~3,000 words total)
+% =================================================================
+
+% ---------------- Introduction (NO heading)  ~550 words -----------
+% P1 - The problem   [WISO26 §1, para 1]
+Industrial process heat accounts for three quarters of industrial greenhouse-gas emissions in the European Union (EU)\cite{rehfeldt2024} and is an essential part of the climate change mitigation strategy\cite{madeddu2020}. The majority of industrial process heat demand is concentrated in the iron and steel, chemicals, and non-metallic minerals sectors, which also require the highest process temperatures, typically exceeding 1,000\,$^\circ$C\cite{rehfeldt2024}.
+
+% [WISO26 §1, para 3]
+Europe is facing challenges in energy security due to the reliance on international gas imports\cite{rosenow2025nrct}. Diversifying energy sources and utilising renewable resources can not only reduce dependence on gas imports but also allow for quicker decarbonisation through electrification to meet EU climate goals.
+
+% P2 - Technology is ready   [WISO26 §1, para 2]
+Different technologies are already available to electrify process heat across different temperature heat bands such as heat pumps, industrial heat batteries, electric boilers, and electric arc furnaces. While industrial heat pumps are commercially available and highly efficient, they can only provide heat up to 200\,$^\circ$C\cite{iea2026renewablesindustry}. Heat batteries (thermal storage) are a recent technology that are specified to provide heat up to 1500\,$^\circ$C, reaching temperatures needed for hard to abate industries such as iron and steel and the chemical sectors\cite{rondo2026}. Renewable generation using solar panels paired with heat pump and heat battery is a potential pathway to reduce carbon emissions and increase efficiency\cite{wikoff2025}. These technologies can generate replaceable process heat, heat that is generated with fossil fuel.
+
+% P3 + P4 - Why electrification is stalled / off-grid alternative   [WISO26 §1, para 4]
+However, the progress to electrify process heat has been falling behind other sectors\cite{rosenow2025erss}. Critical barriers to electrifying industrial heat include high electricity grid prices relative to gas\cite{rosenow2025erss} and long lead times to connect to the electricity grid\cite{chojkiewicz2026,baselovic2026}. Off-grid renewable solutions can decrease reliance on imported gas\cite{baselovic2026} and avoid the multi-year grid interconnection timeline\cite{ember2026crossedwires}. With enough land available, solar plus storage systems can provide heat without incurring the cost of expensive transmission infrastructure or long interconnection queue wait times\cite{dominguez2025us}.
+\todo{add from journal draft: industrial electricity price vs gas (\texteuro162 or \texteuro171/MWh -- pick one) and queue lengths (3 years south; 5--10 years NL/DE); land/permitting trade-off.}
+
+% P5 - Prior work and gap   [WISO26 §1, para 5]
+Prior work analyses industrial decarbonisation at a sector level or country level\cite{rosenow2025nrct,agora2026business}. Facility level analysis has been conducted but not for co-located off-grid solar plus storage in the EU with country specific costs and gas benchmarks\cite{chojkiewicz2026,hotmaps2018}. For on-site solar resources, the capacity factor and costs can differ greatly within a country or region. Facility-level bottom-up analysis can tackle those gaps\cite{neuwirth2024} by using site-specific solar capacity factors, land availability, and country adjusted cost of infrastructure.
+\todo{add: Gilbert et al. LCOH / grid-based conclusion\cite{gilbert2023lcoh}; Ziegler et al. cost vs reliability\cite{ziegler2019storage}; McMillan; Saad et al.; Markussen. Literature table $\rightarrow$ Supplementary Table 1.}
+
+% P6 - Here we show   [WISO26 §1, para 5, last sentence]
+With facility-level resolution, this study analyses 2,192 EU facility with 5 and 15km land buffers to determine levelised cost of heat (LCOH) at each facility and quantifies the potential to decarbonise with the solar plus storage solution that is below the gas LCOH.
+\todo{P6: rewrite as a ``Here we show...'' paragraph with one sentence per headline result.}
+
+% =================================================================
+\section*{Results}
+% ~1,750 words, 4 subsections; each heading should state the finding.
+
+\subsection*{Total heat served and LCOH}
+\todo{rewrite heading as the finding}
+% [WISO26 §3.1]
+The aggregate replaceable heat demand served is analysed in two ways: maximising savings and maximising heat demand. To maximise savings, a facility should aim for availability up to the maximum savings points. The remaining can be met with grid electricity or gas. To maximise heat demand served, a facility could overbuild solar panels while still being under gas prices resulting in a lower marginal benefit but is still gas competitive. Table~\ref{tab:served} summarises both framings at the 5\,km and 15\,km buffer zones.
+
+% [WISO26 §3, results text]
+At 5\,km, 59\% of replaceable heat is below country gas at \texteuro55/MWh, expanding to 15\,km reaches 84\% at \texteuro62/MWh. Stopping at max savings leaves more money on the table but only 53\% and 74\% of heat for 5\,km and 15\,km buffer zones respectively. The LCOH at 90\% for solar plus storage is still almost \texteuro100 under the grid electricity LCOH (Fig.~\ref{fig:fleet}).
+
+\subsection*{Country-level comparison}
+\todo{rewrite heading as the finding}
+% [WISO26 §3.3]
+Germany, the Netherlands, and France have very large process-heat demand. With a $\sim$15\,km land buffer, a large majority can be served below country gas. At 5\,km, Germany and the Netherlands remain more land constrained. Southern Europe (Greece, Spain, Italy, Portugal) is the strongest fit. Those sites tend to be smaller, with better solar yield. $\sim$95\% of demand served at LCOH roughly 70--75\% of country gas cost (Fig.~\ref{fig:region}).
+
+\subsection*{High temperature sectors, solar resource and land constraint}
+\todo{rewrite heading as the finding; this subsection merges WISO26 \S3.2, \S3.4 and \S3.5 -- trim}
+% [WISO26 §3.2]
+Steam cracking and iron and steel sector have very large sites and have more heat intense processes ($>$500\,$^\circ$C) resulting in much higher heat loads. These sectors require more hybrid solutions: increased land availability, utilising grid electricity, co-firing with gas plants. By increasing buffer zone around each site, over 80\% of heat can be served in both sectors under gas prices. Increasing buffer zones from 5\,km to 15km, availability for steel increases from 40\% to 80\%, for steam, from 30\% to 80\%. Grid electricity or gas plants are still needed to provide for the last 10-30\% of demand at 15\,km buffer zones.
+
+% [WISO26 §3.4]
+Where land is comparable, solar resource drives how much PV overbuild high-temperature sites need. Two high temperature steel plants, Linz in Austria and Taranto in Italy, have similar temperature needs (900\,$^\circ$C) and heat demand (5\,TWh). Taranto has 20\% solar capacity factor while Linz has 15\%. Both have enough land available at 15\,km to meet 90\% of their heat demand, but Linz needs to overbuild 15x load while Taranto would only need to build 5.3x their load. Higher-irradiance sites can hit high-T reliability with less overbuild and much lower LCOH. Table~\ref{tab:linz} summarises the comparison.
+
+% [WISO26 §3.5]
+For large sites with high temperature processes, there are concentrated areas where the land resources just cannot provide most of the energy at 5\,km buffer zone. The major shortfall areas are in the Rhine-Meuse region where steel and steam cracking facilities are. These sites typically have $\sim$8--50\,km$^2$/TWh land and $\sim$12--14\% solar capacity factor. Most sites that miss 50\% at 5\,km recover at 15\,km. Expanding to 15\,km allows all sites, except for 3, to reach over 50\% availability (Fig.~\ref{fig:land}).
+
+\subsection*{Sensitivity to land lease and other assumptions}
+\todo{rewrite heading as the finding}
+% [Journal draft, land-lease section]
+Most of those sites have a large margin. Adding \texteuro3,000--5,000/ha-yr only costs a few \texteuro/MWh, so they stay below gas. Only sites close to the gas price drop out or fall back to a lower-availability point. 15\,km goes from 85.0\% to 82.5\% at \texteuro3,000 and 80.9\% at \texteuro5,000. 5\,km goes from 59.6\% to 58.5\% and 57.8\%.
+\todo{add CAPEX, WACC, gas/EUA, no-cropland results when runs finish (Fig.~\ref{fig:sens}).}
+
+% =================================================================
+\section*{Discussion}
+% ~700 words. NO subheadings in Nature Energy.
+% [WISO26 §4.1]
+One of the major roadblocks to industrial electrification is the cost and delay to connecting to electricity grid infrastructure. However, with on-site renewable site, there is enough availability served such that industrial sites can use those resources. This study examines how much heat generation can be served on-site without connecting to grid infrastructure and how much that would cost. With even 5\,km of buffer zone, 58.8\% of replaceable heat demand in the EU can be met with solar + heat pump/heat battery at a cost below natural gas fuel costs with carbon tax. This solar + storage solution does not require the whole system to be decarbonized, nor a new interconnection, for meaningful cost and emissions reductions. Facilities that cannot reach high availability on-site can still build to the maximum-savings point (53\% of fleet heat at 5\,km) and meet the remainder with gas or grid electricity.
+\todo{add contrast with grid-based conclusion of Gilbert et al.\cite{gilbert2023lcoh}}
+
+% [WISO26 §4.2]
+The interaction between solar radiance and land availability makes the cost considerations different for each site. The decision to maximise cost savings versus maximise heat demand served depends on how much solar panel overbuilding might be enough to justify the cost and benefit at each site. Where land is comparable, solar resource sets the overbuild. The Linz and Taranto steel plants have similar heat demand ($\sim$5\,TWh) and both can meet 90\% availability at 15\,km, but Linz (15\% capacity factor) needs 15$\times$ load versus 5.3$\times$ at Taranto (21\%). Those sites are the natural candidates for a hybrid remainder: gas, or grid electricity where industrial tariffs fall. In the Rhine-Meuse region, where high temperature and large industrial facilities are clustered. Land is the binding constraint. Regional regulation and electricity prices might help with decarbonisation by enabling cheaper electricity prices to meet part of the heat demand with grid electricity. Some countries in the EU have begun changing electricity prices for industrial customers. Germany has implemented state subsidised electricity prices that would help support electrification efforts\cite{wiedemann2026kpmg}. Even with cost competitive grid electricity, the impacts on the distribution and transmission grid might prevent electrification from being approved or delay the electrification. With the cost of solar panels and storage falling rapidly, this could be a pathway to quicker and sooner decarbonisation.
+% NOTE: Taranto capacity factor is 20% in WISO26 §3.4 but 21% here -- make consistent.
+
+\todo{add: land and permitting as the policy lever (acceleration areas; cropland restrictions in France and Italy).}
+
+% [WISO26 §4.3]
+Heat demand estimations are based on literature sector energy consumption factors and emissions factors, not based on individual facility's generation. These estimates are calculated based on EU published figures and averages by sector. They are validated by sector and country aggregated figures but may deviate from reference individual facilities significantly. With more precise data on combustion plants and fuel types of each facility, the modelled heat generation and LCOH can be better fitted per facility using the same process in this study.
+
+This study does not account for the land acquisition process as there is not enough data to systematically incorporate into this study. Only remote sensing categorised data were used to screen available land. Each facility would need to evaluate the land acquisition process to accommodate the land needed for solar panels.
+\todo{add remaining limitations: flat load; delivery medium not modelled; representative days (8,760-h check); single weather year; 2025 gas vs 2030 costs.}
+
+% [WISO26 §5 Conclusion]
+On-site solar with heat pumps and heat batteries can serve most replaceable EU industrial process heat at costs below the 2025 gas-heat benchmark. Within a 5\,km buffer zone, 58.8\% of replaceable heat demand can be served at an average levelised cost of \texteuro55/MWh. That rate can be increased to 84.4\% at \texteuro62/MWh with a 15\,km buffer zone. Southern European facilities tend to have stronger solar resource and less heat intense industrial facilities which allows them to serve almost their entire replaceable heat demand. The large, land-constrained, high-temperature sites are concentrated in the Rhine-Meuse region which will require hybrid solutions with either grid electricity or gas use to meet all its needs. Because this pathway is cost-competitive without requiring full decarbonisation of the heat demand or a new interconnection, it offers industrial facilities a deployable, near-term solution to reduce emissions and lower exposure to gas price volatility.
+
+% =================================================================
+%  METHODS
+% =================================================================
+\section*{Methods}
+
+\subsection*{Facility dataset and replaceable process heat}
+% [WISO26 §2, intro]
+We generated a facility-level dataset from Climate TRACE in the EU and optimised for different heat demand targets to determine total energy demand served. Climate TRACE provides latitude and longitude, annual production and emissions of each facility. Combining facility level information with solar radiation and land availability data, the optimisation program calculates the levelised cost of heat (LCOH) at each site. The LCOH is calculated using an optimisation framework adapted from ref.~\citenum{chojkiewicz2026}, which was originally developed to size surplus interconnection capacity for renewable projects. The gas-capped, optimised LCOH at the highest availability is chosen for each site and aggregated to get the total process heat that can be decarbonised using this system and configuration, as illustrated in Fig.~\ref{fig:system}.
+
+% [WISO26 §2.1]
+The replaceable process heat for each facility is the heat generated by fossil fuel that is used in the process of manufacturing a product (steel, food, textile, etc.). Depending on data availability, total annual production or total annual emissions is used to calculate the amount of process heat per sector and country. With total annual production, we apply a specific energy consumption (SEC) factor by sector\cite{hotmaps2018} that defines the energy intensity per tonne of product. With emissions total\cite{ipcc2006stationary}, we applied an emissions factor, assuming an EU averaged gas/oil share of 90\%/10\%\cite{eurostat_nrg_d_indq}, to get the total process heat demand. With the total process heat estimate from both SEC and emissions factor, we calculated the replaceable process heat by applying a fossil-fuel share\cite{eurostat_nrg_d_indq_n} to the useful heat (Table~\ref{tab:heatroutes}).
+
+To validate the heat estimates, we compared against sector and country wide useful heat aggregates and determined it is within +-50\% of reference data\todo{cite: WISO26 ref.~[18] is missing from the WISO reference list}.
+\todo{2,192 vs 2,149 facilities -- reconcile; add E-PRTR validation if done.}
+
+\subsection*{Solar resource}
+% [WISO26 §2.2]
+Solar capacity factor, the amount of solar power output relative to nameplate, is pulled from PVGIS using ERA5 data for 2023. Hourly profiles are pulled for each facility and normalised to 1\,kWp. It is then summed over a year and divided by 8760 to get the average solar capacity factor. The tilt is set to the absolute latitude and azimuth is south facing.
+\todo{journal draft adds inverter derate 0.967 -- include.}
+
+\subsection*{Land availability}
+% [WISO26 §2.3]
+We aggregated the square km of cropland, bare, grass and shrubland around each facility in 5\,km and 15\,km buffer zones using Google Earth Engine and ESA WorldCover v200 (2021) map. A nameplate power density of 50\,MW$_{\mathrm{dc}}$/km$^2$ is assumed, which caps the solar capacity that can be installed on the eligible land at each site.
+\todo{journal draft says ``bare + cropland with protected land mask'' -- make consistent.}
+
+\subsection*{Technology costs and financing}
+% [WISO26 §2.4]
+All costs are set in 2030-dollar values and assumes construction start in 2030. Technologies, both solar and storage, are assumed to have 25-year life. Capital expenditure and fixed operation and maintenance costs of solar panels and utility scale batteries are gathered from BloombergNEF (BNEF)\cite{bnef2024lcoe} for 2030 by country. Heat pump costs by temperature band\cite{rissman2020} and industrial heat batteries\cite{rissman2023ihb} are in 2021 and 2023 dollars respectively. Both are CPI-inflated to 2030 which applies a factor of 1.31 and 1.17 respectively. Country specific costs from BNEF and cost of capital rates\cite{irena2025} are used when direct country costs are available and proxied by peer mean income country groups (HIC, LMIC, etc.) when not available. All monetary results are reported in euros at a fixed EUR/USD rate of 1.08.
+
+Capital costs are annualised using a standard capital recovery factor (CRF) assuming a 25-year technology life and country-specific cost of capital. Total annualised system cost, $C^{\mathrm{ann}}$, sums four technology terms (solar, Li-ion battery, industrial heat battery, and heat pump). The Li-ion battery, industrial heat battery, and heat pump terms follow the same functional form using their respective CAPEX and FOM values described above. Each follows the same general form, illustrated here for solar:
+% Equation reconstructed from the WISO26 PDF (text extraction was garbled) -- check against your source file.
+\begin{equation}
+C^{\mathrm{ann}}_{\mathrm{solar}} = \left(\mathrm{CAPEX}_{\PV}\cdot 1000 \cdot \mathrm{CRF}_{r_c} + \mathrm{FOM}_{\PV}\right) S^{*}, \qquad
+\mathrm{LCOH}_{\mathrm{solar}} = \frac{C^{\mathrm{ann}}_{\mathrm{solar}}}{Q_{\mathrm{served}}},
+\end{equation}
+where $r_c$ is country WACC, $S^*$, $E^*$, $P^*$ are optimised capacities, $Q_b^*$ is HP thermal capacity sized to served heat in band $b$, and $Q_{\mathrm{served}}=Q_{\mathrm{demand}}-Q_{\mathrm{unserved}}$. Unserved energy is not costed (VoLL = 0).
+\todo{journal draft uses 1.1 USD/EUR in the HP table vs 1.08 here -- pick one; confirm whether BNEF costs include land.}
+
+\subsection*{Gas heat benchmark}
+% [WISO26 §2.5]
+Each LCOH is compared against a gas heat benchmark to get the highest availability of electrified heat generated below the gas heat price. Gas heat prices are gathered from Eurostat's non-household gas for 2025 (nrg\_pc\_203)\cite{eurostat_gasprices}. A general gas boiler efficiency of 0.85\cite{energynl_boiler} is applied to the gas price. Each facility is capped at its own country's gas price. The LCOH of gas only accounts for the operation cost and not the capital cost because this study assumes the gas boiler had already been installed. The EUA carbon tax of \texteuro79/tCO$_2$ is assumed and added to the gas heat cost.
+\begin{equation}
+c^{\mathrm{gas}}_{\mathrm{heat},c} = \frac{p^{\mathrm{gas}}_{c}}{\eta} + \frac{p_{\mathrm{EUA}} \times EF_{\mathrm{NG}}}{\eta}
+\label{eq:gas}
+\end{equation}
+with $\eta = 0.85$ (boiler efficiency), $p_{\mathrm{EUA}} = 79$\,EUR/tCO$_2$ (EUA carbon price assumption), and $EF_{\mathrm{NG}} = 0.202$\,tCO$_2$/MWh$_{\mathrm{fuel}}$ (gas CO$_2$ emission factor). Technology costs are expressed in 2030 dollars, whereas the gas benchmark uses 2025 Eurostat prices. Even at high availability levels, the LCOH for solar plus storage comes below the 2025 gas benchmark.
+
+\subsection*{Optimization model}
+
+% [WISO26 §2.6]
+To get the system size for minimal cost, we sized the co-located solar panels with heat pump or heat battery solution using a linear program (HiGHS). Both of those solutions will pipe heat into the industrial facility. The linear program is defined as follows.
+
+% [WISO26 §2.6, Sets and parameters]  (PDF text shows "c" for the day index; your equations use k)
+$k \in \{1, \ldots, K\}$: days in the year. $t \in \{1, \ldots, H\}$: hours ($H = 24$), with $t-1 \equiv H$ when $t = 1$. $b \in \mathcal{B}^{\HP}$: heat-pump bands (COP $>$ 1), covering $<$100\,$^\circ$C and 100--200\,$^\circ$C. $b \in \mathcal{B}^{\IHB}$: industrial-heat-battery bands (COP $\le$ 1), covering $\ge$200\,$^\circ$C. Round-trip efficiencies enter as $\eta_{\Li} = \sqrt{RTE_{\Li}}$ and $\eta_{\IHB} = \sqrt{RTE_{\IHB}}$, with $RTE_{\Li} = 0.90$, $RTE_{\IHB} = 0.95$, and maximum Li-ion duration $h_{\max} = 16$\,h.
+
+% [WISO26 §2.6]
+The model is solved as a facility-level linear program (HiGHS) over 2023 PVGIS hourly profiles. Shared solar capacity feeds heat-pump bands (below 200\,$^\circ$C, buffered by a Li-ion battery) and industrial-heat-battery bands (at or above 200\,$^\circ$C, resistively charged into a thermal store).
+
+% [Journal draft optimization .tex follows]
+
+% ---------------------------------------------------------------------------
+% SUGGESTED EDITS (not applied -- for you to decide; comments only):
+%  1. Z_unserved appears in the LCOH decomposition but unserved heat has no cost in the
+%     objective (VoLL = 0). Either drop Z_unserved or add a penalty term to the objective.
+%  2. Rename "Phase 2" so it is clear it has two steps (min U, then min Z s.t. U <= U*).
+%  3. Write COP and RTE as \mathrm{COP}, \mathrm{RTE} so they don't render as products.
+%  4. IHB balance: state explicitly that sum_b y_{b,k,t} = p^dis_{IHB,k,t} (if true in code).
+%  5. Symbol table: define x^dir and x^batt (electricity to HP band b from PV / from Li-ion),
+%     and add w_k, u_{b,k,t}, COP_b, P^HP_b, E_j, the c terms, RTE.
+%  6. eta is used for storage efficiency here and boiler efficiency in the gas benchmark.
+% ---------------------------------------------------------------------------
+Two phases solve:
+\begin{itemize}
+  \item The first phase sets the availability floor: attempt to meet that availability floor.
+  \item If that is not possible, the second phase minimizes the unserved demand and runs the optimization with that maximizing availability given the land available and solar radiation.
+\end{itemize}
+
+\paragraph*{Objective}
+
+\begin{equation}
+\begin{split}
+\min\; Z = \frac{1}{\Eload}\Big[\, & c_{\PV}P_{\PV} + c_{\Li,E}E_{\Li} + c_{\Li,P}P_{\Li}^{\dis} \\
+ & + c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB} + \sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP} \Big], \qquad Z = \mathrm{LCOH}
+\end{split}
+\label{eq:objective}
+\end{equation}
+
+\begin{equation}
+\Eload = \sum_{b} L_{b}\sum_{k} w_{k}H
+\label{eq:eload}
+\end{equation}
+
+\paragraph*{LCOH by components}
+
+\begin{equation}
+Z = Z_{\mathrm{solar}} + Z_{\text{Li-ion}} + Z_{\IHB} + Z_{\HP} + Z_{\mathrm{unserved}}
+\end{equation}
+
+\begin{align}
+Z_{\mathrm{solar}}   &= \frac{c_{\PV}P_{\PV}}{\Eload} \\
+Z_{\text{Li-ion}}    &= \frac{c_{\Li,E}E_{\Li} + c_{\Li,P}P_{\Li}^{\dis}}{\Eload} \\
+Z_{\IHB}             &= \frac{c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB}}{\Eload} \\
+Z_{\HP}              &= \frac{1}{\Eload}\sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP}
+\end{align}
+
+\paragraph*{Constraints}
+
+\paragraph{Shared solar limit:}
+\begin{equation}
+\sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{dir}} + p_{\Li,k,t}^{\ch} + p_{\IHB,k,t}^{\ch} \leq P_{\PV}\, g_{k,t}
+\label{eq:solar}
+\end{equation}
+
+\paragraph{Storage state of charge:}
+\begin{align}
+s_{\Li,k,t}  &= s_{\Li,k,t-1} + \eta_{\Li}\, p_{\Li,k,t}^{\ch} - \frac{p_{\Li,k,t}^{\dis}}{\eta_{\Li}} \label{eq:soc-li}\\
+s_{\IHB,k,t} &= s_{\IHB,k,t-1} + \eta_{\IHB}\, p_{\IHB,k,t}^{\ch} - \frac{p_{\IHB,k,t}^{\dis}}{\eta_{\IHB}} \label{eq:soc-ihb}
+\end{align}
+\begin{equation}
+\eta_{\Li} = \sqrt{RTE_{\Li}}, \qquad \eta_{\IHB} = \sqrt{RTE_{\IHB}}
+\end{equation}
+
+\paragraph{Storage rate limit} for each storage $j \in \{\Li, \IHB\}$:
+\begin{equation}
+s_{j,k,t} \leq E_{j}, \qquad p_{j,k,t}^{\ch} \leq P_{j}^{\ch}, \qquad p_{j,k,t}^{\dis} \leq P_{j}^{\dis}
+\label{eq:rate}
+\end{equation}
+
+\paragraph{Maximum storage duration:}
+\begin{equation}
+E_{j} \leq h_{\max}\, P_{j}^{\dis}
+\label{eq:duration}
+\end{equation}
+
+\paragraph{Li-ion discharge to HP bands:}
+\begin{equation}
+p_{\Li,k,t}^{\dis} = \sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{batt}}
+\label{eq:li-dis}
+\end{equation}
+
+\paragraph{HP heat balance and capacity:}
+\begin{align}
+COP_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) + u_{b,k,t} &= L_{b}\,\sigma_{t} \label{eq:hp-balance}\\
+COP_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) &\leq P_{b}^{\HP} \label{eq:hp-cap}
+\end{align}
+
+\paragraph{IHB discharge across temperature heat bands:}
+\begin{equation}
+y_{b,k,t} + u_{b,k,t} = L_{b}\,\sigma_{t}
+\label{eq:ihb-balance}
+\end{equation}
+
+\paragraph{Availability:}
+\begin{equation}
+\sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq (1 - AF)\,\Eload
+\label{eq:availability}
+\end{equation}
+
+\paragraph{Bounds:}
+\begin{gather}
+0 \leq P_{\PV} \leq P_{\PV}^{\max} \label{eq:pv-bound}\\
+P_{j}^{\ch},\, P_{j}^{\dis},\, E_{j},\, P_{b}^{\HP},\, x_{b,k,t}^{\mathrm{dir}},\, x_{b,k,t}^{\mathrm{batt}},\, y_{b,k,t},\, p_{j,k,t}^{\ch},\, p_{j,k,t}^{\dis},\, s_{j,k,t},\, u_{b,k,t} \geq 0 \label{eq:nonneg}
+\end{gather}
+
+\paragraph*{Phase 2: Lexicographic/hierarchical optimization}
+
+Minimize the unmet amount, then minimize cost subject to that service level:
+\begin{equation}
+\min\; U = \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t}
+\label{eq:phase2-U}
+\end{equation}
+
+Minimize unserved at every hour of every representative day and run the same optimization but with the optimal unserved amount ($U^{*}$):
+% NOTE: the Word draft read "s.t. constraints 1--8, 10". Below this is interpreted as
+% all constraints except availability (eq:availability); adjust the references if needed.
+\begin{equation}
+\min\; Z \quad \text{s.t. constraints (\ref{eq:solar})--(\ref{eq:ihb-balance}), (\ref{eq:pv-bound})--(\ref{eq:nonneg}), and} \quad \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq U^{*}
+\label{eq:phase2-Z}
+\end{equation}
+
+\paragraph*{Nomenclature}
+
+\begin{table}[h]
+\centering
+\caption{Symbols used in the optimization model.}
+\label{tab:symbols}
+\begin{tabular}{>{$}l<{$} p{0.65\textwidth}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\mathcal{B}^{\HP},\ \mathcal{B}^{\IHB} & Bands served by heat pump (COP $>$ 1) or by IHB (COP $\leq$ 1) \\
+g_{k,t} & Solar capacity factor in hour $t$ of representative day $k$ (MW per MW installed) \\
+L_{b} & Flat heat load of band $b$ (MW$_{\mathrm{th}}$) \\
+\sigma_{t} & Diurnal load shape, mean 1 (all 1 if flat) \\
+y_{b,k,t} & IHB heat delivered to band $b$ \\
+p_{j,k,t}^{\ch},\ p_{j,k,t}^{\dis},\ s_{j,k,t} & Charge, discharge and state of charge of storage $j$ \\
+\eta_{j} & One-way efficiency, the square root of round-trip efficiency \\
+h_{\max} & Maximum storage duration, 16\,h by default \\
+AF & Availability factor, which sets the share of heat that must be served \\
+P_{\PV}^{\max} & Optional solar cap from land limits (no cap if unset) \\
+H & Number of hours in representative days \\
+x & Electricity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Representative days}
+% [WISO26 §2.6, last paragraph, first sentence]
+Utilising the hourly solar profiles and the flat-load heat demand, we optimised for availability level at 90\%. on 16 representative days, obtained by k-means clustering of the 365 daily solar profiles weighted by cluster size.
+\todo{8,760-hour validation sample and error.}
+
+\subsection*{Selecting operating points and aggregation}
+% [WISO26 §2.6, last paragraph, continued]
+Optimisation is run at every decile (10\%, 20\%, \ldots 100\%). At 10\% availability, the optimization is run to minimize the cost of solar plus storage to provide 10\%. After sizing the solar panels and batteries for both the 5\,km and 15\,km radius, served heat is summed across facilities and expressed as a share of total replaceable heat, with fleet LCOH weighted by served heat.
+\todo{define max-heat point and max-savings point (journal draft: max saving = heat served $\times$ (gas $-$ LCOH)); use national gas price.}
+
+\subsection*{Sensitivity analyses}
+% [Journal draft, land-lease method]
+\todo{rewrite as prose:} For each site and lease price, I take the availability sweep points and each site's gas-capped point and add the lease cost for the land it uses. Then I keep the point that serves the most heat while staying at or below that country's gas cost. So, at a higher lease, a site can step down to a lower availability instead of dropping out entirely. ($\mathrm{LCOH}_{\mathrm{served}} + p \times \mathrm{ha} / \mathrm{served\ MWh} \le$ gas cost; 2\,ha/MW.)
+\todo{CAPEX, WACC, gas/EUA, no-cropland, heat demand $\pm$.}
+
+% =================================================================
+\section*{Data availability}
+\todo{data availability statement (note: BNEF data under licence)}
+
+\section*{Code availability}
+\todo{code availability statement (repository + DOI)}
+
+% =================================================================
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+% =================================================================
+\section*{Acknowledgements}
+\todo{Funding sources.}
+
+\section*{Author contributions}
+\todo{author contributions (CRediT)}
+
+\section*{Competing interests}
+\todo{competing interests statement}
+
+% =================================================================
+%  FIGURE LEGENDS  (Nature style: legends here; figures uploaded separately)
+% =================================================================
+\section*{Figure legends}
+
+\begin{figure}[h]
+\centering
+% [WISO26 Fig. 1 caption]
+\caption{Modelled system configuration: co-located, off-grid solar PV paired with a heat pump/heat battery and battery storage supplying process heat to the facility. \todo{add facility map panel?}}
+\label{fig:system}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+% [WISO26 Fig. 2 caption]
+\caption{EU fleet-average LCOH vs. availability achieved at 5\,km and 15\,km land buffer zones, relative to the \texteuro93/MWh gas-heat and \texteuro171/MWh grid-electricity benchmarks.}
+\label{fig:fleet}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+% [WISO26 Fig. 4 caption]
+\caption{Country-level LCOH vs. heat served at each country's gas-heat price, relative to \texteuro93/MWh: (a) 5\,km, (b) 15\,km}
+\label{fig:region}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+% [WISO26 Fig. 3 and Fig. 5 captions] -- decide whether to merge into one figure
+\caption{LCOH vs. availability for land-capped industries at 5\,km and 15\,km: (a) iron and steel, (b) steam cracking. Lines: gas \texteuro93/MWh, grid electricity \texteuro171/MWh. \textit{[WISO26 Fig.~5:]} Facility-level heat availability achieved by land-constraint category: (a) 5\,km buffer zone, (b) 15\,km buffer zone}
+\label{fig:land}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\caption{\todo{Fig. 5 (sensitivity) legend}}
+\label{fig:sens}
+\end{figure}
+
+% =================================================================
+%  TABLES   (WISO26 Tables 1-3 + parameter table = 4 tables + 5 figures = 9 display items;
+%            limit is 8 -> move Table 1 and/or Table 3 to Supplementary Information)
+% =================================================================
+\clearpage
+
+% [WISO26 Table 2]
+\begin{table}[h]
+\centering
+\caption{Share of replaceable process heat served and levelised cost of heat (LCOH) at 5\,km and 15\,km buffer zones}
+\label{tab:served}
+\begin{tabular}{l c c}
+\toprule
+ & 5\,km & 15\,km \\
+\midrule
+Served (highest served under gas prices) & 58.8\% (307\,TWh) & 84.4\% (441\,TWh) \\
+LCOH (highest served under gas prices) & \texteuro55 & \texteuro62 \\
+Served (max savings vs \texteuro93) & 53.4\% (278\,TWh) & 73.9\% (377\,TWh) \\
+LCOH (max savings vs \texteuro93) & \texteuro41 & \texteuro42 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% [WISO26 Table 3]
+\begin{table}[h]
+\centering
+\caption{Solar overbuild, capacity, land use, and LCOH for two high-temperature steel sites at 15\,km buffer zone (90\% availability)}
+\label{tab:linz}
+\begin{tabular}{l c c c c}
+\toprule
+ & Solar/load & PV built & Land used & LCOH \\
+\midrule
+Taranto & 5.3$\times$ & 3.0\,GW & 32\% & \texteuro33 \\
+Linz & 15.0$\times$ & 8.5\,GW & 80\% & \texteuro85 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% [WISO26 Table 1]  -> candidate for Supplementary Information
+\begin{table}[h]
+\centering
+\caption{Facility-level process heat and replaceable-heat estimation formulas by calculation route}
+\label{tab:heatroutes}
+\begin{tabular}{l l}
+\toprule
+Calculation route & Formulas \\
+\midrule
+SEC route & fuel\_energy = production $\times$ SEC \\
+ & useful\_heat = fuel\_energy $\times$ $\eta$\_process \\
+Emissions route & fuel\_energy = (CO$_2$e $\times$ combustion\_share) / emissions\_factor \\
+ & useful\_heat = fuel\_energy $\times$ $\eta$\_boiler \\
+Replaceable heat & replaceable\_heat = useful\_heat $\times$ fossil\_share \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Key parameters (values from your drafts)
+\begin{table}[h]
+\centering
+\caption{\todo{Table caption: key parameters}}
+\label{tab:params}
+\begin{tabular}{l l l}
+\toprule
+Parameter & Value & Source \\
+\midrule
+PV CAPEX, FOM & by country (2030) & BNEF \\
+Li-ion energy / power CAPEX & by country (2030) & BNEF \\
+HP CAPEX, $<$100\,$^\circ$C & \$918.30\,kW$_{\mathrm{th}}^{-1}$ (2030 USD) & Rissman \\
+HP CAPEX, 100--200\,$^\circ$C & \$1,141.31\,kW$_{\mathrm{th}}^{-1}$ (2030 USD) & Rissman \\
+IHB CAPEX (in / out / storage) & \$116.66 / \$349.99\,kW$^{-1}$; \$5.83\,kWh$^{-1}$ & Rissman \& Gimon \\
+COP ($<$100 / 100--200\,$^\circ$C) & 3.7 / 2.2 & Rissman \\
+RTE (Li-ion / IHB) & 0.90 / 0.95 & \\
+Max Li-ion duration $h_{\max}$ & 16\,h & \\
+Lifetime & 25\,yr & \\
+PV power density & 50\,MW$_{\mathrm{dc}}$\,km$^{-2}$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

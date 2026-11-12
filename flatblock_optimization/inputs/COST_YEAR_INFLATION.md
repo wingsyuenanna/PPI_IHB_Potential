@@ -1,3 +1,5 @@
+> **Update 2026-11-05: real 2025 USD basis.** All costs are now in constant (real) 2025 USD. HP (2021) and IHB (2023) source costs are CPI-inflated to 2025 only (x1.1882 and x1.0566) and are held flat in the 2030 and 2035 columns, with no further inflation. BNEF 2030 PV and Li-ion costs are taken as real 2025 USD (BNEF's dollar year is not stated in the dataset; the storage survey is real 2025 USD). The CRF uses IRENA's real WACC directly (`REAL_BASIS = True` in `Input/bnef/compile_bnef_costs.py`), not the nominal rate. The nominal-2030 tables below are superseded and kept for reference. Previous files: nominal CRF and 2030-inflated HP/IHB costs.
+
 # Cost-year inflation (USD) — HP and IHB
 
 Solar PV and Li-ion already enter as **BNEF project-year dollars** (e.g. 2030

@@ -1,7 +1,7 @@
 """Sector trade-off scatter: max heat served vs max savings.
 
 Steam cracking, iron & steel, aluminium — 5 km and 15 km side by side.
-Filled = max heat under gas price; open = max savings (vs €93/MWh gas heat).
+Filled = max heat under gas price; open = max savings (vs EU-27 gas heat, see gas_benchmark.py).
 
     python outputs/multiband/analysis/plot_sector_scatter_gascap_vs_maxsavings.py
 """
@@ -20,7 +20,10 @@ from matplotlib.lines import Line2D
 OUT = Path(__file__).resolve().parent
 OUT_STEM = "sector_scatter_gascap_vs_maxsavings"
 
-GAS93 = 63.25 / 0.85 + (0.202 / 0.85) * 79
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 SECS = [
@@ -40,7 +43,7 @@ def max_savings_sites(km: int) -> pd.DataFrame:
     if long["lcoh"].isna().all():
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (GAS93 - long["lcoh"])
+    long["surplus"] = long["served"] * (GAS_EU - long["lcoh"])
     long = long.dropna(subset=["source_id", "surplus", "served", "lcoh", "subsector"])
     return long.loc[long.groupby("source_id")["surplus"].idxmax()].copy()
 
@@ -196,7 +199,7 @@ def main() -> None:
     ]
     fig.suptitle(
         "Sector trade-off — max heat served vs max savings\n"
-        f"(under country gas heat price · 2030 costs · max savings vs €{GAS93:.0f}/MWh)",
+        f"(under country gas heat price · 2030 costs · max savings vs €{GAS_EU:.0f}/MWh)",
         fontsize=11.5,
         y=0.98,
     )

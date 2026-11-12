@@ -21,8 +21,10 @@ OUT = Path(__file__).resolve().parent
 OUT_STEM = "lcoh_vs_availability_steel_steam_5km_15km"
 
 EURUSD = 1.08
-GAS93 = 63.25 / 0.85 + (0.202 / 0.85) * 79
-ELEC171 = 162.0 / 0.95  # grid electricity ÷ 0.95 RTE (industrial heat battery)
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from gas_benchmark import GAS_EU, ELEC_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 YMAX = 200.0  # show gas + grid-elec reference lines; clip extreme 100%-floor spikes
 
 # Same encoding as fleet Fig. 2 (Okabe–Ito; pattern + marker, not colour-only)
@@ -82,7 +84,7 @@ def sector_curve(km: int, sec: str) -> pd.DataFrame:
         )
     out = pd.DataFrame(rows).sort_values("availability_floor")
     # Fleet surplus vs gas at each floor (max = last point before overbuilding)
-    out["surplus"] = out["served_twh"] * (GAS93 - out["hw_LCOH_eur"])
+    out["surplus"] = out["served_twh"] * (GAS_EU - out["hw_LCOH_eur"])
     return out
 
 
@@ -120,8 +122,8 @@ def main() -> None:
     }
 
     for ax, sec in zip(axes, SECS):
-        ax.axhline(GAS93, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
-        ax.axhline(ELEC171, color=C_ELEC, ls=LS_ELEC, lw=1.2, zorder=1)
+        ax.axhline(GAS_EU, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
+        ax.axhline(ELEC_EU, color=C_ELEC, ls=LS_ELEC, lw=1.2, zorder=1)
 
         for km in (5, 15):
             c = curves[(sec, km)]
@@ -187,8 +189,8 @@ def main() -> None:
     leg = [
         Line2D([0], [0], color=C5, marker="o", lw=1.6, label="5 km"),
         Line2D([0], [0], color=C15, marker="s", ls="--", lw=1.6, label="15 km"),
-        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS93:.0f}"),
-        Line2D([0], [0], color=C_ELEC, ls=LS_ELEC, lw=1.2, label=f"Grid elec. €{ELEC171:.0f}"),
+        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS_EU:.0f}"),
+        Line2D([0], [0], color=C_ELEC, ls=LS_ELEC, lw=1.2, label=f"Grid elec. €{ELEC_EU:.0f}"),
         Line2D(
             [0], [0], marker="s", color="w", markerfacecolor=C_MS,
             markeredgecolor="#222", markersize=6, label="Max € savings",
