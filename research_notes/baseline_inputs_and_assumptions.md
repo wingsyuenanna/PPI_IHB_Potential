@@ -7,7 +7,7 @@ Compiled 2026-11-05 from the code and input files. This documents the baseline a
 | Item | Value | Source |
 |---|---|---|
 | Scenario folders | `outputs/multiband/land_5km_ss_2030_liion/` (primary), `land_15km_ss_2030_liion/` (sensitivity) | outputs/multiband/README.md |
-| Command | `python run_multiband_potential.py --scenario land_5km_ss_2030_liion --project-start 2030` (15 km adds `--land-csv land_availability/outputs/land_availability_by_facility_15km.csv`) | README |
+| Command | `python run_multiband_potential.py --scenario land_5km_ss_2030_liion --project-start 2030` (15 km adds `--land-km 15`. Land defaults to heat-weighted allocated buffers, `land_availability/outputs/land_availability_allocated_{5,15}km.csv`) | README |
 | Run date | by_facility.csv written 2026-10-26 16:58, one minute after the COP change (16:57), so it reflects Rissman COPs 3.7/2.2. run_log.txt was not refreshed (still 07-24) | file mtimes |
 | Fleet | 2,192 facilities, 27 countries, 522.3 TWh/yr replaceable heat, all status `ok` | by_facility.csv |
 | Heat case | base (low/high = 389/703 TWh) | HEAT_BOUNDS_LOGIC.md |

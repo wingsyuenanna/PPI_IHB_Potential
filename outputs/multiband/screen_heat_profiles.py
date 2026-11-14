@@ -86,7 +86,9 @@ def solve_one(row: dict, shape: np.ndarray | None) -> dict:
     res, _, ok = run_multiband_heatpump_optimization(
         sid, CONFIG["availability"], solar, costs, bl,
         round_trip_efficiency=CONFIG["round_trip_efficiency"],
-        max_storage_hours=CONFIG["max_storage_hours"],
+        liion_max_hours=CONFIG["liion_max_hours"],
+        ihb_max_hours=CONFIG["ihb_max_hours"],
+        ihb_loss_per_day=CONFIG["ihb_loss_per_day"],
         n_representative_days=CONFIG["n_representative_days"],
         max_solar_mw=(land * CONFIG["mw_per_km2"]) if land >= 0 else None,
         project_start_year=int(CONFIG["project_start"]),

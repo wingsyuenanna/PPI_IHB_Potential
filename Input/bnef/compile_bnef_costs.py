@@ -26,6 +26,10 @@ import numpy as np
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 VERSION   = 'v5'
+# Base life for the country CRF column. The solver recovers the WACC from this 25-yr CRF and
+# re-annualises each technology over its own life (rows in
+# flatblock_optimization/inputs/input_heat_battery_cost.csv: PV 40, Li-ion 20, IHB 30, HP 25/20).
+# Changing this value without updating CRF_BASE_LIFETIME_YR in the solver breaks that recovery.
 LIFETIME  = 25
 YEARS     = [2025, 2030]
 BENCHMARK_TECH  = 'PV fixed-axis'   # the technology we are benchmarking
@@ -71,6 +75,18 @@ DEFAULT_INFLATION = 0.03   # fallback when IMF data is missing
 # consistent with real-dollar CAPEX/FOM. False = old nominal basis (real WACC x IMF CPI forecast).
 REAL_BASIS = True
 
+# European solar PV WACC (real, after tax) from IRENA, Renewable Power Generation Costs in 2024
+# (2025), Figure 1.13 (p. 41): Europe solar PV 4.2% for 2024; Annex I (pp. 206-207) states these
+# are real after-tax values. IRENA_cost_of_cap.json holds older country values (IRENA 2023 cost of
+# financing survey, 2019-2021 financing, near-zero interest rates), so for European countries we
+# replace them with this regional value. The country-level 2024 values are only published as a map.
+IRENA_2024_EUROPE_SOLAR_WACC_PCT = 4.2
+EUROPE_ISO3 = {
+    'AUT', 'BEL', 'BGR', 'CYP', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GRC', 'HRV',
+    'HUN', 'IRL', 'ITA', 'LTU', 'LUX', 'LVA', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN',
+    'SWE', 'GBR', 'NOR', 'CHE', 'ISL',
+}
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # HELPERS
@@ -89,6 +105,8 @@ def build_crf_table(irena_path: str, inflation_path: str, lifetime: int) -> pd.D
     CRF = (i * (1+i)^n) / ((1+i)^n - 1)
     """
     cost_of_cap_df = pd.DataFrame(load_json(irena_path))
+    eu_pv = cost_of_cap_df['ISO3'].isin(EUROPE_ISO3) & (cost_of_cap_df['Technology'] == 'Solar PV')
+    cost_of_cap_df.loc[eu_pv, 'WACC_Percentage'] = IRENA_2024_EUROPE_SOLAR_WACC_PCT
 
     imf = pd.read_csv(inflation_path)
     infl = imf[imf['WEO Subject Code'] == 'PCPIPCH'].copy()

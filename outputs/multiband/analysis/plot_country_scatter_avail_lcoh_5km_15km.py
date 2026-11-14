@@ -26,7 +26,7 @@ OUT_STEM = "country_scatter_avail_lcoh_5km_15km"
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from gas_benchmark import GAS_EU, max_savings_sites  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 LABEL = {
@@ -130,8 +130,8 @@ def country_agg_max_heat_under_gas(path: Path) -> tuple[pd.DataFrame, float, flo
     return agg, fa, fl
 
 
-def fleet_max_savings(path: Path, gas_eur: float = GAS_EU) -> tuple[float, float]:
-    """Per site: pick floor maximizing served × (gas − LCOH); return fleet HW stats."""
+def fleet_max_savings(path: Path) -> tuple[float, float]:
+    """Per site: pick floor maximizing served × (country gas − LCOH); return fleet HW stats."""
     long = pd.read_csv(path, low_memory=False)
     if "status" in long.columns:
         long = long[long["status"] == "ok"].copy()
@@ -142,11 +142,8 @@ def fleet_max_savings(path: Path, gas_eur: float = GAS_EU) -> tuple[float, float
     if long["lcoh"].isna().all() and "LCOH_served_$perMWh" in long.columns:
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (gas_eur - long["lcoh"])
-    long = long.dropna(subset=["source_id", "floor", "served", "lcoh", "surplus"])
-
-    idx = long.groupby("source_id")["surplus"].idxmax()
-    best = long.loc[idx]
+    long = long.dropna(subset=["source_id", "floor", "served", "lcoh"])
+    best = max_savings_sites(long)  # country gas price per site, then aggregate
     return _fleet_stats(best["heat"], best["served"], best["lcoh"])
 
 

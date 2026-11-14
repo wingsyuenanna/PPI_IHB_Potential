@@ -35,8 +35,8 @@ EURUSD = 1.08
 SITES = ROOT / "outputs" / "eu_ihb_site_assessment_2024.csv"
 GAS = ROOT / "Input" / "industrial_heat_pump_costs" / "eu_heat_pump_costs_by_country.csv"
 LAND = {
-    5: ROOT / "land_availability" / "outputs" / "land_availability_by_facility_5km.csv",
-    15: ROOT / "land_availability" / "outputs" / "land_availability_by_facility_15km.csv",
+    5: ROOT / "land_availability" / "outputs" / "land_availability_allocated_5km.csv",
+    15: ROOT / "land_availability" / "outputs" / "land_availability_allocated_15km.csv",
 }
 PRIOR = {
     5: ROOT / "outputs" / "multiband" / "land_5km_ss_2030_liion" / "by_facility_with_gas.csv",

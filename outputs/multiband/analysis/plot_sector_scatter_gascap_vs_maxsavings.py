@@ -23,7 +23,7 @@ OUT_STEM = "sector_scatter_gascap_vs_maxsavings"
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from gas_benchmark import GAS_EU, max_savings_sites  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 SECS = [
@@ -43,9 +43,8 @@ def max_savings_sites(km: int) -> pd.DataFrame:
     if long["lcoh"].isna().all():
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (GAS_EU - long["lcoh"])
-    long = long.dropna(subset=["source_id", "surplus", "served", "lcoh", "subsector"])
-    return long.loc[long.groupby("source_id")["surplus"].idxmax()].copy()
+    long = long.dropna(subset=["source_id", "served", "lcoh", "subsector"])
+    return max_savings_sites(long)  # country gas price per site, then aggregate
 
 
 def gas_capped_sites(km: int) -> pd.DataFrame:

@@ -13,12 +13,18 @@ IHB storage CAPEX high $/kWh,$/kWh,10.57,10.57,10.57
 IHB RTE,fraction,0.95,0.95,0.95
 IHB OPEX frac/yr,% of capex,0.0,0.0,0.0
 IHB source year,year,2023,2023,2023
-HP CAPEX below100C $/kWth,$/kWth,831.73,831.73,831.73
-HP CAPEX 100C-200C $/kWth,$/kWth,1033.72,1033.72,1033.72
-HP FOM below100C $/kWth/yr,$/kWth-yr,14.26,14.26,14.26
-HP FOM 100C-200C $/kWth/yr,$/kWth-yr,21.39,21.39,21.39
-HP lifetime yr,year,25,25,25
-HP source year,year,2021,2021,2021
+HP CAPEX below100C $/kWth,$/kWth,1026.0,1015.2,982.8
+HP CAPEX 100C-200C $/kWth,$/kWth,1890.0,1782.0,1674.0
+HP FOM below100C $/kWth/yr,$/kWth-yr,2.3,2.26,2.19
+HP FOM 100C-200C $/kWth/yr,$/kWth-yr,2.69,2.65,2.57
+HP VOM below100C $/MWhth,$/MWh_th,3.32,3.26,3.16
+HP VOM 100C-200C $/MWhth,$/MWh_th,3.89,3.82,3.7
+PV lifetime yr,year (DEA electricity v0019 utility-scale PV),40,40,40
+Li-ion lifetime yr,year (DEA storage v0011 utility Li-ion: 15 / 20 / 25 for 2025 / 2030 / 2035),15,20,25
+IHB lifetime yr,year (Wikoff et al. 2025 firebrick),30,30,30
+HP lifetime below100C yr,year (DEA 2026 sheet 1.2),25,25,25
+HP lifetime 100C-200C yr,year (DEA 2026 sheet 2.b HTHP),20,20,20
+HP source year,year (DEA 2025 EUR price level),2025,2025,2025
 USD inflation index CPI-U,"index 1982-84=100 (2025 basis; no forward inflation, real 2025 USD)",321.962,321.962,321.962
-USD inflate from HP source yr,factor,1.188183,1.188183,1.188183
 USD inflate from IHB source yr,factor,1.056642,1.056642,1.056642
+HP EURUSD,USD per EUR (pipeline EURUSD),1.08,1.08,1.08

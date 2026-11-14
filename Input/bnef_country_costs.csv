@@ -1,40 +1,40 @@
 iso3_country,year,technology,income_group,wb_region,capex_$/kw,fom_$/kw/yr,vom_$/mwh,lcoe_$/mwh,wacc_nominal,crf,annual_cost_$/kw/yr,data_source,capex_source,crf_source,proxy_peers,country_name
 ABW,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,,0.064035,53.89,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Aruba
 ABW,2030,PV fixed-axis,HIC,Latin America & Caribbean,497.26,13.0839,0.0,36.88,,0.064035,44.93,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Aruba
-AFG,2025,PV fixed-axis,LIC,South Asia,573.91,12.2751,0.0,44.09,,0.081387,58.98,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Afghanistan
-AFG,2030,PV fixed-axis,LIC,South Asia,462.06,11.5,0.0,34.46,,0.081387,49.11,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Afghanistan
+AFG,2025,PV fixed-axis,LIC,South Asia,573.91,12.2751,0.0,44.09,,0.08243,59.58,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Afghanistan
+AFG,2030,PV fixed-axis,LIC,South Asia,462.06,11.5,0.0,34.46,,0.08243,49.59,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Afghanistan
 AGO,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639,49.63,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Angola
 AGO,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Angola
-ALB,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Albania
-ALB,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Albania
-AND,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.061667,42.31,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Andorra
-AND,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.061667,36.91,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Andorra
+ALB,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Albania
+ALB,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Albania
+AND,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.065372,44.18,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Andorra
+AND,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.065372,38.5,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Andorra
 ARE,2025,PV fixed-axis,HIC,Middle East & North Africa,492.19,11.8838,0.0,28.97,0.056,0.075278,48.94,bnef,bnef,irena,,United Arab Emirates
 ARE,2030,PV fixed-axis,HIC,Middle East & North Africa,446.22,11.1281,0.0,24.91,0.056,0.075278,44.72,bnef,bnef,irena,,United Arab Emirates
 ARG,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.138,0.143673,87.6,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Argentina
 ARG,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.138,0.143673,71.44,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Argentina
-ARM,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Armenia
-ARM,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Armenia
+ARM,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Armenia
+ARM,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Armenia
 ATG,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,,0.064035,53.89,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Antigua and Barbuda
 ATG,2030,PV fixed-axis,HIC,Latin America & Caribbean,497.26,13.0839,0.0,36.88,,0.064035,44.93,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Antigua and Barbuda
 AUS,2025,PV fixed-axis,HIC,East Asia & Pacific,608.67,12.7097,0.0,39.78,0.029,0.05679,47.28,bnef,bnef,irena,,Australia
 AUS,2030,PV fixed-axis,HIC,East Asia & Pacific,448.2,11.9097,0.0,28.32,0.029,0.05679,37.36,bnef,bnef,irena,,Australia
-AUT,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.034,0.060017,41.47,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Austria
-AUT,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.034,0.060017,36.21,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Austria
+AUT,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Austria
+AUT,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Austria
 AZE,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,0.07,0.085811,56.64,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Azerbaijan
 AZE,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,0.07,0.085811,46.72,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Azerbaijan
 BDI,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Burundi
 BDI,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Burundi
-BEL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.019,0.050621,36.73,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Belgium
-BEL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.019,0.050621,32.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Belgium
+BEL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Belgium
+BEL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Belgium
 BEN,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Benin
 BEN,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Benin
 BFA,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,0.058,0.076746,56.32,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Burkina Faso
 BFA,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,0.058,0.076746,46.96,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Burkina Faso
 BGD,2025,PV fixed-axis,LMIC,South Asia,358.73,5.0176,0.0,25.14,0.068,0.08427,35.25,proxied,peer_mean_region_income,irena,IND,Bangladesh
 BGD,2030,PV fixed-axis,LMIC,South Asia,324.97,4.7021,0.0,19.48,0.068,0.08427,32.09,proxied,peer_mean_region_income,irena,IND,Bangladesh
-BGR,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,0.048,0.069537,47.93,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Bulgaria
-BGR,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,0.048,0.069537,39.76,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Bulgaria
+BGR,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,0.042,0.065372,45.7,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Bulgaria
+BGR,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,0.042,0.065372,37.98,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Bulgaria
 BHR,2025,PV fixed-axis,HIC,Middle East & North Africa,492.19,11.8838,0.0,28.97,,0.072524,47.58,proxied,peer_mean_region_income,peer_mean,ARE,Bahrain
 BHR,2030,PV fixed-axis,HIC,Middle East & North Africa,446.22,11.1281,0.0,24.91,,0.072524,43.49,proxied,peer_mean_region_income,peer_mean,ARE,Bahrain
 BHS,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,,0.064035,53.89,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Bahamas
@@ -61,8 +61,8 @@ CAF,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491
 CAF,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Central African Republic
 CAN,2025,PV fixed-axis,HIC,North America,550.31,15.3382,0.0,39.78,0.043,0.066058,51.69,bnef,bnef,irena,,Canada
 CAN,2030,PV fixed-axis,HIC,North America,434.82,14.3547,0.0,32.31,0.043,0.066058,43.08,bnef,bnef,irena,,Canada
-CHE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.017,0.049434,36.13,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Switzerland
-CHE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.017,0.049434,31.67,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Switzerland
+CHE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Switzerland
+CHE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Switzerland
 CHL,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,0.035,0.060674,51.79,proxied,peer_mean_income,irena,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Chile
 CHL,2030,PV fixed-axis,HIC,Latin America & Caribbean,497.26,13.0839,0.0,36.88,0.035,0.060674,43.25,proxied,peer_mean_income,irena,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Chile
 CHN,2025,PV fixed-axis,UMIC,East Asia & Pacific,419.49,5.1078,0.0,28.23,0.025,0.054276,27.88,bnef,bnef,irena,,China
@@ -85,18 +85,18 @@ CRI,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0
 CRI,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.064,0.081224,44.76,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Costa Rica
 CUB,2025,PV fixed-axis,Unknown,Unknown,573.91,12.2751,0.0,44.09,0.116,0.123975,83.43,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Cuba
 CUB,2030,PV fixed-axis,Unknown,Unknown,462.06,11.5,0.0,34.46,0.116,0.123975,68.78,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Cuba
-CYP,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.049,0.070243,46.64,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Cyprus
-CYP,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.049,0.070243,40.59,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Cyprus
-CZE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.037,0.061998,42.47,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Czechia
-CZE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.037,0.061998,37.06,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Czechia
-DEU,2025,PV fixed-axis,HIC,Europe & Central Asia,509.21,11.0117,0.0,44.69,0.013,0.047109,35.0,bnef,bnef,irena,,Germany
-DEU,2030,PV fixed-axis,HIC,Europe & Central Asia,424.78,10.3203,0.0,38.49,0.013,0.047109,30.33,bnef,bnef,irena,,Germany
+CYP,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Cyprus
+CYP,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Cyprus
+CZE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Czechia
+CZE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Czechia
+DEU,2025,PV fixed-axis,HIC,Europe & Central Asia,509.21,11.0117,0.0,44.69,0.042,0.065372,44.3,bnef,bnef,irena,,Germany
+DEU,2030,PV fixed-axis,HIC,Europe & Central Asia,424.78,10.3203,0.0,38.49,0.042,0.065372,38.09,bnef,bnef,irena,,Germany
 DJI,2025,PV fixed-axis,LMIC,Middle East & North Africa,457.05,8.6566,0.0,39.05,,0.123454,65.08,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Djibouti
 DJI,2030,PV fixed-axis,LMIC,Middle East & North Africa,390.9,8.1074,0.0,29.11,,0.123454,56.37,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Djibouti
 DMA,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,,0.098571,63.47,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Dominica
 DMA,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,,0.098571,52.17,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Dominica
-DNK,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.021,0.051824,37.34,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Denmark
-DNK,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.021,0.051824,32.69,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Denmark
+DNK,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Denmark
+DNK,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Denmark
 DOM,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.056,0.075278,51.0,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Dominican Republic
 DOM,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.056,0.075278,42.22,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Dominican Republic
 DZA,2025,PV fixed-axis,LMIC,Middle East & North Africa,457.05,8.6566,0.0,39.05,0.11,0.11874,62.93,proxied,peer_mean_income,irena,IND|PHL|VNM,Algeria
@@ -107,26 +107,26 @@ EGY,2025,PV fixed-axis,LMIC,Middle East & North Africa,457.05,8.6566,0.0,39.05,0
 EGY,2030,PV fixed-axis,LMIC,Middle East & North Africa,390.9,8.1074,0.0,29.11,0.088,0.100161,47.26,proxied,peer_mean_income,irena,IND|PHL|VNM,Egypt
 ERI,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Eritrea
 ERI,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Eritrea
-ESP,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,34.0,0.036,0.061334,42.24,bnef,bnef,irena,,Spain
-ESP,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,27.96,0.036,0.061334,36.37,bnef,bnef,irena,,Spain
-EST,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.051,0.071665,47.36,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Estonia
-EST,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.051,0.071665,41.2,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Estonia
+ESP,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,34.0,0.042,0.065372,44.3,bnef,bnef,irena,,Spain
+ESP,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,27.96,0.042,0.065372,38.09,bnef,bnef,irena,,Spain
+EST,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Estonia
+EST,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Estonia
 ETH,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,0.084,0.0969,67.89,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Ethiopia
 ETH,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,0.084,0.0969,56.27,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Ethiopia
-FIN,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.048,0.069537,46.28,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Finland
-FIN,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.048,0.069537,40.29,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Finland
+FIN,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Finland
+FIN,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Finland
 FJI,2025,PV fixed-axis,UMIC,East Asia & Pacific,549.44,10.333,0.0,44.03,,0.068441,47.94,proxied,peer_mean_region_income,peer_mean,CHN|IDN|MYS|THA,Fiji
 FJI,2030,PV fixed-axis,UMIC,East Asia & Pacific,422.58,9.6798,0.0,32.25,,0.068441,38.6,proxied,peer_mean_region_income,peer_mean,CHN|IDN|MYS|THA,Fiji
-FRA,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,42.45,0.018,0.050026,36.48,bnef,bnef,irena,,France
-FRA,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,36.5,0.018,0.050026,31.57,bnef,bnef,irena,,France
+FRA,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,42.45,0.042,0.065372,44.3,bnef,bnef,irena,,France
+FRA,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,36.5,0.042,0.065372,38.09,bnef,bnef,irena,,France
 FSM,2025,PV fixed-axis,LMIC,East Asia & Pacific,506.22,10.4761,0.0,46.01,,0.088469,55.26,proxied,peer_mean_region_income,peer_mean,PHL|VNM,"Micronesia, Federated States of"
 FSM,2030,PV fixed-axis,LMIC,East Asia & Pacific,423.87,9.81,0.0,33.93,,0.088469,47.31,proxied,peer_mean_region_income,peer_mean,PHL|VNM,"Micronesia, Federated States of"
 GAB,2025,PV fixed-axis,UMIC,Sub-Saharan Africa,477.96,12.2584,0.0,39.09,,0.06863,45.06,proxied,peer_mean_region_income,peer_mean,ZAF,Gabon
 GAB,2030,PV fixed-axis,UMIC,Sub-Saharan Africa,446.22,11.5353,0.0,32.58,,0.06863,42.16,proxied,peer_mean_region_income,peer_mean,ZAF,Gabon
-GBR,2025,PV fixed-axis,HIC,Europe & Central Asia,488.93,11.7451,0.0,50.98,0.02,0.05122,36.79,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
-GBR,2030,PV fixed-axis,HIC,Europe & Central Asia,446.22,10.9983,0.0,44.77,0.02,0.05122,33.85,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
-GEO,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Georgia
-GEO,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Georgia
+GBR,2025,PV fixed-axis,HIC,Europe & Central Asia,488.93,11.7451,0.0,50.98,0.042,0.065372,43.71,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
+GBR,2030,PV fixed-axis,HIC,Europe & Central Asia,446.22,10.9983,0.0,44.77,0.042,0.065372,40.17,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
+GEO,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Georgia
+GEO,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Georgia
 GHA,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,0.095,0.105959,57.09,proxied,peer_mean_income,irena,IND|PHL|VNM,Ghana
 GHA,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,0.095,0.105959,49.53,proxied,peer_mean_income,irena,IND|PHL|VNM,Ghana
 GIN,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Guinea
@@ -137,8 +137,8 @@ GNB,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491
 GNB,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Guinea-Bissau
 GNQ,2025,PV fixed-axis,UMIC,Sub-Saharan Africa,477.96,12.2584,0.0,39.09,,0.06863,45.06,proxied,peer_mean_region_income,peer_mean,ZAF,Equatorial Guinea
 GNQ,2030,PV fixed-axis,UMIC,Sub-Saharan Africa,446.22,11.5353,0.0,32.58,,0.06863,42.16,proxied,peer_mean_region_income,peer_mean,ZAF,Equatorial Guinea
-GRC,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.041,0.06469,43.83,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Greece
-GRC,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.041,0.06469,38.21,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Greece
+GRC,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Greece
+GRC,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Greece
 GRD,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,,0.098571,63.47,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Grenada
 GRD,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,,0.098571,52.17,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Grenada
 GTM,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.063,0.08047,53.78,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Guatemala
@@ -149,28 +149,28 @@ HKG,2025,PV fixed-axis,HIC,East Asia & Pacific,771.49,18.4174,0.0,55.59,,0.06120
 HKG,2030,PV fixed-axis,HIC,East Asia & Pacific,576.43,17.2491,0.0,42.05,,0.061205,52.53,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Hong Kong
 HND,2025,PV fixed-axis,LMIC,Latin America & Caribbean,457.05,8.6566,0.0,39.05,0.046,0.068135,39.8,proxied,peer_mean_income,irena,IND|PHL|VNM,Honduras
 HND,2030,PV fixed-axis,LMIC,Latin America & Caribbean,390.9,8.1074,0.0,29.11,0.046,0.068135,34.74,proxied,peer_mean_income,irena,IND|PHL|VNM,Honduras
-HRV,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.053,0.073101,48.08,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Croatia
-HRV,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.053,0.073101,41.82,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Croatia
-HTI,2025,PV fixed-axis,LIC,Latin America & Caribbean,573.91,12.2751,0.0,44.09,,0.081387,58.98,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Haiti
-HTI,2030,PV fixed-axis,LIC,Latin America & Caribbean,462.06,11.5,0.0,34.46,,0.081387,49.11,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Haiti
-HUN,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.037,0.061998,42.47,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Hungary
-HUN,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.037,0.061998,37.06,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Hungary
+HRV,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Croatia
+HRV,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Croatia
+HTI,2025,PV fixed-axis,LIC,Latin America & Caribbean,573.91,12.2751,0.0,44.09,,0.08243,59.58,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Haiti
+HTI,2030,PV fixed-axis,LIC,Latin America & Caribbean,462.06,11.5,0.0,34.46,,0.08243,49.59,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Haiti
+HUN,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Hungary
+HUN,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Hungary
 IDN,2025,PV fixed-axis,UMIC,East Asia & Pacific,599.64,13.1086,0.0,55.0,0.06,0.078227,60.02,bnef,bnef,irena,,Indonesia
 IDN,2030,PV fixed-axis,UMIC,East Asia & Pacific,446.19,12.2937,0.0,37.58,0.06,0.078227,47.2,bnef,bnef,irena,,Indonesia
 IND,2025,PV fixed-axis,LMIC,South Asia,358.73,5.0176,0.0,25.14,0.059,0.077485,32.81,bnef,bnef,irena,,India
 IND,2030,PV fixed-axis,LMIC,South Asia,324.97,4.7021,0.0,19.48,0.059,0.077485,29.88,bnef,bnef,irena,,India
-IRL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.055,0.074549,48.81,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Ireland
-IRL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.055,0.074549,42.44,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Ireland
+IRL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Ireland
+IRL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Ireland
 IRN,2025,PV fixed-axis,LMIC,Middle East & North Africa,457.05,8.6566,0.0,39.05,0.114,0.122223,64.52,proxied,peer_mean_income,irena,IND|PHL|VNM,"Iran, Islamic Republic of"
 IRN,2030,PV fixed-axis,LMIC,Middle East & North Africa,390.9,8.1074,0.0,29.11,0.114,0.122223,55.88,proxied,peer_mean_income,irena,IND|PHL|VNM,"Iran, Islamic Republic of"
 IRQ,2025,PV fixed-axis,UMIC,Middle East & North Africa,535.15,10.7181,0.0,43.04,0.096,0.106797,67.87,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Iraq
 IRQ,2030,PV fixed-axis,UMIC,Middle East & North Africa,427.3,10.0509,0.0,32.32,0.096,0.106797,55.69,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Iraq
-ISL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.061667,42.31,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Iceland
-ISL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.061667,36.91,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Iceland
+ISL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.065372,44.18,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Iceland
+ISL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.065372,38.5,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,Iceland
 ISR,2025,PV fixed-axis,HIC,Middle East & North Africa,492.19,11.8838,0.0,28.97,0.037,0.061998,42.4,proxied,peer_mean_region_income,irena,ARE,Israel
 ISR,2030,PV fixed-axis,HIC,Middle East & North Africa,446.22,11.1281,0.0,24.91,0.037,0.061998,38.79,proxied,peer_mean_region_income,irena,ARE,Israel
-ITA,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,35.97,0.031,0.05807,40.58,bnef,bnef,irena,,Italy
-ITA,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,30.0,0.031,0.05807,34.99,bnef,bnef,irena,,Italy
+ITA,2025,PV fixed-axis,HIC,Europe & Central Asia,509.14,11.0117,0.0,35.97,0.042,0.065372,44.3,bnef,bnef,irena,,Italy
+ITA,2030,PV fixed-axis,HIC,Europe & Central Asia,424.76,10.3203,0.0,30.0,0.042,0.065372,38.09,bnef,bnef,irena,,Italy
 JAM,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.072,0.087362,57.47,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Jamaica
 JAM,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.072,0.087362,47.38,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Jamaica
 JOR,2025,PV fixed-axis,UMIC,Middle East & North Africa,535.15,10.7181,0.0,43.04,0.082,0.095284,61.71,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Jordan
@@ -207,32 +207,32 @@ LKA,2025,PV fixed-axis,LMIC,South Asia,358.73,5.0176,0.0,25.14,0.103,0.112719,45
 LKA,2030,PV fixed-axis,LMIC,South Asia,324.97,4.7021,0.0,19.48,0.103,0.112719,41.33,proxied,peer_mean_region_income,irena,IND,Sri Lanka
 LSO,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639,49.63,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Lesotho
 LSO,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Lesotho
-LTU,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.057,0.076011,49.55,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Lithuania
-LTU,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.057,0.076011,43.07,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Lithuania
-LUX,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.031,0.05807,40.49,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Luxembourg
-LUX,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.031,0.05807,35.37,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Luxembourg
-LVA,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.055,0.074549,48.81,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Latvia
-LVA,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.055,0.074549,42.44,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Latvia
+LTU,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Lithuania
+LTU,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Lithuania
+LUX,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Luxembourg
+LUX,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Luxembourg
+LVA,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Latvia
+LVA,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Latvia
 MAC,2025,PV fixed-axis,HIC,East Asia & Pacific,771.49,18.4174,0.0,55.59,,0.061205,65.64,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Macao
 MAC,2030,PV fixed-axis,HIC,East Asia & Pacific,576.43,17.2491,0.0,42.05,,0.061205,52.53,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Macao
 MAR,2025,PV fixed-axis,LMIC,Middle East & North Africa,457.05,8.6566,0.0,39.05,0.067,0.083504,46.82,proxied,peer_mean_income,irena,IND|PHL|VNM,Morocco
 MAR,2030,PV fixed-axis,LMIC,Middle East & North Africa,390.9,8.1074,0.0,29.11,0.067,0.083504,40.75,proxied,peer_mean_income,irena,IND|PHL|VNM,Morocco
-MDA,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,"Moldova, Republic of"
-MDA,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,"Moldova, Republic of"
+MDA,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,"Moldova, Republic of"
+MDA,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,"Moldova, Republic of"
 MDG,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Madagascar
 MDG,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Madagascar
-MDV,2025,PV fixed-axis,UMIC,South Asia,535.15,10.7181,0.0,43.04,,0.081387,54.27,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Maldives
-MDV,2030,PV fixed-axis,UMIC,South Asia,427.3,10.0509,0.0,32.32,,0.081387,44.83,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Maldives
+MDV,2025,PV fixed-axis,UMIC,South Asia,535.15,10.7181,0.0,43.04,,0.08243,54.83,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Maldives
+MDV,2030,PV fixed-axis,UMIC,South Asia,427.3,10.0509,0.0,32.32,,0.08243,45.27,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Maldives
 MEX,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.072,0.087362,57.47,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Mexico
 MEX,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.072,0.087362,47.38,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Mexico
 MHL,2025,PV fixed-axis,UMIC,East Asia & Pacific,549.44,10.333,0.0,44.03,,0.068441,47.94,proxied,peer_mean_region_income,peer_mean,CHN|IDN|MYS|THA,Marshall Islands
 MHL,2030,PV fixed-axis,UMIC,East Asia & Pacific,422.58,9.6798,0.0,32.25,,0.068441,38.6,proxied,peer_mean_region_income,peer_mean,CHN|IDN|MYS|THA,Marshall Islands
-MKD,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,North Macedonia
-MKD,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,North Macedonia
+MKD,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,North Macedonia
+MKD,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,North Macedonia
 MLI,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Mali
 MLI,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Mali
-MLT,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.018,0.050026,36.43,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Malta
-MLT,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.018,0.050026,31.92,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Malta
+MLT,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Malta
+MLT,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Malta
 MMR,2025,PV fixed-axis,LMIC,East Asia & Pacific,506.22,10.4761,0.0,46.01,0.095,0.105959,64.11,proxied,peer_mean_region_income,irena,PHL|VNM,Myanmar
 MMR,2030,PV fixed-axis,LMIC,East Asia & Pacific,423.87,9.81,0.0,33.93,0.095,0.105959,54.72,proxied,peer_mean_region_income,irena,PHL|VNM,Myanmar
 MNE,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,0.088,0.100161,64.32,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Montenegro
@@ -257,12 +257,12 @@ NGA,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639
 NGA,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Nigeria
 NIC,2025,PV fixed-axis,LMIC,Latin America & Caribbean,457.05,8.6566,0.0,39.05,0.092,0.103461,55.94,proxied,peer_mean_income,irena,IND|PHL|VNM,Nicaragua
 NIC,2030,PV fixed-axis,LMIC,Latin America & Caribbean,390.9,8.1074,0.0,29.11,0.092,0.103461,48.55,proxied,peer_mean_income,irena,IND|PHL|VNM,Nicaragua
-NLD,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.014,0.047684,35.24,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,"Netherlands, Kingdom of the"
-NLD,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.014,0.047684,30.92,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,"Netherlands, Kingdom of the"
-NOR,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.045,0.067439,45.22,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Norway
-NOR,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.045,0.067439,39.39,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Norway
-NPL,2025,PV fixed-axis,LIC,South Asia,573.91,12.2751,0.0,44.09,,0.081387,58.98,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Nepal
-NPL,2030,PV fixed-axis,LIC,South Asia,462.06,11.5,0.0,34.46,,0.081387,49.11,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Nepal
+NLD,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,"Netherlands, Kingdom of the"
+NLD,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,"Netherlands, Kingdom of the"
+NOR,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Norway
+NOR,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Norway
+NPL,2025,PV fixed-axis,LIC,South Asia,573.91,12.2751,0.0,44.09,,0.08243,59.58,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Nepal
+NPL,2030,PV fixed-axis,LIC,South Asia,462.06,11.5,0.0,34.46,,0.08243,49.59,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Nepal
 NRU,2025,PV fixed-axis,HIC,East Asia & Pacific,771.49,18.4174,0.0,55.59,,0.061205,65.64,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Nauru
 NRU,2030,PV fixed-axis,HIC,East Asia & Pacific,576.43,17.2491,0.0,42.05,,0.061205,52.53,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Nauru
 NZL,2025,PV fixed-axis,HIC,East Asia & Pacific,771.49,18.4174,0.0,55.59,0.043,0.066058,69.38,proxied,peer_mean_region_income,irena,AUS|JPN|KOR,New Zealand
@@ -281,8 +281,8 @@ PLW,2025,PV fixed-axis,HIC,East Asia & Pacific,771.49,18.4174,0.0,55.59,,0.06120
 PLW,2030,PV fixed-axis,HIC,East Asia & Pacific,576.43,17.2491,0.0,42.05,,0.061205,52.53,proxied,peer_mean_region_income,peer_mean,AUS|JPN|KOR,Palau
 PNG,2025,PV fixed-axis,LMIC,East Asia & Pacific,506.22,10.4761,0.0,46.01,,0.088469,55.26,proxied,peer_mean_region_income,peer_mean,PHL|VNM,Papua New Guinea
 PNG,2030,PV fixed-axis,LMIC,East Asia & Pacific,423.87,9.81,0.0,33.93,,0.088469,47.31,proxied,peer_mean_region_income,peer_mean,PHL|VNM,Papua New Guinea
-POL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.039,0.063337,43.15,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Poland
-POL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.039,0.063337,37.63,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Poland
+POL,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Poland
+POL,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Poland
 PRI,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,,0.064035,53.89,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Puerto Rico
 PRI,2030,PV fixed-axis,HIC,Latin America & Caribbean,497.26,13.0839,0.0,36.88,,0.064035,44.93,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Puerto Rico
 PRT,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Portugal
@@ -291,8 +291,8 @@ PRY,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,,
 PRY,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,,0.098571,52.17,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Paraguay
 QAT,2025,PV fixed-axis,HIC,Middle East & North Africa,492.19,11.8838,0.0,28.97,,0.072524,47.58,proxied,peer_mean_region_income,peer_mean,ARE,Qatar
 QAT,2030,PV fixed-axis,HIC,Middle East & North Africa,446.22,11.1281,0.0,24.91,,0.072524,43.49,proxied,peer_mean_region_income,peer_mean,ARE,Qatar
-ROU,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.051,0.071665,47.36,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Romania
-ROU,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.051,0.071665,41.2,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Romania
+ROU,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Romania
+ROU,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Romania
 RUS,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,0.063,0.08047,53.78,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Russian Federation
 RUS,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,0.063,0.08047,44.44,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,Russian Federation
 RWA,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,0.056,0.075278,55.48,proxied,global_mean,irena,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Rwanda
@@ -311,28 +311,28 @@ SLE,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491
 SLE,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Sierra Leone
 SLV,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,0.063,0.08047,53.78,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,El Salvador
 SLV,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,0.063,0.08047,44.44,proxied,peer_mean_income,irena,CHN|IDN|MYS|THA|ZAF,El Salvador
-SMR,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.061667,42.31,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,San Marino
-SMR,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.061667,36.91,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,San Marino
+SMR,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,,0.065372,44.18,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,San Marino
+SMR,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,,0.065372,38.5,proxied,peer_mean_region_income,peer_mean,DEU|ESP|FRA|GBR|ITA,San Marino
 SOM,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Somalia
 SOM,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Somalia
-SRB,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Serbia
-SRB,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Serbia
+SRB,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Serbia
+SRB,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Serbia
 SSD,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,South Sudan
 SSD,2030,PV fixed-axis,LIC,Sub-Saharan Africa,462.06,11.5,0.0,34.46,,0.083491,50.08,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,South Sudan
 STP,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639,49.63,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Sao Tome and Principe
 STP,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Sao Tome and Principe
 SUR,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,,0.098571,63.47,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Suriname
 SUR,2030,PV fixed-axis,UMIC,Latin America & Caribbean,427.3,10.0509,0.0,32.32,,0.098571,52.17,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Suriname
-SVK,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.038,0.062666,42.81,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovakia
-SVK,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.038,0.062666,37.34,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovakia
+SVK,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovakia
+SVK,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovakia
 SVN,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovenia
 SVN,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Slovenia
-SWE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.032,0.058715,40.82,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Sweden
-SWE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.032,0.058715,35.65,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Sweden
+SWE,2025,PV fixed-axis,HIC,Europe & Central Asia,505.11,11.1583,0.0,41.62,0.042,0.065372,44.18,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Sweden
+SWE,2030,PV fixed-axis,HIC,Europe & Central Asia,429.06,10.4559,0.0,35.54,0.042,0.065372,38.5,proxied,peer_mean_region_income,irena,DEU|ESP|FRA|GBR|ITA,Sweden
 SWZ,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639,49.63,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Eswatini
 SWZ,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Eswatini
-SYC,2025,PV fixed-axis,HIC,Sub-Saharan Africa,623.4,13.9697,0.0,45.95,,0.081387,64.71,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Seychelles
-SYC,2030,PV fixed-axis,HIC,Sub-Saharan Africa,497.26,13.0839,0.0,36.88,,0.081387,53.55,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Seychelles
+SYC,2025,PV fixed-axis,HIC,Sub-Saharan Africa,623.4,13.9697,0.0,45.95,,0.08243,65.36,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Seychelles
+SYC,2030,PV fixed-axis,HIC,Sub-Saharan Africa,497.26,13.0839,0.0,36.88,,0.08243,54.07,proxied,peer_mean_income,peer_mean,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Seychelles
 SYR,2025,PV fixed-axis,LIC,Middle East & North Africa,573.91,12.2751,0.0,44.09,,0.175316,112.89,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Syrian Arab Republic
 SYR,2030,PV fixed-axis,LIC,Middle East & North Africa,462.06,11.5,0.0,34.46,,0.175316,92.51,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Syrian Arab Republic
 TCD,2025,PV fixed-axis,LIC,Sub-Saharan Africa,573.91,12.2751,0.0,44.09,,0.083491,60.19,proxied,global_mean,peer_mean,ARE|AUS|CAN|CHN|DEU|ESP|FRA|GBR|IDN|IND|ITA|JPN|KOR|MYS|PHL|THA|USA|VNM|ZAF,Chad
@@ -343,8 +343,8 @@ THA,2025,PV fixed-axis,UMIC,East Asia & Pacific,592.1,10.4493,0.0,46.87,0.045,0.
 THA,2030,PV fixed-axis,UMIC,East Asia & Pacific,444.5,9.7849,0.0,33.05,0.045,0.067439,39.76,bnef,bnef,irena,,Thailand
 TJK,2025,PV fixed-axis,LMIC,Europe & Central Asia,457.05,8.6566,0.0,39.05,,0.109322,58.62,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Tajikistan
 TJK,2030,PV fixed-axis,LMIC,Europe & Central Asia,390.9,8.1074,0.0,29.11,,0.109322,50.84,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Tajikistan
-TKM,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Turkmenistan
-TKM,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Turkmenistan
+TKM,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Turkmenistan
+TKM,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Turkmenistan
 TLS,2025,PV fixed-axis,LMIC,East Asia & Pacific,506.22,10.4761,0.0,46.01,,0.088469,55.26,proxied,peer_mean_region_income,peer_mean,PHL|VNM,Timor-Leste
 TLS,2030,PV fixed-axis,LMIC,East Asia & Pacific,423.87,9.81,0.0,33.93,,0.088469,47.31,proxied,peer_mean_region_income,peer_mean,PHL|VNM,Timor-Leste
 TON,2025,PV fixed-axis,UMIC,East Asia & Pacific,549.44,10.333,0.0,44.03,,0.068441,47.94,proxied,peer_mean_region_income,peer_mean,CHN|IDN|MYS|THA,Tonga
@@ -369,8 +369,8 @@ URY,2025,PV fixed-axis,HIC,Latin America & Caribbean,623.4,13.9697,0.0,45.95,0.0
 URY,2030,PV fixed-axis,HIC,Latin America & Caribbean,497.26,13.0839,0.0,36.88,0.042,0.065372,45.59,proxied,peer_mean_income,irena,ARE|AUS|CAN|DEU|ESP|FRA|GBR|ITA|JPN|KOR|USA,Uruguay
 USA,2025,PV fixed-axis,HIC,North America,974.82,15.4008,0.0,61.84,0.043,0.066058,79.8,bnef,bnef,irena,,United States of America
 USA,2030,PV fixed-axis,HIC,North America,714.25,14.4133,0.0,44.63,0.043,0.066058,61.6,bnef,bnef,irena,,United States of America
-UVK,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.091132,59.49,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,
-UVK,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.091132,48.99,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,
+UVK,2025,PV fixed-axis,UMIC,Europe & Central Asia,535.15,10.7181,0.0,43.04,,0.090611,59.21,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,
+UVK,2030,PV fixed-axis,UMIC,Europe & Central Asia,427.3,10.0509,0.0,32.32,,0.090611,48.77,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,
 UZB,2025,PV fixed-axis,LMIC,Europe & Central Asia,457.05,8.6566,0.0,39.05,,0.109322,58.62,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Uzbekistan
 UZB,2030,PV fixed-axis,LMIC,Europe & Central Asia,390.9,8.1074,0.0,29.11,,0.109322,50.84,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Uzbekistan
 VCT,2025,PV fixed-axis,UMIC,Latin America & Caribbean,535.15,10.7181,0.0,43.04,,0.098571,63.47,proxied,peer_mean_income,peer_mean,CHN|IDN|MYS|THA|ZAF,Saint Vincent and the Grenadines
@@ -395,40 +395,40 @@ ZWE,2025,PV fixed-axis,LMIC,Sub-Saharan Africa,457.05,8.6566,0.0,39.05,,0.089639
 ZWE,2030,PV fixed-axis,LMIC,Sub-Saharan Africa,390.9,8.1074,0.0,29.11,,0.089639,43.15,proxied,peer_mean_income,peer_mean,IND|PHL|VNM,Zimbabwe
 ABW,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.8575,14.4329,121.67,,0.064035,89.3,proxied,peer_mean_region_income,peer_mean,CHL,Aruba
 ABW,2030,Utility-scale battery (4h),HIC,Latin America & Caribbean,887.97,8.7009,8.2902,85.75,,0.064035,65.56,proxied,peer_mean_region_income,peer_mean,CHL,Aruba
-AFG,2025,Utility-scale battery (4h),LIC,South Asia,1061.64,10.375,17.919,114.21,,0.081387,96.78,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Afghanistan
-AFG,2030,Utility-scale battery (4h),LIC,South Asia,780.98,7.6333,10.3,78.53,,0.081387,71.19,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Afghanistan
+AFG,2025,Utility-scale battery (4h),LIC,South Asia,1061.64,10.375,17.919,114.21,,0.08243,97.89,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Afghanistan
+AFG,2030,Utility-scale battery (4h),LIC,South Asia,780.98,7.6333,10.3,78.53,,0.08243,72.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Afghanistan
 AGO,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7793,154.41,,0.089639,125.27,proxied,peer_mean_income,peer_mean,IND,Angola
 AGO,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,,0.089639,91.98,proxied,peer_mean_income,peer_mean,IND,Angola
-ALB,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,Albania
-ALB,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,Albania
-AND,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.061667,72.24,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Andorra
-AND,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.061667,51.99,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Andorra
+ALB,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,Albania
+ALB,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,Albania
+AND,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.065372,75.98,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Andorra
+AND,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.065372,54.68,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Andorra
 ARE,2025,Utility-scale battery (4h),HIC,Middle East & North Africa,1125.66,11.0345,15.1185,116.39,0.056,0.075278,95.77,proxied,peer_mean_income,irena,AUS|CHL|DEU|GBR|JPN|USA,United Arab Emirates
 ARE,2030,Utility-scale battery (4h),HIC,Middle East & North Africa,826.83,8.1055,8.689,81.2,0.056,0.075278,70.35,proxied,peer_mean_income,irena,AUS|CHL|DEU|GBR|JPN|USA,United Arab Emirates
 ARG,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.138,0.143673,73.19,proxied,peer_mean_income,irena,CHN,Argentina
 ARG,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.138,0.143673,55.27,proxied,peer_mean_income,irena,CHN,Argentina
-ARM,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,Armenia
-ARM,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,Armenia
+ARM,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,Armenia
+ARM,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,Armenia
 ATG,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.8575,14.4329,121.67,,0.064035,89.3,proxied,peer_mean_region_income,peer_mean,CHL,Antigua and Barbuda
 ATG,2030,Utility-scale battery (4h),HIC,Latin America & Caribbean,887.97,8.7009,8.2902,85.75,,0.064035,65.56,proxied,peer_mean_region_income,peer_mean,CHL,Antigua and Barbuda
 AUS,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1127.75,10.9823,14.2796,116.9,0.029,0.05679,75.03,bnef,bnef,irena,,Australia
 AUS,2030,Utility-scale battery (4h),HIC,East Asia & Pacific,828.0,8.0688,8.2125,82.79,0.029,0.05679,55.09,bnef,bnef,irena,,Australia
-AUT,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.034,0.060017,70.57,proxied,peer_mean_region_income,irena,DEU|GBR,Austria
-AUT,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.034,0.060017,50.79,proxied,peer_mean_region_income,irena,DEU|GBR,Austria
+AUT,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Austria
+AUT,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Austria
 AZE,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,0.07,0.085811,45.59,proxied,peer_mean_income,irena,CHN,Azerbaijan
 AZE,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,0.07,0.085811,34.43,proxied,peer_mean_income,irena,CHN,Azerbaijan
 BDI,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Burundi
 BDI,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Burundi
-BEL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.019,0.050621,61.07,proxied,peer_mean_region_income,irena,DEU|GBR,Belgium
-BEL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.019,0.050621,43.95,proxied,peer_mean_region_income,irena,DEU|GBR,Belgium
+BEL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Belgium
+BEL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Belgium
 BEN,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Benin
 BEN,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Benin
 BFA,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,0.058,0.076746,91.85,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Burkina Faso
 BFA,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,0.058,0.076746,67.57,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Burkina Faso
 BGD,2025,Utility-scale battery (4h),LMIC,South Asia,1262.24,12.1262,28.7793,154.41,0.068,0.08427,118.5,proxied,peer_mean_region_income,irena,IND,Bangladesh
 BGD,2030,Utility-scale battery (4h),LMIC,South Asia,926.75,8.9099,16.5526,99.71,0.068,0.08427,87.01,proxied,peer_mean_region_income,irena,IND,Bangladesh
-BGR,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,0.048,0.069537,37.83,proxied,peer_mean_income,irena,CHN,Bulgaria
-BGR,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,0.048,0.069537,28.57,proxied,peer_mean_income,irena,CHN,Bulgaria
+BGR,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,0.042,0.065372,35.85,proxied,peer_mean_income,irena,CHN,Bulgaria
+BGR,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,0.042,0.065372,27.07,proxied,peer_mean_income,irena,CHN,Bulgaria
 BHR,2025,Utility-scale battery (4h),HIC,Middle East & North Africa,1125.66,11.0345,15.1185,116.39,,0.072524,92.67,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Bahrain
 BHR,2030,Utility-scale battery (4h),HIC,Middle East & North Africa,826.83,8.1055,8.689,81.2,,0.072524,68.07,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Bahrain
 BHS,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.8575,14.4329,121.67,,0.064035,89.3,proxied,peer_mean_region_income,peer_mean,CHL,Bahamas
@@ -455,8 +455,8 @@ CAF,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919
 CAF,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Central African Republic
 CAN,2025,Utility-scale battery (4h),HIC,North America,1066.5,10.4562,16.5978,110.26,0.043,0.066058,80.91,proxied,peer_mean_region_income,irena,USA,Canada
 CAN,2030,Utility-scale battery (4h),HIC,North America,823.46,8.0687,9.5337,80.81,0.043,0.066058,62.46,proxied,peer_mean_region_income,irena,USA,Canada
-CHE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.017,0.049434,59.87,proxied,peer_mean_region_income,irena,DEU|GBR,Switzerland
-CHE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.017,0.049434,43.09,proxied,peer_mean_region_income,irena,DEU|GBR,Switzerland
+CHE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Switzerland
+CHE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Switzerland
 CHL,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.8575,14.4329,121.67,0.035,0.060674,85.24,bnef,bnef,irena,,Chile
 CHL,2030,Utility-scale battery (4h),HIC,Latin America & Caribbean,887.97,8.7009,8.2902,85.75,0.035,0.060674,62.58,bnef,bnef,irena,,Chile
 CHN,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.8615,60.96,0.025,0.054276,30.55,bnef,bnef,irena,,China
@@ -479,18 +479,18 @@ CRI,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667
 CRI,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.064,0.081224,32.78,proxied,peer_mean_income,irena,CHN,Costa Rica
 CUB,2025,Utility-scale battery (4h),Unknown,Unknown,1061.64,10.375,17.919,114.21,0.116,0.123975,141.99,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Cuba
 CUB,2030,Utility-scale battery (4h),Unknown,Unknown,780.98,7.6333,10.3,78.53,0.116,0.123975,104.46,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Cuba
-CYP,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.049,0.070243,80.9,proxied,peer_mean_region_income,irena,DEU|GBR,Cyprus
-CYP,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.049,0.070243,58.22,proxied,peer_mean_region_income,irena,DEU|GBR,Cyprus
-CZE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.037,0.061998,72.57,proxied,peer_mean_region_income,irena,DEU|GBR,Czechia
-CZE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.037,0.061998,52.23,proxied,peer_mean_region_income,irena,DEU|GBR,Czechia
-DEU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1040.35,10.2018,9.3749,111.04,0.013,0.047109,59.21,bnef,bnef,irena,,Germany
-DEU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,748.67,7.3478,5.3926,74.45,0.013,0.047109,42.62,bnef,bnef,irena,,Germany
+CYP,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Cyprus
+CYP,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Cyprus
+CZE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Czechia
+CZE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Czechia
+DEU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1040.35,10.2018,9.3749,111.04,0.042,0.065372,78.21,bnef,bnef,irena,,Germany
+DEU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,748.67,7.3478,5.3926,74.45,0.042,0.065372,56.29,bnef,bnef,irena,,Germany
 DJI,2025,Utility-scale battery (4h),LMIC,Middle East & North Africa,1262.24,12.1262,28.7793,154.41,,0.123454,167.96,proxied,peer_mean_income,peer_mean,IND,Djibouti
 DJI,2030,Utility-scale battery (4h),LMIC,Middle East & North Africa,926.75,8.9099,16.5526,99.71,,0.123454,123.32,proxied,peer_mean_income,peer_mean,IND,Djibouti
 DMA,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,,0.098571,51.68,proxied,peer_mean_income,peer_mean,CHN,Dominica
 DMA,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,,0.098571,39.02,proxied,peer_mean_income,peer_mean,CHN,Dominica
-DNK,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.021,0.051824,62.29,proxied,peer_mean_region_income,irena,DEU|GBR,Denmark
-DNK,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.021,0.051824,44.83,proxied,peer_mean_region_income,irena,DEU|GBR,Denmark
+DNK,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Denmark
+DNK,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Denmark
 DOM,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.056,0.075278,40.57,proxied,peer_mean_income,irena,CHN,Dominican Republic
 DOM,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.056,0.075278,30.63,proxied,peer_mean_income,irena,CHN,Dominican Republic
 DZA,2025,Utility-scale battery (4h),LMIC,Middle East & North Africa,1262.24,12.1262,28.7793,154.41,0.11,0.11874,162.01,proxied,peer_mean_income,irena,IND,Algeria
@@ -501,26 +501,26 @@ EGY,2025,Utility-scale battery (4h),LMIC,Middle East & North Africa,1262.24,12.1
 EGY,2030,Utility-scale battery (4h),LMIC,Middle East & North Africa,926.75,8.9099,16.5526,99.71,0.088,0.100161,101.73,proxied,peer_mean_income,irena,IND,Egypt
 ERI,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Eritrea
 ERI,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Eritrea
-ESP,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.036,0.061334,71.9,proxied,peer_mean_region_income,irena,DEU|GBR,Spain
-ESP,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.036,0.061334,51.75,proxied,peer_mean_region_income,irena,DEU|GBR,Spain
-EST,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.051,0.071665,82.34,proxied,peer_mean_region_income,irena,DEU|GBR,Estonia
-EST,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.051,0.071665,59.26,proxied,peer_mean_region_income,irena,DEU|GBR,Estonia
+ESP,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Spain
+ESP,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Spain
+EST,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Estonia
+EST,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Estonia
 ETH,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,0.084,0.0969,113.25,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Ethiopia
 ETH,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,0.084,0.0969,83.31,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Ethiopia
-FIN,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.048,0.069537,80.19,proxied,peer_mean_region_income,irena,DEU|GBR,Finland
-FIN,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.048,0.069537,57.71,proxied,peer_mean_region_income,irena,DEU|GBR,Finland
+FIN,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Finland
+FIN,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Finland
 FJI,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.8615,60.96,,0.068441,37.31,proxied,peer_mean_region_income,peer_mean,CHN,Fiji
 FJI,2030,Utility-scale battery (4h),UMIC,East Asia & Pacific,360.14,3.5239,13.7138,41.37,,0.068441,28.17,proxied,peer_mean_region_income,peer_mean,CHN,Fiji
-FRA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.018,0.050026,60.47,proxied,peer_mean_region_income,irena,DEU|GBR,France
-FRA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.018,0.050026,43.52,proxied,peer_mean_region_income,irena,DEU|GBR,France
+FRA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,France
+FRA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,France
 FSM,2025,Utility-scale battery (4h),LMIC,East Asia & Pacific,1262.24,12.1262,28.7793,154.41,,0.088469,123.8,proxied,peer_mean_income,peer_mean,IND,"Micronesia, Federated States of"
 FSM,2030,Utility-scale battery (4h),LMIC,East Asia & Pacific,926.75,8.9099,16.5526,99.71,,0.088469,90.9,proxied,peer_mean_income,peer_mean,IND,"Micronesia, Federated States of"
 GAB,2025,Utility-scale battery (4h),UMIC,Sub-Saharan Africa,476.94,4.6667,23.8615,60.96,,0.06863,37.4,proxied,peer_mean_income,peer_mean,CHN,Gabon
 GAB,2030,Utility-scale battery (4h),UMIC,Sub-Saharan Africa,360.14,3.5239,13.7138,41.37,,0.06863,28.24,proxied,peer_mean_income,peer_mean,CHN,Gabon
-GBR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,981.04,9.6181,21.1755,109.26,0.02,0.05122,59.87,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
-GBR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,705.99,6.9215,12.1701,72.33,0.02,0.05122,43.08,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
-GEO,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,Georgia
-GEO,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,Georgia
+GBR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,981.04,9.6181,21.1755,109.26,0.042,0.065372,73.75,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
+GBR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,705.99,6.9215,12.1701,72.33,0.042,0.065372,53.07,bnef,bnef,irena,,United Kingdom of Great Britain and Northern Ireland
+GEO,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,Georgia
+GEO,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,Georgia
 GHA,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7793,154.41,0.095,0.105959,145.87,proxied,peer_mean_income,irena,IND,Ghana
 GHA,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,0.095,0.105959,107.11,proxied,peer_mean_income,irena,IND,Ghana
 GIN,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Guinea
@@ -531,8 +531,8 @@ GNB,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919
 GNB,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Guinea-Bissau
 GNQ,2025,Utility-scale battery (4h),UMIC,Sub-Saharan Africa,476.94,4.6667,23.8615,60.96,,0.06863,37.4,proxied,peer_mean_income,peer_mean,CHN,Equatorial Guinea
 GNQ,2030,Utility-scale battery (4h),UMIC,Sub-Saharan Africa,360.14,3.5239,13.7138,41.37,,0.06863,28.24,proxied,peer_mean_income,peer_mean,CHN,Equatorial Guinea
-GRC,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.041,0.06469,75.29,proxied,peer_mean_region_income,irena,DEU|GBR,Greece
-GRC,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.041,0.06469,54.19,proxied,peer_mean_region_income,irena,DEU|GBR,Greece
+GRC,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Greece
+GRC,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Greece
 GRD,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,,0.098571,51.68,proxied,peer_mean_income,peer_mean,CHN,Grenada
 GRD,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,,0.098571,39.02,proxied,peer_mean_income,peer_mean,CHN,Grenada
 GTM,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.063,0.08047,43.05,proxied,peer_mean_income,irena,CHN,Guatemala
@@ -543,28 +543,28 @@ HKG,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1228.32,12.0369,14.5
 HKG,2030,Utility-scale battery (4h),HIC,East Asia & Pacific,897.43,8.7969,8.3737,86.92,,0.061205,63.72,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Hong Kong
 HND,2025,Utility-scale battery (4h),LMIC,Latin America & Caribbean,1262.24,12.1262,28.7793,154.41,0.046,0.068135,98.13,proxied,peer_mean_income,irena,IND,Honduras
 HND,2030,Utility-scale battery (4h),LMIC,Latin America & Caribbean,926.75,8.9099,16.5526,99.71,0.046,0.068135,72.05,proxied,peer_mean_income,irena,IND,Honduras
-HRV,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.053,0.073101,83.79,proxied,peer_mean_region_income,irena,DEU|GBR,Croatia
-HRV,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.053,0.073101,60.3,proxied,peer_mean_region_income,irena,DEU|GBR,Croatia
-HTI,2025,Utility-scale battery (4h),LIC,Latin America & Caribbean,1061.64,10.375,17.919,114.21,,0.081387,96.78,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Haiti
-HTI,2030,Utility-scale battery (4h),LIC,Latin America & Caribbean,780.98,7.6333,10.3,78.53,,0.081387,71.19,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Haiti
-HUN,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.037,0.061998,72.57,proxied,peer_mean_region_income,irena,DEU|GBR,Hungary
-HUN,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.037,0.061998,52.23,proxied,peer_mean_region_income,irena,DEU|GBR,Hungary
+HRV,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Croatia
+HRV,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Croatia
+HTI,2025,Utility-scale battery (4h),LIC,Latin America & Caribbean,1061.64,10.375,17.919,114.21,,0.08243,97.89,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Haiti
+HTI,2030,Utility-scale battery (4h),LIC,Latin America & Caribbean,780.98,7.6333,10.3,78.53,,0.08243,72.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Haiti
+HUN,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Hungary
+HUN,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Hungary
 IDN,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.8615,60.96,0.06,0.078227,41.98,proxied,peer_mean_region_income,irena,CHN,Indonesia
 IDN,2030,Utility-scale battery (4h),UMIC,East Asia & Pacific,360.14,3.5239,13.7138,41.37,0.06,0.078227,31.7,proxied,peer_mean_region_income,irena,CHN,Indonesia
 IND,2025,Utility-scale battery (4h),LMIC,South Asia,1262.24,12.1262,28.7793,154.41,0.059,0.077485,109.93,bnef,bnef,irena,,India
 IND,2030,Utility-scale battery (4h),LMIC,South Asia,926.75,8.9099,16.5526,99.71,0.059,0.077485,80.72,bnef,bnef,irena,,India
-IRL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.055,0.074549,85.26,proxied,peer_mean_region_income,irena,DEU|GBR,Ireland
-IRL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.055,0.074549,61.36,proxied,peer_mean_region_income,irena,DEU|GBR,Ireland
+IRL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Ireland
+IRL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Ireland
 IRN,2025,Utility-scale battery (4h),LMIC,Middle East & North Africa,1262.24,12.1262,28.7793,154.41,0.114,0.122223,166.4,proxied,peer_mean_income,irena,IND,"Iran, Islamic Republic of"
 IRN,2030,Utility-scale battery (4h),LMIC,Middle East & North Africa,926.75,8.9099,16.5526,99.71,0.114,0.122223,122.18,proxied,peer_mean_income,irena,IND,"Iran, Islamic Republic of"
 IRQ,2025,Utility-scale battery (4h),UMIC,Middle East & North Africa,476.94,4.6667,23.8615,60.96,0.096,0.106797,55.6,proxied,peer_mean_income,irena,CHN,Iraq
 IRQ,2030,Utility-scale battery (4h),UMIC,Middle East & North Africa,360.14,3.5239,13.7138,41.37,0.096,0.106797,41.99,proxied,peer_mean_income,irena,CHN,Iraq
-ISL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.061667,72.24,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Iceland
-ISL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.061667,51.99,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Iceland
+ISL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.065372,75.98,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Iceland
+ISL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.065372,54.68,proxied,peer_mean_region_income,peer_mean,DEU|GBR,Iceland
 ISR,2025,Utility-scale battery (4h),HIC,Middle East & North Africa,1125.66,11.0345,15.1185,116.39,0.037,0.061998,80.82,proxied,peer_mean_income,irena,AUS|CHL|DEU|GBR|JPN|USA,Israel
 ISR,2030,Utility-scale battery (4h),HIC,Middle East & North Africa,826.83,8.1055,8.689,81.2,0.037,0.061998,59.37,proxied,peer_mean_income,irena,AUS|CHL|DEU|GBR|JPN|USA,Israel
-ITA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.031,0.05807,68.6,proxied,peer_mean_region_income,irena,DEU|GBR,Italy
-ITA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.031,0.05807,49.37,proxied,peer_mean_region_income,irena,DEU|GBR,Italy
+ITA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Italy
+ITA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Italy
 JAM,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.072,0.087362,46.33,proxied,peer_mean_income,irena,CHN,Jamaica
 JAM,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.072,0.087362,34.99,proxied,peer_mean_income,irena,CHN,Jamaica
 JOR,2025,Utility-scale battery (4h),UMIC,Middle East & North Africa,476.94,4.6667,23.8615,60.96,0.082,0.095284,50.11,proxied,peer_mean_income,irena,CHN,Jordan
@@ -601,32 +601,32 @@ LKA,2025,Utility-scale battery (4h),LMIC,South Asia,1262.24,12.1262,28.7793,154.
 LKA,2030,Utility-scale battery (4h),LMIC,South Asia,926.75,8.9099,16.5526,99.71,0.103,0.112719,113.37,proxied,peer_mean_region_income,irena,IND,Sri Lanka
 LSO,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7793,154.41,,0.089639,125.27,proxied,peer_mean_income,peer_mean,IND,Lesotho
 LSO,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,,0.089639,91.98,proxied,peer_mean_income,peer_mean,IND,Lesotho
-LTU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.057,0.076011,86.73,proxied,peer_mean_region_income,irena,DEU|GBR,Lithuania
-LTU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.057,0.076011,62.42,proxied,peer_mean_region_income,irena,DEU|GBR,Lithuania
-LUX,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.031,0.05807,68.6,proxied,peer_mean_region_income,irena,DEU|GBR,Luxembourg
-LUX,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.031,0.05807,49.37,proxied,peer_mean_region_income,irena,DEU|GBR,Luxembourg
-LVA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.055,0.074549,85.26,proxied,peer_mean_region_income,irena,DEU|GBR,Latvia
-LVA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.055,0.074549,61.36,proxied,peer_mean_region_income,irena,DEU|GBR,Latvia
+LTU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Lithuania
+LTU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Lithuania
+LUX,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Luxembourg
+LUX,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Luxembourg
+LVA,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Latvia
+LVA,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Latvia
 MAC,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1228.32,12.0369,14.565,123.05,,0.061205,87.22,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Macao
 MAC,2030,Utility-scale battery (4h),HIC,East Asia & Pacific,897.43,8.7969,8.3737,86.92,,0.061205,63.72,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Macao
 MAR,2025,Utility-scale battery (4h),LMIC,Middle East & North Africa,1262.24,12.1262,28.7793,154.41,0.067,0.083504,117.53,proxied,peer_mean_income,irena,IND,Morocco
 MAR,2030,Utility-scale battery (4h),LMIC,Middle East & North Africa,926.75,8.9099,16.5526,99.71,0.067,0.083504,86.3,proxied,peer_mean_income,irena,IND,Morocco
-MDA,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,"Moldova, Republic of"
-MDA,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,"Moldova, Republic of"
+MDA,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,"Moldova, Republic of"
+MDA,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,"Moldova, Republic of"
 MDG,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Madagascar
 MDG,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Madagascar
-MDV,2025,Utility-scale battery (4h),UMIC,South Asia,476.94,4.6667,23.8615,60.96,,0.081387,43.48,proxied,peer_mean_income,peer_mean,CHN,Maldives
-MDV,2030,Utility-scale battery (4h),UMIC,South Asia,360.14,3.5239,13.7138,41.37,,0.081387,32.83,proxied,peer_mean_income,peer_mean,CHN,Maldives
+MDV,2025,Utility-scale battery (4h),UMIC,South Asia,476.94,4.6667,23.8615,60.96,,0.08243,43.98,proxied,peer_mean_income,peer_mean,CHN,Maldives
+MDV,2030,Utility-scale battery (4h),UMIC,South Asia,360.14,3.5239,13.7138,41.37,,0.08243,33.21,proxied,peer_mean_income,peer_mean,CHN,Maldives
 MEX,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.072,0.087362,46.33,proxied,peer_mean_income,irena,CHN,Mexico
 MEX,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.072,0.087362,34.99,proxied,peer_mean_income,irena,CHN,Mexico
 MHL,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.8615,60.96,,0.068441,37.31,proxied,peer_mean_region_income,peer_mean,CHN,Marshall Islands
 MHL,2030,Utility-scale battery (4h),UMIC,East Asia & Pacific,360.14,3.5239,13.7138,41.37,,0.068441,28.17,proxied,peer_mean_region_income,peer_mean,CHN,Marshall Islands
-MKD,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,North Macedonia
-MKD,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,North Macedonia
+MKD,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,North Macedonia
+MKD,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,North Macedonia
 MLI,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Mali
 MLI,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Mali
-MLT,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.018,0.050026,60.47,proxied,peer_mean_region_income,irena,DEU|GBR,Malta
-MLT,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.018,0.050026,43.52,proxied,peer_mean_region_income,irena,DEU|GBR,Malta
+MLT,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Malta
+MLT,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Malta
 MMR,2025,Utility-scale battery (4h),LMIC,East Asia & Pacific,1262.24,12.1262,28.7793,154.41,0.095,0.105959,145.87,proxied,peer_mean_income,irena,IND,Myanmar
 MMR,2030,Utility-scale battery (4h),LMIC,East Asia & Pacific,926.75,8.9099,16.5526,99.71,0.095,0.105959,107.11,proxied,peer_mean_income,irena,IND,Myanmar
 MNE,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,0.088,0.100161,52.44,proxied,peer_mean_income,irena,CHN,Montenegro
@@ -651,12 +651,12 @@ NGA,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7
 NGA,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,,0.089639,91.98,proxied,peer_mean_income,peer_mean,IND,Nigeria
 NIC,2025,Utility-scale battery (4h),LMIC,Latin America & Caribbean,1262.24,12.1262,28.7793,154.41,0.092,0.103461,142.72,proxied,peer_mean_income,irena,IND,Nicaragua
 NIC,2030,Utility-scale battery (4h),LMIC,Latin America & Caribbean,926.75,8.9099,16.5526,99.71,0.092,0.103461,104.79,proxied,peer_mean_income,irena,IND,Nicaragua
-NLD,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.014,0.047684,58.1,proxied,peer_mean_region_income,irena,DEU|GBR,"Netherlands, Kingdom of the"
-NLD,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.014,0.047684,41.82,proxied,peer_mean_region_income,irena,DEU|GBR,"Netherlands, Kingdom of the"
-NOR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.045,0.067439,78.07,proxied,peer_mean_region_income,irena,DEU|GBR,Norway
-NOR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.045,0.067439,56.19,proxied,peer_mean_region_income,irena,DEU|GBR,Norway
-NPL,2025,Utility-scale battery (4h),LIC,South Asia,1061.64,10.375,17.919,114.21,,0.081387,96.78,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Nepal
-NPL,2030,Utility-scale battery (4h),LIC,South Asia,780.98,7.6333,10.3,78.53,,0.081387,71.19,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Nepal
+NLD,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,"Netherlands, Kingdom of the"
+NLD,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,"Netherlands, Kingdom of the"
+NOR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Norway
+NOR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Norway
+NPL,2025,Utility-scale battery (4h),LIC,South Asia,1061.64,10.375,17.919,114.21,,0.08243,97.89,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Nepal
+NPL,2030,Utility-scale battery (4h),LIC,South Asia,780.98,7.6333,10.3,78.53,,0.08243,72.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Nepal
 NRU,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1228.32,12.0369,14.565,123.05,,0.061205,87.22,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Nauru
 NRU,2030,Utility-scale battery (4h),HIC,East Asia & Pacific,897.43,8.7969,8.3737,86.92,,0.061205,63.72,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Nauru
 NZL,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1228.32,12.0369,14.565,123.05,0.043,0.066058,93.18,proxied,peer_mean_region_income,irena,AUS|JPN,New Zealand
@@ -675,8 +675,8 @@ PLW,2025,Utility-scale battery (4h),HIC,East Asia & Pacific,1228.32,12.0369,14.5
 PLW,2030,Utility-scale battery (4h),HIC,East Asia & Pacific,897.43,8.7969,8.3737,86.92,,0.061205,63.72,proxied,peer_mean_region_income,peer_mean,AUS|JPN,Palau
 PNG,2025,Utility-scale battery (4h),LMIC,East Asia & Pacific,1262.24,12.1262,28.7793,154.41,,0.088469,123.8,proxied,peer_mean_income,peer_mean,IND,Papua New Guinea
 PNG,2030,Utility-scale battery (4h),LMIC,East Asia & Pacific,926.75,8.9099,16.5526,99.71,,0.088469,90.9,proxied,peer_mean_income,peer_mean,IND,Papua New Guinea
-POL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.039,0.063337,73.92,proxied,peer_mean_region_income,irena,DEU|GBR,Poland
-POL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.039,0.063337,53.2,proxied,peer_mean_region_income,irena,DEU|GBR,Poland
+POL,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Poland
+POL,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Poland
 PRI,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.8575,14.4329,121.67,,0.064035,89.3,proxied,peer_mean_region_income,peer_mean,CHL,Puerto Rico
 PRI,2030,Utility-scale battery (4h),HIC,Latin America & Caribbean,887.97,8.7009,8.2902,85.75,,0.064035,65.56,proxied,peer_mean_region_income,peer_mean,CHL,Puerto Rico
 PRT,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Portugal
@@ -685,8 +685,8 @@ PRY,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667
 PRY,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,,0.098571,39.02,proxied,peer_mean_income,peer_mean,CHN,Paraguay
 QAT,2025,Utility-scale battery (4h),HIC,Middle East & North Africa,1125.66,11.0345,15.1185,116.39,,0.072524,92.67,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Qatar
 QAT,2030,Utility-scale battery (4h),HIC,Middle East & North Africa,826.83,8.1055,8.689,81.2,,0.072524,68.07,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Qatar
-ROU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.051,0.071665,82.34,proxied,peer_mean_region_income,irena,DEU|GBR,Romania
-ROU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.051,0.071665,59.26,proxied,peer_mean_region_income,irena,DEU|GBR,Romania
+ROU,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Romania
+ROU,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Romania
 RUS,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,0.063,0.08047,43.05,proxied,peer_mean_income,irena,CHN,Russian Federation
 RUS,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,0.063,0.08047,32.5,proxied,peer_mean_income,irena,CHN,Russian Federation
 RWA,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,0.056,0.075278,90.29,proxied,global_mean,irena,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Rwanda
@@ -705,28 +705,28 @@ SLE,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919
 SLE,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Sierra Leone
 SLV,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,0.063,0.08047,43.05,proxied,peer_mean_income,irena,CHN,El Salvador
 SLV,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,0.063,0.08047,32.5,proxied,peer_mean_income,irena,CHN,El Salvador
-SMR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.061667,72.24,proxied,peer_mean_region_income,peer_mean,DEU|GBR,San Marino
-SMR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.061667,51.99,proxied,peer_mean_region_income,peer_mean,DEU|GBR,San Marino
+SMR,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,,0.065372,75.98,proxied,peer_mean_region_income,peer_mean,DEU|GBR,San Marino
+SMR,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,,0.065372,54.68,proxied,peer_mean_region_income,peer_mean,DEU|GBR,San Marino
 SOM,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Somalia
 SOM,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Somalia
-SRB,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,Serbia
-SRB,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,Serbia
+SRB,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,Serbia
+SRB,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,Serbia
 SSD,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,South Sudan
 SSD,2030,Utility-scale battery (4h),LIC,Sub-Saharan Africa,780.98,7.6333,10.3,78.53,,0.083491,72.84,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,South Sudan
 STP,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7793,154.41,,0.089639,125.27,proxied,peer_mean_income,peer_mean,IND,Sao Tome and Principe
 STP,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,,0.089639,91.98,proxied,peer_mean_income,peer_mean,IND,Sao Tome and Principe
 SUR,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,,0.098571,51.68,proxied,peer_mean_income,peer_mean,CHN,Suriname
 SUR,2030,Utility-scale battery (4h),UMIC,Latin America & Caribbean,360.14,3.5239,13.7138,41.37,,0.098571,39.02,proxied,peer_mean_income,peer_mean,CHN,Suriname
-SVK,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.038,0.062666,73.25,proxied,peer_mean_region_income,irena,DEU|GBR,Slovakia
-SVK,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.038,0.062666,52.71,proxied,peer_mean_region_income,irena,DEU|GBR,Slovakia
+SVK,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Slovakia
+SVK,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Slovakia
 SVN,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Slovenia
 SVN,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Slovenia
-SWE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.032,0.058715,69.25,proxied,peer_mean_region_income,irena,DEU|GBR,Sweden
-SWE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.032,0.058715,49.84,proxied,peer_mean_region_income,irena,DEU|GBR,Sweden
+SWE,2025,Utility-scale battery (4h),HIC,Europe & Central Asia,1010.69,9.9099,15.2752,110.15,0.042,0.065372,75.98,proxied,peer_mean_region_income,irena,DEU|GBR,Sweden
+SWE,2030,Utility-scale battery (4h),HIC,Europe & Central Asia,727.33,7.1347,8.7813,73.39,0.042,0.065372,54.68,proxied,peer_mean_region_income,irena,DEU|GBR,Sweden
 SWZ,2025,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,1262.24,12.1262,28.7793,154.41,,0.089639,125.27,proxied,peer_mean_income,peer_mean,IND,Eswatini
 SWZ,2030,Utility-scale battery (4h),LMIC,Sub-Saharan Africa,926.75,8.9099,16.5526,99.71,,0.089639,91.98,proxied,peer_mean_income,peer_mean,IND,Eswatini
-SYC,2025,Utility-scale battery (4h),HIC,Sub-Saharan Africa,1125.66,11.0345,15.1185,116.39,,0.081387,102.65,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Seychelles
-SYC,2030,Utility-scale battery (4h),HIC,Sub-Saharan Africa,826.83,8.1055,8.689,81.2,,0.081387,75.4,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Seychelles
+SYC,2025,Utility-scale battery (4h),HIC,Sub-Saharan Africa,1125.66,11.0345,15.1185,116.39,,0.08243,103.82,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Seychelles
+SYC,2030,Utility-scale battery (4h),HIC,Sub-Saharan Africa,826.83,8.1055,8.689,81.2,,0.08243,76.26,proxied,peer_mean_income,peer_mean,AUS|CHL|DEU|GBR|JPN|USA,Seychelles
 SYR,2025,Utility-scale battery (4h),LIC,Middle East & North Africa,1061.64,10.375,17.919,114.21,,0.175316,196.5,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Syrian Arab Republic
 SYR,2030,Utility-scale battery (4h),LIC,Middle East & North Africa,780.98,7.6333,10.3,78.53,,0.175316,144.55,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Syrian Arab Republic
 TCD,2025,Utility-scale battery (4h),LIC,Sub-Saharan Africa,1061.64,10.375,17.919,114.21,,0.083491,99.01,proxied,global_mean,peer_mean,AUS|CHL|CHN|DEU|GBR|IND|JPN|USA,Chad
@@ -737,8 +737,8 @@ THA,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.86
 THA,2030,Utility-scale battery (4h),UMIC,East Asia & Pacific,360.14,3.5239,13.7138,41.37,0.045,0.067439,27.81,proxied,peer_mean_region_income,irena,CHN,Thailand
 TJK,2025,Utility-scale battery (4h),LMIC,Europe & Central Asia,1262.24,12.1262,28.7793,154.41,,0.109322,150.12,proxied,peer_mean_income,peer_mean,IND,Tajikistan
 TJK,2030,Utility-scale battery (4h),LMIC,Europe & Central Asia,926.75,8.9099,16.5526,99.71,,0.109322,110.22,proxied,peer_mean_income,peer_mean,IND,Tajikistan
-TKM,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,Turkmenistan
-TKM,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,Turkmenistan
+TKM,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,Turkmenistan
+TKM,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,Turkmenistan
 TLS,2025,Utility-scale battery (4h),LMIC,East Asia & Pacific,1262.24,12.1262,28.7793,154.41,,0.088469,123.8,proxied,peer_mean_income,peer_mean,IND,Timor-Leste
 TLS,2030,Utility-scale battery (4h),LMIC,East Asia & Pacific,926.75,8.9099,16.5526,99.71,,0.088469,90.9,proxied,peer_mean_income,peer_mean,IND,Timor-Leste
 TON,2025,Utility-scale battery (4h),UMIC,East Asia & Pacific,476.94,4.6667,23.8615,60.96,,0.068441,37.31,proxied,peer_mean_region_income,peer_mean,CHN,Tonga
@@ -763,8 +763,8 @@ URY,2025,Utility-scale battery (4h),HIC,Latin America & Caribbean,1209.43,11.857
 URY,2030,Utility-scale battery (4h),HIC,Latin America & Caribbean,887.97,8.7009,8.2902,85.75,0.042,0.065372,66.75,proxied,peer_mean_region_income,irena,CHL,Uruguay
 USA,2025,Utility-scale battery (4h),HIC,North America,1066.5,10.4562,16.5978,110.26,0.043,0.066058,80.91,bnef,bnef,irena,,United States of America
 USA,2030,Utility-scale battery (4h),HIC,North America,823.46,8.0687,9.5337,80.81,0.043,0.066058,62.46,bnef,bnef,irena,,United States of America
-UVK,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.091132,48.13,proxied,peer_mean_income,peer_mean,CHN,
-UVK,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.091132,36.34,proxied,peer_mean_income,peer_mean,CHN,
+UVK,2025,Utility-scale battery (4h),UMIC,Europe & Central Asia,476.94,4.6667,23.8615,60.96,,0.090611,47.88,proxied,peer_mean_income,peer_mean,CHN,
+UVK,2030,Utility-scale battery (4h),UMIC,Europe & Central Asia,360.14,3.5239,13.7138,41.37,,0.090611,36.16,proxied,peer_mean_income,peer_mean,CHN,
 UZB,2025,Utility-scale battery (4h),LMIC,Europe & Central Asia,1262.24,12.1262,28.7793,154.41,,0.109322,150.12,proxied,peer_mean_income,peer_mean,IND,Uzbekistan
 UZB,2030,Utility-scale battery (4h),LMIC,Europe & Central Asia,926.75,8.9099,16.5526,99.71,,0.109322,110.22,proxied,peer_mean_income,peer_mean,IND,Uzbekistan
 VCT,2025,Utility-scale battery (4h),UMIC,Latin America & Caribbean,476.94,4.6667,23.8615,60.96,,0.098571,51.68,proxied,peer_mean_income,peer_mean,CHN,Saint Vincent and the Grenadines

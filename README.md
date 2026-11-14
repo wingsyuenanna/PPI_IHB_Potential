@@ -187,12 +187,29 @@ All WorldCover classes are exported for transparency. **Available land for coloc
 
 - **Bare / sparse vegetation** (`bare_sparse_km2`, WorldCover class 60)
 - **Cropland** (`cropland_km2`, class 40)
+- **Grassland** (`grassland_km2`, class 30)
+- **Shrubland** (`shrubland_km2`, class 20)
 
 **Excluded from available land:** built-up (50), tree cover (10), water (80), wetland (90), and other classes — roofs, roads, forest, and water bodies are not treated as array siting area.
 
 ```
-available_land_km² = bare_sparse_km² + cropland_km²
+available_land_km² = bare_sparse_km² + cropland_km² + grassland_km² + shrubland_km²
 ```
+
+#### Heat-weighted allocation of overlapping buffers (main case, added 2026-11-11)
+
+Main results assume all facilities decarbonise together, so land in overlapping buffers is shared: each eligible pixel is split among the facilities whose buffers cover it in proportion to their replaceable heat (no land counted twice). Independent buffers remain the single-facility comparison.
+
+```
+python land_availability/prepare_gee_upload.py --with-heat          # -> Input/facilities_2024_eu_gee_upload_heat.csv (upload as GEE asset)
+python land_availability/gee_facility_calculate_available_area.py --asset <asset_id> --allocate-by heat_mwh --buffer-m 5000
+python land_availability/gee_facility_calculate_available_area.py --asset <asset_id> --allocate-by heat_mwh --buffer-m 15000
+# download LandCover_Area_Allocated_{5,15}km.csv from Google Drive into Input/, then:
+python land_availability/merge_land_availability.py --land-export Input/LandCover_Area_Allocated_5km.csv --output land_availability/outputs/land_availability_allocated_5km.csv
+python land_availability/check_land_allocation.py --radius-km 5 --allocated land_availability/outputs/land_availability_allocated_5km.csv --independent land_availability/outputs/land_availability_by_facility_5km.csv
+python run_multiband_potential.py --scenario <name> --project-start 2030              # allocated 5 km by default, --land-km 15 for 15 km
+```
+Redo the allocation whenever replaceable heat changes (the weights come from `facilities_2024_eu_replaceable.csv`).
 
 #### Pipeline
 

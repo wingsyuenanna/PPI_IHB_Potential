@@ -18,3 +18,5 @@ Copy the v5 output to `Input/bnef_country_costs.csv` to replace the file the mod
 Key settings in the script: CRF lifetime 25 years; years 2025 and 2030; missing countries use the mean of same-region-and-income peers, then income group, then global mean.
 
 **Not in git:** `input/BNEF_raw_data_2024.xlsx` is licensed BNEF data and is git-ignored (it stays on disk locally). Obtain it from BNEF before running the script on a fresh clone.
+
+**2026-11-11:** European solar PV WACC (used for every technology's CRF) replaced with IRENA, *Renewable Power Generation Costs in 2024*, Fig. 1.13: Europe solar PV 4.2% (real, after tax; Annex I). Applied to EU27 + GBR, NOR, CHE, ISL (`IRENA_2024_EUROPE_SOLAR_WACC_PCT`). Previous country values (e.g. DEU 1.3%) came from the IRENA 2023 cost-of-financing survey (2019–2021 financing). `bnef_country_costs.csv` regenerated; optimisation not yet rerun.

@@ -5,10 +5,8 @@ Gas boiler LCOH by country comes from Input/industrial_heat_pump_costs/
 plus EUA carbon (see eu_heat_pump_cost_assumptions.csv). Converted to USD at
 EURUSD for comparison with LCOH_served_$perMWh.
 
-Published EU range for citation: Agora Industry / Agora Energiewende,
-"The business case for electrifying industrial heat"
-https://www.agora-industry.org/fileadmin/Projekte/2023/2023-36_IND_Electrification_low_heat/A-IND_396_The_business_case_for_electrifying_industrial_heat_WEB.pdf
-(~EUR 43–100/MWh_th gas-boiler LCOH across fuel/carbon scenarios; central ~EUR 65–72).
+Do not cite Agora for a standalone EU gas-boiler LCOH range (see
+Input/industrial_heat_pump_costs/SOURCES.md).
 
     python outputs/multiband/add_gas_benchmark.py
     python outputs/multiband/add_gas_benchmark.py --scenario land_15km_ss

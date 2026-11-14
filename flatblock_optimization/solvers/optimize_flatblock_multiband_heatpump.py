@@ -38,6 +38,32 @@ DEFAULT_COP_BY_BAND = {
     "heat_above1000C_tj": 1.0,
 }
 
+# Lifetime behind the country CRF in Input/bnef_country_costs.csv
+# (LIFETIME in Input/bnef/compile_bnef_costs.py). Used to recover the WACC so
+# technologies with a different life (DEA heat pumps) get their own CRF.
+CRF_BASE_LIFETIME_YR = 25
+
+
+def _crf(rate: float, years: float) -> float:
+    if abs(rate) < 1e-12:
+        return 1.0 / years
+    f = (1.0 + rate) ** years
+    return rate * f / (f - 1.0)
+
+
+def _rate_from_crf(crf: float, years: float) -> float:
+    """Invert the CRF formula for the discount rate (bisection; CRF rises with rate)."""
+    lo, hi = 0.0, 1.0
+    if crf <= 1.0 / years:
+        return 0.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        if _crf(mid, years) < crf:
+            lo = mid
+        else:
+            hi = mid
+    return 0.5 * (lo + hi)
+
 
 def _kmeans(X: np.ndarray, K: int, iters: int = 60, seed: int = 0):
     """Minimal numpy k-means. Returns (labels, centroids)."""
@@ -115,7 +141,11 @@ def run_multiband_heatpump_optimization(
     *,
     cop_by_band: Dict[str, float] | None = None,
     round_trip_efficiency: float = 0.90,
-    max_storage_hours: float = 16.0,
+    max_storage_hours: float | None = None,
+    liion_max_hours: float = 4.0,
+    ihb_max_hours: float = 20.0,
+    ihb_loss_per_day: float = 0.01,
+    chronological_year: bool = False,
     inverter_efficiency: float = 0.967,
     max_solar_mw: float | None = None,
     n_representative_days: int | None = 16,
@@ -139,29 +169,35 @@ def run_multiband_heatpump_optimization(
     fin = input_costs["financial"]
     solar_p = input_costs["solar"]
     batt = input_costs.get("battery", {})
-    CRF = float(fin["CRF"])
-    solar_cost_per_mw = (solar_p["Capex"] * 1000.0) * CRF + solar_p["Fixed O&M"]
+    CRF = float(fin["CRF"])  # country CRF at CRF_BASE_LIFETIME_YR (25 yr)
+    # Same country WACC for every technology, recovered from the 25-yr CRF; each
+    # technology is annualised over its own life (cost CSV rows, sources there).
+    wacc_country = _rate_from_crf(CRF, CRF_BASE_LIFETIME_YR)
+    crf_pv = _crf(wacc_country, float(batt.get("PV lifetime yr", CRF_BASE_LIFETIME_YR)))
+    crf_li = _crf(wacc_country, float(batt.get("Li-ion lifetime yr", CRF_BASE_LIFETIME_YR)))
+    crf_ihb = _crf(wacc_country, float(batt.get("IHB lifetime yr", CRF_BASE_LIFETIME_YR)))
+    solar_cost_per_mw = (solar_p["Capex"] * 1000.0) * crf_pv + solar_p["Fixed O&M"]
 
     # Li-ion (BNEF): cost energy at implied $/kWh from 4h system; FOM on discharge power.
     li_capex_kwh = float(batt.get("Li-ion CAPEX $/kWh", batt.get("Li-ion CAPEX $/kW", 800.0) / 4.0))
     li_fom_per_mw = float(batt.get("Li-ion Fixed O&M $/MW-yr", batt.get("Fixed O&M", 0.0)))
     li_rte = float(np.clip(round_trip_efficiency, 0.05, 0.999))
     li_eta = float(np.sqrt(li_rte))
-    li_energy_annual_per_mwh = li_capex_kwh * 1000.0 * CRF
+    li_energy_annual_per_mwh = li_capex_kwh * 1000.0 * crf_li
     # FOM charged on discharge power rating (MW)
     li_power_annual_per_mw = li_fom_per_mw
     # VOM: BNEF $/MWh, charged on energy discharged from the battery.
     li_vom_per_mwh = float(batt.get("Li-ion VOM $/MWh", 0.0))
 
     # IHB — Energy Innovation CAPEX inflated to project-start USD (COST_YEAR_INFLATION.md);
-    # finance with country BNEF CRF
+    # finance with country WACC over the IHB life (crf_ihb)
     ihb_in_kw = float(batt.get("IHB input CAPEX $/kW", 116.66))
     ihb_out_kw = float(batt.get("IHB delivery CAPEX $/kW", 349.99))
     ihb_kwh = float(batt.get("IHB storage CAPEX $/kWh", 5.83))
     ihb_opex = float(batt.get("IHB OPEX frac/yr", 0.0))
     ihb_rte = float(np.clip(float(batt.get("IHB RTE", 0.95)), 0.05, 0.999))
     ihb_eta = float(np.sqrt(ihb_rte))
-    ihb_ann_frac = CRF + ihb_opex  # same country CRF as solar / Li-ion (not EI's 14%)
+    ihb_ann_frac = crf_ihb + ihb_opex  # country WACC, IHB life (not EI's 14%)
     ihb_in_annual_per_mw = ihb_in_kw * 1000.0 * ihb_ann_frac
     ihb_out_annual_per_mw = ihb_out_kw * 1000.0 * ihb_ann_frac
     ihb_e_annual_per_mwh = ihb_kwh * 1000.0 * ihb_ann_frac
@@ -173,20 +209,50 @@ def run_multiband_heatpump_optimization(
     hp_capex_mt = float(batt.get("HP CAPEX 100C-200C $/kWth", 1141.31))
     hp_fom_lt = float(batt.get("HP FOM below100C $/kWth/yr", 15.74))
     hp_fom_mt = float(batt.get("HP FOM 100C-200C $/kWth/yr", 23.61))
-    # $/MW_th-yr = CAPEX[$/kW]*1000*CRF + FOM[$/kW-yr]*1000
-    hp_lt_annual_per_mw = hp_capex_lt * 1000.0 * CRF + hp_fom_lt * 1000.0
-    hp_mt_annual_per_mw = hp_capex_mt * 1000.0 * CRF + hp_fom_mt * 1000.0
+    # Per-band HP lifetime (DEA 2026: 25 yr for the 80 C heat pump, 20 yr for HTHP).
+    # Same country WACC as everything else (wacc_country above).
+    hp_life_lt = float(batt.get("HP lifetime below100C yr", CRF_BASE_LIFETIME_YR))
+    hp_life_mt = float(batt.get("HP lifetime 100C-200C yr", CRF_BASE_LIFETIME_YR))
+    crf_hp_lt = _crf(wacc_country, hp_life_lt)
+    crf_hp_mt = _crf(wacc_country, hp_life_mt)
+    # $/MW_th-yr = CAPEX[$/kW]*1000*CRF_hp + FOM[$/kW-yr]*1000
+    hp_lt_annual_per_mw = hp_capex_lt * 1000.0 * crf_hp_lt + hp_fom_lt * 1000.0
+    hp_mt_annual_per_mw = hp_capex_mt * 1000.0 * crf_hp_mt + hp_fom_mt * 1000.0
     HP_ANNUAL_BY_BAND = {
         "heat_below100C_tj": hp_lt_annual_per_mw,
         "heat_100C-200C_tj": hp_mt_annual_per_mw,
     }
+    # HP VOM ($/MWh_th delivered; DEA 2026). Charged on HP heat output
+    # cop * (direct + from_batt), same treatment as Li-ion VOM on discharge.
+    HP_VOM_BY_BAND = {
+        "heat_below100C_tj": float(batt.get("HP VOM below100C $/MWhth", 0.0)),
+        "heat_100C-200C_tj": float(batt.get("HP VOM 100C-200C $/MWhth", 0.0)),
+    }
+    hp_vom_default = HP_VOM_BY_BAND["heat_100C-200C_tj"]
 
-    h_max = float(max(0.5, max_storage_hours))
+    # Storage duration caps (E <= h * P_dis), per technology (changed 2026-11-11):
+    #   Li-ion 4 h — BNEF costs are for 4 h utility-scale systems (capex/4 = $/kWh);
+    #   IHB 20 h — Rondo Heat Battery data sheet (2026): storage 8-20 h of rated output
+    #   (e.g. 30-60 MWh at 3 MWth); thermal storage typically up to ~24 h (BNEF LDES 2024).
+    # max_storage_hours is a legacy single cap; if given it overrides both.
+    if max_storage_hours is not None:
+        liion_max_hours = ihb_max_hours = float(max_storage_hours)
+    h_li = float(max(0.5, liion_max_hours))
+    h_ihb = float(max(0.5, ihb_max_hours))
+    # IHB standby heat loss, ~1%/day (Fraunhofer ISI for Agora Industry 2024), applied
+    # hourly to the state of charge: s_t = keep * s_{t-1} + charge - discharge.
+    ihb_keep = float((1.0 - float(np.clip(ihb_loss_per_day, 0.0, 0.99))) ** (1.0 / 24.0))
     af = float(np.clip(availability_factor, 0.0, 1.0))
 
     ydf = solar_profile_df[solar_profile_df["year"] == solar_profile_df["year"].iloc[0]]
     g_full = ydf["P_kWperkWp"].to_numpy(dtype=float)
-    reps, weights = representative_days(g_full, n_representative_days)
+    if chronological_year:
+        # One linked block of the whole year: storage carries over between days and
+        # the state of charge is cyclic over the year (end of Dec 31 -> start of Jan 1).
+        n_h = (len(g_full) // 24) * 24
+        reps, weights = g_full[:n_h].reshape(1, n_h), np.ones(1)
+    else:
+        reps, weights = representative_days(g_full, n_representative_days)
     # PV VOM: $/MWh generated. reps is kW/kWp-DC = MWh/MWdc per hour, so the
     # weighted sum is annual MWh generated per MWdc installed.
     solar_cost_per_mw += float(solar_p.get("VOM $/MWh", 0.0)) * float((weights[:, None] * reps).sum())
@@ -316,8 +382,15 @@ def run_multiband_heatpump_optimization(
                 cost[ihb_Pdis] = ihb_out_annual_per_mw / annual_load_MWh
                 cost[ihb_E] = ihb_e_annual_per_mwh / annual_load_MWh
             for j in hp_idx:
-                b = bands[j][0]
+                b, _, cop_j = bands[j]
                 cost[hp_cap[j]] = HP_ANNUAL_BY_BAND.get(b, hp_mt_annual_per_mw) / annual_load_MWh
+                vom_j = HP_VOM_BY_BAND.get(b, hp_vom_default)
+                if vom_j:
+                    p = hp_pos[j]
+                    for c in range(K):
+                        v = vom_j * cop_j * weights[c] / annual_load_MWh
+                        cost[hp_direct0(p, c):hp_direct0(p, c) + H] = v
+                        cost[hp_from_batt0(p, c):hp_from_batt0(p, c) + H] = v
         else:
             for c in range(K):
                 for p in range(n_hp):
@@ -349,11 +422,13 @@ def run_multiband_heatpump_optimization(
             c_idx.extend(cols)
             c_val.extend(coeffs)
 
-        # Energy duration caps: E <= h_max * P_dis
+        # Energy duration caps: E <= h * P_dis (Li-ion and IHB caps differ)
         if n_hp:
-            row(NINF, 0, [li_E, li_Pdis], [1.0, -h_max])
+            row(NINF, 0, [li_E, li_Pdis], [1.0, -h_li])
+            # Li-ion: one bidirectional inverter rating, so charge power <= discharge power.
+            row(NINF, 0, [li_Pch, li_Pdis], [1.0, -1.0])
         if n_ihb:
-            row(NINF, 0, [ihb_E, ihb_Pdis], [1.0, -h_max])
+            row(NINF, 0, [ihb_E, ihb_Pdis], [1.0, -h_ihb])
 
         for c in range(K):
             # Shared solar: HP direct + Li charge + IHB charge <= S * cf
@@ -420,7 +495,7 @@ def run_multiband_heatpump_optimization(
                         0,
                         0,
                         [sc0 + t, prev, ch0 + t, dis0 + t],
-                        [1.0, -1.0, -ihb_eta, 1.0 / ihb_eta],
+                        [1.0, -ihb_keep, -ihb_eta, 1.0 / ihb_eta],
                     )
                     row(NINF, 0, [sc0 + t, ihb_E], [1.0, -1.0])
                     row(NINF, 0, [ch0 + t, ihb_Pch], [1.0, -1.0])
@@ -592,9 +667,23 @@ def run_multiband_heatpump_optimization(
         hp_capacity_total += cap_val
         annual_hp_capex_fom += cap_val * float(HP_ANNUAL_BY_BAND.get(b, hp_mt_annual_per_mw))
 
+    annual_hp_vom = 0.0
+    for j in hp_idx:
+        b, _, cop_j = bands[j]
+        vom_j = HP_VOM_BY_BAND.get(b, hp_vom_default)
+        if not vom_j:
+            continue
+        p = hp_pos[j]
+        for c in range(K):
+            heat_out = cop_j * (
+                float(cv[hp_direct0(p, c):hp_direct0(p, c) + H].sum())
+                + float(cv[hp_from_batt0(p, c):hp_from_batt0(p, c) + H].sum())
+            )
+            annual_hp_vom += vom_j * weights[c] * heat_out
+
     served_MWh = max(annual_load_MWh - total_unserved, 0.0)
     hp_load_total = sum(load for _, load, cop in bands if cop > 1.0)
-    annual_hp_cost = annual_hp_capex_fom
+    annual_hp_cost = annual_hp_capex_fom + annual_hp_vom
 
     reliability = served_MWh / annual_load_MWh * 100 if annual_load_MWh > 0 else 0.0
     storage_annual = annual_li_cost + annual_ihb_cost

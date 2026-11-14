@@ -7,4 +7,4 @@ earthengine-api
 requests
 timezonefinder
 pyarrow
-highspy
+highspyboto3

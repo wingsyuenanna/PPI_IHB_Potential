@@ -48,11 +48,11 @@ calorific value). Extract: `eurostat_nrg_pc_203_I4_XVAT_2025.csv`. Cyprus, Luxem
 and use the EU-27 I4 mean (EUR 51.4/MWh); the `gas_price_source` column marks them. The earlier series was
 2025-S2 only (EU-27 I4 S2 = 48.3; S1 = 54.5). UK (GBR) is proxied to Ireland in `add_gas_benchmark.py`.
 
-`gas_heat_cost_eur_mwh = (gas_price + 73.43 x 0.202) / 0.94` (EUA 73.43 EUR/tCO2, 2025, ICAP; natural-gas
+`gas_heat_cost_eur_mwh = (gas_price / 0.9 + 73.43 x 0.202) / 0.94` (EUA 73.43 EUR/tCO2, 2025, ICAP; natural-gas
 boiler efficiency 0.94 from Saad et al. 2026 SI Table S3, changed from 0.85 on 2026-11-11).
-Result: EUR 59-114/MWh_th by country, heat-weighted mean about EUR 72. The EU-27 benchmark used in plots is
+Net calorific basis (2026-11-11): Eurostat prices are per kWh GCV and are divided by 0.9 (NCV = 0.9 x GCV for natural gas, IPCC 2006 Vol. 2 Ch. 1, s. 1.4.1.2). EF is IPCC 56.1 tCO2/TJ NCV = 0.202 tCO2/MWh_NCV. The 0.94 efficiency is treated as net, consistent with the heat-side data (IPCC, Hotmaps, JRC-IDEES). Result: EUR 64-125/MWh_th by country, heat-weighted mean about EUR 78. The EU-27 benchmark used in plots is
 computed the same way from the EU27_2020 I4 price (EUR 51.4/MWh) in `outputs/multiband/analysis/gas_benchmark.py`:
-about EUR 70.5/MWh_th. (The poster's EUR 93 used a hard-coded 63.25 EUR/MWh gas price, EUA 79 and 0.85; no
+about EUR 76.5/MWh_th. (The poster's EUR 93 used a hard-coded 63.25 EUR/MWh gas price, EUA 79 and 0.85; no
 longer used.)
 The sector file `eu_heat_pump_costs_by_sector.csv` has its own sector-averaged gas prices that were NOT rebuilt;
 only its `gas_heat_cost_eur_mwh` was recomputed with EUA 73.43. No code reads it.

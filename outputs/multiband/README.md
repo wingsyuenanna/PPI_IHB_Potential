@@ -45,8 +45,9 @@ Map: [`map_lcoh_5km_15km_ss.html`](map_lcoh_5km_15km_ss.html) — 2030 Li-ion HP
 
 ```bash
 python run_multiband_potential.py --scenario land_5km_ss_2030_liion --project-start 2030
-python run_multiband_potential.py --scenario land_15km_ss_2030_liion --project-start 2030 \
-  --land-csv land_availability/outputs/land_availability_by_facility_15km.csv
+python run_multiband_potential.py --scenario land_15km_ss_2030_liion --project-start 2030 --land-km 15
+# land defaults to heat-weighted allocated buffers (land_availability_allocated_{5,15}km.csv);
+# --land-csv land_availability/outputs/land_availability_by_facility_15km.csv gives the independent-buffer comparison
 python outputs/multiband/map_multiband_lcoh.py
 # optional heat cases / gas benchmark on thermal-store folders still work via --five/--fifteen
 ```

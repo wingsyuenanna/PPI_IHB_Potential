@@ -45,7 +45,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument(
         "--drive-description",
         default=None,
-        help="GEE Drive export task description. Default: LandCover_Area_Categorized_<km>km",
+        help="GEE Drive export task description. Default: LandCover_Area_Categorized_<km>km "
+        "(LandCover_Area_Allocated_<km>km with --allocate-by).",
+    )
+    p.add_argument(
+        "--allocate-by",
+        default=None,
+        help="Numeric facility property (e.g. heat_mwh) used to share overlapping buffer land. "
+        "Each pixel inside several buffers is split among those facilities in proportion to this "
+        "weight, so no land is counted twice. Omit for independent buffers.",
     )
     return p.parse_args(argv)
 
@@ -89,15 +97,29 @@ def main(argv: list[str] | None = None) -> int:
     }
     ee_class_names = ee.Dictionary(class_names)
 
-    area_by_lc_image = (
-        ee.Image.pixelArea()
-        .updateMask(environmental_mask)
-        .addBands(wc)
-        .rename(["area", "lc"])
-    )
+    w = args.allocate_by
+    if w:
+        # Heat-weighted allocation of overlapping land (scenario: all facilities
+        # decarbonise together). weight_sum = sum of the weights of every facility whose
+        # buffer covers the pixel. Facility i receives pixelArea * w_i / weight_sum.
+        points = points.filter(ee.Filter.gt(w, 0))
+        buffers = points.map(lambda f: f.setGeometry(f.geometry().buffer(args.buffer_m)))
+        weight_sum = buffers.reduceToImage(properties=[w], reducer=ee.Reducer.sum())
+
+    def area_image_for(feature):
+        """Pixel-area image (m2) for this facility, masked to eligible land, plus LC band."""
+        area = ee.Image.pixelArea()
+        if w:
+            wi = ee.Number(feature.get(w))
+            # max(wi) keeps the share <= 1 at buffer-edge pixels where rasterisation of
+            # the facility's own buffer may be missing from weight_sum.
+            share = ee.Image.constant(wi).divide(weight_sum.unmask(0).max(wi))
+            area = area.multiply(share)
+        return area.updateMask(environmental_mask).addBands(wc).rename(["area", "lc"])
 
     def calculate_grouped_area(feature):
         buffer = feature.geometry().buffer(args.buffer_m)
+        area_by_lc_image = area_image_for(feature)
         stats = area_by_lc_image.reduceRegion(
             reducer=ee.Reducer.sum().group(groupField=1, groupName="class"),
             geometry=buffer,
@@ -119,11 +141,12 @@ def main(argv: list[str] | None = None) -> int:
 
     results = points.map(calculate_grouped_area)
 
-    id_columns = ["source_name", "source_id"]
+    id_columns = ["source_name", "source_id"] + ([w] if w else [])
     selector_list = id_columns + ["system:index"] + list(class_names.values())
 
     km = args.buffer_m // 1000
-    description = args.drive_description or f"LandCover_Area_Categorized_{km}km"
+    default_desc = f"LandCover_Area_Allocated_{km}km" if w else f"LandCover_Area_Categorized_{km}km"
+    description = args.drive_description or default_desc
 
     task = ee.batch.Export.table.toDrive(
         collection=results,

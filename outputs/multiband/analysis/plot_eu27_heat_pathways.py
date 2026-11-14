@@ -21,7 +21,7 @@ OUT_STEM = "buffer_served_lcoh_gascap_vs_maxsavings_5km_15km"
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from gas_benchmark import GAS_EU, max_savings_sites  # EU-27 gas heat cost from input files (see gas_benchmark.py)
 EURUSD = 1.08
 
 # Okabe–Ito-adjacent neutrals for a clean table
@@ -61,9 +61,8 @@ def max_savings(km: int) -> tuple[float, float, float]:
     if long["lcoh"].isna().all():
         long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
     long["served"] = long["heat"] * long["rel"] / 100.0
-    long["surplus"] = long["served"] * (GAS_EU - long["lcoh"])
-    long = long.dropna(subset=["source_id", "surplus", "served", "lcoh"])
-    best = long.loc[long.groupby("source_id")["surplus"].idxmax()]
+    long = long.dropna(subset=["source_id", "served", "lcoh"])
+    best = max_savings_sites(long)  # country gas price per site, then aggregate
     return _fleet(best["heat"], best["served"], best["lcoh"])
 
 

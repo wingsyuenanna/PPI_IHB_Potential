@@ -24,14 +24,22 @@ IHB_ROW_STORAGE_CAPEX_KWH = "IHB storage CAPEX $/kWh"
 IHB_ROW_RTE = "IHB RTE"
 IHB_ROW_OPEX = "IHB OPEX frac/yr"
 
-# Industrial heat pump CAPEX/FOM inflated to project-start USD
-# (see COST_YEAR_INFLATION.md). Source: Rissman 2022 / 2021 basis.
-# FOM is absolute $/kWth-yr (not % of CAPEX).
+# Industrial heat pump CAPEX/FOM/VOM in real 2025 USD.
+# Source (changed 2026-11-11): Danish Energy Agency, Technology Data for Industrial
+# Process Heat, datasheet Jan 2026 (2025 EUR), converted at EURUSD 1.08
+# (see COST_YEAR_INFLATION.md). Previously Rissman 2020 (2021 USD, CPI-inflated).
+# FOM is absolute $/kWth-yr (not % of CAPEX). VOM is $/MWh of heat delivered.
 HP_ROW_CAPEX_LT = "HP CAPEX below100C $/kWth"
 HP_ROW_CAPEX_MT = "HP CAPEX 100C-200C $/kWth"
 HP_ROW_FOM_LT = "HP FOM below100C $/kWth/yr"
 HP_ROW_FOM_MT = "HP FOM 100C-200C $/kWth/yr"
-HP_ROW_LIFE = "HP lifetime yr"
+HP_ROW_VOM_LT = "HP VOM below100C $/MWhth"
+HP_ROW_VOM_MT = "HP VOM 100C-200C $/MWhth"
+PV_ROW_LIFE = "PV lifetime yr"  # DEA electricity catalogue v0019: utility-scale PV 40 yr
+LIION_ROW_LIFE = "Li-ion lifetime yr"  # DEA storage catalogue v0011: utility Li-ion 20 yr (2030)
+IHB_ROW_LIFE = "IHB lifetime yr"  # Wikoff et al. 2025: firebrick storage 30 yr (Rondo = brick)
+HP_ROW_LIFE_LT ="HP lifetime below100C yr"  # DEA 2026 sheet 1.2: 25 yr
+HP_ROW_LIFE_MT = "HP lifetime 100C-200C yr"  # DEA 2026 sheet 2.b (HTHP): 20 yr
 
 # BNEF 4h utility battery embeds energy in the $/kW price; implied $/kWh = capex/duration.
 LIION_DURATION_H = 4.0
@@ -126,12 +134,18 @@ def load_re_costs(bnef_filepath, battery_filepath, iso_country, start_year):
         ),
         "IHB RTE": get_optional_battery_row(IHB_ROW_RTE, 0.95),
         "IHB OPEX frac/yr": get_optional_battery_row(IHB_ROW_OPEX, 0.0),
-        # Industrial HP — CAPEX/FOM already inflated to project-start USD in CSV year col.
+        # Industrial HP — CAPEX/FOM/VOM in real 2025 USD in the CSV year column (DEA 2026).
         "HP CAPEX below100C $/kWth": get_optional_battery_row(HP_ROW_CAPEX_LT, 918.30),
         "HP CAPEX 100C-200C $/kWth": get_optional_battery_row(HP_ROW_CAPEX_MT, 1141.31),
         "HP FOM below100C $/kWth/yr": get_optional_battery_row(HP_ROW_FOM_LT, 15.74),
         "HP FOM 100C-200C $/kWth/yr": get_optional_battery_row(HP_ROW_FOM_MT, 23.61),
-        "HP lifetime yr": get_optional_battery_row(HP_ROW_LIFE, 25.0),
+        "HP VOM below100C $/MWhth": get_optional_battery_row(HP_ROW_VOM_LT, 0.0),
+        "HP VOM 100C-200C $/MWhth": get_optional_battery_row(HP_ROW_VOM_MT, 0.0),
+        "PV lifetime yr": get_optional_battery_row(PV_ROW_LIFE, 25.0),
+        "Li-ion lifetime yr": get_optional_battery_row(LIION_ROW_LIFE, 25.0),
+        "IHB lifetime yr": get_optional_battery_row(IHB_ROW_LIFE, 25.0),
+        "HP lifetime below100C yr": get_optional_battery_row(HP_ROW_LIFE_LT, 25.0),
+        "HP lifetime 100C-200C yr": get_optional_battery_row(HP_ROW_LIFE_MT, 25.0),
     }
 
     # Li-ion: country-matched BNEF utility-scale 4h battery.

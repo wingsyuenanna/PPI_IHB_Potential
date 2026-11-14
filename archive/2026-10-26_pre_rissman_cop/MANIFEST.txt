@@ -1,0 +1,9 @@
+Archived 2026-10-26, before re-running the 5 km / 15 km base scenarios with Rissman COPs (3.7 / 2.2).
+Previous results used COP 2.7 (<100 C) and 1.8 (100-200 C), Rissman CAPEX/FOM, Li-ion HP + IHB, 2030 costs.
+
+results_cop_2.7_1.8.tar.gz contains (paths relative to repo root; restore with: tar -xzf results_cop_2.7_1.8.tar.gz):
+  - outputs/multiband/land_5km_ss_2030_liion/ and land_15km_ss_2030_liion/ (by_facility, by_facility_with_gas, run_log)
+  - outputs/multiband/analysis/lcoh_vs_availability_<site>_{5,15}km[_heat_low|_heat_high].csv  (per-site availability sweeps)
+  - fleet_availability_sweep_* (by_floor, long, summary, heat_low/high), fleet_availability_knee_15km.csv
+  - gas_capped_step90_*, gas_vs_floor_served_share.*, lcoh_vs_availability_fleet_* figures and tables
+filelist.txt lists every archived path.

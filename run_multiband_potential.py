@@ -7,8 +7,9 @@ heat into temperature bands and sizes one shared on-site solar array plus:
     ($100/kW-in, $300/kW-out, $5/kWh, 95% RTE), annualized at country BNEF CRF
 
 Hard 90% availability floor; land-limited sites get max-serve then cost-min.
-COP 3.7/2.2/1.0, 50 MWdc/km2, ≤16 h storage, 16 rep-days (or --n-representative-days 0
-for all calendar days); cost year via --project-start.
+COP 3.7/2.2/1.0, 50 MWdc/km2, Li-ion ≤4 h and IHB ≤20 h storage (IHB loses 1%/day), one linked
+8,760-h year by default (--n-representative-days N switches to N independent rep-days, 0 = all
+calendar days unlinked); cost year via --project-start.
 
 Heat sensitivity (sector low/base/high bounds on assessment CSV):
 
@@ -16,11 +17,14 @@ Heat sensitivity (sector low/base/high bounds on assessment CSV):
     python run_multiband_potential.py --scenario land_5km_ss --heat-case base
     python run_multiband_potential.py --scenario land_5km_ss --heat-case low
     python run_multiband_potential.py --scenario land_5km_ss --heat-case high
-    python run_multiband_potential.py --scenario land_15km_ss --heat-case low \\
-        --land-csv land_availability/outputs/land_availability_by_facility_15km.csv
+    python run_multiband_potential.py --scenario land_15km_ss --heat-case low --land-km 15
     python run_multiband_potential.py --scenario land_5km_ss_2030 --project-start 2030
-    python run_multiband_potential.py --scenario land_15km_ss_2030 --project-start 2030 \\
-        --land-csv land_availability/outputs/land_availability_by_facility_15km.csv
+    python run_multiband_potential.py --scenario land_15km_ss_2030 --project-start 2030 --land-km 15
+
+Land: heat-weighted allocated buffers (overlapping land shared, none counted twice) from
+land_availability/outputs/land_availability_allocated_{5,15}km.csv, chosen by --land-km
+(default 5). --land-csv overrides, e.g. the independent-buffer comparison
+land_availability/outputs/land_availability_by_facility_15km.csv.
 """
 from __future__ import annotations
 
@@ -49,6 +53,10 @@ CONFIG = {
     "sites_csv": "outputs/eu_ihb_site_assessment_2024.csv",
     "bnef_costs_csv": "Input/bnef_country_costs.csv",
     "battery_costs_csv": "flatblock_optimization/inputs/input_heat_battery_cost.csv",
+    "land_csv_by_km": {
+        5: "land_availability/outputs/land_availability_allocated_5km.csv",
+        15: "land_availability/outputs/land_availability_allocated_15km.csv",
+    },
     "solar_hourly_dir": "solar_radiation/outputs/hourly_profiles",
     "solar_year": 2023,
     "project_start": "2030",
@@ -57,7 +65,10 @@ CONFIG = {
     "availability": 0.90,
     "mw_per_km2": 50.0,
     "round_trip_efficiency": 0.90,  # Li-ion RTE; IHB RTE comes from cost CSV (0.95)
-    "max_storage_hours": 16.0,
+    "liion_max_hours": 4.0,  # BNEF Li-ion costs are for 4 h systems
+    "ihb_max_hours": 20.0,  # Rondo data sheet: 8-20 h storage at rated output (max 60 MWh / 3 MWth)
+    "ihb_loss_per_day": 0.01,  # ~1%/day standby heat loss (Fraunhofer ISI / Agora Industry 2024)
+    "chronological_year": True,  # one linked 8,760-h year; False = independent representative days
     "n_representative_days": 16,
     "output": "outputs/multiband/land_5km_ss/by_facility.csv",
     "max_workers": 8,
@@ -118,7 +129,10 @@ def run_one_site(row: dict, cfg: dict) -> dict:
         res, _, ok = run_multiband_heatpump_optimization(
             sid, cfg["availability"], solar, costs, bl,
             round_trip_efficiency=cfg["round_trip_efficiency"],
-            max_storage_hours=cfg["max_storage_hours"],
+            liion_max_hours=cfg["liion_max_hours"],
+            ihb_max_hours=cfg["ihb_max_hours"],
+            ihb_loss_per_day=cfg["ihb_loss_per_day"],
+            chronological_year=cfg["chronological_year"],
             n_representative_days=cfg["n_representative_days"],
             max_solar_mw=(land_km2 * cfg["mw_per_km2"]) if land_km2 >= 0 else None,
             project_start_year=int(cfg["project_start"]))
@@ -155,8 +169,10 @@ def main() -> None:
                     help="Results CSV path (default: outputs/multiband/<scenario>/by_facility.csv)")
     ap.add_argument("--scenario", type=str, default="land_5km_ss",
                     help="Scenario folder name under outputs/multiband/")
+    ap.add_argument("--land-km", type=int, default=5, choices=sorted(CONFIG["land_csv_by_km"]),
+                    help="Buffer radius for the heat-weighted allocated land CSV (default 5)")
     ap.add_argument("--land-csv", type=str, default=None,
-                    help="Override available_land_km2 from this land-availability CSV")
+                    help="Use this land-availability CSV instead of the allocated --land-km file")
     ap.add_argument("--heat-case", type=str, default="base", choices=["base", "low", "high"],
                     help="Use replaceable_heat_mwh_th{,_low,_high} from assessment CSV")
     ap.add_argument("--project-start", type=str, default=None,
@@ -175,6 +191,7 @@ def main() -> None:
         cfg["project_start"] = str(args.project_start)
     cfg["max_workers"] = args.max_workers
     if args.n_representative_days is not None:
+        cfg["chronological_year"] = False
         # 0 => None => solver uses every day in the solar year
         cfg["n_representative_days"] = (
             None if args.n_representative_days <= 0 else args.n_representative_days
@@ -190,10 +207,9 @@ def main() -> None:
 
     df = pd.read_csv(_ROOT / CONFIG["sites_csv"], low_memory=False)
     df = apply_heat_case(df, args.heat_case)
-    if args.land_csv:
-        land_path = _ROOT / args.land_csv
-        print(f"Overriding land from {args.land_csv}")
-        df = apply_land_override(df, land_path)
+    land_rel = args.land_csv or CONFIG["land_csv_by_km"][args.land_km]
+    print(f"Land from {land_rel}")
+    df = apply_land_override(df, _ROOT / land_rel)
     run = df[df["has_solar_data"] & df["has_replaceable_heat"]].copy()
     if args.subsector:
         run = run[run["subsector"] == args.subsector]
@@ -202,7 +218,10 @@ def main() -> None:
     rows = run.to_dict("records")
     heat_twh = float(run["replaceable_heat_mwh_th"].sum() / 1e6)
     n_rep = cfg["n_representative_days"]
-    rep_label = "full-year (all days)" if n_rep is None else f"{n_rep} rep-days"
+    if cfg["chronological_year"]:
+        rep_label = "linked full year (8,760 h)"
+    else:
+        rep_label = "full-year (all days)" if n_rep is None else f"{n_rep} rep-days"
     print(f"Running multi-band optimizer on {len(rows)} sites "
           f"(scenario={scenario}, heat_case={args.heat_case}, project_start={cfg['project_start']}, "
           f"{heat_twh:.1f} TWh, "
