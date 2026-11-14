@@ -137,8 +137,10 @@ The interaction between solar radiance and land availability makes the cost cons
 Heat demand estimations are based on literature sector energy consumption factors and emissions factors, not based on individual facility's generation. These estimates are calculated based on EU published figures and averages by sector. They are validated by sector and country aggregated figures but may deviate from reference individual facilities significantly. With more precise data on combustion plants and fuel types of each facility, the modelled heat generation and LCOH can be better fitted per facility using the same process in this study.
 
 This study does not account for the land acquisition process as there is not enough data to systematically incorporate into this study. Only remote sensing categorised data were used to screen available land. Each facility would need to evaluate the land acquisition process to accommodate the land needed for solar panels.
+
+The model also does not include the electrical infrastructure needed to bring solar electricity from land in the 5\,km and 15\,km buffers to the facility. Solar arrays built several kilometres from a site would need distribution lines or cables, substations and rights of way, which add cost and electrical losses. The BloombergNEF solar costs used here exclude grid connection costs\cite{bnef2026lcoemethod}, so the LCOH does not include this infrastructure, and the omitted cost is likely to be larger for the 15\,km buffer than for the 5\,km buffer.
 Production data for glass and some other facilities are from 2014, and more recent facility-level emissions data, such as the EU Emissions Trading System and EEA industrial reporting, could be used in future work to update these estimates and cover facilities that currently have no heat estimate.
-\todo{add remaining limitations: flat load; delivery medium not modelled; representative days (8,760-h check); single weather year; 2025 gas vs 2030 costs.}
+\todo{add remaining limitations: flat load; delivery medium not modelled; perfect foresight over the year; single weather year; 2025 gas vs 2030 costs.}
 
 % [WISO26 §5 Conclusion]
 On-site solar with heat pumps and heat batteries can serve most replaceable EU industrial process heat at costs below the 2025 gas-heat benchmark. Within a 5\,km buffer zone, 58.8\% of replaceable heat demand can be served at an average levelised cost of \texteuro55/MWh. That rate can be increased to 84.4\% at \texteuro62/MWh with a 15\,km buffer zone. Southern European facilities tend to have stronger solar resource and less heat intense industrial facilities which allows them to serve almost their entire replaceable heat demand. The large, land-constrained, high-temperature sites are concentrated in the Rhine-Meuse region which will require hybrid solutions with either grid electricity or gas use to meet all its needs. Because this pathway is cost-competitive without requiring full decarbonisation of the heat demand or a new interconnection, it offers industrial facilities a deployable, near-term solution to reduce emissions and lower exposure to gas price volatility.
@@ -149,14 +151,10 @@ On-site solar with heat pumps and heat batteries can serve most replaceable EU i
 \section*{Methods}
 
 \subsection*{Facility dataset}
-We built a facility-level dataset of EU manufacturing facilities from the Climate TRACE emissions inventory\cite{climatetrace2026}. For each facility it provides the location, subsector, annual production capacity and capacity factor, and annual greenhouse-gas emissions. The dataset covers cement, lime, iron and steel, aluminium and other non-ferrous metals, glass, chemicals, ethylene steam cracking, pulp and paper, food, beverages and tobacco, and textiles. There are 2,415 facilities in the EU in this dataset, of which 2,192 facilities have production or emissions data and therefore a replaceable heat estimate. The 223 facilities without an estimate are mainly glass (193 facilities) and other metals (27 facilities), for which source has neither production nor emissions data.
-
-Climate TRACE contains duplicate and placeholder records, so we cleaned the data before use. Duplicates were identified by identical facility names, coordinates, or capacity values, and by known ownership changes, and were reviewed against the sector totals in the top-down data described in Supplementary Note 1. In total, 78 records were removed across 67 groups of duplicate or double-listed records, for example cement plants that were also listed as lime. One removed record, a second listing of a glass site, was first merged into the kept record by adding its production so that the site's production is not lost. Identical capacity values across facilities are often a country-level default and not evidence of duplication, so these were not treated as duplicates on their own.
-
-Annual production is taken from Climate TRACE, as capacity multiplied by capacity factor, for 540 facilities (72\% of replaceable heat). Climate TRACE has no production for glass, and for some iron and steel and pulp and paper facilities it reports the same default value for every facility in a country. For these we use production from the Hotmaps industrial database\cite{hotmaps2018} (2014 data), which applies to 172 facilities (148 glass, 16 iron and steel and 8 pulp and paper facilities; 8\% of replaceable heat). Facilities are matched to Hotmaps records by location (within 5\,km) and by name, and low-confidence matches are not used. Food and textile facilities (868 and 612 facilities respectively, 20\% of replaceable heat) have no production data in either source, so their heat is estimated from emissions instead (see Replaceable process heat). Facility data therefore carry the vintage of their source, 2024 for Climate TRACE and 2014 for the Hotmaps substitutions. The Hotmaps substitutions are 2014 estimates, so glass and other sites that have opened, closed or changed capacity since are not captured. These substitutions affect 8\% of replaceable heat.
+We built a facility-level dataset of manufacturing facilities in the EU and the UK from the Climate TRACE emissions inventory\cite{climatetrace2026}. For each facility it provides the location, subsector and annual greenhouse-gas emissions and, where reported, the annual production capacity and capacity factor. The dataset covers cement, lime, iron and steel, aluminium and other non-ferrous metals, glass, chemicals, ethylene steam cracking, pulp and paper, food, beverages and tobacco, and textiles. There are 2,415 facilities in this dataset, of which 2,192 facilities have a replaceable heat estimate. The 223 facilities without an estimate are mainly glass (193 facilities) and other metals (27 facilities). These have emissions data but no production data in either source, and because their emissions include process CO$_2$ that is not from fuel combustion, heat cannot be estimated from emissions. The other three report zero production and zero emissions. Climate TRACE contains duplicate and placeholder records, so we deduplicated the dataset before use (Supplementary Note~4). Annual production is taken from Climate TRACE, as capacity multiplied by capacity factor, for 540 facilities (71\% of replaceable heat). Where Climate TRACE has no production data or reports a country-level default value and the facility has a confident match in the Hotmaps industrial database, we substituted production from Hotmaps\cite{hotmaps2018} (2014 data) for 172 facilities (8\% of replaceable heat, Supplementary Note~5). Food and textile facilities (868 and 612 facilities respectively, 20\% of replaceable heat) have no production data in either source, so their heat is estimated from emissions instead (see Replaceable process heat).
 
 \subsection*{Replaceable process heat}
-The replaceable process heat of a facility is the useful heat supplied by fossil fuel combustion in its manufacturing processes. Fuel used as feedstock or reductant, such as natural gas feedstock for ammonia and methanol and coke in blast furnaces, is excluded, consistent with Eurostat final energy consumption, which excludes non-energy use\cite{eurostat_fec}. Process heat is estimated from annual production where available and from annual emissions otherwise (food and textiles; Supplementary Note~2). For the production route, a specific energy consumption (SEC), the fuel input per tonne of product, gives fuel energy, and a process efficiency gives useful heat (Extended Data Table~\ref{tab:sec}). SEC is taken from the Hotmaps industry process benchmarks\cite{hotmaps2018}, using the same process recipes as the temperature bands (Supplementary Note~3), and for alumina refineries, which Hotmaps does not cover, from Deloitte\cite{deloitte2022alumina}. The fuel-to-heat efficiency $\eta$ is 0.94 for heat supplied as boiler steam and 0.75 for direct process heating, such as kilns and furnaces\cite{saad2026}. Each facility's steam fraction is the sector's share of boiler steam in EU-27 non-electric useful heat from IndustryHeat-EU\cite{industryheateu2025}, capped at the facility's share of heat below 200\,$^\circ$C, since steam is assigned to the bands below 200\,$^\circ$C (see Temperature bands); heat at or above 200\,$^\circ$C is direct-fired. The exception is alumina refineries, where digestion (67\% of heat) is supplied by boiler steam at 175--400\,$^\circ$C\cite{deloitte2022alumina}. $\eta$ is the mix of the two efficiencies weighted by the steam fraction. For steam cracking, the SEC (35.9\,GJ\,t$^{-1}$ ethylene) is within the range reported for European crackers and, as in that literature, covers fuel including byproduct fuel gas but not the hydrocarbon feedstock\cite{ren2006}. For the emission route, a fuel emission factor\cite{ipcc2006stationary} gives fuel energy. Because Climate TRACE food emissions are modelled and poorly allocated between countries, food heat is then scaled so that each country's total matches the non-electric useful heat of the food, beverages and tobacco sector in JRC-IDEES-2023\cite{jrcidees2023}, and emissions are used only to allocate heat among facilities within a country. Replaceable heat is the useful heat multiplied by the fossil-fuel share of the sector\cite{eurostat_nrg_d_indq_n}. For facilities with production data, fuel energy and useful heat are
+Useful heat is the heat delivered to a process, such as the steam that heats a dryer or the heat that melts glass in a furnace. It is lower than the energy of the fuel burned, because part of that energy is lost, mainly in hot exhaust gases. An electric replacement has to supply the same useful heat, so all heat demand in this study is expressed as useful heat. The replaceable process heat of a facility is the useful heat supplied by fossil fuel combustion in its manufacturing processes. Fuel used as feedstock or reductant, such as natural gas feedstock for ammonia and methanol and coke in blast furnaces, is excluded, consistent with Eurostat final energy consumption, which excludes non-energy use\cite{eurostat_fec}. Process heat is estimated from annual production where available and from annual emissions otherwise (food and textiles, Supplementary Note~2). For the production route, a specific energy consumption (SEC), the fuel input per tonne of product, gives fuel energy, and a process efficiency gives useful heat (Extended Data Table~\ref{tab:sec}). SEC is taken from the Hotmaps industry process benchmarks\cite{hotmaps2018}. Where a product is made through several processes, SEC is the sum of the process SECs, each weighted by tonnes of process per tonne of product (for example 1.2\,t sinter and 0.9\,t rolled steel per tonne of blast-furnace steel). The process SECs and temperature distributions are from Hotmaps, and the process weights are our assumptions based on typical EU process ratios (Supplementary Note~3). The fuel-to-heat efficiency $\eta$ is 0.94 for heat supplied as boiler steam and 0.75 for direct process heating, such as kilns and furnaces\cite{saad2026}, and each facility's $\eta$ is the mix of the two weighted by its steam fraction, the share of its useful heat supplied as boiler steam (Supplementary Note~6). Alumina refineries, which Hotmaps does not cover, and steam crackers are also described there. For the emission route, a fuel emission factor\cite{ipcc2006stationary} gives fuel energy. Because Climate TRACE food emissions are modelled and poorly allocated between countries, food heat is then scaled so that each country's total matches the non-electric useful heat of the food, beverages and tobacco sector in JRC-IDEES-2023\cite{jrcidees2023}, and emissions are used only to allocate heat among facilities within a country. Replaceable heat is the useful heat multiplied by the fossil-fuel share of the sector\cite{eurostat_nrg_d_indq_n}. For facilities with production data, fuel energy and useful heat are
 \begin{equation}
 Q_{\mathrm{fuel}} = \frac{P \cdot \mathrm{SEC}}{1000}, \qquad Q_{\mathrm{useful}} = \eta\, Q_{\mathrm{fuel}},
 \end{equation}
@@ -164,7 +162,7 @@ where $P$ is annual production (t), SEC is the fuel input for process heat (GJ\,
 \begin{equation}
 Q_{\mathrm{fuel}} = \frac{E_{\mathrm{CO_2e}}\, f_{\mathrm{comb}}}{\mathrm{EF}}, \qquad Q_{\mathrm{useful}} = \eta\, Q_{\mathrm{fuel}},
 \end{equation}
-where $E_{\mathrm{CO_2e}}$ is annual emissions (tCO$_2$e), $f_{\mathrm{comb}}$ is the share of emissions from fuel combustion (1.0 for food and textiles, which have no process CO$_2$) and EF is the fuel emission factor (tCO$_2$\,TJ$^{-1}$). EF is the energy-weighted mix of the emission factors of natural gas (56.1\,tCO$_2$\,TJ$^{-1}$) and residual fuel oil (77.4\,tCO$_2$\,TJ$^{-1}$)\cite{ipcc2006stationary}, at a gas/oil energy share of 90\%/10\%, which is the fossil fuel mix of EU food and textile industries in Eurostat energy statistics\cite{eurostat_nrg_d_indq}. This gives $0.9\times56.1+0.1\times77.4=58.2$\,tCO$_2$\,TJ$^{-1}$. Replaceable heat is then $Q_{\mathrm{rep}} = s_{\mathrm{fossil}}\, Q_{\mathrm{useful}}$, with $s_{\mathrm{fossil}}$ the fossil-fuel share, the fossil fuel use divided by the sum of fossil fuel and biomass use for the industry in that country, from Eurostat disaggregated final energy consumption in industry (nrg\_d\_indq\_n, 2024)\cite{eurostat_nrg_d_indq_n}. Fossil fuels include coal, oil, natural gas and non-renewable waste, and biomass includes biofuels and renewable waste. Purchased electricity and derived heat (heat bought from outside the site, such as district heating) are excluded from the ratio, which assumes that purchased heat has the same fossil share as on-site fuels. The heat demand itself is not reduced. The EU-27 value, calculated from the summed fuel use of all 27 member states, is used where a country value is unavailable. SEC and efficiency values by sector are in Extended Data Table~\ref{tab:sec}, and emission-route parameters in Extended Data Table~\ref{tab:ef}.
+where $E_{\mathrm{CO_2e}}$ is annual emissions (tCO$_2$e), $f_{\mathrm{comb}}$ is the share of emissions from fuel combustion (1.0 for food and textiles, which have no process CO$_2$) and EF is the fuel emission factor (tCO$_2$\,TJ$^{-1}$). EF is 58.2\,tCO$_2$\,TJ$^{-1}$, a 90\%/10\% mix of natural gas and residual fuel oil (Supplementary Note~2). Replaceable heat is then $Q_{\mathrm{rep}} = s_{\mathrm{fossil}}\, Q_{\mathrm{useful}}$, with $s_{\mathrm{fossil}}$ the fossil-fuel share, the fossil fuel use divided by the sum of fossil fuel and biomass use for the industry in that country, from Eurostat disaggregated final energy consumption in industry (nrg\_d\_indq\_n, 2024)\cite{eurostat_nrg_d_indq_n}. Fossil fuels include coal, oil, natural gas and non-renewable waste, and biomass includes biofuels and renewable waste. Purchased electricity and heat are excluded from the ratio (Supplementary Note~2). The EU-27 value, calculated from the summed fuel use of all 27 member states, is used where a country value is unavailable. SEC and efficiency values by sector are in Extended Data Table~\ref{tab:sec}, and emission-route parameters in Extended Data Table~\ref{tab:ef}.
 
 \subsection*{Temperature bands}
 Each facility's useful heat is split into five temperature bands ($<$100, 100--200, 200--500, 500--1000 and $>$1000\,$^\circ$C), which determine the technology that can serve it. For facilities with production data, the shares come from the Hotmaps industry process benchmarks\cite{hotmaps2018}, which give the temperature distribution of fuel use for each process. Each sector or route is represented by one or more Hotmaps processes, and its shares are the SEC-weighted mix of those processes. Food facilities, which have only emissions data, are matched by name to a Hotmaps food process. Food facilities with no match, and all textile facilities, use a general EU-27 sector split from the IndustryHeat-EU dataset\cite{industryheateu2025}. This dataset reports heat supplied directly to the process by temperature range and heat supplied as boiler steam without a temperature, and we assume steam is supplied at 100--200\,$^\circ$C. The assignment rules and the resulting shares for each sector and route are given in Supplementary Note~3 and Supplementary Table~\ref{tab:bands}.
@@ -172,44 +170,56 @@ Each facility's useful heat is split into five temperature bands ($<$100, 100--2
 We performed additional validation against sector and country aggregates of useful heat from JRC-IDEES\cite{jrcidees2023} to confirm that the heat estimates are reasonable (Supplementary Note 1).
 
 \subsection*{Solar resource}
-Hourly solar generation for each facility is taken from the Photovoltaic Geographical Information System (PVGIS)\cite{huld2012pvgis} using ERA5 reanalysis\cite{hersbach2020era5} for the calendar year 2023. One time series is requested per facility at its latitude and longitude, for a 1\,kW$_\mathrm{p}$ system, so that the output is per unit of DC nameplate capacity. Panels are fixed-mounted and south facing, with a tilt equal to the absolute latitude of the site, which approximates the annual-energy-maximising angle without optimising each site. The PVGIS series are pulled with no system losses, and a 14\% system loss, the default of PVGIS and of the NREL PVWatts model\cite{dobos2014}, is then applied in the model by reducing the hourly output by 14\%. The loss covers inverter, wiring, soiling and other losses, and PVGIS accounts for temperature and irradiance effects separately. The capacity factor reported for each site is the annual sum of the hourly output divided by 8,760\,h. Annual yields before losses range from about 950\,kWh\,kW$_\mathrm{p}^{-1}$ in northern Finland to 1,950\,kWh\,kW$_\mathrm{p}^{-1}$ in southern Portugal. Because the model sizes storage to cover day-to-day operation rather than seasonal storage, a single weather year is used. The 365 daily solar profiles of 2023 are clustered into 16 representative days (k-means, using each cluster's medoid day, weighted by cluster size) so that sunny, overcast and intermediate days across the seasons are all represented (see Optimization model). Year-to-year variation in solar resource is therefore not captured.
+Hourly solar generation for each facility is taken from the Photovoltaic Geographical Information System (PVGIS, version 5.3)\cite{huld2012pvgis,pvgis53} using ERA5 reanalysis\cite{hersbach2020era5} for the calendar year 2023, the most recent year available in PVGIS 5.3\cite{pvgis53}. The aim is to compare facilities across Europe under the same weather, not to capture year-to-year variation in solar resource, so a single weather year is used for all facilities. The optimisation is solved over all 8,760 hours of 2023 in calendar order (see Optimization model), so storage can carry energy from one day to the next, for example from a sunny day into a following cloudy day. The model sees the whole year's weather in advance (perfect foresight), so the results are a lower bound on cost. Operation based on weather forecasts would cost at least as much. One time series is requested per facility at its latitude and longitude, for a 1\,kW$_\mathrm{p}$ system, so that the output is per unit of DC nameplate capacity. Panels are fixed-mounted and south facing, with a tilt equal to the absolute latitude of the site, which approximates the annual-energy-maximising angle without optimising each site. A system loss of 14\% is applied to the hourly output. This is the default value in PVGIS, which covers losses in cables and inverters and from dirt and snow on the modules\cite{pvgismanual}. The capacity factor reported for each site is the annual sum of the hourly output divided by 8,760\,h.
 
 \subsection*{Land availability}
-Land availability sets the maximum solar capacity that can be built at each facility. We define the land area available to each facility as the eligible land within a circular buffer centred on the facility coordinates, using a 5\,km radius for the main analysis and 15\,km as a sensitivity. We calculated this using Google Earth Engine at 30\,m resolution. Land cover is taken from the ESA WorldCover v200 map for 2021\cite{zanaga2022worldcover}, and the classes counted as available are bare or sparse vegetation, cropland, grassland and shrubland. Built-up areas, tree cover, water, wetland and snow and ice are excluded. Grassland and shrubland are included because many mills, particularly Nordic pulp and paper sites, sit in forest and grassland mosaics where bare land and cropland alone report almost no usable area.
+Land availability sets the maximum solar capacity that can be built at each facility. We define the land area available to each facility as the eligible land within a circular buffer centred on the facility coordinates, using a 5\,km radius for the main analysis and 15\,km as a sensitivity. Together, these radii provide a range for testing whether land availability constrains deployment, with the 15\,km buffer representing an upper-bound land-availability case. We calculated this using Google Earth Engine at 30\,m resolution. Land cover is taken from the ESA WorldCover v200 map for 2021\cite{zanaga2022worldcover}, and the classes counted as available are bare or sparse vegetation, cropland, grassland and shrubland. Built-up areas, tree cover, water, wetland and snow and ice are excluded. These are open land classes on which ground-mounted solar can be built: most existing solar farms worldwide are on cropland, followed by arid land and grassland\cite{kruitwagen2021}, and European land-eligibility studies likewise exclude forests, wetlands, water bodies and settlements, not open land\cite{ryberg2018}.
 
-Two further screens remove land that is unsuitable for ground-mounted solar. Pixels with a slope above 5$^\circ$ are excluded, using SRTM elevation data and Copernicus GLO-30 above 60$^\circ$N, where SRTM has no coverage. Protected areas in the World Database on Protected Areas (WDPA)\cite{wdpa} with a status of designated, inscribed or established are also excluded, together with a 100\,m buffer around them. A power density of 50\,MW$_{\mathrm{dc}}$\,km$^{-2}$ is applied to the remaining area to set an upper limit on installed solar capacity at each site. Land enters the optimisation only as a hard capacity constraint, and land cost is assumed to be included in the operating costs of the BloombergNEF technology cost data\cite{bnef2024lcoe}. Facility buffers are assessed independently, so overlapping buffers of neighbouring facilities are not allocated between them and land could be counted by more than one site.
+Two further screens remove land that is unsuitable for ground-mounted solar. Pixels with a slope above 5$^\circ$ are excluded, a stricter limit than the 10$^\circ$ most often used in land eligibility studies\cite{ryberg2017framework}. Slope is calculated from SRTM elevation data\cite{farr2007srtm}, and from the Copernicus GLO-30 elevation model\cite{copernicusglo30} above 60$^\circ$N, where SRTM has no coverage. Protected areas in the World Database on Protected Areas (WDPA)\cite{wdpa} with a status of designated, inscribed or established are also excluded, together with a 100\,m buffer around them, within the range of 0--3,000\,m used for distance from protected areas in land eligibility studies\cite{ryberg2017framework}. A power density of 50\,MW$_{\mathrm{dc}}$\,km$^{-2}$ is applied to the remaining area to set an upper limit on installed solar capacity at each site. This is below the 2019 median of 87\,MW$_{\mathrm{dc}}$\,km$^{-2}$ (0.87\,MW$_{\mathrm{dc}}$ per hectare) for fixed-tilt utility-scale plants in the United States\cite{bolinger2022land}, which allows for the wider row spacing that fixed-tilt arrays need at higher latitudes, where the sun is lower. Land enters the optimisation only as a hard capacity constraint, and land cost is not modelled separately because BloombergNEF includes land lease costs in the fixed operating costs of solar PV\cite{bnef2026lcoemethod}, which are part of the technology cost data used here\cite{bnef2024lcoe}. The analysis represents a scenario in which all facilities are decarbonised at the same time, so neighbouring facilities share the land where their buffers overlap. Each eligible pixel that lies within the buffers of more than one facility is allocated to those facilities in proportion to their replaceable heat demand, so that no land is counted twice. The available land of a facility is the sum of the eligible land in its buffer that is not shared and its allocated share of the overlapping land.
 
 \subsection*{Technology costs and financing}
 % [WISO26 §2.4]
-All costs are expressed in constant (real) 2025 US dollars for a 2030 construction start, and technologies are assumed to have a 25-year life. Capital expenditure (CAPEX), fixed operation and maintenance (FOM) and variable operation and maintenance (VOM) of solar panels and utility-scale Li-ion batteries are taken from BloombergNEF (BNEF)\cite{bnef2024lcoe} for 2030 by country, reported in real 2025 dollars. BNEF reports direct data for only a few countries: five of the countries in our dataset for solar PV (Germany, Spain, France, Italy and the UK) and two for batteries (Germany and the UK). All other countries are assigned the mean cost of peer countries in the same World Bank region and income group, falling back to the income group and then to the global mean. As a result, European battery costs outside Germany and the UK are the mean of the German and UK values. Battery VOM is charged per MWh discharged, and PV VOM is zero in the BNEF data. Land cost is not modelled separately and is assumed to be included in the BNEF operating costs.
+\paragraph*{Cost basis and analysis year}
+All costs are expressed in constant (real) 2025 US dollars for a 2030 construction start. Each technology is given its technical lifetime from published sources. Solar PV has a 40-year life, the Danish Energy Agency (DEA) value for utility-scale ground-mounted PV\cite{dea2026electricity}. The Li-ion battery has a 20-year life, the DEA value for utility-scale Li-ion batteries built in 2030\cite{dea2026storage}. The heat battery has a 30-year life, the value Wikoff et al.\ use for resistively charged firebrick storage\cite{wikoff2025}. This matches the modelled heat battery, since commercial heat batteries such as Rondo's store heat in refractory brick\cite{rondo2026datasheet}. The heat pump has a 25-year life below 100\,$^\circ$C and a 20-year life at 100--200\,$^\circ$C, the DEA values for these heat pumps\cite{dea2026processheat}.
 
-Industrial heat pump costs by temperature band\cite{rissman2020} and industrial heat battery (IHB) costs\cite{rissman2023ihb} are in 2021 and 2023 US dollars respectively. Both are converted to real 2025 dollars using US CPI, which applies factors of 1.19 and 1.06. No cost decline or increase beyond general inflation is assumed between the source year and 2030, so these technologies are priced at their published cost level, unlike the BNEF solar and battery costs, which are projected to 2030. This is a conservative choice, because costs of heat pumps and heat batteries are more likely to fall than rise by 2030 as deployment grows. Heat pump CAPEX is \$832\,kW$_\mathrm{th}^{-1}$ below 100\,$^\circ$C and \$1,034\,kW$_\mathrm{th}^{-1}$ at 100--200\,$^\circ$C, with FOM of \$14.3 and \$21.4\,kW$_\mathrm{th}^{-1}$\,yr$^{-1}$ (2025 USD), and coefficients of performance (COP) of 3.7 and 2.2 respectively\cite{rissman2020}. IHB CAPEX is \$105.7\,kW$^{-1}$ for charging, \$317\,kW$^{-1}$ for delivery and \$5.3\,kWh$^{-1}$ for storage, with no FOM and a round-trip efficiency of 95\%\cite{rissman2023ihb}. The Li-ion round-trip efficiency is set as an assumption at 90\%, slightly above the current BNEF survey median of 87.5\%, to reflect expected improvement by 2030. Degradation, replacement costs, grid purchases and curtailment costs are not included, and the system is assumed to operate for its full life at the initial performance. The key parameters are summarised in Extended Data Table~\ref{tab:params}.
+\paragraph*{Solar PV and Li-ion battery costs}
+Capital expenditure (CAPEX), fixed operation and maintenance (FOM) and variable operation and maintenance (VOM) of solar panels and utility-scale Li-ion batteries are taken from BloombergNEF (BNEF)\cite{bnef2024lcoe} for 2030 by country, reported in real 2025 dollars. BNEF reports direct data for only a few countries: five of the countries in our dataset for solar PV (Germany, Spain, France, Italy and the UK) and two for batteries (Germany and the UK). All other countries are assigned the mean cost of peer countries in the same World Bank region and income group, falling back to the income group and then to the global mean. As a result, European battery costs outside Germany and the UK are the mean of the German and UK values. The UK uses its own BNEF costs. Battery VOM is charged per MWh discharged, and PV VOM is zero in the BNEF data. Land cost is not modelled separately and is assumed to be included in the BNEF operating costs.
 
-Capital costs are annualised using the capital recovery factor (CRF) for each country, calculated over the 25-year life from the real weighted average cost of capital (WACC) from IRENA\cite{irena2025}, consistent with the real-dollar costs. The solar PV WACC is used for all technologies. The UK uses its own BNEF costs and WACC. Costs are calculated in US dollars and the results are converted to euros at a fixed rate of 1.08\,USD per EUR.
+\paragraph*{Heat pump and industrial heat battery costs}
+Industrial heat pump costs are the 2030 values of the DEA technology catalogue for industrial process heat\cite{dea2026processheat}, revised in January 2026, so they are projected to 2030 like the BNEF solar and battery costs. Converted from 2025 euros at 1.08\,USD per EUR, heat pump CAPEX is \$1,015\,kW$_\mathrm{th}^{-1}$ below 100\,$^\circ$C and \$1,782\,kW$_\mathrm{th}^{-1}$ at 100--200\,$^\circ$C, FOM is \$2.3 and \$2.7\,kW$_\mathrm{th}^{-1}$\,yr$^{-1}$, VOM is \$3.3 and \$3.8\,MWh$_\mathrm{th}^{-1}$, and the lifetimes are 25 and 20 years\cite{dea2026processheat}. The coefficients of performance (COP) are 3.7 and 2.2\cite{rissman2020}. Supplementary Note~7 describes how the DEA technologies are matched to the two temperature bands.
 
-Total annualised system cost, $C^{\mathrm{ann}}$, sums four technology terms (solar, Li-ion battery, industrial heat battery, and heat pump), each annualised with the CRF above. The Li-ion battery, industrial heat battery, and heat pump terms follow the same functional form using their respective CAPEX and FOM values described above. Each follows the same general form, illustrated here for solar:
+Industrial heat battery (IHB) costs are from Rissman and Gimon\cite{rissman2023ihb} in 2023 US dollars and are converted to real 2025 dollars with US CPI (a factor of 1.06). IHB CAPEX is \$105.7\,kW$^{-1}$ for charging, \$317\,kW$^{-1}$ for delivery and \$5.3\,kWh$^{-1}$ for storage, with no FOM and a round-trip efficiency of 95\%\cite{rissman2023ihb}. These costs are only adjusted for inflation to 2025. No published projections of heat battery cost decline were found, so no reduction for learning between 2025 and 2030 is applied, and the costs would be conservative if heat battery costs fall as deployment grows. Supplementary Note~7 compares the heat pump and heat battery costs with other published values.
+
+\paragraph*{Performance and cost exclusions}
+The Li-ion round-trip efficiency is set as an assumption at 90\%, slightly above the current BNEF survey median of 87.5\%, to reflect expected improvement by 2030. Degradation, replacement costs, grid purchases and curtailment costs are not included, and the system is assumed to operate for its full life at the initial performance. The key parameters are summarised in Extended Data Table~\ref{tab:params}.
+
+\paragraph*{Financing and currency conversion}
+Capital costs are annualised using the capital recovery factor (CRF), calculated over each technology's life (see Cost basis and analysis year) from a real after-tax weighted average cost of capital (WACC) of 4.2\%, IRENA's 2024 value for solar PV in Europe\cite{irena2025}. A real WACC is used because all costs are in real US dollars. The same WACC is used for all technologies and countries. Costs are calculated in US dollars and the results are converted to euros at a fixed rate of 1.08\,USD per EUR.
+
+\paragraph*{Annualised cost calculation}
+Total annualised system cost, $C^{\mathrm{ann}}$, sums four technology terms (solar, Li-ion battery, industrial heat battery, and heat pump), each annualised with the CRF above. The Li-ion battery, industrial heat battery, and heat pump terms follow the same functional form using their respective CAPEX and FOM values described above, with VOM added for the Li-ion battery and the heat pump. Each follows the same general form, illustrated here for solar:
 % Equation reconstructed from the WISO26 PDF (text extraction was garbled) -- check against your source file.
 \begin{equation}
 C^{\mathrm{ann}}_{\mathrm{solar}} = \left(\mathrm{CAPEX}_{\PV}\cdot 1000 \cdot \mathrm{CRF}_{r_c} + \mathrm{FOM}_{\PV}\right) S^{*}, \qquad
 \mathrm{LCOH}_{\mathrm{solar}} = \frac{C^{\mathrm{ann}}_{\mathrm{solar}}}{Q_{\mathrm{served}}},
 \end{equation}
-where $r_c$ is country WACC, $S^*$, $E^*$, $P^*$ are optimised capacities, $Q_b^*$ is HP thermal capacity sized to served heat in band $b$, and $Q_{\mathrm{served}}=Q_{\mathrm{demand}}-Q_{\mathrm{unserved}}$. Unserved energy is not costed (VoLL = 0).
+where $r_c$ is the WACC, $S^*$, $E^*$, $P^*$ are optimised capacities, $Q_b^*$ is HP thermal capacity sized to served heat in band $b$, and $Q_{\mathrm{served}}=Q_{\mathrm{demand}}-Q_{\mathrm{unserved}}$. Unserved energy is not costed (VoLL = 0).
 
 \subsection*{Gas heat benchmark}
 % [WISO26 §2.5]
 Each facility's LCOH is compared against the cost of continuing to produce the same heat from natural gas, which we call the gas heat benchmark. The benchmark sets the highest availability of electrified heat that can be supplied below the gas heat cost, and each facility is capped at the gas heat cost of its own country. We assume the existing gas boiler is already installed and paid for, so the gas heat cost includes only fuel and carbon costs, and excludes boiler capital and maintenance costs. This favours gas, because the gas cost does not include the capital cost of the boiler.
 
-Gas prices by country are from Eurostat gas prices for non-household consumers (nrg\_pc\_203)\cite{eurostat_gasprices}, taken for the large industrial consumption band of 100,000--999,999\,GJ per year, excluding VAT and other recoverable taxes, and averaged over the two half-years of 2025. Cyprus, Luxembourg and Malta have no data for this band and use the EU-27 average. The price is divided by a natural-gas boiler efficiency of 0.94\cite{saad2026} to give the cost per unit of useful heat, and a carbon cost is added for the emissions of burning the gas:
+The gas heat cost of country $c$ is the cost of the fuel and carbon allowances needed to produce one unit of useful heat in a gas boiler:
 \begin{equation}
-c^{\mathrm{gas}}_{\mathrm{heat},c} = \frac{p^{\mathrm{gas}}_{c}}{\eta_{\mathrm{boiler}}} + \frac{p_{\mathrm{EUA}} \times EF_{\mathrm{NG}}}{\eta_{\mathrm{boiler}}}
+c^{\mathrm{gas}}_{\mathrm{heat},c} = \frac{p^{\mathrm{gas}}_{c} + p_{\mathrm{EUA}} \times EF_{\mathrm{NG}}}{\eta_{\mathrm{boiler}}}
 \label{eq:gas}
 \end{equation}
-where $p^{\mathrm{gas}}_{c}$ is the gas price in country $c$ (EUR/MWh$_{\mathrm{fuel}}$), $\eta_{\mathrm{boiler}} = 0.94$ is the boiler efficiency, $p_{\mathrm{EUA}} = 73.43$\,EUR/tCO$_2$ is the 2025 EU Emissions Trading System allowance price\cite{icap_euets}, and $EF_{\mathrm{NG}} = 0.202$\,tCO$_2$/MWh$_{\mathrm{fuel}}$ is the CO$_2$ emission factor of natural gas (56.1\,tCO$_2$\,TJ$^{-1}$\cite{ipcc2006stationary}). The carbon term adds a uniform \texteuro15.8\,MWh$_{\mathrm{th}}^{-1}$ in every country, so differences in the benchmark between countries come from gas prices. The resulting benchmark ranges from \texteuro59 to \texteuro114\,MWh$_{\mathrm{th}}^{-1}$ across the 27 countries, with a heat-weighted mean of \texteuro72\,MWh$_{\mathrm{th}}^{-1}$. Eurostat does not report UK gas prices, so the UK uses the Irish price. The benchmark is converted to US dollars at 1.08\,USD per EUR for comparison with the LCOH. Gas prices are for 2025 and are not projected to 2030, which matches the real 2025 dollar basis of the technology costs, but ignores any change in gas or carbon prices by 2030.
+where $p^{\mathrm{gas}}_{c}$ is the 2025 industrial gas price from Eurostat in EUR per MWh of fuel\cite{eurostat_gasprices}, $p_{\mathrm{EUA}}$ is the average 2025 auction price of EU Emissions Trading System allowances, 73.43\,EUR per tCO$_2$\cite{icap_euets}, $EF_{\mathrm{NG}}$ is the CO$_2$ emission factor of natural gas, 0.202\,tCO$_2$ per MWh of fuel\cite{ipcc2006stationary}, and $\eta_{\mathrm{boiler}}$ is the boiler efficiency, 0.94\cite{saad2026}. Fuel energy is on a net calorific basis throughout. The benchmark ranges from \texteuro64 to \texteuro125\,MWh$_{\mathrm{th}}^{-1}$ across the 27 countries, with a heat-weighted mean of \texteuro78\,MWh$_{\mathrm{th}}^{-1}$. Gas and carbon prices are observed 2025 values and are not projected to 2030. This keeps the benchmark at the same real 2025 price level as the technology costs and avoids depending on a single price forecast, since projections vary with the scenario. Supplementary Note~8 describes the price data and the conversion to a net calorific basis.
 
 \subsection*{Optimization model}
 
 % [WISO26 §2.6]
-For each facility, we size the co-located solar, storage and heat conversion equipment that delivers its process heat at the lowest levelised cost of heat (LCOH). The problem is a linear program solved with HiGHS, adapted from the framework of ref.~\citenum{chojkiewicz2026} and illustrated in Fig.~\ref{fig:system}. It is solved separately for each facility over the 16 representative days of 2023 PVGIS hourly solar profiles (see Representative days), and each day is solved with a cyclic state of charge, so storage operates within a day only.
+For each facility, we size the co-located solar, storage and heat conversion equipment that delivers its process heat at the lowest levelised cost of heat (LCOH). The problem is a linear program solved with HiGHS, adapted from the framework of ref.~\citenum{chojkiewicz2026} and illustrated in Fig.~\ref{fig:system}. It is solved separately for each facility over the 8,760 hourly time steps of the 2023 PVGIS solar profile in calendar order. The state of charge of each storage is cyclic over the year, so the state at the end of 31 December equals that at the start of 1 January, and storage can carry energy between days.
 
 The heat demand of a facility is a flat load split across its temperature bands (see Temperature bands). Shared solar capacity supplies two routes. Bands below 200\,$^\circ$C are served by heat pumps, which can use solar electricity directly or through a Li-ion battery. Bands at or above 200\,$^\circ$C are served by an industrial heat battery (IHB), which is charged resistively from solar and discharges heat directly to the process. The model chooses the solar capacity, battery and heat battery capacity and heat pump capacity that minimise cost, subject to meeting a required availability, the share of annual heat demand that is served, and to the solar capacity the land allows. Symbols are defined in Supplementary Table~\ref{tab:symbols}.
 
@@ -222,14 +232,15 @@ The optimisation has two phases. In the first phase, the model minimises the LCO
 \begin{equation}
 \begin{split}
 \min\; \mathrm{LCOH} = \frac{1}{\Eload}\Big[\, & c_{\PV}P_{\PV} + c_{\Li,E}E_{\Li} + c_{\Li,P}P_{\Li}^{\dis} \\
- & + c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB} + \sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP} \Big]
+ & + c_{\IHB,\mathrm{in}}P_{\IHB}^{\ch} + c_{\IHB,\mathrm{out}}P_{\IHB}^{\dis} + c_{\IHB,E}E_{\IHB} + \sum_{b \in \mathcal{B}^{\HP}} c_{b}^{\HP}P_{b}^{\HP} \\
+ & + \sum_{t} \Big( v_{\Li}\, p_{\Li,t}^{\dis} + \sum_{b \in \mathcal{B}^{\HP}} v_{b}^{\HP}\, \mathrm{COP}_{b} \big( x_{b,t}^{\mathrm{dir}} + x_{b,t}^{\mathrm{batt}} \big) \Big) \Big]
 \end{split}
 \label{eq:objective}
 \end{equation}
-Each cost term is the annualised capital cost of the technology (CAPEX multiplied by the capital recovery factor) plus its operation and maintenance (O\&M) costs. Solar includes fixed O\&M, and variable O\&M is zero in the BNEF data. The Li-ion battery includes fixed O\&M on its discharge power and variable O\&M on the energy discharged. The heat pump includes fixed O\&M, and the heat battery has no O\&M cost.
+Each capacity cost $c$ is the annualised capital cost of the technology, its CAPEX multiplied by the capital recovery factor for its own lifetime (see Cost basis and analysis year), plus its fixed operation and maintenance (O\&M) cost. Solar includes fixed O\&M, and its variable O\&M is zero in the BNEF data. The Li-ion battery is costed on its energy capacity, with fixed O\&M on its discharge power and variable O\&M $v_{\Li}$ on the energy discharged. The heat pump includes fixed O\&M on its thermal capacity and variable O\&M $v_{b}^{\HP}$ on the heat it delivers. The heat battery is costed on its charging power, delivery power and storage energy, with no O\&M cost.
 
 \begin{equation}
-\Eload = \sum_{b} L_{b}\sum_{k} w_{k}H
+\Eload = T\sum_{b} L_{b}
 \label{eq:eload}
 \end{equation}
 
@@ -237,14 +248,14 @@ Each cost term is the annualised capital cost of the technology (CAPEX multiplie
 
 \paragraph{Shared solar limit:}
 \begin{equation}
-\sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{dir}} + p_{\Li,k,t}^{\ch} + p_{\IHB,k,t}^{\ch} \leq P_{\PV}\, g_{k,t}
+\sum_{b \in \mathcal{B}^{\HP}} x_{b,t}^{\mathrm{dir}} + p_{\Li,t}^{\ch} + p_{\IHB,t}^{\ch} \leq P_{\PV}\, g_{t}
 \label{eq:solar}
 \end{equation}
 
 \paragraph{Storage state of charge:}
 \begin{align}
-s_{\Li,k,t}  &= s_{\Li,k,t-1} + \eta_{\Li}\, p_{\Li,k,t}^{\ch} - \frac{p_{\Li,k,t}^{\dis}}{\eta_{\Li}} \label{eq:soc-li}\\
-s_{\IHB,k,t} &= s_{\IHB,k,t-1} + \eta_{\IHB}\, p_{\IHB,k,t}^{\ch} - \frac{p_{\IHB,k,t}^{\dis}}{\eta_{\IHB}} \label{eq:soc-ihb}
+s_{\Li,t}  &= s_{\Li,t-1} + \eta_{\Li}\, p_{\Li,t}^{\ch} - \frac{p_{\Li,t}^{\dis}}{\eta_{\Li}} \label{eq:soc-li}\\
+s_{\IHB,t} &= (1-\lambda)\, s_{\IHB,t-1} + \eta_{\IHB}\, p_{\IHB,t}^{\ch} - \frac{p_{\IHB,t}^{\dis}}{\eta_{\IHB}} \label{eq:soc-ihb}
 \end{align}
 \begin{equation}
 \eta_{\Li} = \sqrt{\mathrm{RTE}_{\Li}}, \qquad \eta_{\IHB} = \sqrt{\mathrm{RTE}_{\IHB}}
@@ -252,58 +263,60 @@ s_{\IHB,k,t} &= s_{\IHB,k,t-1} + \eta_{\IHB}\, p_{\IHB,k,t}^{\ch} - \frac{p_{\IH
 
 \paragraph{Storage rate limit} for each storage $j \in \{\Li, \IHB\}$:
 \begin{equation}
-s_{j,k,t} \leq E_{j}, \qquad p_{j,k,t}^{\ch} \leq P_{j}^{\ch}, \qquad p_{j,k,t}^{\dis} \leq P_{j}^{\dis}
+s_{j,t} \leq E_{j}, \qquad p_{j,t}^{\ch} \leq P_{j}^{\ch}, \qquad p_{j,t}^{\dis} \leq P_{j}^{\dis}, \qquad P_{\Li}^{\ch} \leq P_{\Li}^{\dis}
 \label{eq:rate}
 \end{equation}
+The Li-ion battery charges and discharges through one inverter, so its charging power cannot exceed its discharge power rating. The heat battery has separate charging and delivery equipment, so its two power ratings are sized independently.
 
 \paragraph{Maximum storage duration:}
 \begin{equation}
-E_{j} \leq h_{\max}\, P_{j}^{\dis}
+E_{j} \leq h_{j}\, P_{j}^{\dis}
 \label{eq:duration}
 \end{equation}
+The Li-ion duration is limited to $h_{\Li}=4$\,h because the BloombergNEF battery costs are for four-hour systems\cite{bnef2024lcoe}, and the IHB duration to $h_{\IHB}=20$\,h, the upper end of commercial heat battery configurations, which store 8--20\,h of heat at rated output\cite{rondo2026datasheet}, and within the duration of up to about 24\,h reported for thermal energy storage\cite{bnef2024ldes}. The IHB loses $\lambda$ of its stored heat each hour, equivalent to the heat loss of about 1\% per day expected for industrial thermal storage\cite{fraunhofer2024directelec}.
 
 \paragraph{Li-ion discharge to HP bands:}
 \begin{equation}
-p_{\Li,k,t}^{\dis} = \sum_{b \in \mathcal{B}^{\HP}} x_{b,k,t}^{\mathrm{batt}}
+p_{\Li,t}^{\dis} = \sum_{b \in \mathcal{B}^{\HP}} x_{b,t}^{\mathrm{batt}}
 \label{eq:li-dis}
 \end{equation}
 
 \paragraph{HP heat balance and capacity:}
 \begin{align}
-\mathrm{COP}_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) + u_{b,k,t} &= L_{b}\,\sigma_{t} \label{eq:hp-balance}\\
-\mathrm{COP}_{b}\left( x_{b,k,t}^{\mathrm{dir}} + x_{b,k,t}^{\mathrm{batt}} \right) &\leq P_{b}^{\HP} \label{eq:hp-cap}
+\mathrm{COP}_{b}\left( x_{b,t}^{\mathrm{dir}} + x_{b,t}^{\mathrm{batt}} \right) + u_{b,t} &= L_{b}\,\sigma_{t} \label{eq:hp-balance}\\
+\mathrm{COP}_{b}\left( x_{b,t}^{\mathrm{dir}} + x_{b,t}^{\mathrm{batt}} \right) &\leq P_{b}^{\HP} \label{eq:hp-cap}
 \end{align}
 
 \paragraph{IHB discharge across temperature heat bands:} the heat battery is one shared store, and its discharge is allocated across the bands it serves:
 \begin{equation}
-p_{\IHB,k,t}^{\dis} = \sum_{b \in \mathcal{B}^{\IHB}} y_{b,k,t}, \qquad y_{b,k,t} + u_{b,k,t} = L_{b}\,\sigma_{t}
+p_{\IHB,t}^{\dis} = \sum_{b \in \mathcal{B}^{\IHB}} y_{b,t}, \qquad y_{b,t} + u_{b,t} = L_{b}\,\sigma_{t}
 \label{eq:ihb-balance}
 \end{equation}
 
 \paragraph{Availability:}
 \begin{equation}
-\sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq (1 - AF)\,\Eload
+\sum_{t}\sum_{b} u_{b,t} \leq (1 - AF)\,\Eload
 \label{eq:availability}
 \end{equation}
 
 \paragraph{Bounds:}
 \begin{gather}
 0 \leq P_{\PV} \leq P_{\PV}^{\max} \label{eq:pv-bound}\\
-P_{j}^{\ch},\, P_{j}^{\dis},\, E_{j},\, P_{b}^{\HP},\, x_{b,k,t}^{\mathrm{dir}},\, x_{b,k,t}^{\mathrm{batt}},\, y_{b,k,t},\, p_{j,k,t}^{\ch},\, p_{j,k,t}^{\dis},\, s_{j,k,t},\, u_{b,k,t} \geq 0 \label{eq:nonneg}
+P_{j}^{\ch},\, P_{j}^{\dis},\, E_{j},\, P_{b}^{\HP},\, x_{b,t}^{\mathrm{dir}},\, x_{b,t}^{\mathrm{batt}},\, y_{b,t},\, p_{j,t}^{\ch},\, p_{j,t}^{\dis},\, s_{j,t},\, u_{b,t} \geq 0 \label{eq:nonneg}
 \end{gather}
 
 \paragraph*{Phase 2: Maximum service, then minimum cost}
 
 When the availability floor in Phase 1 cannot be met, the model first minimises the unserved heat $U$:
 \begin{equation}
-\min\; U = \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t}
+\min\; U = \sum_{t}\sum_{b} u_{b,t}
 \label{eq:phase2-U}
 \end{equation}
 
 It then minimises cost with the unserved heat held at its optimal value $U^{*}$, so that the system is the cheapest that achieves the maximum possible service. Unserved heat is not assigned a cost in the objective:
 % The availability constraint (eq:availability) is replaced by the bound on U.
 \begin{equation}
-\min\; \mathrm{LCOH} \quad \text{s.t. constraints (\ref{eq:solar})--(\ref{eq:ihb-balance}), (\ref{eq:pv-bound})--(\ref{eq:nonneg}), and} \quad \sum_{k} w_{k}\sum_{t}\sum_{b} u_{b,k,t} \leq U^{*}
+\min\; \mathrm{LCOH} \quad \text{s.t. constraints (\ref{eq:solar})--(\ref{eq:ihb-balance}), (\ref{eq:pv-bound})--(\ref{eq:nonneg}), and} \quad \sum_{t}\sum_{b} u_{b,t} \leq U^{*}
 \label{eq:phase2-Z}
 \end{equation}
 
@@ -312,10 +325,9 @@ Symbols used in the optimization model are defined in Supplementary Table~\ref{t
 
 
 
-\subsection*{Representative days}
-% [WISO26 §2.6, last paragraph, first sentence]
-The optimisation uses the hourly solar profiles and the flat-load heat demand on 16 representative days, obtained by k-means clustering of the 365 daily solar profiles and weighted by cluster size.
-\todo{8,760-hour validation sample and error.}
+\subsection*{Temporal resolution}
+The optimisation uses the hourly solar profile and the flat-load heat demand for all 8,760 hours of 2023, solved in calendar order. Solving the year in calendar order lets storage carry energy between days, which representative-day methods that model each day independently do not capture\cite{kotzur2018}.
+\todo{Report comparison with 16 independent representative days (k-means) as a conservative case.}
 
 \subsection*{Selecting operating points and aggregation}
 % [WISO26 §2.6, last paragraph, continued]
@@ -448,7 +460,7 @@ Linz & 15.0$\times$ & 8.5\,GW & 80\% & \texteuro85 \\
 \begin{table}[h]
 \centering
 \small
-\caption{Specific energy consumption (SEC) and fuel-to-heat efficiency ($\eta$) used in the production route, by sector. SEC is fuel input for process heat per tonne of product, excluding feedstock and electricity, and is the Hotmaps benchmark SEC\cite{hotmaps2018} of each sector's process recipe (Supplementary Table~\ref{tab:bands}) except for alumina refineries. $\eta$ is 0.94 for boiler steam and 0.75 for direct process heating\cite{saad2026}, weighted by each facility's steam fraction, which is the sector's steam share of non-electric useful heat in IndustryHeat-EU\cite{industryheateu2025} capped at the facility's share of heat below 200\,$^\circ$C (alumina digestion is steam\cite{deloitte2022alumina}). Ranges are across the glass types and pulp types in Supplementary Table~\ref{tab:bands}. $s_{\mathrm{fossil}}$ is the EU-27 fossil share of fuel use from Eurostat nrg\_d\_indq\_n (2024)\cite{eurostat_nrg_d_indq_n}; country values replace it where Eurostat data are reliable.}
+\caption{Specific energy consumption (SEC) and fuel-to-heat efficiency ($\eta$) used in the production route, by sector. SEC is fuel input for process heat per tonne of product, excluding feedstock and electricity, and is the Hotmaps benchmark SEC\cite{hotmaps2018} of each sector's process recipe (Supplementary Table~\ref{tab:bands}) except for alumina refineries. $\eta$ is 0.94 for boiler steam and 0.75 for direct process heating\cite{saad2026}, weighted by each facility's steam fraction, which is the sector's steam share of non-electric useful heat in IndustryHeat-EU\cite{industryheateu2025} capped at the facility's share of heat below 200\,$^\circ$C (alumina digestion is steam\cite{deloitte2022alumina}). Ranges are across the glass types and pulp types in Supplementary Table~\ref{tab:bands}. $s_{\mathrm{fossil}}$ is the EU-27 fossil share of fuel use from Eurostat nrg\_d\_indq\_n (2024)\cite{eurostat_nrg_d_indq_n}. Country values replace it where Eurostat data are reliable.}
 \label{tab:sec}
 \begin{tabular}{p{2.9cm} p{2.1cm} c c c p{4.6cm}}
 \toprule
@@ -474,7 +486,7 @@ Aluminium (aluminium) & smelting & 5.2 & 0.75 & 1.00 & \\
 \begin{table}[h]
 \centering
 \small
-\caption{Parameters of the emissions route for sectors without production data (food, beverages and tobacco; textiles and leather).}
+\caption{Parameters of the emissions route for sectors without production data (food, beverages and tobacco, and textiles and leather).}
 \label{tab:ef}
 \begin{tabular}{p{4.6cm} c p{6.4cm}}
 \toprule
@@ -485,8 +497,8 @@ Residual fuel oil emission factor & 77.4\,tCO$_2$\,TJ$^{-1}$ & IPCC 2006 Guideli
 Gas/oil fuel share & 90\%/10\% & Eurostat nrg\_d\_indq\cite{eurostat_nrg_d_indq} \\
 Blended emission factor EF & 58.2\,tCO$_2$\,TJ$^{-1}$ & $0.9\times56.1+0.1\times77.4$ \\
 Combustion share $f_{\mathrm{comb}}$ & 1.0 & No process CO$_2$ in food and textiles \\
-Fuel-to-heat efficiency $\eta$ & 0.89 food (unmatched); 0.88 textiles & Saad et al.\cite{saad2026}; steam share from IndustryHeat-EU\cite{industryheateu2025} \\
-Fossil-fuel share $s_{\mathrm{fossil}}$ & 0.89 food; 0.95 textiles (EU-27) & Eurostat nrg\_d\_indq\_n\cite{eurostat_nrg_d_indq_n} \\
+Fuel-to-heat efficiency $\eta$ & 0.89 food (unmatched), 0.88 textiles & Saad et al.\cite{saad2026}, steam share from IndustryHeat-EU\cite{industryheateu2025} \\
+Fossil-fuel share $s_{\mathrm{fossil}}$ & 0.89 food, 0.95 textiles (EU-27) & Eurostat nrg\_d\_indq\_n\cite{eurostat_nrg_d_indq_n} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -501,13 +513,17 @@ Parameter & Value & Source \\
 \midrule
 PV CAPEX, FOM & by country (2030) & BNEF \\
 Li-ion energy / power CAPEX & by country (2030) & BNEF \\
-HP CAPEX, $<$100\,$^\circ$C & \$831.73\,kW$_{\mathrm{th}}^{-1}$ (2025 USD) & Rissman \\
-HP CAPEX, 100--200\,$^\circ$C & \$1,033.72\,kW$_{\mathrm{th}}^{-1}$ (2025 USD) & Rissman \\
-IHB CAPEX (in / out / storage) & \$105.66 / \$316.99\,kW$^{-1}$; \$5.28\,kWh$^{-1}$ & Rissman \& Gimon \\
+HP CAPEX, $<$100\,$^\circ$C & \$1,015\,kW$_{\mathrm{th}}^{-1}$ (2030) & DEA\cite{dea2026processheat} \\
+HP CAPEX, 100--200\,$^\circ$C & \$1,782\,kW$_{\mathrm{th}}^{-1}$ (2030, steam) & DEA\cite{dea2026processheat} \\
+HP FOM / VOM, $<$100\,$^\circ$C & \$2.3\,kW$_{\mathrm{th}}^{-1}$\,yr$^{-1}$ / \$3.3\,MWh$_{\mathrm{th}}^{-1}$ & DEA\cite{dea2026processheat} \\
+HP FOM / VOM, 100--200\,$^\circ$C & \$2.7\,kW$_{\mathrm{th}}^{-1}$\,yr$^{-1}$ / \$3.8\,MWh$_{\mathrm{th}}^{-1}$ & DEA\cite{dea2026processheat} \\
+IHB CAPEX (in / out / storage) & \$105.66 / \$316.99\,kW$^{-1}$, \$5.28\,kWh$^{-1}$ & Rissman \& Gimon \\
 COP ($<$100 / 100--200\,$^\circ$C) & 3.7 / 2.2 & Rissman \\
 RTE (Li-ion / IHB) & 0.90 / 0.95 & \\
-Max Li-ion duration $h_{\max}$ & 16\,h & \\
-Lifetime & 25\,yr & \\
+Max storage duration $h_{\Li}$ / $h_{\IHB}$ & 4\,h / 20\,h & BNEF\cite{bnef2024lcoe}, Rondo\cite{rondo2026datasheet} \\
+IHB heat loss & 1\%\,day$^{-1}$ & Fraunhofer ISI\cite{fraunhofer2024directelec} \\
+Lifetime (PV / Li-ion / IHB) & 40 / 20 / 30\,yr & DEA\cite{dea2026electricity,dea2026storage}, Wikoff\cite{wikoff2025} \\
+Lifetime (HP $<$100 / 100--200\,$^\circ$C) & 25 / 20\,yr & DEA\cite{dea2026processheat} \\
 PV power density & 50\,MW$_{\mathrm{dc}}$\,km$^{-2}$ & \\
 \bottomrule
 \end{tabular}
@@ -523,7 +539,7 @@ PV power density & 50\,MW$_{\mathrm{dc}}$\,km$^{-2}$ & \\
 \renewcommand{\tablename}{Supplementary Table}
 
 \subsection*{Supplementary Note 1: Validation of heat estimates}
-To validate the heat estimates, we compared them with non-electric useful heat from JRC-IDEES-2023\cite{jrcidees2023}, summed over EU-27 countries for each sector (Supplementary Fig.~\ref{fig:heatval}). Our estimates cover EU-27 facilities only and are shown both for heat from all fuels and for the replaceable, fossil-fired part. Across all fuels, our estimate for cement and lime is 13\% above the reference. Food matches the reference ($-$2\%) by construction, because food heat is scaled to the JRC-IDEES country totals, so it is not an independent check. Steel is 24\% above the reference and chemicals 25\% below. Our chemicals sector covers only steam crackers and ammonia, methanol and soda ash plants, while JRC-IDEES covers the whole chemical industry, and differences between the efficiencies used here and in JRC-IDEES may explain part of the gap for both sectors. The remaining sectors differ more, for three reasons of scope. First, replaceable heat excludes biomass, which supplies 67\% of our pulp and paper heat and 17\% of our cement and lime heat; the all-fuel bars remove this effect. Second, our estimate includes only facilities in the Climate TRACE dataset, which leaves pulp and paper (19\% of the reference) and non-ferrous metals (39\%) under-covered. Third, the JRC-IDEES ceramics and glass category also includes ceramics, brick and refractory firing, which we do not model, so our glass-only estimate is 35\% of the reference. Textiles is 63\% above the reference; it is estimated from emissions rather than production and is the least certain sector. These heat estimates carry further limitations. They use 2024 production and emissions, whereas costs are set for 2030, and demand is modelled as a flat load throughout the year, so any seasonal or daily variation in process heat is not captured. This uncertainty in heat demand is a known limitation, but because we compute the levelised cost of heat (LCOH) per unit of heat delivered, the results depend less on the absolute size of the heat estimate than a total-demand figure would.
+To validate the heat estimates, we compared them with non-electric useful heat from JRC-IDEES-2023\cite{jrcidees2023}, summed over EU-27 countries for each sector (Supplementary Fig.~\ref{fig:heatval}). Our estimates cover EU-27 facilities only and are shown both for heat from all fuels and for the replaceable, fossil-fired part. Across all fuels, our estimate for cement and lime is 13\% above the reference. Food matches the reference ($-$2\%) by construction, because food heat is scaled to the JRC-IDEES country totals, so it is not an independent check. Steel is 24\% above the reference and chemicals 25\% below. Our chemicals sector covers only steam crackers and ammonia, methanol and soda ash plants, while JRC-IDEES covers the whole chemical industry, and differences between the efficiencies used here and in JRC-IDEES may explain part of the gap for both sectors. The remaining sectors differ more, for three reasons of scope. First, replaceable heat excludes biomass, which supplies 67\% of our pulp and paper heat and 17\% of our cement and lime heat. The all-fuel bars remove this effect. Second, our estimate includes only facilities in the Climate TRACE dataset, which leaves pulp and paper (19\% of the reference) and non-ferrous metals (39\%) under-covered. Third, the JRC-IDEES ceramics and glass category also includes ceramics, brick and refractory firing, which we do not model, so our glass-only estimate is 35\% of the reference. Textiles is 63\% above the reference. It is estimated from emissions rather than production and is the least certain sector. These heat estimates carry further limitations. They use 2024 production and emissions, whereas costs are set for 2030, and demand is modelled as a flat load throughout the year, so any seasonal or daily variation in process heat is not captured. This uncertainty in heat demand is a known limitation, but because we compute the levelised cost of heat (LCOH) per unit of heat delivered, the results depend less on the absolute size of the heat estimate than a total-demand figure would.
 
 \begin{figure}[h]
 \centering
@@ -535,15 +551,19 @@ To validate the heat estimates, we compared them with non-electric useful heat f
 \subsection*{Supplementary Note 2: Estimation route and scope of replaceable heat}
 Production is preferred to emissions where available because emissions are a less direct measure of process heat. Emissions include process emissions that do not come from fuel (for example, 60--65\% of cement CO$_2$ is from calcination), and they depend on the fuel mix, process design and system boundaries of each site, such as on-site electricity generation. Manz et al.\ compared production-based and emission-based estimates of fuel demand for individual sites and found that production data are more accurate, because process energy demand is more closely correlated with physical production than with emissions\cite{manz2018}. Emission-based estimates are therefore used only where production data are not available, which is the case for food and textiles. Fuel used as feedstock or reductant is excluded because it is incorporated into the product or consumed in a chemical reaction, so it cannot be replaced by an alternative heat source. Madeddu et al.\ likewise separate feedstock energy from electrifiable heat demand\cite{madeddu2020}. In steam cracking, byproduct methane and hydrogen recovered from the cracked gas supply most of the furnace fuel\cite{ren2006}. This fuel is fossil-derived, and an electrified furnace would have to supply the same duty, so it is included in the replaceable heat.
 
+For the emission route, eF is the energy-weighted mix of the emission factors of natural gas (56.1\,tCO$_2$\,TJ$^{-1}$) and residual fuel oil (77.4\,tCO$_2$\,TJ$^{-1}$)\cite{ipcc2006stationary}, at a gas/oil energy share of 90\%/10\%, which is the fossil fuel mix of EU food and textile industries in Eurostat energy statistics\cite{eurostat_nrg_d_indq}. This gives $0.9\times56.1+0.1\times77.4=58.2$\,tCO$_2$\,TJ$^{-1}$.
+
+For the fossil-fuel share, purchased electricity and derived heat (heat bought from outside the site, such as district heating) are excluded from the ratio, which assumes that purchased heat has the same fossil share as on-site fuels. The heat demand itself is not reduced.
+
 \subsection*{Supplementary Note 3: Temperature band assignment}
-For facilities with production data, each sector or route is represented by one or more Hotmaps processes\cite{hotmaps2018}, weighted by tonnes of process per tonne of product (for example 1.2\,t sinter and 0.9\,t rolled steel per tonne of blast-furnace steel). The band shares are the mix of the processes' temperature distributions, weighted by each process's Hotmaps fuel SEC. Steel facilities that Climate TRACE lists under two routes (for example DRI-EAF and BF/BOF at the same site) use an equal 50/50 average of the two route recipes. Glass facilities are matched by name to a Hotmaps glass type (container, flat, fibre or other), and unmatched facilities use the EU production mix of 55\% container, 30\% flat, 5\% fibre and 10\% other glass. Alumina refineries have no Hotmaps process. Digestion and calcination use about 63--64\% and 31\% of refinery energy, with the remaining 5\% used by electric drives\cite{aac2023alumina,deloitte2022alumina}, so we assign 67\% of heat to digestion and 33\% to calcination. Digestion is heated by boiler steam supplied at 175--230\,$^\circ$C in low-temperature refineries and 325--400\,$^\circ$C in high-temperature refineries\cite{deloitte2022alumina}, and is assigned to the 200--500\,$^\circ$C band. Calcination takes place at about 1,100\,$^\circ$C\cite{barnes2024bayer} and is assigned to the $>$1000\,$^\circ$C band.
+For facilities with production data, each sector or route is represented by one or more Hotmaps processes\cite{hotmaps2018}, weighted by tonnes of process per tonne of product (for example 1.2\,t sinter and 0.9\,t rolled steel per tonne of blast-furnace steel). The weights are our assumptions, not Hotmaps values: the steel weights are typical intermediate ratios of the blast-furnace route (worldsteel), the cement weight is the EU clinker-to-cement ratio (Cembureau), and pulp and paper facilities are assumed to produce half pulp and half paper, with unspecified pulp split 70\% chemical and 30\% mechanical (CEPI). Routes with a single process have a weight of 1.0. The band shares are the mix of the processes' temperature distributions, weighted by each process's Hotmaps fuel SEC. Steel facilities that Climate TRACE lists under two routes (for example DRI-EAF and BF/BOF at the same site) use an equal 50/50 average of the two route recipes. Glass facilities are matched by name to a Hotmaps glass type (container, flat, fibre or other), and unmatched facilities use the EU production mix of 55\% container, 30\% flat, 5\% fibre and 10\% other glass (FEVE, Glass Alliance Europe). Alumina refineries have no Hotmaps process. Digestion and calcination use about 63--64\% and 31\% of refinery energy, with the remaining 5\% used by electric drives\cite{aac2023alumina,deloitte2022alumina}, so we assign 67\% of heat to digestion and 33\% to calcination. Digestion is heated by boiler steam supplied at 175--230\,$^\circ$C in low-temperature refineries and 325--400\,$^\circ$C in high-temperature refineries\cite{deloitte2022alumina}, and is assigned to the 200--500\,$^\circ$C band. Calcination takes place at about 1,100\,$^\circ$C\cite{barnes2024bayer} and is assigned to the $>$1000\,$^\circ$C band.
 
 Food facilities are matched by name to a Hotmaps process (sugar, dairy, brewing, meat, bakery or starch). Food facilities with no name match, and all textile facilities, use the EU-27 useful heat of the food, beverages and tobacco sector, or of the textiles and leather sector, from the IndustryHeat-EU dataset\cite{industryheateu2025}, which applies the method of Madeddu et al.\cite{madeddu2020} to JRC-IDEES 2021 data. The dataset reports heat supplied directly to the process (for example by burners or hot water) by temperature range, and heat supplied as steam from boilers separately, without a temperature. We assume steam is supplied at 100--200\,$^\circ$C and assign direct heat at 100--400\,$^\circ$C to the 200--500\,$^\circ$C band. The resulting split is 20\% below 100\,$^\circ$C, 74\% at 100--200\,$^\circ$C and 6\% at 200--500\,$^\circ$C for food, and 32\% below 100\,$^\circ$C and 68\% at 100--200\,$^\circ$C for textiles, so all textile heat is served by heat pumps.
 
 \begin{table}[h]
 \centering
 \small
-\caption{Temperature band shares of process heat by sector and route (\% of heat). Shares are the SEC-weighted mix of the listed Hotmaps processes\cite{hotmaps2018}, with weights in tonnes of process per tonne of product. Assignment rules are described in Supplementary Note~3.}
+\caption{Temperature band shares of process heat by sector and route (\% of heat). Shares are the SEC-weighted mix of the listed Hotmaps processes\cite{hotmaps2018}, with weights in tonnes of process per tonne of product. The weights are our assumptions (Supplementary Note~3). Assignment rules are described in Supplementary Note~3.}
 \label{tab:bands}
 \begin{tabular}{l p{0.36\textwidth} rrrrr}
 \toprule
@@ -589,29 +609,77 @@ Textiles & IndustryHeat-EU\cite{industryheateu2025} (not Hotmaps) & 32 & 68 & 0 
 \toprule
 \textbf{Symbol} & \textbf{Meaning} \\
 \midrule
-k,\ K & Representative day and number of representative days (16) \\
-t,\ H & Hour of the day and hours per day ($H = 24$, with $t-1 \equiv H$ when $t = 1$) \\
-\mathcal{B}^{\HP},\ \mathcal{B}^{\IHB} & Bands served by heat pump (COP $>$ 1; $<$100 and 100--200\,$^\circ$C) or by IHB (COP $\leq$ 1; $\geq$200\,$^\circ$C) \\
-g_{k,t} & Solar capacity factor in hour $t$ of representative day $k$ (MW per MW installed) \\
+t,\ T & Hour of the year and number of hours ($T = 8{,}760$, with $t-1 \equiv T$ when $t = 1$) \\
+\mathcal{B}^{\HP},\ \mathcal{B}^{\IHB} & Bands served by heat pump (COP $>$ 1, $<$100 and 100--200\,$^\circ$C) or by IHB (COP $\leq$ 1, $\geq$200\,$^\circ$C) \\
+g_{t} & Solar capacity factor in hour $t$ (MW per MW installed) \\
 L_{b} & Flat heat load of band $b$ (MW$_{\mathrm{th}}$) \\
-\sigma_{t} & Diurnal load shape, mean 1 (all 1 if flat) \\
-y_{b,k,t} & IHB heat delivered to band $b$ \\
-p_{j,k,t}^{\ch},\ p_{j,k,t}^{\dis},\ s_{j,k,t} & Charge, discharge and state of charge of storage $j$ \\
+\sigma_{t} & Load shape in hour $t$, mean 1 (all 1 for the flat load used here) \\
+y_{b,t} & IHB heat delivered to band $b$ \\
+p_{j,t}^{\ch},\ p_{j,t}^{\dis},\ s_{j,t} & Charge, discharge and state of charge of storage $j$ \\
 \eta_{j} & One-way efficiency of storage $j$, $\sqrt{\mathrm{RTE}_{j}}$ \\
-h_{\max} & Maximum storage duration, 16\,h by default \\
+h_{j} & Maximum storage duration of storage $j$ (4\,h Li-ion, 20\,h IHB) \\
+\lambda & Hourly standby heat loss of the IHB, $1-(1-0.01)^{1/24}$ (1\% per day) \\
 AF & Availability factor, which sets the share of heat that must be served \\
 P_{\PV}^{\max} & Optional solar cap from land limits (no cap if unset) \\
-H & Number of hours in representative days \\
-w_{k} & Weight of representative day $k$ (number of days it represents) \\
-x_{b,k,t}^{\mathrm{dir}},\ x_{b,k,t}^{\mathrm{batt}} & Electricity to the heat pump of band $b$ directly from solar or from the Li-ion battery \\
-u_{b,k,t} & Unserved heat in band $b$ \\
+x_{b,t}^{\mathrm{dir}},\ x_{b,t}^{\mathrm{batt}} & Electricity to the heat pump of band $b$ directly from solar or from the Li-ion battery \\
+u_{b,t} & Unserved heat in band $b$ \\
 \mathrm{COP}_{b} & Heat pump coefficient of performance for band $b$ \\
 P_{b}^{\HP},\ P_{j}^{\ch},\ P_{j}^{\dis},\ E_{j} & Heat pump capacity, storage charge and discharge power, and storage energy capacity \\
 c_{\PV},\ c_{\Li,E},\ c_{\Li,P},\ c_{\IHB,\cdot},\ c_{b}^{\HP} & Annualised unit costs of each technology \\
+v_{\Li},\ v_{b}^{\HP} & Variable O\&M of the Li-ion battery (per MWh discharged) and of the heat pump of band $b$ (per MWh of heat delivered) \\
 \mathrm{RTE}_{j} & Round-trip efficiency of storage $j$ (0.90 Li-ion, 0.95 IHB) \\
 x & Electricity \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection*{Supplementary Note 4: Deduplication of facility records}
+Climate TRACE contains duplicate and placeholder records, so we cleaned the data before use. Duplicates were identified by identical facility names, coordinates, or capacity values, and by known ownership changes, and were reviewed against the sector totals in the top-down data described in Supplementary Note~1. In total, 78 records were removed across 67 groups of duplicate or double-listed records. One removed record, a second listing of a glass site, was first merged into the kept record by adding its production so that the site's production is not lost. Identical capacity values across facilities are often a country-level default and not evidence of duplication, so these were not treated as duplicates on their own.
+
+\subsection*{Supplementary Note 5: Substitution of Hotmaps production data}
+Climate TRACE has no production for glass, and for some iron and steel and pulp and paper facilities it reports the same default value for every facility in a country. For these we use production from the Hotmaps industrial database\cite{hotmaps2018} (2014 data), which applies to 172 facilities with 8\% of replaceable heat (148 glass, 16 iron and steel and 8 pulp and paper facilities). Facilities are matched to Hotmaps records by location (within 5\,km) and by name, and low-confidence matches are not used. The 60 facilities that report a country-level default value but have no confident match, mainly pulp and paper (36) and lime (21), keep the Climate TRACE value (1.5\% of replaceable heat). Facility data therefore carry the vintage of their source, 2024 for Climate TRACE and 2014 for the Hotmaps substitutions. The Hotmaps substitutions are 2014 estimates, so glass and other sites that have opened, closed or changed capacity since are not captured.
+
+\subsection*{Supplementary Note 6: Fuel-to-heat efficiency and sector exceptions}
+The fuel-to-heat efficiency $\eta$ is 0.94 for heat supplied as steam from fuel-fired boilers and 0.75 for direct process heating, where burners fire into kilns and furnaces\cite{saad2026}. The steam fraction of a facility is the share of its useful heat supplied as boiler steam, and $\eta$ is the mix of the two efficiencies weighted by this fraction. The steam fraction is assigned by process. Kilns, furnaces, reformers and ovens are direct-fired, so cement and lime kilns, glass melting, sintering and steel reheating, electric-arc and direct-reduction furnaces, steam-cracking furnaces, ammonia and methanol reformers and aluminium smelting have a steam fraction of 0 (glass 3\%, the IndustryHeat-EU share of boiler steam in ceramics and glass\cite{industryheateu2025}). Boiler steam supplies alumina digestion, 67\% of refinery heat\cite{deloitte2022alumina}, and 70\% of soda-ash heat, with the remaining 30\% supplied by the direct-fired lime kiln. Pulp and paper, food and textile facilities use the sector's share of boiler steam in EU-27 non-electric useful heat from IndustryHeat-EU\cite{industryheateu2025}: 59\% for pulp and paper, 74\% for food and 68\% for textiles. Food processes with direct-fired steps have a lower steam fraction, equal to the share of heat not supplied by those steps: 53\% for bakeries, which use direct-fired ovens, and 70\% for sugar. Hotmaps does not cover alumina refineries, so their SEC is also from Deloitte\cite{deloitte2022alumina}. For steam cracking, the SEC (35.9\,GJ\,t$^{-1}$ ethylene) is within the range reported for European crackers and, as in that literature, covers fuel including byproduct fuel gas but not the hydrocarbon feedstock\cite{ren2006}.
+
+\subsection*{Supplementary Note 7: Comparison of heat pump and heat battery costs}
+\paragraph*{Heat pumps}
+Heat pump costs are from the DEA technology catalogue\cite{dea2026processheat} because it is a European source, it was revised in January 2026, it reports values for 2030 and it states what the investment includes. Heat below 100\,$^\circ$C is matched to the DEA heat pump that supplies hot water up to 80\,$^\circ$C (\texteuro940\,kW$_\mathrm{th}^{-1}$ in 2030). Heat at 100--200\,$^\circ$C is matched to the DEA high-temperature heat pump that supplies up to 150\,$^\circ$C. We assume this heat is delivered as steam, since boiler steam supplies most of the process heat in the sectors with heat in this band (Supplementary Note~6), and add the catalogue's steam-generation cost of \texteuro150\,kW$_\mathrm{th}^{-1}$, giving \texteuro1,650\,kW$_\mathrm{th}^{-1}$. The catalogue does not cover heat pumps above 150\,$^\circ$C, so this cost is applied to the whole band and probably understates the cost of supplying 150--200\,$^\circ$C. The DEA investment covers equipment, installation and piping to an existing hot water or steam loop, but not upgrades to the electrical connection or a temperature lift above 75\,K. DEA FOM is \texteuro2.1 and \texteuro2.5\,kW$_\mathrm{th}^{-1}$\,yr$^{-1}$ and VOM is \texteuro3.0 and \texteuro3.5\,MWh$_\mathrm{th}^{-1}$, and the technical lifetimes are 25 years for the 80\,$^\circ$C heat pump and 20 years for the high-temperature heat pump. The 2030 CAPEX values are 1\% and 6\% below DEA's 2025 values. Supplementary Table~\ref{tab:hpcost} compares the DEA costs with other published costs. Rissman\cite{rissman2020} reports US costs of \$700 and \$870\,kW$_\mathrm{th}^{-1}$ (2021 USD) below 100\,$^\circ$C and at 100--200\,$^\circ$C, or \$832 and \$1,034\,kW$_\mathrm{th}^{-1}$ in 2025 dollars, which were used in an earlier version of this analysis. The DEA 2030 costs used here are 22\% and 72\% higher. The same numbers, 700 and 870, appear in euros in the Agora Industry business-case study as investment excluding implementation, to which the study applies an implementation factor of 1.5\cite{agora2026business}, and this explains much of the gap. The Agora study's costs for Italy (\texteuro833 and \texteuro1,220\,kW$_\mathrm{th}^{-1}$ in 2023 euros) are close to the DEA values. The DEA cost at 100--200\,$^\circ$C is the highest central value in Supplementary Table~\ref{tab:hpcost}, because it includes installation and steam generation.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Published industrial heat pump CAPEX per kW of heat output. Values are in each source's own currency and price year and are not converted. Agora Table 7 values exclude implementation and are shown with the study's implementation factor applied in brackets.}
+\label{tab:hpcost}
+\begin{tabular}{p{0.24\linewidth} p{0.22\linewidth} p{0.18\linewidth} p{0.26\linewidth}}
+\toprule
+Source & Basis & Low temperature & 100--200\,$^\circ$C \\
+\midrule
+DEA, 2030 (used here)\cite{dea2026processheat} & EU, 2025 EUR, installed & 940 ($\leq$80\,$^\circ$C) & 1,650 (steam, $\leq$150\,$^\circ$C) \\
+DEA, 2025\cite{dea2026processheat} & EU, 2025 EUR, installed & 950 ($\leq$80\,$^\circ$C) & 1,750 (steam, $\leq$150\,$^\circ$C) \\
+Agora, Table 10 (Italy)\cite{agora2026business} & EU, 2023 EUR & 833 ($<$80\,$^\circ$C) & 1,220 ($<$150\,$^\circ$C) \\
+Agora, Table 7, medium\cite{agora2026business} & EU, 2025 EUR, excl.\ implementation & 550 [660] ($\leq$80\,$^\circ$C) & 700 [1,050] ($\leq$100\,$^\circ$C), 870 [1,305] ($\leq$150\,$^\circ$C) \\
+Rissman (previous)\cite{rissman2020} & US, 2021 USD & 700 ($<$100\,$^\circ$C) & 870 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph*{Industrial heat batteries}
+IHB costs are from Rissman and Gimon\cite{rissman2023ihb} (2023 USD). We kept this source because it is the only one we found that splits heat battery CAPEX into charging power, delivery power and storage energy, which is how the heat battery is modelled. We did not find a European catalogue or a 2030 projection with this split. The Fraunhofer ISI assessment of direct electrification states that heat battery cost estimates are based on limited industry-scale experience and gives no cost values\cite{fraunhofer2024directelec}. The storage cost of \$5.3\,kWh$^{-1}$ (2025 USD) is close to the \$4.55\,kWh$_\mathrm{th}^{-1}$ that Wikoff et al.\ use for firebrick storage\cite{wikoff2025}. That study adds \$20.67\,kW$^{-1}$ for charging power and \$6.47\,kW$^{-1}$ for discharge power, but these are the costs of adding heaters and blowers to the firebrick store, not the full charging and heat-delivery equipment, so they are not directly comparable to the \$105.7 and \$317\,kW$^{-1}$ used here. The IEA reports that heat storage built from sand, cement and bricks costs around \$15--20\,kWh$^{-1}$, without stating what the figure includes\cite{iea2026renewablesindustry}. For comparison, a heat battery with the maximum 20\,h of storage and equal charging and delivery ratings costs about \$26\,kWh$^{-1}$ with the costs used here. The heat battery costs used here are therefore at or above the other published values.
+
+
+\subsection*{Supplementary Note 8: Gas heat benchmark data}
+\paragraph*{Gas prices}
+Gas prices are from Eurostat gas prices for non-household consumers (nrg\_pc\_203)\cite{eurostat_gasprices}, for the large industrial consumption band of 100,000--999,999\,GJ per year, excluding VAT and other recoverable taxes, and averaged over the two half-years of 2025. Cyprus, Luxembourg and Malta have no data for this band and use the EU-27 average (\texteuro51.4\,MWh$^{-1}$ on a gross calorific basis). Eurostat does not report UK gas prices, so the UK uses the Irish price. The benchmark is converted to US dollars at 1.08\,USD per EUR for comparison with the LCOH.
+
+\paragraph*{Net calorific basis}
+Fuel energy can be measured on a gross calorific value (GCV) basis, which counts all the heat released by combustion, or on a net calorific value (NCV) basis, which excludes the latent heat of the water vapour in the flue gas. All fuel energy in this study is on an NCV basis, as in the IPCC emission factors\cite{ipcc2006stationary}, the Hotmaps specific energy consumption\cite{hotmaps2018} and JRC-IDEES\cite{jrcidees2023}. Eurostat reports gas prices per kWh of GCV, so they are converted to NCV using an NCV of 0.9 times the GCV for natural gas\cite{ipcc2006intro}:
+\begin{equation}
+p^{\mathrm{gas}}_{c} = \frac{p^{\mathrm{gas,GCV}}_{c}}{0.9}
+\end{equation}
+Saad et al.\ do not state the basis of the 0.94 boiler efficiency\cite{saad2026}. We treat it as a net-basis value, because 94\% on a gross basis would require a condensing boiler, which industrial steam boilers generally are not, and because Saad et al.\ report that their efficiencies are higher than the gross-basis values of the US Department of Energy. The emission factor of 56.1\,tCO$_2$\,TJ$^{-1}$ is also on an NCV basis\cite{ipcc2006stationary} and equals 0.202\,tCO$_2$\,MWh$^{-1}$.
+
+\paragraph*{Carbon cost}
+The carbon term adds a uniform \texteuro15.8\,MWh$_{\mathrm{th}}^{-1}$ in every country, so differences in the benchmark between countries come from gas prices.
 
 \end{document}

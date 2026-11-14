@@ -64,6 +64,33 @@
   year        = {2025}
 }
 
+@techreport{dea2026processheat,
+  author      = {{Danish Energy Agency}},
+  title       = {Technology Data for Industrial Process Heat},
+  institution = {Danish Energy Agency},
+  address     = {Copenhagen},
+  year        = {2026},
+  note        = {Version 0006, January 2026, and datasheet for industrial process heat. ISBN 978-87-94447-47-8. All cost data in 2025 EUR. \url{https://ens.dk/en/analyses-and-statistics/technology-data-industrial-process-heat}. Accessed 11 November 2026}
+}
+
+@techreport{dea2026electricity,
+  author      = {{Danish Energy Agency}},
+  title       = {Technology Data for Generation of Electricity and District Heating},
+  institution = {Danish Energy Agency},
+  address     = {Copenhagen},
+  year        = {2026},
+  note        = {Datasheet version 0019, solar PV datasheets updated 26 August 2026. \url{https://ens.dk/en/analyses-and-statistics/technology-data-generation-electricity-and-district-heating}. Accessed 11 November 2026}
+}
+
+@techreport{dea2026storage,
+  author      = {{Danish Energy Agency}},
+  title       = {Technology Data for Energy Storage},
+  institution = {Danish Energy Agency},
+  address     = {Copenhagen},
+  year        = {2026},
+  note        = {Datasheet version 0011. \url{https://ens.dk/en/analyses-and-statistics/technology-data-energy-storage}. Accessed 11 November 2026}
+}
+
 @techreport{rissman2023ihb,
   author      = {Rissman, Jeffrey and Gimon, Eric},
   title       = {Thermal Batteries: Decarbonizing {U.S.} Industry While Supporting a High-Renewables Grid},
@@ -151,6 +178,10 @@
   year = {2025},
   doi = {10.2905/JRC.JPXYRT8},
   note = {Dataset}}
+@incollection{ipcc2006intro,
+  author = {Garg, Amit and Kazunari, Kainou and Pulles, Tinus}, title = {Introduction},
+  booktitle = {2006 IPCC Guidelines for National Greenhouse Gas Inventories, Volume 2: Energy}, chapter = {1}, year = {2006},
+  note = {Section 1.4.1.2: for natural gas the NCV is about 10 percent less than the GCV}}
 @incollection{ipcc2006stationary,
   author = {Gomez, Dario and Watterson, John D.}, title = {Stationary Combustion},
   booktitle = {2006 IPCC Guidelines for National Greenhouse Gas Inventories, Volume 2}, year = {2006}}
@@ -167,7 +198,7 @@
 @techreport{rissman2020,
   author = {Rissman, J.}, title = {Decarbonizing Low-Temperature Industrial Heat in the U.S.}, institution = {Energy Innovation}, year = {2020}}
 @techreport{irena2025,
-  author = {{IRENA}}, title = {Renewable Power Generation Costs in 2024}, institution = {International Renewable Energy Agency}, year = {2025}}
+  author = {{IRENA}}, title = {Renewable Power Generation Costs in 2024}, institution = {International Renewable Energy Agency}, address = {Abu Dhabi}, year = {2025}, note = {ISBN 978-92-9260-669-5. Figure 1.13 and Annex I. \url{https://www.irena.org/Publications/2025/Jun/Renewable-Power-Generation-Costs-in-2024}}}
 @misc{eurostat_gasprices,
   author = {{Eurostat}}, title = {Gas prices for industrial consumers - bi-annual data (from 2007 onwards)},
   howpublished = {\url{https://ec.europa.eu/eurostat/databrowser/product/page/NRG_PC_203}},
@@ -201,7 +232,7 @@
   title = {{ESA WorldCover} 10 m 2021 v200}, year = {2022}, doi = {10.5281/zenodo.7254221}}
 @misc{wdpa,
   author = {{UNEP-WCMC and IUCN}},
-  title = {Protected Planet: The World Database on Protected Areas ({WDPA})}, howpublished = {\url{https://www.protectedplanet.net}}}
+  title = {Protected Planet: The World Database on Protected Areas ({WDPA})}, year = {2026}, howpublished = {\url{https://www.protectedplanet.net}}, note = {Version of July 2026, accessed through Google Earth Engine (WCMC/WDPA/current)}}
 @misc{icap_euets,
   author = {{International Carbon Action Partnership}},
   title = {{EU} Emissions Trading System ({EU ETS})},
@@ -223,3 +254,48 @@
   author = {Dobos, Aron P.},
   title = {{PVWatts} Version 5 Manual},
   institution = {National Renewable Energy Laboratory}, number = {NREL/TP-6A20-62641}, year = {2014}}
+@misc{pvgis53,
+  author = {{European Commission, Joint Research Centre}},
+  title = {{PVGIS} 5.3: Photovoltaic Geographical Information System, user manual and release notes},
+  year = {2024},
+  howpublished = {\url{https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis_en}},
+  note = {Accessed 11 November 2026}}
+
+@article{kotzur2018,
+  author = {Kotzur, Leander and Markewitz, Peter and Robinius, Martin and Stolten, Detlef},
+  title = {Time series aggregation for energy system design: Modeling seasonal storage},
+  journal = {Applied Energy}, volume = {213}, pages = {123--135}, year = {2018}, doi = {10.1016/j.apenergy.2018.01.023}}
+@article{kruitwagen2021,
+  author = {Kruitwagen, Lucas and Story, K. T. and Friedrich, J. and Byers, L. and Skillman, S. and Hepburn, Cameron},
+  title = {A global inventory of photovoltaic solar energy generating units},
+  journal = {Nature}, volume = {598}, pages = {604--610}, year = {2021}, doi = {10.1038/s41586-021-03957-7}}
+@article{ryberg2018,
+  author = {Ryberg, David Severin and Robinius, Martin and Stolten, Detlef},
+  title = {Evaluating land eligibility constraints of renewable energy sources in {Europe}},
+  journal = {Energies}, volume = {11}, number = {5}, pages = {1246}, year = {2018}, doi = {10.3390/en11051246}}
+@techreport{bnef2026lcoemethod,
+  author = {Vasdev, Amar and Kimel, Matthias},
+  title = {Levelized Cost of Electricity: Methodology},
+  institution = {BloombergNEF}, year = {2026}, note = {Last updated 18 February 2026}}
+@techreport{bnef2024ldes,
+  author = {{BloombergNEF}}, title = {2024 Long-Duration Energy Storage Cost Survey}, institution = {BloombergNEF}, year = {2024}}
+@techreport{fraunhofer2024directelec,
+  author = {{Fraunhofer ISI}}, title = {Direct electrification of industrial process heat. {An} assessment of technologies, potentials and future prospects for the {EU}},
+  institution = {Study on behalf of Agora Industry}, year = {2024}}
+@misc{rondo2026datasheet,
+  author = {{Rondo Energy}}, title = {The {Rondo} Heat Battery Platform: Drop-in Solution for Industrial Heat \& Power (data sheet)}, year = {2026}, howpublished = {\url{https://rondo.com}}}
+@misc{pvgismanual,
+  author = {{European Commission, Joint Research Centre}}, title = {{PVGIS} 5 user manual, section 4.1: System loss}, year = {2026},
+  howpublished = {\url{https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/getting-started-pvgis/pvgis-user-manual_en}},
+  note = {Accessed 11 November 2026}}
+@misc{ryberg2017framework,
+  author = {Ryberg, David Severin and Robinius, Martin and Stolten, Detlef},
+  title = {Methodological framework for determining the land eligibility of renewable energy sources}, year = {2017}, howpublished = {arXiv:1712.07840}}
+@article{farr2007srtm,
+  author = {Farr, Tom G. and others}, title = {The {Shuttle Radar Topography Mission}},
+  journal = {Reviews of Geophysics}, volume = {45}, number = {2}, pages = {RG2004}, year = {2007}, doi = {10.1029/2005RG000183}}
+@misc{copernicusglo30,
+  author = {{European Space Agency}}, title = {Copernicus Global Digital Elevation Model ({GLO-30})}, year = {2021}, doi = {10.5270/ESA-c5d3d65}}
+@article{bolinger2022land,
+  author = {Bolinger, Mark and Bolinger, Greta}, title = {Land requirements for utility-scale {PV}: an empirical update on power and energy density},
+  journal = {IEEE Journal of Photovoltaics}, volume = {12}, number = {2}, pages = {589--594}, year = {2022}, doi = {10.1109/JPHOTOV.2021.3136805}}
