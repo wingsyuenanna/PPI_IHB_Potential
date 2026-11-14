@@ -8,9 +8,9 @@ from pathlib import Path
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_LAND_EXPORT = PROJECT_ROOT / "Input" / "LandCover_Area_Categorized_5km.csv"
+DEFAULT_LAND_EXPORT = PROJECT_ROOT / "Input" / "LandCover_Area_Allocated_5km.csv"
 DEFAULT_OUTPUT = (
-    PROJECT_ROOT / "land_availability" / "outputs" / "land_availability_by_facility.csv"
+    PROJECT_ROOT / "land_availability" / "outputs" / "land_availability_allocated_5km.csv"
 )
 DEFAULT_FACILITIES = PROJECT_ROOT / "heat_demand" / "facilities" / "facilities_2024_eu.csv"
 
@@ -82,7 +82,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Process a downloaded GEE land-cover CSV into a standalone "
-            "land_availability_by_facility.csv. "
+            "land-availability CSV (default: allocated 5 km). "
             "available_land_km2 = bare_sparse + cropland + grassland + shrubland."
         )
     )

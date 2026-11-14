@@ -3,7 +3,7 @@
 Combines:
   - heat_demand/facilities/facilities_2024_eu_replaceable.csv
         useful + replaceable heat (new fossil-share methodology), all subsectors
-  - land_availability/outputs/land_availability_by_facility.csv
+  - land_availability/outputs/land_availability_allocated_5km.csv (heat-weighted allocated buffers)
         available_land_km2 (+ land-cover breakdown), by source_id
   - solar profile presence (solar_radiation/outputs/hourly_profiles/<id>_<yr>.parquet)
   - classification + solar_capacity_factor carried from the previous pulp/paper
@@ -26,7 +26,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 REPLACEABLE = ROOT / "heat_demand" / "facilities" / "facilities_2024_eu_replaceable.csv"
-LAND = ROOT / "land_availability" / "outputs" / "land_availability_by_facility.csv"
+LAND = ROOT / "land_availability" / "outputs" / "land_availability_allocated_5km.csv"
 SOLAR_DIR = ROOT / "solar_radiation" / "outputs" / "hourly_profiles"
 SOLAR_SUMMARY = ROOT / "solar_radiation" / "outputs" / "solar_radiation_by_facility.csv"
 PREV_ASSESSMENT = ROOT / "outputs" / "eu_pulp_paper_ihb_site_assessment_2024.csv"

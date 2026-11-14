@@ -160,7 +160,7 @@ For the current EU facility set (2023), annual yield ranges from ~950 kWh/kWp (n
 Land suitable for colocated solar is estimated in Google Earth Engine (GEE) as the area of selected land-cover classes within a buffer around each facility point. The default **5 km** buffer reflects on-site or immediately adjacent siting for colocated arrays; a **15 km** buffer is reserved for sensitivity analysis only.
 
 **Scripts:** `land_availability/prepare_gee_upload.py` → `land_availability/gee_facility_calculate_available_area.py` → `land_availability/merge_land_availability.py`  
-**Exploratory notebook:** `land_availability/GEE_facility_calculate_available_area.ipynb` (maps and buffer tests only; use the Python script for production exports)
+**Exploratory notebook:** archived in `archive/2026-11-14_land_availability_notebooks/` (old SRTM-only version, use the Python script)
 
 #### Spatial boundary and resolution
 
@@ -211,6 +211,8 @@ python run_multiband_potential.py --scenario <name> --project-start 2030        
 ```
 Redo the allocation whenever replaceable heat changes (the weights come from `facilities_2024_eu_replaceable.csv`).
 
+Protected areas: the script uses the pinned WDPA snapshot `WCMC/WDPA/202607/polygons` (`--wdpa-asset`). Do not use `WCMC/WDPA/current`, which changes monthly. The 2026-11 release dropped most German Landscape Protection Areas and Polish national parks, nature reserves and landscape parks. German Landscape Protection Areas (Landschaftsschutzgebiete) are treated as eligible by default (`--allow-desig "DEU:Landscape Protection Area"`, manuscript Supplementary Note 9). Independent-buffer exports use asset `facilities_2024_eu_gee_upload_v1` (2,415 points). `--to-asset projects/eu-re-potential/assets` writes the table to an EE asset instead of Drive, which can then be downloaded with `ee.FeatureCollection(asset).getDownloadURL(filetype="csv")`.
+
 #### Pipeline
 
 ```bash
@@ -232,7 +234,7 @@ python3 land_availability/merge_land_availability.py \
   --land-export Input/LandCover_Area_Categorized_5km.csv
 ```
 
-**Output:** `land_availability/outputs/land_availability_by_facility.csv` — facility metadata plus all land-cover km² columns and `available_land_km2`.
+**Output:** `land_availability/outputs/land_availability_allocated_{5,15}km.csv` (main case) and `land_availability_by_facility_{5,15}km.csv` (independent buffers), each with facility metadata, all land-cover km² columns and `available_land_km2`. See `land_availability/README.md`.
 
 #### Limitations
 

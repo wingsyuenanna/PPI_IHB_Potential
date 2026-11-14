@@ -21,7 +21,7 @@ def get_elevation() -> ee.Image:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        description="Script version of GEE_facility_calculate_available_area.ipynb (exports land-cover area within a buffer for each facility point)."
+        description="Exports land-cover area within a buffer for each facility point)."
     )
     p.add_argument(
         "--project",
@@ -41,12 +41,32 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument("--slope-max-deg", type=float, default=5.0, help="Maximum slope for suitability mask.")
     p.add_argument("--wdpa-padding-m", type=int, default=100, help="Padding applied to protected areas mask.")
+    p.add_argument(
+        "--wdpa-asset",
+        default="WCMC/WDPA/202607/polygons",
+        help="Pinned WDPA snapshot. Do not use WCMC/WDPA/current: it changes monthly, and the "
+        "2026-11 release dropped most German Landscape Protection Areas and Polish national parks, "
+        "nature reserves and landscape parks.",
+    )
+    p.add_argument(
+        "--allow-desig",
+        nargs="*",
+        default=["DEU:Landscape Protection Area"],
+        help="WDPA designations (ISO3:DESIG_ENG) NOT excluded, so their land counts as eligible. "
+        "Default keeps German Landscape Protection Areas (Landschaftsschutzgebiete), where PV is "
+        "permitted subject to the area's ordinance. Pass the flag with no values to exclude all WDPA.",
+    )
     p.add_argument("--scale", type=int, default=30, help="Scale in meters for reduceRegion.")
     p.add_argument(
         "--drive-description",
         default=None,
         help="GEE Drive export task description. Default: LandCover_Area_Categorized_<km>km "
         "(LandCover_Area_Allocated_<km>km with --allocate-by).",
+    )
+    p.add_argument(
+        "--to-asset",
+        default=None,
+        help="Export to an EE asset folder (e.g. projects/eu-re-potential/assets) instead of Drive.",
     )
     p.add_argument(
         "--allocate-by",
@@ -68,9 +88,14 @@ def main(argv: list[str] | None = None) -> int:
     points = ee.FeatureCollection(args.asset)
     wc = ee.Image("ESA/WorldCover/v200/2021").select("Map")
     elev = get_elevation()
-    wdpa = ee.FeatureCollection("WCMC/WDPA/current/polygons").filter(
+    wdpa = ee.FeatureCollection(args.wdpa_asset).filter(
         ee.Filter.inList("STATUS", wdpa_statuses)
     )
+    for item in args.allow_desig:
+        iso3, desig = item.split(":", 1)
+        wdpa = wdpa.filter(
+            ee.Filter.And(ee.Filter.eq("ISO3", iso3), ee.Filter.eq("DESIG_ENG", desig)).Not()
+        )
 
     slope_mask = ee.Terrain.slope(elev).lte(args.slope_max_deg)
     wdpa_mask = (
@@ -148,6 +173,18 @@ def main(argv: list[str] | None = None) -> int:
     default_desc = f"LandCover_Area_Allocated_{km}km" if w else f"LandCover_Area_Categorized_{km}km"
     description = args.drive_description or default_desc
 
+    if args.to_asset:
+        # Store the table as an EE asset, so it can be downloaded with
+        # ee.FeatureCollection(asset).getDownloadURL(...) without going through Drive.
+        asset_id = f"{args.to_asset.rstrip('/')}/{description}"
+        task = ee.batch.Export.table.toAsset(
+            collection=results,
+            description=description,
+            assetId=asset_id,
+        )
+        task.start()
+        print(f"Started GEE asset export task: {asset_id}")
+        return 0
     task = ee.batch.Export.table.toDrive(
         collection=results,
         description=description,
