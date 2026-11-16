@@ -25,7 +25,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! -x .venv/bin/python ]]; then
-  python3 -m venv .venv
+  # Current pandas/numpy need Python >= 3.11 (Amazon Linux 2023 ships 3.9: sudo dnf install python3.12)
+  PY="${PYTHON:-$(command -v python3.12 || command -v python3.11 || echo python3)}"
+  "$PY" -m venv .venv
 fi
 .venv/bin/python -m pip install -q --upgrade pip
 .venv/bin/python -m pip install -q -r requirements.txt
