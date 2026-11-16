@@ -537,10 +537,15 @@ def run_multiband_heatpump_optimization(
             np.array(c_idx, dtype=np.int32),
             np.array(c_val, dtype=np.float64),
         )
-        # Scale with horizon: 16-day runs stay ~2 min; full-year (~365 days) needs
-        # much longer or HiGHS hits time_limit and falsely falls into the max-serve path.
-        time_limit = float(max(120.0, min(2400.0, 4.0 * K)))
+        # Scale with horizon in days (K blocks of H hours): 16-day runs stay ~2 min, the
+        # full year (one linked 8,760-h block, K=1) gets ~24 min. Scaling by K alone gave
+        # the linked year only 120 s, so HiGHS stopped without a feasible solution.
+        n_days = K * H / 24.0
+        time_limit = float(max(120.0, min(2400.0, 4.0 * n_days)))
         h.setOptionValue("time_limit", time_limit)
+        # Interior point: same optimum as dual simplex on the linked 8,760-h year
+        # (LCOH equal to 1e-12) in about a third of the time (123 s vs 368 s, one site).
+        h.setOptionValue("solver", "ipm")
         return h
 
     def _unserved(cv: np.ndarray) -> float:
@@ -554,13 +559,17 @@ def run_multiband_heatpump_optimization(
                 total += weights[c] * float(cv[u0:u0 + H].sum())
         return total
 
-    def _accept_status(status: HighsModelStatus) -> bool:
-        """Optimal, or time/iteration limit with a usable primal solution."""
-        return status in (
-            HighsModelStatus.kOptimal,
-            HighsModelStatus.kTimeLimit,
-            HighsModelStatus.kIterationLimit,
-        )
+    def _accept_status(status: HighsModelStatus, model: Highs | None = None) -> bool:
+        """Optimal, or time/iteration limit with a feasible primal solution.
+
+        At a time limit HiGHS may hold no feasible point (primal_solution_status != 2).
+        Using that point gives served > 100%, negative storage and broken caps.
+        """
+        if status == HighsModelStatus.kOptimal:
+            return True
+        if status in (HighsModelStatus.kTimeLimit, HighsModelStatus.kIterationLimit):
+            return model is not None and model.getInfo().primal_solution_status == 2
+        return False
 
     t0 = time.time()
     h = _build("cost", target_unserved_cap)
@@ -572,16 +581,16 @@ def run_multiband_heatpump_optimization(
     if status0 == HighsModelStatus.kInfeasible:
         h1 = _build("unserved", None)
         h1.minimize()
-        if not _accept_status(h1.getModelStatus()):
+        if not _accept_status(h1.getModelStatus(), h1):
             print(f"⚠️ site {site_id}: not optimal ({h1.getModelStatus()})")
             return None, None, False
         u_star = _unserved(np.asarray(h1.getSolution().col_value, dtype=float))
         h = _build("cost", u_star * 1.0001 + 1e-6)
         h.minimize()
-        if not _accept_status(h.getModelStatus()):
+        if not _accept_status(h.getModelStatus(), h):
             print(f"⚠️ site {site_id}: cost phase not optimal ({h.getModelStatus()})")
             return None, None, False
-    elif not _accept_status(status0):
+    elif not _accept_status(status0, h):
         print(f"⚠️ site {site_id}: cost@90% not optimal ({status0})")
         return None, None, False
     elif status0 != HighsModelStatus.kOptimal:
