@@ -144,6 +144,7 @@ def run_multiband_heatpump_optimization(
     max_storage_hours: float | None = None,
     liion_max_hours: float = 4.0,
     ihb_max_hours: float = 20.0,
+    cap_discharge_to_load: bool = True,
     ihb_loss_per_day: float = 0.01,
     chronological_year: bool = False,
     inverter_efficiency: float = 0.967,
@@ -369,6 +370,15 @@ def run_multiband_heatpump_optimization(
         lower = np.zeros(n_total, dtype=np.float64)
         upper = np.full(n_total, HS_INF, dtype=np.float64)
         upper[0] = max_solar_mw if (max_solar_mw is not None and max_solar_mw >= 0) else HS_INF
+        if cap_discharge_to_load:
+            # Discharge rating <= the peak load it can serve. Without this, E <= h * P_dis
+            # lets the model buy idle discharge rating to unlock storage beyond h hours of
+            # load (e.g. 248 h at Duisburg in the linked year). With it, E <= h * load.
+            peak = float(np.max(shape24))
+            if n_hp:  # Li-ion feeds heat pumps: electric load = heat / COP
+                upper[li_Pdis] = peak * sum(bands[j][1] / bands[j][2] for j in hp_idx)
+            if n_ihb:  # IHB discharges heat straight to its bands
+                upper[ihb_Pdis] = peak * sum(bands[j][1] for j in ihb_idx)
 
         if objective == "cost":
             cost[0] = solar_cost_per_mw / annual_load_MWh

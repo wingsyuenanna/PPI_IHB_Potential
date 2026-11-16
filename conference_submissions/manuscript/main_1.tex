@@ -273,6 +273,12 @@ The Li-ion battery charges and discharges through one inverter, so its charging 
 E_{j} \leq h_{j}\, P_{j}^{\dis}
 \label{eq:duration}
 \end{equation}
+\begin{equation}
+P_{\Li}^{\dis} \leq \max_{t}\sigma_{t} \sum_{b \in \mathcal{B}^{\HP}} \frac{L_{b}}{\mathrm{COP}_{b}}, \qquad
+P_{\IHB}^{\dis} \leq \max_{t}\sigma_{t} \sum_{b \in \mathcal{B}^{\IHB}} L_{b}
+\label{eq:dis-cap}
+\end{equation}
+Equation~\ref{eq:duration} is the fixed ratio of energy to power used for storage in energy system models\cite{brown2018pypsa}. Each discharge rating is also limited to the peak load that the store can serve (Eq.~\ref{eq:dis-cap}), the electricity drawn by the heat pumps for Li-ion and the heat load of the IHB bands for the heat battery. A higher rating cannot be used, because discharge is limited by the load, but under Eq.~\ref{eq:duration} it would raise the storage limit. Without Eq.~\ref{eq:dis-cap}, the full-year optimisation buys such unused rating at high availability to store heat across several days, more than ten times the stated duration at some sites. Together the two constraints limit storage to $h_{j}$ hours of the load each store serves.
 The Li-ion duration is limited to $h_{\Li}=4$\,h because the BloombergNEF battery costs are for four-hour systems\cite{bnef2024lcoe}, and the IHB duration to $h_{\IHB}=20$\,h, the upper end of commercial heat battery configurations, which store 8--20\,h of heat at rated output\cite{rondo2026datasheet}, and within the duration of up to about 24\,h reported for thermal energy storage\cite{bnef2024ldes}. The IHB loses $\lambda$ of its stored heat each hour, equivalent to the heat loss of about 1\% per day expected for industrial thermal storage\cite{fraunhofer2024directelec}.
 
 \paragraph{Li-ion discharge to HP bands:}

@@ -54,6 +54,7 @@ def solve(row: pd.Series) -> tuple[dict, pd.DataFrame]:
         round_trip_efficiency=CONFIG["round_trip_efficiency"],
         liion_max_hours=CONFIG["liion_max_hours"],
         ihb_max_hours=CONFIG["ihb_max_hours"],
+        cap_discharge_to_load=CONFIG["cap_discharge_to_load"],
         ihb_loss_per_day=CONFIG["ihb_loss_per_day"],
         n_representative_days=CONFIG["n_representative_days"],
         max_solar_mw=(land * CONFIG["mw_per_km2"]) if land >= 0 else None,
