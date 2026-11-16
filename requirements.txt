@@ -7,4 +7,6 @@ earthengine-api
 requests
 timezonefinder
 pyarrow
-highspyboto3
+highspy==1.15.0  # interior-point solve tested with this version
+boto3
+matplotlib

@@ -22,3 +22,8 @@ References/Levelized Cost of Electricity_ Methodology _ Full Report _ BloombergN
 solar_radiation/outputs/hourly_profiles/*.parquet
 References/jrc_idees/extracted/**/*.csv
 archive/**/*.tar.gz
+
+# Fleet sweep run outputs (per-site, thousands of files) and EC2 logs
+outputs/multiband/analysis/lcoh_vs_availability_[0-9]*_[0-9]*km.csv
+outputs/multiband/analysis/_stale_*/
+logs/
