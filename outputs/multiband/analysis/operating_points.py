@@ -54,3 +54,29 @@ def fleet_stats(p: pd.DataFrame, tag: str) -> tuple[float, float]:
     s = p[f"served_{tag}"]
     m = s > 0
     return 100.0 * s.sum() / p["demand"].sum(), float((p.loc[m, f"lcoh_{tag}"] * s[m]).sum() / s[m].sum())
+
+
+def price_cap_curve(km: int, ks=None) -> pd.DataFrame:
+    """Fleet heat met and LCOH when each site may pay up to k x its country gas heat cost.
+
+    For each k, every site takes the highest availability floor with LCOH <= k x gas (the
+    max-heat rule with a scaled threshold), so k = 1 reproduces the max-heat point. Shares are of
+    total demand of all runnable sites.
+    """
+    import numpy as np
+
+    from gas_benchmark import country_gas_heat
+
+    if ks is None:
+        ks = np.round(np.arange(0.40, 1.0001, 0.02), 2)
+    long = sweep_long(km)
+    long = long.assign(gas=long["iso3_country"].map(country_gas_heat()))
+    demand = points(km)["demand"].sum()
+    rows = []
+    for k in ks:
+        ok = long[long["lcoh"] <= k * long["gas"]]
+        best = ok.loc[ok.groupby("source_id")["availability_floor"].idxmax()]
+        s = best["served"].sum()
+        rows.append({"k": float(k), "served_pct": 100.0 * s / demand,
+                     "lcoh": float((best["lcoh"] * best["served"]).sum() / s) if s > 0 else float("nan")})
+    return pd.DataFrame(rows)
