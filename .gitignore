@@ -30,3 +30,4 @@ logs/
 
 # Notebook caches of extracted sweep results
 outputs/multiband/analysis/_cache_*/
+outputs/multiband/analysis/lcoh_vs_availability_[0-9]*_[0-9]*km_hybrid.csv

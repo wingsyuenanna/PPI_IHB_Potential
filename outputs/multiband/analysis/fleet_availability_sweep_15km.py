@@ -8,6 +8,8 @@ Floors: 10%, 20%, …, 100%. Checkpoint per site; resume-safe.
 from __future__ import annotations
 
 import argparse
+import os
+import shutil
 import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -33,15 +35,26 @@ from outputs.multiband.analysis.lcoh_vs_availability_sweep import (  # noqa: E40
 
 OUT = Path(__file__).resolve().parent
 LAND_KM = 15
+# SWEEP_TAG (e.g. "hybrid") keeps a variant's per-site and summary files apart from the base run.
+TAG = os.environ.get("SWEEP_TAG", "")
+SFX = f"_{TAG}" if TAG else ""
+HYBRID = os.environ.get("HYBRID_LOW_TEMP", "0") == "1"
 FLOORS = [round(x, 2) for x in np.arange(0.1, 1.01, 0.1)]
-LONG_CSV = OUT / "fleet_availability_sweep_15km_long.csv"
-KNEE_CSV = OUT / "fleet_availability_knee_15km.csv"
-SUMMARY_TXT = OUT / "fleet_availability_sweep_15km_summary.txt"
-PNG = OUT / "fleet_availability_sweep_15km_curve.png"
+LONG_CSV = OUT / f"fleet_availability_sweep_15km{SFX}_long.csv"
+KNEE_CSV = OUT / f"fleet_availability_knee_15km{SFX}.csv"
+SUMMARY_TXT = OUT / f"fleet_availability_sweep_15km{SFX}_summary.txt"
+PNG = OUT / f"fleet_availability_sweep_15km{SFX}_curve.png"
 
 
 def site_csv(sid: int) -> Path:
-    return OUT / f"lcoh_vs_availability_{sid}_{LAND_KM}km.csv"
+    return OUT / f"lcoh_vs_availability_{sid}_{LAND_KM}km{SFX}.csv"
+
+
+def heat_pump_sites() -> set[int]:
+    """Sites with any heat below 200 C, the only ones the hybrid option can change."""
+    a = pd.read_csv(ROOT / "outputs" / "eu_ihb_site_assessment_2024.csv", low_memory=False)
+    hp = a[["heat_below100C_tj", "heat_100C-200C_tj"]].fillna(0).sum(axis=1) > 0
+    return set(a.loc[hp, "source_id"].astype(int))
 
 
 def floors_complete(df: pd.DataFrame) -> bool:
@@ -80,6 +93,18 @@ def run_sweep(max_workers: int) -> None:
     prior = pd.read_csv(PRIOR[LAND_KM])
     ids = sorted(int(x) for x in prior.loc[prior["status"] == "ok", "source_id"].unique())
     print(f"Fleet sites: {len(ids)}  floors: {FLOORS}  workers: {max_workers}")
+
+    if HYBRID and SFX:
+        # Heat-battery-only sites give the same result with the hybrid option: reuse the base files.
+        hp_ids = heat_pump_sites()
+        copied = 0
+        for sid in ids:
+            base = OUT / f"lcoh_vs_availability_{sid}_{LAND_KM}km.csv"
+            if sid not in hp_ids and base.exists() and not site_csv(sid).exists():
+                shutil.copyfile(base, site_csv(sid))
+                copied += 1
+        print(f"Hybrid: {len(ids) - len(hp_ids & set(ids))} heat-battery-only sites reuse base results "
+              f"({copied} copied now)")
 
     todo: list[int] = []
     done = 0
@@ -244,7 +269,7 @@ def analyze(long: pd.DataFrame) -> None:
             }
         )
     curve = pd.DataFrame(rows).sort_values("availability_floor")
-    curve.to_csv(OUT / "fleet_availability_sweep_15km_by_floor.csv", index=False)
+    curve.to_csv(OUT / f"fleet_availability_sweep_15km{SFX}_by_floor.csv", index=False)
 
     # Per-site knee
     knees = []
