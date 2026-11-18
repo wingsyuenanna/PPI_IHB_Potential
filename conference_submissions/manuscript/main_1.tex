@@ -102,23 +102,27 @@ With facility-level resolution, this study analyses 2,192 EU facility with 5 and
 The aggregate replaceable heat demand served is analysed in two ways: maximising savings and maximising heat demand. To maximise savings, a facility should aim for availability up to the maximum savings points. The remaining can be met with grid electricity or gas. To maximise heat demand served, a facility could overbuild solar panels while still being under gas prices resulting in a lower marginal benefit but is still gas competitive. Table~\ref{tab:served} summarises both framings at the 5\,km and 15\,km buffer zones.
 
 % [WISO26 §3, results text]
-At 5\,km, 59\% of replaceable heat is below country gas at \texteuro55/MWh, expanding to 15\,km reaches 84\% at \texteuro62/MWh. Stopping at max savings leaves more money on the table but only 53\% and 74\% of heat for 5\,km and 15\,km buffer zones respectively. The LCOH at 90\% for solar plus storage is still almost \texteuro100 under the grid electricity LCOH (Fig.~\ref{fig:fleet}).
+At 5\,km, 50.5\% of replaceable heat (270\,TWh) can be supplied below each country's gas heat cost at an average LCOH of \texteuro49/MWh. Expanding the buffer to 15\,km raises this to 76.6\% (410\,TWh) at \texteuro55/MWh, against an EU-27 gas heat cost of \texteuro77/MWh. Stopping at the maximum-savings point serves 46.3\% and 67.5\% of heat at \texteuro40/MWh at 5\,km and 15\,km, and saves \texteuro9.2 and \texteuro13.8\,bn per year compared with gas.
+
+Figure~\ref{fig:fleet} shows how heat served grows as a common availability target is raised from 10\% to 100\%, with each facility following the target only while its LCOH stays at or below its gas heat cost. Up to a target of 50\%, almost every facility can follow and heat served tracks the target at below \texteuro40/MWh. Above it, facilities drop out. At 15\,km, 1,791 facilities meet a 60\% target below gas, 670 meet 70\% and 69 meet 100\%, so heat served flattens at 77\%. At 5\,km land runs out sooner, and a 50\% target serves only 38\% of heat.
 
 \subsection*{Country-level comparison}
 \todo{rewrite heading as the finding}
 % [WISO26 §3.3]
-Germany, the Netherlands, and France have very large process-heat demand. With a $\sim$15\,km land buffer, a large majority can be served below country gas. At 5\,km, Germany and the Netherlands remain more land constrained. Southern Europe (Greece, Spain, Italy, Portugal) is the strongest fit. Those sites tend to be smaller, with better solar yield. $\sim$95\% of demand served at LCOH roughly 70--75\% of country gas cost (Fig.~\ref{fig:region}).
+Germany, the Netherlands, and France have very large process-heat demand. With a 15\,km land buffer, 75--78\% of their heat can be served below country gas. At 5\,km, Germany (44\%) and the Netherlands (30\%) remain more land constrained. Southern Europe (Greece, Spain, Italy, Portugal) is the strongest fit, with better solar yield. It serves 83\% of its demand at 15\,km and 63\% at 5\,km, at an LCOH of 55--58\% of its gas heat cost. Sweden and Finland serve the least, 59\% and 65\% at 15\,km (Fig.~\ref{fig:region}).
 
 \subsection*{High temperature sectors, solar resource and land constraint}
 \todo{rewrite heading as the finding; this subsection merges WISO26 \S3.2, \S3.4 and \S3.5 -- trim}
 % [WISO26 §3.2]
-Steam cracking and iron and steel sector have very large sites and have more heat intense processes ($>$500\,$^\circ$C) resulting in much higher heat loads. These sectors require more hybrid solutions: increased land availability, utilising grid electricity, co-firing with gas plants. By increasing buffer zone around each site, over 80\% of heat can be served in both sectors under gas prices. Increasing buffer zones from 5\,km to 15km, availability for steel increases from 40\% to 80\%, for steam, from 30\% to 80\%. Grid electricity or gas plants are still needed to provide for the last 10-30\% of demand at 15\,km buffer zones.
+Steam cracking and iron and steel sector have very large sites and have more heat intense processes ($>$500\,$^\circ$C) resulting in much higher heat loads. These sectors require more hybrid solutions: increased land availability, utilising grid electricity, co-firing with gas plants. By increasing buffer zone around each site, over 80\% of heat can be served in both sectors under gas prices. Increasing buffer zones from 5\,km to 15\,km, availability for steel increases from 37\% to 81\%, and for steam cracking from 30\% to 83\%. Grid electricity or gas plants are still needed to provide the last 17--20\% of demand at 15\,km buffer zones.
+
+Low-temperature sectors reach a smaller share of their heat than high-temperature sectors. At 15\,km, food, textiles and pulp and paper meet 50--58\% of their heat below gas, while steel, steam cracking, cement, lime and glass meet 80--87\%. The limit is storage rather than land. Heat below 200\,$^\circ$C is supplied by heat pumps whose Li-ion batteries hold at most 4\,h of their electricity demand, which cannot carry solar output through the night. Heat at or above 200\,$^\circ$C comes from heat batteries that store up to 20\,h of heat. At 15\,km, 231 of the 232 facilities that meet less than half of their heat below gas mainly use heat pumps, and only two are limited by land.
 
 % [WISO26 §3.4]
-Where land is comparable, solar resource drives how much PV overbuild high-temperature sites need. Two high temperature steel plants, Linz in Austria and Taranto in Italy, have similar temperature needs (900\,$^\circ$C) and heat demand (5\,TWh). Taranto has 20\% solar capacity factor while Linz has 15\%. Both have enough land available at 15\,km to meet 90\% of their heat demand, but Linz needs to overbuild 15x load while Taranto would only need to build 5.3x their load. Higher-irradiance sites can hit high-T reliability with less overbuild and much lower LCOH. Table~\ref{tab:linz} summarises the comparison.
+Where land is comparable, solar resource drives how much PV overbuild high-temperature sites need. Two high temperature steel plants, Linz in Austria and Taranto in Italy, have similar temperature needs (900\,$^\circ$C) and heat demand (5\,TWh). Taranto has 20\% solar capacity factor while Linz has 15\%. Both have enough land available at 15\,km to meet 90\% of their heat demand, but Linz needs to overbuild 15.3 times its load and uses all of its eligible land, while Taranto would only need to build 5.9 times its load. Higher-irradiance sites can hit high-T reliability with less overbuild and much lower LCOH. Table~\ref{tab:linz} summarises the comparison.
 
 % [WISO26 §3.5]
-For large sites with high temperature processes, there are concentrated areas where the land resources just cannot provide most of the energy at 5\,km buffer zone. The major shortfall areas are in the Rhine-Meuse region where steel and steam cracking facilities are. These sites typically have $\sim$8--50\,km$^2$/TWh land and $\sim$12--14\% solar capacity factor. Most sites that miss 50\% at 5\,km recover at 15\,km. Expanding to 15\,km allows all sites, except for 3, to reach over 50\% availability (Fig.~\ref{fig:land}).
+For large sites with high temperature processes, there are concentrated areas where the land resources just cannot provide most of the energy at 5\,km buffer zone. The largest shortfalls are in Germany (63\,TWh) and the Netherlands (30\,TWh), where steel and steam cracking facilities are concentrated. At 5\,km, 99 high-temperature facilities meet less than half of their heat below gas. These sites typically have 2--6\,km$^2$ of eligible land per TWh of heat and a 14--18\% solar capacity factor. Expanding to 15\,km lifts 98 of them above 50\%, and only SSAB Lule\aa{} in northern Sweden remains below (Fig.~\ref{fig:land}).
 
 % =================================================================
 \section*{Discussion}
@@ -346,7 +350,7 @@ For facility $i$, let $\alpha$ be the availability floor, $Q_i(\alpha)$ the heat
 \alpha^{\mathrm{heat}}_i &= \max\left\{\alpha : \mathrm{LCOH}_i(\alpha) \leq c^{\mathrm{gas}}_{i}\right\}, \label{eq:maxheat}\\
 \alpha^{\mathrm{sav}}_i &= \arg\max_{\alpha}\; Q_i(\alpha) \left(c^{\mathrm{gas}}_{i} - \mathrm{LCOH}_i(\alpha)\right), \label{eq:maxsav}
 \end{align}
-where the saving in Eq.~\ref{eq:maxsav} is evaluated only at floors with $\mathrm{LCOH}_i(\alpha) \leq c^{\mathrm{gas}}_{i}$.
+where the saving in Eq.~\ref{eq:maxsav} is evaluated only at floors with $\mathrm{LCOH}_i(\alpha) \leq c^{\mathrm{gas}}_{i}$. To show how heat served grows with the availability asked of facilities, a common target is raised from 10\% to 100\% in steps of 10\%. At each target, a facility operates at the highest floor up to the target at which its LCOH is at or below its gas heat cost. At the 100\% target every facility is at its maximum-heat point, so the fleet curve ends at the fleet maximum-heat point (Fig.~\ref{fig:fleet}).
 
 Heat served is summed across facilities and expressed as a share of total replaceable heat. Fleet and country LCOH are the means of facility LCOH weighted by heat served, which is equivalent to total annualised cost divided by total heat served.
 
@@ -386,14 +390,16 @@ Heat served is summed across facilities and expressed as a share of total replac
 \begin{figure}[h]
 \centering
 % [WISO26 Fig. 2 caption]
-\caption{EU fleet-average LCOH vs. availability achieved at 5\,km and 15\,km land buffer zones, relative to the \texteuro93/MWh gas-heat and \texteuro171/MWh grid-electricity benchmarks.}
+\includegraphics[width=0.6\textwidth]{figures/fig_fleet_lcoh_availability.pdf}
+\caption{EU fleet LCOH against the share of replaceable heat served at 5\,km and 15\,km land buffer zones. Each point is a common availability target from 10\% to 100\% (labelled on the 15\,km curve). At each target a facility operates at the target if its LCOH is at or below its country's gas heat cost, and otherwise at its highest availability below that cost, so each curve ends at the maximum-heat point. Filled markers: maximum savings. Open markers: maximum heat. Dash-dot line: EU-27 gas heat cost (\texteuro77/MWh).}
 \label{fig:fleet}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 % [WISO26 Fig. 4 caption]
-\caption{Country-level LCOH vs. heat served at each country's gas-heat price, relative to \texteuro93/MWh: (a) 5\,km, (b) 15\,km}
+\includegraphics[width=0.6\textwidth]{figures/fig_country_lcoh.pdf}
+\caption{Country LCOH against the share of replaceable heat served at the maximum-heat point, using each country's gas heat cost: (a) 5\,km, (b) 15\,km. Bubble area is proportional to national replaceable heat demand. Vertical lines: fleet maximum heat (dashed) and maximum savings (dotted). Dash-dot line: EU-27 gas heat cost (\texteuro77/MWh).}
 \label{fig:region}
 \end{figure}
 
@@ -402,6 +408,7 @@ Heat served is summed across facilities and expressed as a share of total replac
 % [WISO26 Fig. 3 and Fig. 5 captions] -- decide whether to merge into one figure
 \caption{LCOH vs. availability for land-capped industries at 5\,km and 15\,km: (a) iron and steel, (b) steam cracking. Lines: gas \texteuro93/MWh, grid electricity \texteuro171/MWh. \textit{[WISO26 Fig.~5:]} Facility-level heat availability achieved by land-constraint category: (a) 5\,km buffer zone, (b) 15\,km buffer zone}
 \label{fig:land}
+\todo{Fig.~\ref{fig:land} not yet regenerated from the 2026-11-17 sweep. Its panels and caption still use the \texteuro93 gas and \texteuro171 grid benchmarks.}
 \end{figure}
 
 
@@ -420,10 +427,11 @@ Heat served is summed across facilities and expressed as a share of total replac
 \toprule
  & 5\,km & 15\,km \\
 \midrule
-Served (highest served under gas prices) & 58.8\% (307\,TWh) & 84.4\% (441\,TWh) \\
-LCOH (highest served under gas prices) & \texteuro55 & \texteuro62 \\
-Served (max savings vs \texteuro93) & 53.4\% (278\,TWh) & 73.9\% (377\,TWh) \\
-LCOH (max savings vs \texteuro93) & \texteuro41 & \texteuro42 \\
+Served (maximum heat below country gas) & 50.5\% (270\,TWh) & 76.6\% (410\,TWh) \\
+LCOH (maximum heat) & \texteuro49 & \texteuro55 \\
+Served (maximum savings vs country gas) & 46.3\% (248\,TWh) & 67.5\% (361\,TWh) \\
+LCOH (maximum savings) & \texteuro40 & \texteuro40 \\
+Saving vs gas (maximum savings) & \texteuro9.2\,bn/yr & \texteuro13.8\,bn/yr \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -437,8 +445,8 @@ LCOH (max savings vs \texteuro93) & \texteuro41 & \texteuro42 \\
 \toprule
  & Solar/load & PV built & Land used & LCOH \\
 \midrule
-Taranto & 5.3$\times$ & 3.0\,GW & 32\% & \texteuro33 \\
-Linz & 15.0$\times$ & 8.5\,GW & 80\% & \texteuro85 \\
+Taranto & 5.9$\times$ & 3.6\,GW & 38\% & \texteuro28 \\
+Linz & 15.3$\times$ & 9.3\,GW & 100\% & \texteuro67 \\
 \bottomrule
 \end{tabular}
 \end{table}
