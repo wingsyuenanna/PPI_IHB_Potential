@@ -145,6 +145,7 @@ def run_multiband_heatpump_optimization(
     liion_max_hours: float = 4.0,
     ihb_max_hours: float = 20.0,
     cap_discharge_to_load: bool = True,
+    hybrid_low_temp: bool = False,
     ihb_loss_per_day: float = 0.01,
     chronological_year: bool = False,
     inverter_efficiency: float = 0.967,
@@ -284,6 +285,12 @@ def run_multiband_heatpump_optimization(
     nb = len(bands)
     n_hp = len(hp_idx)
     n_ihb = len(ihb_idx)
+    # Hybrid: the heat battery can also serve heat-pump bands, so a low-temperature band is met
+    # by heat pump (direct solar or Li-ion) + heat battery + unserved, in whatever mix is cheapest.
+    # A heat battery store then exists whenever there are heat-pump bands.
+    hybrid = bool(hybrid_low_temp and n_hp)
+    has_store = bool(n_ihb or hybrid)
+    hp_blk = 4 if hybrid else 3  # hourly blocks per HP band: direct, from_batt, unserved (+ from_ihb)
     total_load_MW = sum(load for _, load, _ in bands)
     annual_load_MWh = total_load_MW * total_days * H
     target_unserved_cap = (1.0 - af) * annual_load_MWh
@@ -301,7 +308,7 @@ def run_multiband_heatpump_optimization(
         col += 3
 
     ihb_Pch = ihb_Pdis = ihb_E = None
-    if n_ihb:
+    if has_store:
         ihb_Pch, ihb_Pdis, ihb_E = col, col + 1, col + 2
         col += 3
 
@@ -318,8 +325,8 @@ def run_multiband_heatpump_optimization(
         return n_cap + c * _day_stride
 
     # Precompute day stride
-    hp_hourly_per_day = (3 + 3 * n_hp) if n_hp else 0  # li soc trio + per-band
-    ihb_hourly_per_day = (3 + 2 * n_ihb) if n_ihb else 0  # shared store trio + per-band
+    hp_hourly_per_day = (3 + hp_blk * n_hp) if n_hp else 0  # li soc trio + per-band
+    ihb_hourly_per_day = (3 + 2 * n_ihb) if has_store else 0  # shared store trio + per-band
     _day_stride = H * (hp_hourly_per_day + ihb_hourly_per_day)
 
     def li_ch0(c):
@@ -333,13 +340,16 @@ def run_multiband_heatpump_optimization(
 
     def hp_direct0(j_pos, c):
         # j_pos = position in hp_idx list
-        return li_hour_base(c) + 3 * H + j_pos * 3 * H
+        return li_hour_base(c) + 3 * H + j_pos * hp_blk * H
 
     def hp_from_batt0(j_pos, c):
         return hp_direct0(j_pos, c) + H
 
     def hp_un0(j_pos, c):
         return hp_direct0(j_pos, c) + 2 * H
+
+    def hp_from_ihb0(j_pos, c):  # hybrid only: heat-battery heat delivered to this HP band
+        return hp_direct0(j_pos, c) + 3 * H
 
     def ihb_hour_base(c):
         return li_hour_base(c) + H * hp_hourly_per_day
@@ -377,8 +387,8 @@ def run_multiband_heatpump_optimization(
             peak = float(np.max(shape24))
             if n_hp:  # Li-ion feeds heat pumps: electric load = heat / COP
                 upper[li_Pdis] = peak * sum(bands[j][1] / bands[j][2] for j in hp_idx)
-            if n_ihb:  # IHB discharges heat straight to its bands
-                upper[ihb_Pdis] = peak * sum(bands[j][1] for j in ihb_idx)
+            if has_store:  # IHB discharges heat straight to its bands (and HP bands if hybrid)
+                upper[ihb_Pdis] = peak * sum(bands[j][1] for j in ihb_idx + (hp_idx if hybrid else []))
 
         if objective == "cost":
             cost[0] = solar_cost_per_mw / annual_load_MWh
@@ -387,7 +397,7 @@ def run_multiband_heatpump_optimization(
                 cost[li_Pdis] = li_power_annual_per_mw / annual_load_MWh
                 for c in range(K):
                     cost[li_dis0(c):li_dis0(c) + H] = li_vom_per_mwh * weights[c] / annual_load_MWh
-            if n_ihb:
+            if has_store:
                 cost[ihb_Pch] = ihb_in_annual_per_mw / annual_load_MWh
                 cost[ihb_Pdis] = ihb_out_annual_per_mw / annual_load_MWh
                 cost[ihb_E] = ihb_e_annual_per_mwh / annual_load_MWh
@@ -437,7 +447,7 @@ def run_multiband_heatpump_optimization(
             row(NINF, 0, [li_E, li_Pdis], [1.0, -h_li])
             # Li-ion: one bidirectional inverter rating, so charge power <= discharge power.
             row(NINF, 0, [li_Pch, li_Pdis], [1.0, -1.0])
-        if n_ihb:
+        if has_store:
             row(NINF, 0, [ihb_E, ihb_Pdis], [1.0, -h_ihb])
 
         for c in range(K):
@@ -451,7 +461,7 @@ def run_multiband_heatpump_optimization(
                     for p in range(n_hp):
                         cols.append(hp_direct0(p, c) + t)
                         coeffs.append(1.0)
-                if n_ihb:
+                if has_store:
                     cols.append(ihb_ch0(c) + t)
                     coeffs.append(1.0)
                 row(NINF, 0, cols, coeffs)
@@ -485,19 +495,18 @@ def run_multiband_heatpump_optimization(
                 for t in range(H):
                     load_t = load * float(shape24[t])
                     d0, b0 = hp_direct0(p, c) + t, hp_from_batt0(p, c) + t
-                    row(
-                        load_t,
-                        load_t,
-                        [d0, b0, hp_un0(p, c) + t],
-                        [cop, cop, 1.0],
-                    )
+                    bal_cols, bal_coef = [d0, b0, hp_un0(p, c) + t], [cop, cop, 1.0]
+                    if hybrid:
+                        bal_cols.append(hp_from_ihb0(p, c) + t)
+                        bal_coef.append(1.0)
+                    row(load_t, load_t, bal_cols, bal_coef)
                     row(NINF, 0, [d0, b0, cap_col], [cop, cop, -1.0])
 
             # Shared IHB store: one thermal mass charged by resistive heating
             # (COP=1 for all IHB bands by construction) feeds every IHB band —
             # discharge is allocated across bands, i.e. higher-temperature stored
             # heat can supply a lower-temperature band's load (cascading).
-            if n_ihb:
+            if has_store:
                 ch0, dis0, sc0 = ihb_ch0(c), ihb_dis0(c), ihb_soc0(c)
                 for t in range(H):
                     prev = sc0 + (H - 1) if t == 0 else sc0 + t - 1
@@ -512,7 +521,9 @@ def run_multiband_heatpump_optimization(
                     row(NINF, 0, [dis0 + t, ihb_Pdis], [1.0, -1.0])
                     # Pool's discharge is split across bands' serve columns.
                     serve_cols = [dis0 + t] + [ihb_serve0(p, c) + t for p in range(n_ihb)]
-                    serve_coeffs = [1.0] + [-1.0] * n_ihb
+                    if hybrid:
+                        serve_cols += [hp_from_ihb0(p, c) + t for p in range(n_hp)]
+                    serve_coeffs = [1.0] + [-1.0] * (len(serve_cols) - 1)
                     row(0, 0, serve_cols, serve_coeffs)
 
             for j in ihb_idx:
@@ -631,7 +642,7 @@ def run_multiband_heatpump_optimization(
     annual_ihb_cost = 0.0
     ihb_E_total = 0.0
     ihb_Pch_val = ihb_Pdis_val = 0.0
-    if n_ihb:
+    if has_store:
         ihb_Pch_val = float(cv[ihb_Pch])
         ihb_Pdis_val = float(cv[ihb_Pdis])
         ihb_E_total = float(cv[ihb_E])
@@ -701,6 +712,14 @@ def run_multiband_heatpump_optimization(
             annual_hp_vom += vom_j * weights[c] * heat_out
 
     served_MWh = max(annual_load_MWh - total_unserved, 0.0)
+    # Heat delivered to heat-pump bands, split by source (hybrid reports both)
+    hp_heat_from_hp = sum(
+        weights[c] * bands[j][2] * float(cv[hp_direct0(hp_pos[j], c):hp_direct0(hp_pos[j], c) + H].sum()
+                                         + cv[hp_from_batt0(hp_pos[j], c):hp_from_batt0(hp_pos[j], c) + H].sum())
+        for c in range(K) for j in hp_idx)
+    hp_heat_from_ihb = sum(
+        weights[c] * float(cv[hp_from_ihb0(hp_pos[j], c):hp_from_ihb0(hp_pos[j], c) + H].sum())
+        for c in range(K) for j in hp_idx) if hybrid else 0.0
     hp_load_total = sum(load for _, load, cop in bands if cop > 1.0)
     annual_hp_cost = annual_hp_capex_fom + annual_hp_vom
 
@@ -722,7 +741,7 @@ def run_multiband_heatpump_optimization(
         else:
             li_ch_days.append(np.zeros(H))
             li_dis_days.append(np.zeros(H))
-        if n_ihb:
+        if has_store:
             ihb_ch_days.append(np.asarray(cv[ihb_ch0(c):ihb_ch0(c) + H], dtype=float))
             ihb_dis_days.append(np.asarray(cv[ihb_dis0(c):ihb_dis0(c) + H], dtype=float))
         else:
@@ -758,6 +777,9 @@ def run_multiband_heatpump_optimization(
         "Reliability_%": reliability,
         "Unserved_MWh": total_unserved,
         "met_availability_target": bool(met_availability),
+        "hybrid_low_temp": hybrid,
+        "low_temp_heat_from_hp_MWh": hp_heat_from_hp,
+        "low_temp_heat_from_ihb_MWh": hp_heat_from_ihb,
         "hp_load_MW": hp_load_total,
         "ihb_load_MW": sum(load for _, load, cop in bands if cop <= 1.0),
         "solve_seconds": elapsed,
@@ -795,7 +817,7 @@ def run_multiband_heatpump_optimization(
                 hp_load += load * shape24
             ihb_ch = ihb_ch_days[c]
             ihb_dis = ihb_dis_days[c]
-            ihb_soc = cv[ihb_soc0(c):ihb_soc0(c) + H] if n_ihb else np.zeros(H)
+            ihb_soc = cv[ihb_soc0(c):ihb_soc0(c) + H] if has_store else np.zeros(H)
             ihb_un = np.zeros(H)
             ihb_load = np.zeros(H)
             for j in ihb_idx:

@@ -67,7 +67,8 @@ CONFIG = {
     "round_trip_efficiency": 0.90,  # Li-ion RTE; IHB RTE comes from cost CSV (0.95)
     "liion_max_hours": 4.0,  # BNEF Li-ion costs are for 4 h systems
     "ihb_max_hours": 20.0,  # Rondo data sheet: 8-20 h storage at rated output (max 60 MWh / 3 MWth)
-    "cap_discharge_to_load": True,  # Li-ion/IHB discharge rating <= load served, so storage <= h x load
+    "cap_discharge_to_load": True,
+    "hybrid_low_temp": False,  # True: heat battery may also serve heat-pump bands (optimiser picks the mix)  # Li-ion/IHB discharge rating <= load served, so storage <= h x load
     "ihb_loss_per_day": 0.01,  # ~1%/day standby heat loss (Fraunhofer ISI / Agora Industry 2024)
     "chronological_year": True,  # one linked 8,760-h year; False = independent representative days
     "n_representative_days": 16,
@@ -133,6 +134,7 @@ def run_one_site(row: dict, cfg: dict) -> dict:
             liion_max_hours=cfg["liion_max_hours"],
             ihb_max_hours=cfg["ihb_max_hours"],
             cap_discharge_to_load=cfg.get("cap_discharge_to_load", True),
+            hybrid_low_temp=cfg.get("hybrid_low_temp", False),
             ihb_loss_per_day=cfg["ihb_loss_per_day"],
             chronological_year=cfg["chronological_year"],
             n_representative_days=cfg["n_representative_days"],
