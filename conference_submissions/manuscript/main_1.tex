@@ -116,7 +116,7 @@ Germany, the Netherlands, and France have very large process-heat demand. With a
 % [WISO26 §3.2]
 Steam cracking and iron and steel sector have very large sites and have more heat intense processes ($>$500\,$^\circ$C) resulting in much higher heat loads. These sectors require more hybrid solutions: increased land availability, utilising grid electricity, co-firing with gas plants. By increasing buffer zone around each site, over 80\% of heat can be served in both sectors under gas prices. Increasing buffer zones from 5\,km to 15\,km, availability for steel increases from 37\% to 81\%, and for steam cracking from 30\% to 83\%. Grid electricity or gas plants are still needed to provide the last 17--20\% of demand at 15\,km buffer zones.
 
-Low-temperature sectors reach a smaller share of their heat than high-temperature sectors. At 15\,km, food, textiles and pulp and paper meet 50--58\% of their heat below gas, while steel, steam cracking, cement, lime and glass meet 80--87\%. The limit is storage rather than land. Heat below 200\,$^\circ$C is supplied by heat pumps whose Li-ion batteries hold at most 4\,h of their electricity demand, which cannot carry solar output through the night. Heat at or above 200\,$^\circ$C comes from heat batteries that store up to 20\,h of heat. At 15\,km, 231 of the 232 facilities that meet less than half of their heat below gas mainly use heat pumps, and only two are limited by land.
+Low-temperature sectors reach a smaller share of their heat than high-temperature sectors. At 15\,km, food, textiles and pulp and paper meet 50--58\% of their heat below gas, while steel, steam cracking, cement, lime and glass meet 80--87\%. The limit is storage rather than land. Heat below 200\,$^\circ$C is supplied by heat pumps whose Li-ion batteries hold at most 4\,h of their electricity demand, which cannot carry solar output through the night. Heat at or above 200\,$^\circ$C comes from heat batteries that store up to 20\,h of heat. At 15\,km, 231 of the 232 facilities that meet less than half of their heat below gas mainly use heat pumps, and only two are limited by land. Expanding the buffer from 5\,km to 15\,km therefore lifts the heat-battery sectors but leaves the heat-pump sectors almost unchanged (Fig.~\ref{fig:sector}).
 
 % [WISO26 §3.4]
 Where land is comparable, solar resource drives how much PV overbuild high-temperature sites need. Two high temperature steel plants, Linz in Austria and Taranto in Italy, have similar temperature needs (900\,$^\circ$C) and heat demand (5\,TWh). Taranto has 21\% solar capacity factor while Linz has 15\%. Both have enough land available at 15\,km to meet 90\% of their heat demand, but Linz needs to overbuild 15.3 times its load and uses all of its eligible land, while Taranto would only need to build 5.9 times its load. Higher-irradiance sites can hit high-T reliability with less overbuild and much lower LCOH. Table~\ref{tab:linz} summarises the comparison.
@@ -404,6 +404,13 @@ Heat served is summed across facilities and expressed as a share of total replac
 
 \begin{figure}[h]
 \centering
+\includegraphics[width=0.6\textwidth]{figures/fig_sector_heat_met.pdf}
+\caption{Share of each sector's replaceable heat met below its country's gas heat cost at the maximum-heat point, at 5\,km (circles) and 15\,km (squares) land buffers, with each sector's replaceable heat demand. Sectors are grouped by how most of their heat is supplied: heat batteries for heat at or above 200\,$^\circ$C, or heat pumps with Li-ion storage of up to 4\,h for heat below 200\,$^\circ$C.}
+\label{fig:sector}
+\end{figure}
+
+\begin{figure}[h]
+\centering
 % [WISO26 Fig. 3 and Fig. 5 captions] -- decide whether to merge into one figure
 \includegraphics[width=0.48\textwidth]{figures/fig_land_sectors.pdf}\hfill
 \includegraphics[width=0.48\textwidth]{figures/fig_land_map.pdf}
@@ -414,7 +421,7 @@ Heat served is summed across facilities and expressed as a share of total replac
 
 
 % =================================================================
-%  TABLES   (main display items: 4 figures + 2 tables = 6; limit is 8)
+%  TABLES   (main display items: 5 figures + 2 tables = 7; limit is 8)
 % =================================================================
 \clearpage
 

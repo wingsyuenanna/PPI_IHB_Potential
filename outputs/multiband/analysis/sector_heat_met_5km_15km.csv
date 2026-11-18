@@ -1,0 +1,11 @@
+subsector,hp_share,heat_5,demand_twh,heat_15,group
+aluminum,0.0,45.37,10.21,75.23,Heat battery sectors (≥200 °C)
+cement,0.0,76.33,65.06,86.68,Heat battery sectors (≥200 °C)
+chemicals,0.29,62.44,48.74,78.35,Heat battery sectors (≥200 °C)
+food-beverage-tobacco,0.91,57.87,90.44,58.38,Heat pump sectors (<200 °C)
+glass,0.22,77.89,35.41,81.31,Heat battery sectors (≥200 °C)
+iron-and-steel,0.0,36.74,117.99,80.53,Heat battery sectors (≥200 °C)
+lime,0.0,73.3,10.35,84.3,Heat battery sectors (≥200 °C)
+petrochemical-steam-cracking,0.0,30.16,126.89,83.4,Heat battery sectors (≥200 °C)
+pulp-and-paper,0.97,47.85,12.22,50.06,Heat pump sectors (<200 °C)
+textiles-leather-apparel,1.0,57.59,18.26,57.92,Heat pump sectors (<200 °C)
