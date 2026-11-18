@@ -80,3 +80,31 @@ def price_cap_curve(km: int, ks=None) -> pd.DataFrame:
         rows.append({"k": float(k), "served_pct": 100.0 * s / demand,
                      "lcoh": float((best["lcoh"] * best["served"]).sum() / s) if s > 0 else float("nan")})
     return pd.DataFrame(rows)
+
+
+def target_curve(km: int, targets=None) -> pd.DataFrame:
+    """Fleet heat met and LCOH when every site is asked to reach the same availability target.
+
+    For each target (10%, 20%, ..., 100%), a site moves up to the target only while that level costs
+    no more than its country's gas heat cost. Otherwise it stays at its highest level below gas
+    (land-limited sites keep what they can reach). At the 100% target every site sits at its own
+    max-heat point, so the curve ends on the fleet max-heat point.
+    """
+    import numpy as np
+
+    from gas_benchmark import country_gas_heat
+
+    if targets is None:
+        targets = np.round(np.arange(0.1, 1.0001, 0.1), 1)
+    long = sweep_long(km)
+    long = long[long["lcoh"] <= long["iso3_country"].map(country_gas_heat())]
+    demand = points(km)["demand"].sum()
+    rows = []
+    for t in targets:
+        ok = long[long["availability_floor"] <= t + 1e-9]
+        best = ok.loc[ok.groupby("source_id")["availability_floor"].idxmax()]
+        s = best["served"].sum()
+        rows.append({"target": float(t), "served_pct": 100.0 * s / demand,
+                     "lcoh": float((best["lcoh"] * best["served"]).sum() / s) if s > 0 else float("nan"),
+                     "sites_at_target": int((best["availability_floor"] >= t - 1e-9).sum())})
+    return pd.DataFrame(rows)
