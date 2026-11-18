@@ -40,39 +40,39 @@ LABEL = {
 NORDIC = {"SWE", "FIN", "DNK", "EST", "LVA", "LTU"}
 SOUTH = {"ESP", "PRT", "ITA", "GRC", "CYP"}
 
-# Paper figure style (manuscript/figures/make_fig_validation.py): 7 in wide, default font sizes,
-# 8 pt frameless legend, no top/right spines, 300 dpi. Region = colour AND marker; the validated
-# palette's aqua is below 3:1 contrast, so the marker shape and country labels carry it too.
+# Okabe–Ito; region encoded by colour AND marker (colour-blind).
+# Line patterns match Figs 2–3: dash-dot vs dense dots, not two dashes.
 STYLE = {
-    "other": {"color": "#2a78d6", "marker": "o"},
-    "nordic": {"color": "#eb6834", "marker": "^"},
-    "south": {"color": "#1baf7a", "marker": "s"},
+    "nordic": {"color": "#E69F00", "marker": "^"},
+    "south": {"color": "#009E73", "marker": "s"},
+    "other": {"color": "#0072B2", "marker": "o"},
 }
-INK = "#0b0b0b"
-MUTED = "#6f6e69"
-LS_GAS = (0, (6, 2, 1.5, 2))  # dash-dot
-LS_MH = (0, (5, 2))  # dashed
-LS_MS = (0, (1, 1.5))  # dotted
+C_MH = "#CC79A7"  # max heat — same pink as Fig. 2
+C_MS = "#D55E00"  # max savings — vermillion (green is already Southern Europe)
+C_GAS = "#6A3D9A"
+LS_GAS = (0, (5.5, 1.6, 1.2, 1.6))  # dash-dot
+LS_MH = (0, (5.0, 1.8))  # long dash
+LS_MS = (0, (1.1, 1.3))  # dense dots
 
-# ISO labels, offset in points (ha follows the sign of dx)
+# Nudge ISO labels off neighbouring bubbles (offset points)
 LABEL_ISO = {"DEU", "FRA", "ITA", "ESP", "NLD", "GBR", "POL", "BEL"}
 LABEL_XY = {  # tuned to the 2026-11-17 sweep positions
-    (5, "NLD"): (6, 5),
-    (5, "BEL"): (0, -12),
-    (5, "DEU"): (0, 9),
-    (5, "GBR"): (5, 6),
-    (5, "FRA"): (0, -12),
-    (5, "ESP"): (6, 0),
-    (5, "POL"): (0, 8),
-    (5, "ITA"): (7, 0),
-    (15, "GBR"): (-7, -1),
-    (15, "BEL"): (-7, -3),
-    (15, "POL"): (-6, 7),
-    (15, "DEU"): (-3, 10),
-    (15, "NLD"): (7, 3),
-    (15, "FRA"): (-8, -6),
-    (15, "ITA"): (7, 1),
-    (15, "ESP"): (7, -2),
+    (5, "NLD"): (4, 9),
+    (5, "BEL"): (-4, -13),
+    (5, "DEU"): (-8, 13),
+    (5, "GBR"): (9, 9),
+    (5, "FRA"): (-3, -13),
+    (5, "ESP"): (9, -6),
+    (5, "POL"): (2, 11),
+    (5, "ITA"): (11, 8),
+    (15, "GBR"): (-17, -2),
+    (15, "BEL"): (-14, -11),
+    (15, "POL"): (-12, 10),
+    (15, "DEU"): (-4, 15),
+    (15, "NLD"): (13, 4),
+    (15, "FRA"): (2, -13),
+    (15, "ITA"): (9, 9),
+    (15, "ESP"): (9, -8),
 }
 
 
@@ -115,26 +115,93 @@ def fleet_max_savings(km: int) -> tuple[float, float]:
     return fleet_stats(points(km), "sav")
 
 
-def plot_panel(ax, agg, fa_mh, fl_mh, fa_ms, fl_ms, title, km) -> None:
-    plot = agg[agg["demand_twh"] >= 0.5]
-    ax.axhline(GAS_EU, color=MUTED, ls=LS_GAS, lw=1.1, zorder=1)
-    ax.axvline(fa_mh, color=INK, ls=LS_MH, lw=0.9, zorder=1)
-    ax.axvline(fa_ms, color=INK, ls=LS_MS, lw=0.9, zorder=1)
+def plot_panel(
+    ax,
+    agg: pd.DataFrame,
+    fa_mh: float,
+    fl_mh: float,
+    fa_ms: float,
+    fl_ms: float,
+    title: str,
+    xlim: tuple[float, float],
+    ylim: tuple[float, float],
+    km: int,
+    show_xlabel: bool,
+) -> None:
+    plot = agg[agg["demand_twh"] >= 0.5].copy()
+
+    ax.axhline(GAS_EU, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
+    ax.axvline(fa_mh, color=C_MH, ls=LS_MH, lw=1.2, zorder=1)
+    ax.axhline(fl_mh, color=C_MH, ls=LS_MH, lw=1.2, zorder=1)
+    ax.axvline(fa_ms, color=C_MS, ls=LS_MS, lw=1.2, zorder=1)
+    ax.axhline(fl_ms, color=C_MS, ls=LS_MS, lw=1.2, zorder=1)
+
     for _, r in plot.iterrows():
         st = STYLE[region(r["iso3"])]
-        ax.scatter(r["avail"], r["lcoh"], s=12 + 1.2 * r["demand_twh"], color=st["color"],
-                   marker=st["marker"], edgecolors="white", linewidths=0.6, zorder=3)
-        if r["iso3"] in LABEL_ISO:
-            dx, dy = LABEL_XY.get((km, r["iso3"]), (6, 3))
-            ax.annotate(LABEL.get(r["iso3"], r["iso3"]), (r["avail"], r["lcoh"]), textcoords="offset points",
-                        xytext=(dx, dy), ha="right" if dx < 0 else ("center" if dx == 0 else "left"),
-                        va="center", fontsize=8, color=INK, zorder=6)
-    ax.annotate(f"Fleet max heat\n{fa_mh:.0f}%, €{fl_mh:.0f}", (fa_mh, 1), xycoords=("data", "axes fraction"),
-                textcoords="offset points", xytext=(4, -2), ha="left", va="top", fontsize=8, color=INK)
-    ax.annotate(f"Fleet max savings\n{fa_ms:.0f}%, €{fl_ms:.0f}", (fa_ms, 1), xycoords=("data", "axes fraction"),
-                textcoords="offset points", xytext=(-4, -2), ha="right", va="top", fontsize=8, color=INK)
-    ax.set_title(title, loc="left", fontsize=10)
-    ax.spines[["top", "right"]].set_visible(False)
+        ax.scatter(
+            r["avail"],
+            r["lcoh"],
+            s=14 + 4.0 * r["demand_twh"],
+            facecolors=st["color"],
+            edgecolors="white",
+            marker=st["marker"],
+            linewidths=0.5,
+            alpha=0.92,
+            zorder=3,
+        )
+
+    for _, r in plot.iterrows():
+        if r["iso3"] not in LABEL_ISO:
+            continue
+        dx, dy = LABEL_XY.get((km, r["iso3"]), (4, 3))
+        ax.annotate(
+            LABEL.get(r["iso3"], r["iso3"]),
+            (r["avail"], r["lcoh"]),
+            textcoords="offset points",
+            xytext=(dx, dy),
+            fontsize=6.5,
+            fontweight="bold",
+            color="#111",
+            zorder=6,
+        )
+
+    mh_kw = (
+        dict(xytext=(4, -8), ha="left", va="top")
+        if km == 15
+        else dict(xytext=(-4, -8), ha="right", va="top")
+    )
+    ax.annotate(
+        f"{fa_mh:.0f}% · €{fl_mh:.0f}",
+        (fa_mh, ylim[1]),
+        textcoords="offset points",
+        fontsize=6.5,
+        color=C_MH,
+        fontweight="bold",
+        zorder=5,
+        **mh_kw,
+    )
+    ax.annotate(
+        f"{fa_ms:.0f}% · €{fl_ms:.0f}",
+        (fa_ms, ylim[0]),
+        xytext=(-4, 6),  # left of the line, clear of the high-share country bubbles
+        textcoords="offset points",
+        fontsize=6.5,
+        color=C_MS,
+        fontweight="bold",
+        ha="right",
+        va="bottom",
+        zorder=5,
+    )
+
+    ax.set_title(title, fontsize=8, loc="left", pad=2)
+    if show_xlabel:
+        ax.set_xlabel("Heat served / demand (%)", fontsize=8, labelpad=2)
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
+    ax.tick_params(labelsize=7)
+    ax.grid(True, ls=":", alpha=0.35, zorder=0)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
 
 def main() -> None:
@@ -145,35 +212,75 @@ def main() -> None:
         fa_ms, fl_ms = fleet_max_savings(km)
         panels[km] = (mh, fa_mh, fl_mh, fa_ms, fl_ms)
         rows_out.append(mh.assign(buffer_km=km, policy="max_heat_under_gas"))
-        print(f"{km} km  max heat {fa_mh:.1f}% / EUR {fl_mh:.0f}   max savings {fa_ms:.1f}% / EUR {fl_ms:.0f}")
+        print(
+            f"{km} km  max-heat-under-gas {fa_mh:.1f}% / €{fl_mh:.0f}   "
+            f"max-savings {fa_ms:.1f}% / €{fl_ms:.0f}"
+        )
+
     pd.concat(rows_out, ignore_index=True).to_csv(OUT / f"{OUT_STEM}.csv", index=False)
 
-    fig, axes = plt.subplots(2, 1, figsize=(7, 6), sharex=True, sharey=True)
-    for ax, km in zip(axes, (5, 15)):
-        plot_panel(ax, *panels[km], f"({'a' if km == 5 else 'b'}) {km} km land buffer", km)
-    shown = pd.concat([panels[k][0][panels[k][0]["demand_twh"] >= 0.5] for k in (5, 15)])
-    axes[0].set_xlim(np.floor(shown["avail"].min() / 5) * 5 - 2, np.ceil(shown["avail"].max() / 5) * 5 + 3)
-    axes[0].set_ylim(np.floor(shown["lcoh"].min() / 10) * 10 - 5, max(GAS_EU, shown["lcoh"].max()) + 15)
-    axes[1].set_xlabel("Share of replaceable heat met at max heat (%)")
-    for ax in axes:
-        ax.set_ylabel("LCOH (€/MWh)")
+    p5 = panels[5][0][panels[5][0]["demand_twh"] >= 0.5]
+    p15 = panels[15][0][panels[15][0]["demand_twh"] >= 0.5]
+    xmin = min(float(p5["avail"].min()), float(p15["avail"].min())) - 1
+    xmax = max(float(p5["avail"].max()), float(p15["avail"].max())) + 1
+    xlim = (xmin, xmax)
+    ymax = float(np.ceil(max(p5["lcoh"].max(), p15["lcoh"].max()) / 5) * 5) + 5
+    ymin = min(25.0, float(np.floor(min(p5["lcoh"].min(), p15["lcoh"].min()) / 5) * 5) - 2)
+    ylim = (ymin, max(ymax, 110.0))
 
-    handles = [
-        Line2D([0], [0], ls="", marker=STYLE[k]["marker"], color=STYLE[k]["color"], markersize=7, label=lab)
-        for k, lab in (("other", "Other"), ("nordic", "Nordic and Baltic"), ("south", "Southern Europe"))
-    ] + [
-        Line2D([0], [0], color=MUTED, ls=LS_GAS, lw=1.1, label=f"EU-27 gas heat €{GAS_EU:.0f}/MWh"),
-        Line2D([0], [0], color=INK, ls=LS_MH, lw=0.9, label="Fleet max heat"),
-        Line2D([0], [0], color=INK, ls=LS_MS, lw=0.9, label="Fleet max savings"),
+    fig, axes = plt.subplots(2, 1, figsize=(3.44, 3.75), sharex=True, layout="constrained")
+    for ax, km, show_x in ((axes[0], 5, False), (axes[1], 15, True)):
+        mh, fa_mh, fl_mh, fa_ms, fl_ms = panels[km]
+        plot_panel(
+            ax, mh, fa_mh, fl_mh, fa_ms, fl_ms,
+            f"({'a' if km == 5 else 'b'}) {km} km",
+            xlim, ylim, km, show_x,
+        )
+
+    fig.supylabel("LCOH of served heat (€/MWh)", fontsize=8)
+
+    leg_handles = [
+        Line2D(
+            [0], [0], marker="^", color="w",
+            markerfacecolor=STYLE["nordic"]["color"],
+            markeredgecolor="white", markeredgewidth=0.5,
+            markersize=6, label="Nordic / Baltic",
+        ),
+        Line2D(
+            [0], [0], marker="s", color="w",
+            markerfacecolor=STYLE["south"]["color"],
+            markeredgecolor="white", markeredgewidth=0.5,
+            markersize=6, label="Southern Europe",
+        ),
+        Line2D(
+            [0], [0], marker="o", color="w",
+            markerfacecolor=STYLE["other"]["color"],
+            markeredgecolor="white", markeredgewidth=0.5,
+            markersize=6, label="Other",
+        ),
+        Line2D([0], [0], color=C_GAS, ls=LS_GAS, lw=1.2, label=f"Gas €{GAS_EU:.0f}"),
+        Line2D([0], [0], color=C_MH, ls=LS_MH, lw=1.2, label="Fleet max heat"),
+        Line2D([0], [0], color=C_MS, ls=LS_MS, lw=1.2, label="Fleet max savings"),
     ]
-    axes[1].legend(handles=handles, frameon=False, fontsize=8, loc="lower left", ncol=2)
-    fig.text(0.99, 0.005, "Bubble area proportional to national replaceable heat demand.", ha="right",
-             fontsize=7, color=MUTED)
-    fig.tight_layout()
-    for ext in ("png", "pdf"):
-        fig.savefig(OUT / f"{OUT_STEM}.{ext}", dpi=300)
+    fig.legend(
+        handles=leg_handles,
+        loc="outside upper center",
+        ncol=3,
+        frameon=False,
+        fontsize=6.5,
+        handlelength=2.0,
+        columnspacing=1.0,
+        handletextpad=0.35,
+        labelspacing=0.22,
+        borderaxespad=0.15,
+    )
+
+    png = OUT / f"{OUT_STEM}.png"
+    pdf = OUT / f"{OUT_STEM}.pdf"
+    fig.savefig(png, dpi=600, bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(pdf, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
-    print(f"Wrote {OUT / (OUT_STEM + '.png')}")
+    print(f"Wrote {png}")
 
 
 if __name__ == "__main__":
