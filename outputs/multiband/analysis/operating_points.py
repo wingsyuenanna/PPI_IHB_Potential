@@ -82,13 +82,14 @@ def price_cap_curve(km: int, ks=None) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def target_curve(km: int, targets=None) -> pd.DataFrame:
+def target_curve(km: int, targets=None, subsector: str | None = None) -> pd.DataFrame:
     """Fleet heat met and LCOH when every site is asked to reach the same availability target.
 
     For each target (10%, 20%, ..., 100%), a site moves up to the target only while that level costs
     no more than its country's gas heat cost. Otherwise it stays at its highest level below gas
     (land-limited sites keep what they can reach). At the 100% target every site sits at its own
-    max-heat point, so the curve ends on the fleet max-heat point.
+    max-heat point, so the curve ends on the fleet max-heat point. With subsector, the same for one
+    sector (shares of that sector's demand).
     """
     import numpy as np
 
@@ -98,7 +99,11 @@ def target_curve(km: int, targets=None) -> pd.DataFrame:
         targets = np.round(np.arange(0.1, 1.0001, 0.1), 1)
     long = sweep_long(km)
     long = long[long["lcoh"] <= long["iso3_country"].map(country_gas_heat())]
-    demand = points(km)["demand"].sum()
+    pts = points(km)
+    if subsector is not None:
+        long = long[long["subsector"] == subsector]
+        pts = pts[pts["subsector"] == subsector]
+    demand = pts["demand"].sum()
     rows = []
     for t in targets:
         ok = long[long["availability_floor"] <= t + 1e-9]
