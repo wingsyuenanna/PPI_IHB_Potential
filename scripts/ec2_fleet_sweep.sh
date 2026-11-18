@@ -4,6 +4,9 @@
 #   bash scripts/ec2_fleet_sweep.sh --fresh            # first run: back up any old per-site results, then sweep
 #   bash scripts/ec2_fleet_sweep.sh                    # resume after an interruption (keeps finished sites)
 #   bash scripts/ec2_fleet_sweep.sh --fresh --km "15"  # one radius only
+#   bash scripts/ec2_fleet_sweep.sh --fresh --s3 s3://annaiecc/facility_IHB_potential/results/<run> --stop-when-done
+#        # upload results to S3 when done (size-checked), then stop the instance. The stop also
+#        # happens if the sweep fails, after uploading whatever results exist. The disk is kept.
 #
 # Runs the 5 km and then the 15 km sweep (2,192 sites x 10 availability floors each) with the
 # committed solver settings (linked 8,760-h year, interior point, discharge capped at load).
@@ -15,14 +18,47 @@ cd "$(dirname "$0")/.."
 FRESH=0
 KMS="5 15"
 WORKERS="${WORKERS:-}"
+S3_PREFIX=""
+STOP=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --fresh) FRESH=1; shift ;;
     --km) KMS="$2"; shift 2 ;;
     --workers) WORKERS="$2"; shift 2 ;;
+    --s3) S3_PREFIX="${2%/}"; shift 2 ;;
+    --stop-when-done) STOP=1; shift ;;
     *) echo "unknown option $1"; exit 2 ;;
   esac
 done
+
+finalize() {
+  status=$?
+  mkdir -p logs
+  if [[ -n "$S3_PREFIX" ]]; then
+    tarball="sweep_results_$(date -u +%Y%m%dT%H%MZ)_$(git rev-parse --short HEAD).tar.gz"
+    { ls outputs/multiband/analysis | grep -E '^lcoh_vs_availability_[0-9]+_(5|15)km\.csv$|^fleet_availability_(sweep|knee)_(5|15)km' \
+        | sed 's|^|outputs/multiband/analysis/|'; ls logs/*.log; } > /tmp/sweep_files.txt 2>/dev/null || true
+    if tar -czf "$HOME/$tarball" -T /tmp/sweep_files.txt \
+       && aws s3 cp --only-show-errors "$HOME/$tarball" "$S3_PREFIX/$tarball"; then
+      local_bytes=$(stat -c %s "$HOME/$tarball")
+      remote_bytes=$(aws s3 ls "$S3_PREFIX/$tarball" | awk '{print $3}')
+      if [[ "$local_bytes" == "$remote_bytes" ]]; then
+        echo "=== $(date -u +%FT%TZ) uploaded $S3_PREFIX/$tarball ($local_bytes bytes, verified)" | tee -a logs/finalize.log
+      else
+        echo "=== $(date -u +%FT%TZ) UPLOAD SIZE MISMATCH local $local_bytes remote $remote_bytes" | tee -a logs/finalize.log
+      fi
+      aws s3 cp --only-show-errors logs/finalize.log "$S3_PREFIX/finalize.log" || true
+    else
+      echo "=== $(date -u +%FT%TZ) UPLOAD FAILED, results stay on the instance disk" | tee -a logs/finalize.log
+    fi
+  fi
+  echo "=== $(date -u +%FT%TZ) sweep script exit status $status" | tee -a logs/finalize.log
+  if [[ "$STOP" == 1 ]]; then
+    echo "=== stopping instance" | tee -a logs/finalize.log
+    sudo shutdown -h +1  # instance shutdown behaviour is "stop": disk kept, billing stops
+  fi
+}
+trap finalize EXIT
 
 if [[ ! -x .venv/bin/python ]]; then
   # Current pandas/numpy need Python >= 3.11 (Amazon Linux 2023 ships 3.9: sudo dnf install python3.12)
