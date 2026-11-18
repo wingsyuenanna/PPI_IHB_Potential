@@ -21,8 +21,10 @@ OUT_STEM = "lcoh_vs_availability_fleet_avg_5km_15km"
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from gas_benchmark import GAS_EU, ELEC_EU, max_savings_sites  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from gas_benchmark import GAS_EU, ELEC_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from operating_points import fleet_stats, points
 EURUSD = 1.08
+Y_MAX = 215  # €/MWh; higher fixed-floor points are labelled at the top edge
 
 # Shared gas / grid-elec colors with EU-27 bar chart; curve markers distinct
 C5 = "#0072B2"  # blue — 5 km
@@ -48,27 +50,13 @@ def load_curve(km: int) -> pd.DataFrame:
 
 
 def max_heat_point(km: int) -> tuple[float, float]:
-    df = pd.read_csv(OUT / f"gas_capped_step90_{km}km.csv")
-    return _fleet(
-        pd.to_numeric(df["replaceable_heat_mwh_th"], errors="coerce"),
-        pd.to_numeric(df["served_mwh"], errors="coerce"),
-        pd.to_numeric(df["LCOH_served_eur_perMWh"], errors="coerce"),
-    )
+    """Fleet max-heat point on the sweep grid (Methods Eq. maxheat), all 2,192 sites as demand."""
+    return fleet_stats(points(km), "heat")
 
 
 def max_savings_point(km: int) -> tuple[float, float]:
-    long = pd.read_csv(OUT / f"fleet_availability_sweep_{km}km_long.csv", low_memory=False)
-    if "status" in long.columns:
-        long = long[long["status"] == "ok"].copy()
-    long["heat"] = pd.to_numeric(long["replaceable_heat_mwh_th"], errors="coerce")
-    long["rel"] = pd.to_numeric(long["Reliability_%"], errors="coerce")
-    long["lcoh"] = pd.to_numeric(long["LCOH_served_eur_perMWh"], errors="coerce")
-    if long["lcoh"].isna().all():
-        long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
-    long["served"] = long["heat"] * long["rel"] / 100.0
-    long = long.dropna(subset=["source_id", "served", "lcoh"])
-    best = max_savings_sites(long)  # country gas price per site, then aggregate
-    return _fleet(best["heat"], best["served"], best["lcoh"])
+    """Fleet max-savings point on the sweep grid (Methods Eq. maxsav), all 2,192 sites as demand."""
+    return fleet_stats(points(km), "sav")
 
 
 def main() -> None:
@@ -100,16 +88,33 @@ def main() -> None:
             zorder=2,
             label=f"{km} km (fixed floor)",
         )
-        end = c.iloc[-1]
-        ax.annotate(
-            f'{end["hw_LCOH_eur"]:.0f}',
-            (end["served_pct"], end["hw_LCOH_eur"]),
-            textcoords="offset points",
-            xytext=(3, 3),
-            fontsize=7,
-            fontweight="bold",
-            color=st["color"],
-        )
+        # Label where the curve leaves the plot (fixed floors that sites cannot reach are solved
+        # as max-serve, so fleet LCOH jumps off scale), else the last point.
+        off = c[c["hw_LCOH_eur"] > Y_MAX]
+        if len(off):
+            first = off.iloc[0]
+            ax.annotate(
+                f'↑ €{first["hw_LCOH_eur"]:.0f} at {first["served_pct"]:.0f}%',
+                (first["served_pct"], Y_MAX),
+                textcoords="offset points",
+                xytext=(-6, -10) if km == 5 else (6, -24),
+                ha="right" if km == 5 else "left",
+                fontsize=6.5,
+                fontweight="bold",
+                color=st["color"],
+                annotation_clip=False,
+            )
+        else:
+            end = c.iloc[-1]
+            ax.annotate(
+                f'{end["hw_LCOH_eur"]:.0f}',
+                (end["served_pct"], end["hw_LCOH_eur"]),
+                textcoords="offset points",
+                xytext=(3, 3),
+                fontsize=7,
+                fontweight="bold",
+                color=st["color"],
+            )
 
         a_ms, l_ms = max_savings_point(km)
         a_mh, l_mh = max_heat_point(km)
@@ -146,9 +151,9 @@ def main() -> None:
     ax.axhline(GAS_EU, color=C_GAS, ls=LS_GAS, lw=1.2, zorder=1)
     ax.axhline(ELEC_EU, color=C_ELEC, ls=LS_ELEC, lw=1.2, zorder=1)
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 215)
+    ax.set_ylim(0, Y_MAX)
     ax.set_xlabel("Heat-weighted availability achieved (%)", fontsize=8, labelpad=2)
-    ax.set_ylabel("Heat-weighted avg LCOH (€/MWh)", fontsize=8)
+    ax.set_ylabel("Fleet LCOH (€/MWh)", fontsize=8)
     ax.tick_params(labelsize=7)
     ax.grid(True, ls=":", alpha=0.35, zorder=0)
     ax.spines["top"].set_visible(False)
@@ -170,8 +175,9 @@ def main() -> None:
     ]
     ax.legend(
         handles=leg,
-        loc="upper left",
-        ncol=2,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.2),  # below the axes, clear of the off-scale labels
+        ncol=3,
         frameon=False,
         fontsize=6.5,
         handlelength=2.2,

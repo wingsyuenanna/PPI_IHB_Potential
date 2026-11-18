@@ -26,7 +26,8 @@ OUT_STEM = "country_scatter_avail_lcoh_5km_15km"
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from gas_benchmark import GAS_EU, max_savings_sites  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from gas_benchmark import GAS_EU  # EU-27 gas heat cost from input files (see gas_benchmark.py)
+from operating_points import fleet_stats, points
 EURUSD = 1.08
 
 LABEL = {
@@ -38,15 +39,6 @@ LABEL = {
 }
 NORDIC = {"SWE", "FIN", "DNK", "EST", "LVA", "LTU"}
 SOUTH = {"ESP", "PRT", "ITA", "GRC", "CYP"}
-
-GAS_CAPPED = {
-    5: OUT / "gas_capped_step90_5km.csv",
-    15: OUT / "gas_capped_step90_15km.csv",
-}
-SWEEP_LONG = {
-    5: OUT / "fleet_availability_sweep_5km_long.csv",
-    15: OUT / "fleet_availability_sweep_15km_long.csv",
-}
 
 # Okabe–Ito; region encoded by colour AND marker (colour-blind).
 # Line patterns match Figs 2–3: dash-dot vs dense dots, not two dashes.
@@ -64,23 +56,23 @@ LS_MS = (0, (1.1, 1.3))  # dense dots
 
 # Nudge ISO labels off neighbouring bubbles (offset points)
 LABEL_ISO = {"DEU", "FRA", "ITA", "ESP", "NLD", "GBR", "POL", "BEL"}
-LABEL_XY = {
-    (5, "BEL"): (-7, -8),
-    (5, "DEU"): (5, 5),
-    (5, "FRA"): (4, -9),
-    (5, "ESP"): (4, -8),
-    (5, "ITA"): (4, 4),
-    (5, "POL"): (4, 4),
-    (5, "GBR"): (4, 3),
-    (5, "NLD"): (4, 3),
-    (15, "BEL"): (4, -8),
-    (15, "DEU"): (-8, 4),
-    (15, "NLD"): (4, 3),
-    (15, "GBR"): (-8, -8),
-    (15, "POL"): (4, 4),
-    (15, "FRA"): (4, -8),
-    (15, "ITA"): (4, 3),
-    (15, "ESP"): (4, -8),
+LABEL_XY = {  # tuned to the 2026-11-17 sweep positions
+    (5, "NLD"): (4, 9),
+    (5, "BEL"): (-4, -13),
+    (5, "DEU"): (-8, 13),
+    (5, "GBR"): (9, 9),
+    (5, "FRA"): (-3, -13),
+    (5, "ESP"): (9, -6),
+    (5, "POL"): (2, 11),
+    (5, "ITA"): (11, 8),
+    (15, "GBR"): (-17, -2),
+    (15, "BEL"): (-14, -11),
+    (15, "POL"): (-12, 10),
+    (15, "DEU"): (-4, 15),
+    (15, "NLD"): (13, 4),
+    (15, "FRA"): (2, -13),
+    (15, "ITA"): (9, 9),
+    (15, "ESP"): (9, -8),
 }
 
 
@@ -102,49 +94,25 @@ def _fleet_stats(demand: pd.Series, served: pd.Series, lcoh: pd.Series) -> tuple
     return avail, fleet_lcoh
 
 
-def country_agg_max_heat_under_gas(path: Path) -> tuple[pd.DataFrame, float, float]:
-    """Country aggregates from gas-capped solves (max serve s.t. LCOH ≤ country gas)."""
-    df = pd.read_csv(path)
-    ok = df[df["status"] == "ok"].copy() if "status" in df.columns else df.copy()
-    ok["heat"] = pd.to_numeric(ok["replaceable_heat_mwh_th"], errors="coerce")
-    ok["served"] = pd.to_numeric(ok["served_mwh"], errors="coerce")
-    ok["lcoh"] = pd.to_numeric(ok["LCOH_served_eur_perMWh"], errors="coerce")
-
+def country_agg_max_heat_under_gas(km: int) -> tuple[pd.DataFrame, float, float]:
+    """Country aggregates at each site's max-heat point (Methods Eq. maxheat) from the sweep."""
+    p = points(km)
     rows = []
-    for iso, g in ok.groupby("iso3_country"):
-        demand = float(g["heat"].sum())
-        served = float(g["served"].fillna(0).sum())
+    for iso, g in p.groupby("iso3_country"):
+        demand = float(g["demand"].sum())
+        served = float(g["served_heat"].sum())
         if demand <= 0 or served <= 0:
             continue
-        lcoh = float((g["lcoh"] * g["served"]).sum() / served)
-        rows.append(
-            {"iso3": iso, "demand_twh": demand / 1e6, "avail": 100.0 * served / demand, "lcoh": lcoh}
-        )
-    agg = pd.DataFrame(rows)
-    full = pd.read_csv(path)
-    fa, fl = _fleet_stats(
-        pd.to_numeric(full["replaceable_heat_mwh_th"], errors="coerce"),
-        pd.to_numeric(full["served_mwh"], errors="coerce"),
-        pd.to_numeric(full["LCOH_served_eur_perMWh"], errors="coerce"),
-    )
-    return agg, fa, fl
+        m = g["served_heat"] > 0
+        lcoh = float((g.loc[m, "lcoh_heat"] * g.loc[m, "served_heat"]).sum() / served)
+        rows.append({"iso3": iso, "demand_twh": demand / 1e6, "avail": 100.0 * served / demand, "lcoh": lcoh})
+    fa, fl = fleet_stats(p, "heat")
+    return pd.DataFrame(rows), fa, fl
 
 
-def fleet_max_savings(path: Path) -> tuple[float, float]:
-    """Per site: pick floor maximizing served × (country gas − LCOH); return fleet HW stats."""
-    long = pd.read_csv(path, low_memory=False)
-    if "status" in long.columns:
-        long = long[long["status"] == "ok"].copy()
-    long["floor"] = np.round(pd.to_numeric(long["availability_floor"], errors="coerce"), 2)
-    long["heat"] = pd.to_numeric(long["replaceable_heat_mwh_th"], errors="coerce")
-    long["rel"] = pd.to_numeric(long["Reliability_%"], errors="coerce")
-    long["lcoh"] = pd.to_numeric(long["LCOH_served_eur_perMWh"], errors="coerce")
-    if long["lcoh"].isna().all() and "LCOH_served_$perMWh" in long.columns:
-        long["lcoh"] = pd.to_numeric(long["LCOH_served_$perMWh"], errors="coerce") / EURUSD
-    long["served"] = long["heat"] * long["rel"] / 100.0
-    long = long.dropna(subset=["source_id", "floor", "served", "lcoh"])
-    best = max_savings_sites(long)  # country gas price per site, then aggregate
-    return _fleet_stats(best["heat"], best["served"], best["lcoh"])
+def fleet_max_savings(km: int) -> tuple[float, float]:
+    """Fleet max-savings point (Methods Eq. maxsav) from the sweep."""
+    return fleet_stats(points(km), "sav")
 
 
 def plot_panel(
@@ -240,8 +208,8 @@ def main() -> None:
     panels = {}
     rows_out = []
     for km in (5, 15):
-        mh, fa_mh, fl_mh = country_agg_max_heat_under_gas(GAS_CAPPED[km])
-        fa_ms, fl_ms = fleet_max_savings(SWEEP_LONG[km])
+        mh, fa_mh, fl_mh = country_agg_max_heat_under_gas(km)
+        fa_ms, fl_ms = fleet_max_savings(km)
         panels[km] = (mh, fa_mh, fl_mh, fa_ms, fl_ms)
         rows_out.append(mh.assign(buffer_km=km, policy="max_heat_under_gas"))
         print(

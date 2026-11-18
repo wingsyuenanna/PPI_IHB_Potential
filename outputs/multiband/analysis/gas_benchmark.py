@@ -85,6 +85,23 @@ def max_savings_sites(long: pd.DataFrame) -> pd.DataFrame:
     return best
 
 
+def max_heat_sites(long: pd.DataFrame) -> pd.DataFrame:
+    """Maximum-heat operating point per site (Methods, Eq. maxheat).
+
+    The highest availability floor with LCOH <= the country's gas heat cost. Same input
+    as max_savings_sites. A site with no such floor serves no heat (served = 0).
+    Returns one row per site.
+    """
+    d = long.copy()
+    d["gas"] = d["iso3_country"].map(country_gas_heat())
+    below = d[d["lcoh"] <= d["gas"]]
+    best = below.loc[below.groupby("source_id")["availability_floor"].idxmax()].copy()
+    rest = d[~d["source_id"].isin(best["source_id"])].drop_duplicates("source_id").copy()
+    rest["served"] = 0.0
+    rest["lcoh"] = float("nan")
+    return pd.concat([best, rest], ignore_index=True)
+
+
 if __name__ == "__main__":
     print(f"EU-27 gas price {GAS_PRICE_EU_GCV:.2f} EUR/MWh_GCV = {GAS_PRICE_EU:.2f} EUR/MWh_NCV, EUA {EUA} EUR/t, "
           f"eta {ETA_BOILER} -> gas heat {GAS_EU:.1f} EUR/MWh_th")
