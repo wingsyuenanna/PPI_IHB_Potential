@@ -1,30 +1,30 @@
 Full-fleet availability sweep — 15 km, floors 10–100% (step 10 pp)
-Sites with complete sweeps: 2191
+Sites with complete sweeps: 2186
 
 Fleet heat-weighted served % by *fixed* availability floor:
  availability_floor  served_pct  served_twh  hw_LCOH_eur
-                0.1        10.0        52.2         37.6
-                0.2        20.0       104.5         37.8
-                0.3        29.9       156.4         37.9
-                0.4        39.8       207.9         38.1
-                0.5        49.6       259.1         38.3
-                0.6        59.3       309.7         38.9
-                0.7        68.9       359.9         42.2
-                0.8        78.1       407.9         51.1
-                0.9        86.2       450.0         76.9
-                1.0        92.5       483.1        193.2
+                0.1        10.0        53.5         34.9
+                0.2        20.0       107.1         35.2
+                0.3        30.0       160.6         36.1
+                0.4        40.0       214.2         37.3
+                0.5        49.9       267.3         38.7
+                0.6        59.8       320.1         45.9
+                0.7        69.0       369.4        696.1
+                0.8        75.9       406.5        849.3
+                0.9        81.4       435.8        823.9
+                1.0        84.5       452.6        999.4
 
 Per-site LCOH knee (floor before sharpest upturn; else max≤gas / min LCOH):
-  Heat-weighted knee floor: 89.2%
-  Fleet served at knee:     84.6%  (442.0 TWh)
-  HW LCOH at knee:          €68.2/MWh
-  Knee methods: {'before_max_jump': 2134, 'max_below_gas': 57}
+  Heat-weighted knee floor: 82.7%
+  Fleet served at knee:     78.0%  (417.4 TWh)
+  HW LCOH at knee:          €89.1/MWh
+  Knee methods: {'before_max_jump': 2146, 'max_below_gas': 40}
 
 Comparison:
   Fixed 90% floor (main fleet): 86.2%
-  Gas-capped step-from-90:      nan%
-  Per-site LCOH knee:           84.6%
+  Gas-capped step-from-90:      85.0%
+  Per-site LCOH knee:           78.0%
 
-Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_15km_long.csv
-Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_knee_15km.csv
-Wrote /Users/annayuen/Desktop/IECC/industrial_decarb/facility_IHB_potential/outputs/multiband/analysis/fleet_availability_sweep_15km_by_floor.csv
+Wrote /home/ec2-user/PPI_IHB_Potential/outputs/multiband/analysis/fleet_availability_sweep_15km_long.csv
+Wrote /home/ec2-user/PPI_IHB_Potential/outputs/multiband/analysis/fleet_availability_knee_15km.csv
+Wrote /home/ec2-user/PPI_IHB_Potential/outputs/multiband/analysis/fleet_availability_sweep_15km_by_floor.csv

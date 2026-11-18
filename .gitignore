@@ -27,3 +27,6 @@ archive/**/*.tar.gz
 outputs/multiband/analysis/lcoh_vs_availability_[0-9]*_[0-9]*km.csv
 outputs/multiband/analysis/_stale_*/
 logs/
+
+# Notebook caches of extracted sweep results
+outputs/multiband/analysis/_cache_*/
